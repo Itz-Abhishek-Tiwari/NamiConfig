@@ -1,0 +1,10 @@
+@define-color bar-bg rgba(0, 0, 0, 0);
+
+@define-color main-bg #1f1f28; /* Kanagawa background color */
+@define-color main-fg #c8c8c8; /* Kanagawa foreground color */
+
+@define-color wb-act-bg #7aa2f7; /* Kanagawa active background color */
+@define-color wb-act-fg #c8c8c8; /* Kanagawa active foreground color */
+
+@define-color wb-hvr-bg #f7768e; /* Kanagawa hover background color */
+@define-color wb-hvr-fg #c8c8c8; /* Kanagawa hover foreground color */

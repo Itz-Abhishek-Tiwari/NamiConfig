@@ -1,0 +1,61 @@
+$HOME/.config/hypr/themes/theme.conf|> $HOME/.config/hypr/themes/colors.conf
+exec = gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
+exec = gsettings set org.gnome.desktop.interface gtk-theme 'Colloid-Green-Dark-Gruvbox'
+exec = gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+
+
+
+source = ./themeborder.conf
+
+
+general {
+    border_size = 2
+    col.inactive_border = rgba($lavenderAlpha69)
+    col.active_border = rgba($textAlphaee) rgba($lavenderAlpha69) rgba($lavenderAlpha69) rgba($textAlphaee) 45deg
+
+    gaps_in = 5
+    gaps_out = 15
+}
+
+decoration {
+    rounding = 0
+
+    active_opacity = 0.90
+    inactive_opacity = 0.90
+
+    blur {
+        enabled = yes
+        size = 5
+        passes = 4
+        ignore_opacity = true
+        new_optimizations = true
+        xray = false
+        noise = 0.0
+        popups = true
+    }
+
+    dim_inactive = false
+    dim_strength = 0.05
+
+    drop_shadow = yes
+    shadow_range = 30
+    shadow_scale = 2
+    shadow_render_power = 5
+    col.shadow = $crust
+    col.shadow_inactive = $surface0
+}
+
+group {
+    col.border_inactive = rgba($lavenderAlpha69)
+    col.border_active = rgba($textAlphaee) rgba($lavenderAlpha69) rgba($lavenderAlpha69) rgba($textAlphaee) 45deg
+
+    groupbar {
+      col.active = rgba($lavenderAlphaCC)
+      col.inactive = rgba($subtext1Alpha99)
+      font_family = JetBrainsMono Nerd Font
+      font_size = 10
+      text_color = $base
+    }
+}
+
+layerrule = blur,waybar

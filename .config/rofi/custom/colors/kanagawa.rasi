@@ -1,0 +1,17 @@
+
+/**
+ *
+ * Author : Aditya Shakya (adi1090x)
+ * Github : @adi1090x
+ * 
+ * Colors (Modified for Kanagawa Scheme)
+ **/
+
+* {
+    background:     #1F1F28FF;   /* Darker background */
+    background-alt: #363646FF;   /* Slightly lighter for alt background */
+    foreground:     #DCD7BAFF;   /* Soft beige foreground */
+    selected:       #C6B6CAFF;   /* Soft blue for selected */
+    active:         #9ECE6AFF;   /* Green for active state */
+    urgent:         #E46876FF;   /* Reddish for urgent */
+}

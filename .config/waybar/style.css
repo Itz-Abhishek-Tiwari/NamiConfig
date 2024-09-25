@@ -1,0 +1,144 @@
+@import url("colors/catppuccin-mocha.css");
+@import url("theme.css");
+
+* {
+  border: none;
+  min-height: 0;
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+window#waybar {
+  background-color: @main-bg ;
+  border: 2px solid #B4BCDE;
+  animation: dimBrighten 3s ease-in-out infinite;
+}
+
+@keyframes dimBrighten {
+  0% {
+    border-color: #B4BCDE;
+  }
+
+  100% {
+    border-color: #B4BCDE;
+  }
+
+  50% {
+    border-color: transparent;
+  }
+}
+
+
+#workspaces {
+  background-color: @mantle;
+  border-radius: 0;
+  padding: 5px 20px;
+  margin: 10px 5px 0 100px;
+  color: @subtext0;
+}
+
+#workspaces,
+#workspaces button,
+#pulseaudio-slider,
+#backlight-slider {
+  all: unset;
+  border-radius: 0;
+}
+
+#workspaces>button {
+  padding: 0 15px;
+  font-weight: 900;
+  color: @lavender;
+}
+
+#workspaces>button.empty,
+#workspaces>button.visible {
+  color: @sapphire;
+}
+
+#workspaces>button.active {
+  color: @sky;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+#workspaces>button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: @teal;
+}
+
+#workspaces>button:first-child {
+  padding-left: 20px;
+  color: @green;
+}
+
+#workspaces>button:last-child {
+  padding-right: 20px;
+  color: @yellow;
+}
+
+/* Assigning unique colors to each class */
+#memory {
+  color: @rosewater;
+}
+
+#custom-power {
+  color: @flamingo;
+}
+
+#battery {
+  color: @pink;
+}
+
+#backlight {
+  color: @mauve;
+}
+
+#pulseaudio {
+  color: @red;
+}
+
+#network {
+  color: @maroon;
+}
+
+#clock {
+  color: @peach;
+}
+
+#tray {
+  color: @yellow;
+}
+
+#custom-playerctl {
+  color: @green;
+}
+
+#custom-notifications {
+  color: @teal;
+}
+
+#battery.warning,
+#battery.critical,
+#battery.urgent {
+  color: @red;
+}
+
+#battery.charging {
+  color: @maroon;
+}
+
+#memory,
+#custom-power,
+#battery,
+#backlight,
+#pulseaudio,
+#network,
+#clock,
+#tray,
+#custom-playerctl,
+#custom-notifications {
+  border-radius: 4px;
+  padding: 10px 12px;
+  margin-right: 20px;
+}
