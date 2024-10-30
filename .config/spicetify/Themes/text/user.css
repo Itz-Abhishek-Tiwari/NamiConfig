@@ -9,8 +9,9 @@
 
 /* user settings */
 :root {
+      --font-family: "Maple Mono NF";  
+  /*
     --font-family: "DM Mono", monospace;
-    /*
     --font-family: 'Anonymous Pro', monospace;
     --font-family: 'Courier Prime', monospace;
     --font-family: 'Cousine', monospace;
@@ -47,7 +48,7 @@
 
     --border-radius: 0px;
     --border-width: 1px;
-    --border-style: solid; /* dotted | dashed | solid | double | groove | ridge | inset | outset */
+    --border-style: dashed; /* dotted | dashed | solid | double | groove | ridge | inset | outset */
 }
 
 /* font */

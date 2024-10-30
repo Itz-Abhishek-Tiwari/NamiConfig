@@ -104,12 +104,15 @@ fi
 
 #// set defaults
 
-[ -z "${xtrans}" ] && xtrans="grow"
+[ -z "${xtrans}" ] && xtrans="fade"
 [ -z "${wallFramerate}" ] && wallFramerate=60
-[ -z "${wallTransDuration}" ] && wallTransDuration=0.4
+[ -z "${wallTransDuration}" ] && wallTransDuration=0.3
 
 
 #// apply wallpaper
 
 echo ":: applying wall :: \"$(readlink -f "${wallSet}")\""
 swww img "$(readlink "${wallSet}")" --transition-bezier .43,1.19,1,.4 --transition-type "${xtrans}" --transition-duration "${wallTransDuration}" --transition-fps "${wallFramerate}" --invert-y --transition-pos "$(hyprctl cursorpos | grep -E '^[0-9]' || echo "0,0")" &
+
+#// Copy the current wallpaper to the hyprlock assest directory and rename it as lock_image.png
+convert "$(readlink -f "${wallSet}")" ~/.config/hypr/hyprlock_asset/image/lock_image.png

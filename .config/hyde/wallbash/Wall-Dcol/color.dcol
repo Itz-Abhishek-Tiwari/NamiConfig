@@ -1,0 +1,7 @@
+$HOME/.config/hypr/colors.conf
+$mainBg   = rgba(<wallbash_pry1>B3)
+$mainFg   = rgba(<wallbash_1xa9>E6)
+$mainBr   = rgba(<wallbash_pry3>E6)
+$mainEx   = rgba(<wallbash_4xa7>E6)
+$selectBg = rgba(<wallbash_2xa1>80)
+$selectFg = rgba(<wallbash_3xa9>E6)

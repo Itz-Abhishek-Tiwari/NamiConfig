@@ -12,7 +12,7 @@
 
 # Current Theme
 dir="$HOME/.config/rofi/custom/powermenu/"
-theme='style-4'
+theme='style-7'
 
 # CMDs
 uptime="`uptime -p | sed -e 's/up //g'`"
@@ -21,10 +21,10 @@ host=`hostname`
 # Options
 
 # Options
-shutdown=''
+shutdown='⏻'
 reboot=''
 lock='󰌾'
-suspend='󰒲'
+suspend='󰤄'
 logout='󰍃'
 yes=''
 no=''
@@ -103,7 +103,7 @@ case ${chosen} in
 		run_cmd --reboot
         ;;
     $lock)
-		swaylock
+		hyprlock
         ;;
     $suspend)
 		run_cmd --suspend

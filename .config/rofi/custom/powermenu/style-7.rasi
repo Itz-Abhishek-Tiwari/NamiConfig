@@ -15,6 +15,7 @@ configuration {
 /*****----- Global Properties -----*****/
 @import                          "shared/colors.rasi"
 @import                          "shared/fonts.rasi"
+@import                           "./../../theme.rasi"
 
 /*
 USE_BUTTONS=YES
@@ -50,7 +51,7 @@ mainbox {
     padding:                     0px;
     border:                      0px solid;
     border-radius:               0px;
-    border-color:                @selected;
+    border-color:                @select-bg;
     background-color:            transparent;
     children:                    [ "message", "listview" ];
 }
@@ -96,17 +97,17 @@ message {
     margin:                      0px 100px;
     padding:                     15px;
     border:                      0px solid;
-    border-radius:               15px;
-    border-color:                @selected;
-    background-color:            @background-alt;
-    text-color:                  @foreground;
+    border-radius:               0px;
+    border-color:                @select-bg;
+    background-color:            @main-bg;
+    text-color:                  @main-fg;
 }
 textbox {
-    background-color:            inherit;
+    background-color:            transparent;
     text-color:                  inherit;
     vertical-align:              0.5;
     horizontal-align:            0.5;
-    placeholder-color:           @foreground;
+    placeholder-color:           @main-ex;
     blink:                       true;
     markup:                      true;
 }
@@ -131,15 +132,14 @@ listview {
     reverse:                     false;
     fixed-height:                true;
     fixed-columns:               true;
-    
     spacing:                     15px;
     margin:                      0px;
     padding:                     0px;
     border:                      0px solid;
     border-radius:               0px;
-    border-color:                @selected;
-    background-color:            transparent;
-    text-color:                  @foreground;
+    border-color:                @select-bg;
+    background-color:            @main-bg;
+    text-color:                  @select-fg;
     cursor:                      "default";
 }
 
@@ -150,14 +150,14 @@ element {
     margin:                      0px;
     padding:                     45px 10px;
     border:                      0px solid;
-    border-radius:               20px;
-    border-color:                @selected;
-    background-color:            @background-alt;
-    text-color:                  @foreground;
+    border-radius:               0px;
+    border-color:                @main-ex;
+    background-color:            transparent;
+    text-color:                  @select-bg;
     cursor:                      pointer;
 }
 element-text {
-    font:                        "feather bold 32";
+    font:                        "Maple Mono NF bold 32";
     background-color:            transparent;
     text-color:                  inherit;
     cursor:                      inherit;
@@ -165,6 +165,6 @@ element-text {
     horizontal-align:            0.5;
 }
 element selected.normal {
-    background-color:            var(selected);
-    text-color:                  var(background);
+    background-color:            @main-ex;
+    text-color:                  @main-fg;
 }

@@ -18,7 +18,7 @@ configuration {
 /*****----- Global Properties -----*****/
 @import                          "shared/colors.rasi"
 @import                          "shared/fonts.rasi"
-
+@import                           "./../../theme.rasi"
 /*****----- Main Window -----*****/
 window {
     transparency:                "real";
@@ -32,10 +32,10 @@ window {
     enabled:                     true;
     margin:                      0px;
     padding:                     0px;
-    border:                      3px solid;
+    border:                      2px solid;
     border-radius:               0px;
-    border-color:                @selected;
-    background-color:            @background;
+    border-color:                @main-fg;
+    background-color:            @main-bg;
     cursor:                      "default";
 }
 
@@ -47,7 +47,7 @@ mainbox {
     padding:                     0px;
     border:                      0px solid;
     border-radius:               0px 0px 0px 0px;
-    border-color:                @selected;
+    border-color:                @main-ex;
     background-color:            transparent;
     children:                    [ "inputbar", "listview" ];
 }
@@ -58,11 +58,11 @@ inputbar {
     spacing:                     18px;
     margin:                      10px;
     padding:                     15px;
-    border:                      3px solid;
+    border:                      0px solid;
     border-radius:               0px;
-    border-color:                @selected;
-    background-color:            @background;
-    text-color:                   #fff;
+    border-color:                transparent;
+    background-color:            @main-bg;
+    text-color:                  @main-fg;
     children:                    [ "prompt", "entry" ];
 }
 
@@ -80,7 +80,7 @@ textbox-prompt-colon {
 }
 entry {
     enabled:                     true;
-    background-color:            inherit;
+    background-color:            transparent;
     text-color:                  inherit;
     cursor:                      text;
     placeholder:                 "Search...";
@@ -106,8 +106,8 @@ listview {
     border:                      0px solid;
     border-radius:               0px;
     border-color:                @selected;
-    background-color:            transparent;
-    text-color:                  @foreground;
+    background-color:            @main-bg;
+    text-color:                  @select-bg;
     cursor:                      "default";
 }
 scrollbar {
@@ -123,21 +123,21 @@ element {
     spacing:                     15px;
     margin:                      0px;
     padding:                     20px 10px;
-    border:                      3px solid;
+    border:                      0px solid;
     border-radius:               0px;
     border-color:                @selected;
-    background-color:            transparent;
-    text-color:                  @foreground;
+    background-color:            @main-bg;
+    text-color:                  @select-bg;
     orientation:                 vertical;
     cursor:                      pointer;
 }
 element normal.normal {
-    background-color:            @background;
-    text-color:                  @foreground;
+    background-color:            @main-bg;
+    text-color:                  @select-bg;
 }
 element selected.normal {
-    background-color:            @background-alt;
-    text-color:                  @foreground;
+    background-color:            @main-ex;
+    text-color:                  @main-fg;
 }
 element-icon {
     background-color:            transparent;
@@ -157,15 +157,15 @@ element-text {
 /*****----- Message -----*****/
 error-message {
     padding:                     15px;
-    border:                      3px solid;
+    border:                      0px solid;
     border-radius:               0px;
-    border-color:                @selected;
-    background-color:            @background;
-    text-color:                  @foreground;
+    border-color:                transparent;
+    background-color:            @main-bg;
+    text-color:                  @select-bg;
 }
 textbox {
-    background-color:            @background;
-    text-color:                  @foreground;
+    background-color:            transparent;
+    text-color:                  @main-fg;
     vertical-align:              0.5;
     horizontal-align:            0.0;
     highlight:                   none;

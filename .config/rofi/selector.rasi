@@ -37,7 +37,7 @@ frame {
 // Lists //
 listview {
     enabled:                     true;
-    spacing:                     4em;
+    spacing:                     3em;
     padding:                     4em;
     columns:                     10;
     lines:                       1;
@@ -62,6 +62,7 @@ element {
     spacing:                     0em;
     padding:                     0em;
     cursor:                      pointer;
+    border:                      10px;
     background-color:            transparent;
     text-color:                  @main-fg;
 }

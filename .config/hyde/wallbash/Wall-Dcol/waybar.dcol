@@ -1,8 +1,20 @@
 $HOME/.config/waybar/theme.css|${scrDir}/wbarconfgen.sh
-@define-color bar-bg <wallbash_pry1_rgba(0)>;
-@define-color main-bg <wallbash_pry1_rgba(0.8)>;
-@define-color main-fg <wallbash_1xa8_rgba(0.8)>;
-@define-color wb-act-bg <wallbash_pry4_rgba(0.4)>;
-@define-color wb-act-fg <wallbash_4xa9_rgba(1)>;
-@define-color wb-hvr-bg <wallbash_2xa3_rgba(0.4)>;
-@define-color wb-hvr-fg <wallbash_3xa8_rgba(0.8)>;
+@define-color bar-bg <wallbash_pry1_rgba(0.8)>;
+@define-color border-color #<wallbash_pry4>;
+@define-color workspace-bg #<wallbash_1xa5>; 
+@define-color workspace-text #<wallbash_txt2>;
+@define-color button-color #<wallbash_1xa9>;
+@define-color button-color-empty-visible #<wallbash_1xa9>;
+@define-color button-hover-bg #<wallbash_2xa1>;
+@define-color button-hover-color #<wallbash_1xa9>;
+@define-color memory-color #<wallbash_1xa9>;
+@define-color battery-color #<wallbash_2xa8>;
+@define-color backlight-color #<wallbash_1xa8>;
+@define-color pulseaudio-color #<wallbash_4xa7>;
+@define-color network-color #<wallbash_1xa6>;
+@define-color clock-color #<wallbash_txt1>;
+@define-color tray-color #<wallbash_2xa6>;
+@define-color playerctl-color #<wallbash_1xa7>;
+@define-color battery-warning #<wallbash_1xa4>;
+@define-color battery-charging #<wallbash_1xa2>;
+@define-color work-hav #<wallbash_3xa9>;

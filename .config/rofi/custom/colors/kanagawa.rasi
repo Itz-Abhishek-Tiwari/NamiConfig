@@ -8,7 +8,7 @@
  **/
 
 * {
-    background:     #1F1F28FF;   /* Darker background */
+    background:     #1F1F2890;   /* Darker background */
     background-alt: #363646FF;   /* Slightly lighter for alt background */
     foreground:     #DCD7BAFF;   /* Soft beige foreground */
     selected:       #C6B6CAFF;   /* Soft blue for selected */

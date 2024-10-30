@@ -1,74 +1,88 @@
 ${cacheDir}/landing/discord.css|${scrDir}/wallbashdiscord.sh
 
+
+/**
+ * @name system24
+ * @description A tui-style discord theme.
+ * @author refact0r
+ * @version 1.0.0
+ * @invite nz87hXyvcy
+ * @website https://github.com/refact0r/system24
+ * @source https://github.com/refact0r/system24/blob/master/system24.theme.css
+ * @authorId 508863359777505290
+ * @authorLink https://www.refact0r.dev
+*/
+
+/* import theme modules */
+@import url('https://refact0r.github.io/system24/src/main.css'); /* main theme css. DO NOT REMOVE */
+@import url('https://refact0r.github.io/system24/src/unrounding.css'); /* gets rid of all rounded corners. remove if you want rounded corners. */
+
+
 :root {
-	--accent-color: #<wallbash_1xa1>;
-	--border-color: #<wallbash_1xa3>;
-	--background-1: #<wallbash_pry1>;
-	--background-2: #<wallbash_1xa2>;
-	--background-tertiary: #<wallbash_pry1>66;
-	--background-mentioned: #<wallbash_2xa3> !important;
-	--background-mentioned-hover: #<wallbash_2xa2> !important;
-	--background-modifier-hover: #<wallbash_3xa4> !important;
-	--background-modifier-active: #<wallbash_4xa4> !important;
-	--text-normal: #<wallbash_txt1> !important;
-	--text-positive: #<wallbash_3xa9> !important;
-	--text-muted: #<wallbash_txt1>66 !important;
-	--text-link: #<wallbash_pry4> !important;
-  --channel-default: #<wallbash_txt1>99 !important;
-	--button-background: #<wallbash_pry1> !important;
-	--button-background-hover: #<wallbash_pry1> !important;
-	--button-background-active: #<wallbash_pry1> !important;
-	--button-accent: #<wallbash_pry1> !important;
-	--button-accent-hover: #<wallbash_pry1> !important;
-	--button-accent-active: #<wallbash_pry1> !important;
-	--button-destructive: #<wallbash_pry1> !important;
-	--button-destructive-hover: #<wallbash_pry1> !important;
-	--button-destructive-active: #<wallbash_pry1> !important;
-	--settings-icon-color: #<wallbash_pry1> !important;
-	--tab-selected: #<wallbash_pry1> !important;
-	--switch: #<wallbash_pry1> !important;
+	--font: 'DM Mono'; 
+	letter-spacing: -0.05ch; 
+	font-weight: 300; 
+	--label-font-weight: 500; 
+	--corner-text: 'system24'; 
+	--pad: 16px; 
+	--txt-pad: 10px; 
+	--panel-roundness: 0px; 
 
-	--background-primary: var(--background-1);
-	--background-primary-alt: var(--background-1);
-	--background-secondary: var(--background-tertiary);
-	--background-secondary-alt: var(--background-tertiary);
-	--background-accent-gradient: var(--background-1);
-	--background-floating: var(--background-2);
-	--background-modifier-selected: var(--accent-color);
-	--background-modifier-accent: var(--border-color);
-	--background-message-hover: transparent;
-	--interactive-selected: var(--background-primary);
-	--interactive-active: var(--text-positive);
-	--interactive-normal: var(--text-normal);
-  --interactive-muted: var(--text-muted);
-	--channels-default: var(--channel-default);
-	--header-primary: var(--text-normal);
-	--header-secondary: var(--text-muted);
-	--control-brand-foreground: var(--accent-color);
-	--info-warning-foreground: var(--accent-color);
-	--activity-card-background: var(--background-1);
-	--brand-experiment: var(--accent-color) !important;
-	--close-button-color: var(--accent-color);
-	--maximize-button-color: var(--accent-color);
-	--minimize-button-color: var(--accent-color);
-	--scrollbar-color-alt: var(--accent-color);
-	--scrollbar-thin-track: transparent;
-	--scrollbar-auto-thumb: transparent;
-	--scrollbar-auto-thumb-hover: var(--accent-color);
-	--scrollbar-auto-track: transparent;
-	--scrollbar-auto-scrollbar-color-thumb: var(--accent-color);
-	--scrollbar-auto-scrollbar-color-track: transparent;
-	--channeltextarea-background: var(--accent-color);
-	--channeltextarea-background-hover: var(--background-tertiary);
-	--avatar-roundess: 5px;
+	/* background colors */
+	--bg-0: #<wallbash_pry1>; /* main background color */
+	--bg-1: #<wallbash_1xa2>; /* background color for secondary elements */
+	--bg-2: #<wallbash_pry1>; /* color of neutral buttons */
+	--bg-3: #<wallbash_pry1>66; /* color of neutral buttons when hovered */
+
+	/* state modifiers */
+	--hover: #<wallbash_3xa4>; /* color of hovered elements */
+	--active: #<wallbash_4xa4>; /* color of elements when clicked */
+	--selected: var(--active); /* color of selected elements */
+
+	/* text colors */
+	--txt-dark: var(--bg-0); 
+	--txt-link: #<wallbash_pry4>; /* color of links */
+	--txt-0: #<wallbash_txt1>; /* color of bright/white text */
+	--txt-1: #<wallbash_txt1>; /* main text color */
+	--txt-2: #<wallbash_txt1>99; /* color of secondary text */
+	--txt-3: #<wallbash_txt1>66; /* color of muted text */
+
+	/* accent colors */
+	--acc-0: #<wallbash_1xa1>; /* main accent color */
+	--acc-1: #<wallbash_pry1>; /* accent color hover */
+	--acc-2: #<wallbash_pry1>; /* accent color active */
+
+	/* borders */
+	--border-width: 2px;
+	--border-color: #<wallbash_1xa3>; 
+	--border-hover-color: var(--acc-0); 
+	--border-transition: 0.2s ease;
+
+	/* status dot colors */
+	--online-dot: #<wallbash_3xa9>; /* online status dot */
+	--dnd-dot: #<wallbash_pry1>; /* do not disturb status dot */
+	--idle-dot: #<wallbash_pry1>; /* idle status dot */
+	--streaming-dot: #<wallbash_pry1>; /* streaming status dot */
+
+	/* mention/ping and message colors */
+	--mention-txt: var(--acc-0);
+	--mention-bg: var(--background-mentioned); 
+	--mention-overlay: var(--background-mentioned); 
+	--mention-hover-overlay: var(--background-mentioned-hover);
+	--reply-overlay: var(--active); 
+	--reply-hover-overlay: var(--hover);
+
+	/* color shades */
+	--pink: var(--acc-0);
+	--pink-1: var(--acc-1);
+	--pink-2: var(--acc-2);
+	--purple: var(--acc-0);
+	--purple-1: var(--acc-1);
+	--purple-2: var(--acc-2);
+	--cyan: #<wallbash_pry4>;
+	--yellow: #<wallbash_3xa9>;
+	--green: #<wallbash_3xa9>;
+	--green-1: #<wallbash_3xa9>;
+	--green-2: #<wallbash_3xa9>;
 }
 
-.theme-dark {
-	--background-primary: var(--background-1);
-	--background-primary-alt: var(--background-1);
-	--background-secondary: var(--background-tertiary);
-	--background-secondary-alt: var(--background-tertiary);
-	--background-floating: var(--background-2);
-	--background-mentioned: var(--accent-color);
-	--background-mentioned-hover: var(--scrollbar-auto-thumb);	
-}

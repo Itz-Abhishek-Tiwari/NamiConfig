@@ -1,27 +1,26 @@
-@import url("colors/catppuccin-mocha.css");
 @import url("theme.css");
 
 * {
   border: none;
-  min-height: 0;
-  font-family: "JetBrainsMono Nerd Font", monospace;
-  font-size: 13px;
+  font-family: "Maple Mono NF";
+  font-size: 14px;
   font-weight: bold;
+  border-radius: 0px;
 }
 
 window#waybar {
-  background-color: @main-bg ;
-  border: 2px solid #B4BCDE;
+  background-color: @bar-bg;
+  border-bottom: 3px solid @border-color;
   animation: dimBrighten 3s ease-in-out infinite;
 }
 
 @keyframes dimBrighten {
   0% {
-    border-color: #B4BCDE;
+    border-color: @border-color;
   }
 
   100% {
-    border-color: #B4BCDE;
+    border-color: @border-color;
   }
 
   50% {
@@ -29,13 +28,10 @@ window#waybar {
   }
 }
 
-
 #workspaces {
-  background-color: @mantle;
+  background-color: @workspace-bg;
+  color: @pulseaudio-color;
   border-radius: 0;
-  padding: 5px 20px;
-  margin: 10px 5px 0 100px;
-  color: @subtext0;
 }
 
 #workspaces,
@@ -43,90 +39,55 @@ window#waybar {
 #pulseaudio-slider,
 #backlight-slider {
   all: unset;
-  border-radius: 0;
+
 }
 
 #workspaces>button {
   padding: 0 15px;
-  font-weight: 900;
-  color: @lavender;
-}
-
-#workspaces>button.empty,
-#workspaces>button.visible {
-  color: @sapphire;
+  font-weight: bold;
 }
 
 #workspaces>button.active {
-  color: @sky;
-  background: rgba(255, 255, 255, 0.1);
+  color: @button-hover-color;
+  background: @button-hover-bg;
+  border-bottom: 3px solid @border-color;
 }
 
 #workspaces>button:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: @teal;
+  background: @button-hover-bg;
+  color: @button-hover-color;
+  border-bottom: 3px solid @border-color;
 }
 
-#workspaces>button:first-child {
-  padding-left: 20px;
-  color: @green;
-}
-
-#workspaces>button:last-child {
-  padding-right: 20px;
-  color: @yellow;
-}
-
-/* Assigning unique colors to each class */
-#memory {
-  color: @rosewater;
-}
-
-#custom-power {
-  color: @flamingo;
-}
-
-#battery {
-  color: @pink;
-}
-
-#backlight {
-  color: @mauve;
-}
-
-#pulseaudio {
-  color: @red;
-}
-
-#network {
-  color: @maroon;
-}
-
-#clock {
-  color: @peach;
-}
-
-#tray {
-  color: @yellow;
-}
-
-#custom-playerctl {
-  color: @green;
-}
-
-#custom-notifications {
-  color: @teal;
-}
 
 #battery.warning,
 #battery.critical,
 #battery.urgent {
-  color: @red;
+  color: red;
 }
 
 #battery.charging {
-  color: @maroon;
+  color: @battery-color;
 }
+
+/*#taskbar {*/
+/*  padding-left: 20px;*/
+/*}*/
+
+#taskbar>button:hover {
+  background-color: transparent;
+}
+
+/*#workspaces {*/
+/*  padding: 0px 20px 0px 0px;*/
+/*}*/
+
+#custom-separator {
+  color: @work-hav;
+  font-weight: bold;
+}
+
+
 
 #memory,
 #custom-power,
@@ -138,7 +99,8 @@ window#waybar {
 #tray,
 #custom-playerctl,
 #custom-notifications {
-  border-radius: 4px;
-  padding: 10px 12px;
-  margin-right: 20px;
+  padding: 8px 25px;
+  color: @pulseaudio-color;
 }
+
+
