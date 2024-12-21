@@ -1,0 +1,129 @@
+[[keymap]]
+keys = "h"
+action = "left"
+desc = "Panel content move left"
+
+[[keymap]]
+keys = "<Tab>"
+action = "next_tab"
+desc = "Next tab"
+
+[[keymap]]
+keys = "j"
+action = "down"
+desc = "Panel content move down"
+
+[[keymap]]
+keys = "o"
+action = "edit_code"
+desc = "Edit cursor question(or current question) with your editor"
+
+[[keymap]]
+keys = "<C-l>"
+action = "redraw"
+desc = "Redraw ui"
+
+[[keymap]]
+keys = "l"
+action = "right"
+desc = "Panel content move right"
+
+[[keymap]]
+keys = "<C-t>"
+action = "toggle_test_res"
+desc = "Show or hide test result (only tab1/edit)"
+
+[[keymap]]
+keys = "<Cr>"
+action = "toggle"
+desc = "Trigger cursor item, in edit pop menu will active button (add or rm topic_tags, or goto tab1/edit)"
+
+[[keymap]]
+keys = "gg"
+action = "top"
+desc = "Go to top"
+
+[[keymap]]
+keys = "<S-H>"
+action = "head"
+desc = "To the first column of the panel content."
+
+[[keymap]]
+keys = "<S-G>"
+action = "bottom"
+desc = "Go to bottom"
+
+[[keymap]]
+keys = "k"
+action = "up"
+desc = "Panel content move up"
+
+[[keymap]]
+keys = "<S-S>"
+action = "sync_index"
+desc = "Sync question index (select tab and topic_tags tab)"
+
+[[keymap]]
+keys = "a"
+action = "add_test_case"
+desc = "When submit error can add test case. (tab1/edit)"
+
+[[keymap]]
+keys = "<A-j>"
+action = "panel_down"
+desc = "Switch to down panel(topic tags)"
+
+[[keymap]]
+keys = "<S-L>"
+action = "tail"
+desc = "To the last column of the panel content."
+
+[[keymap]]
+keys = "<Esc>"
+action = "escape"
+desc = "Close some float panel"
+
+[[keymap]]
+keys = "<C-r>"
+action = "re_get_qs"
+desc = "Re get question detail (reference tab0/select cursor question info)"
+
+[[keymap]]
+keys = "<C-s>"
+action = "toggle_submit_res"
+desc = "Show or hide submit result (only tab1/edit)"
+
+[[keymap]]
+keys = "<A-h>"
+action = "panel_left"
+desc = "Switch to left panel(topic tags)"
+
+[[keymap]]
+keys = "<A-l>"
+action = "panel_right"
+desc = "Switch to right panel(topic tags)"
+
+[[keymap]]
+keys = "<A-k>"
+action = "panel_up"
+desc = "Switch to up panel(topic tags)"
+
+[[keymap]]
+keys = "<S-Tab>"
+action = "prev_tab"
+desc = "Prev tab"
+
+[[keymap]]
+keys = "e"
+action = "edit_code_tui"
+desc = "Enter input block"
+
+[[keymap]]
+keys = "<C-q>"
+action = "exit"
+desc = "Exit lcode"
+
+[[keymap]]
+keys = "<C-p>"
+action = "toggle_menu"
+desc = "Show or hide menu(only edit)"

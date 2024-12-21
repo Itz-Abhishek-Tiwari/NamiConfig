@@ -1,0 +1,10 @@
+$HOME/.config/waybar/theme.css|${scrDir}/wbarconfgen.sh
+
+@define-color bar-bg <wallbash_pry1_rgba(0.7)>;
+@define-color border-color #<wallbash_pry4>;
+@define-color workspace-bg #<wallbash_1xa5>;
+@define-color button-hover-bg #<wallbash_2xa1>;
+@define-color button-hover-color #<wallbash_1xa9>;
+@define-color battery-color #<wallbash_2xa8>;
+@define-color pulseaudio-color #<wallbash_4xa7>;
+@define-color work-hav #<wallbash_3xa9>;

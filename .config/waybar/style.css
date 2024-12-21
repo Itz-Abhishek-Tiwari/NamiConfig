@@ -1,0 +1,90 @@
+@import url("theme.css");
+
+* {
+  border: none;
+  font-family: "JetBrainsMono NF";
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 0px;
+}
+
+window#waybar {
+  background-color: @bar-bg;
+  border-top: 3px solid @border-color;
+}
+
+#workspaces {
+  background-color: @workspace-bg;
+  color: @pulseaudio-color;
+  border-radius: 0;
+}
+
+#workspaces,
+#workspaces button,
+#pulseaudio-slider,
+#backlight-slider {
+  all: unset;
+  margin-left: 5px;
+}
+
+#workspaces>button {
+  padding: 0 15px;
+  font-weight: bold;
+}
+
+#workspaces>button.active {
+  color: @button-hover-color;
+}
+
+#workspaces>button:hover {
+  background: @button-hover-bg;
+  color: @button-hover-color;
+  border-top: 3px solid @border-color;
+}
+
+#battery.warning,
+#battery.critical,
+#battery.urgent {
+  color: red;
+}
+
+#battery.charging {
+  color: @battery-color;
+}
+
+#taskbar>button:hover {
+  background-color: transparent;
+}
+
+#custom-separator {
+  color: @work-hav;
+  font-weight: bold;
+}
+
+#idle_inhibitor,
+#clock {
+  padding: 0px 7px;
+  color: @pulseaudio-color;
+  margin-right: 5px;
+}
+
+#idle_inhibitor {
+  font-size: 12px;
+}
+
+#memory,
+#custom-power,
+#battery,
+#backlight,
+#pulseaudio,
+#network,
+#clock,
+#custom-pomodoro,
+#tray,
+#custom-notification,
+#idle_inhibitor,
+#mpris {
+  padding: 0.3rem 0.6rem;
+  margin: 0.4rem 1rem;
+  color: @pulseaudio-color;
+}

@@ -1,0 +1,87 @@
+
+
+/**
+ * @name system24
+ * @description A tui-style discord theme.
+ * @author refact0r
+ * @version 1.0.0
+ * @invite nz87hXyvcy
+ * @website https://github.com/refact0r/system24
+ * @source https://github.com/refact0r/system24/blob/master/system24.theme.css
+ * @authorId 508863359777505290
+ * @authorLink https://www.refact0r.dev
+*/
+
+/* import theme modules */
+@import url('https://refact0r.github.io/system24/src/main.css'); /* main theme css. DO NOT REMOVE */
+@import url('https://refact0r.github.io/system24/src/unrounding.css'); /* gets rid of all rounded corners. remove if you want rounded corners. */
+
+
+:root {
+	--font: 'Maple Mono NF'; 
+	letter-spacing: -0.05ch; 
+	font-weight: 300; 
+	--label-font-weight: 500; 
+	--corner-text: 'system24'; 
+	--pad: 16px; 
+	--txt-pad: 10px; 
+	--panel-roundness: 0px; 
+
+	/* background colors */
+	--bg-0: #132423; /* main background color */
+	--bg-1: #3A6B68; /* background color for secondary elements */
+	--bg-2: #132423; /* color of neutral buttons */
+	--bg-3: #13242366; /* color of neutral buttons when hovered */
+
+	/* state modifiers */
+	--hover: #8F6B57; /* color of hovered elements */
+	--active: #8F6557; /* color of elements when clicked */
+	--selected: var(--active); /* color of selected elements */
+
+	/* text colors */
+	--txt-dark: var(--bg-0); 
+	--txt-link: #EDD7D0; /* color of links */
+	--txt-0: #FFFFFF; /* color of bright/white text */
+	--txt-1: #FFFFFF; /* main text color */
+	--txt-2: #FFFFFF99; /* color of secondary text */
+	--txt-3: #FFFFFF66; /* color of muted text */
+
+	/* accent colors */
+	--acc-0: #8F6B57; /* main accent color */
+	--acc-1: #132423; /* accent color hover */
+	--acc-2: #132423; /* accent color active */
+
+	/* borders */
+	--border-width: 2px;
+	--border-color: #4B7D7A; 
+	--border-hover-color: #EDD7D0; 
+	--border-transition: 0.2s ease;
+
+	/* status dot colors */
+	--online-dot: #FFDECC; /* online status dot */
+	--dnd-dot: #132423; /* do not disturb status dot */
+	--idle-dot: #132423; /* idle status dot */
+	--streaming-dot: #132423; /* streaming status dot */
+
+	/* mention/ping and message colors */
+	--mention-txt: var(--acc-0);
+	--mention-bg: var(--background-mentioned); 
+	--mention-overlay: var(--background-mentioned); 
+	--mention-hover-overlay: var(--background-mentioned-hover);
+	--reply-overlay: var(--active); 
+	--reply-hover-overlay: var(--hover);
+
+	/* color shades */
+	--pink: var(--acc-0);
+	--pink-1: var(--acc-1);
+	--pink-2: var(--acc-2);
+	--purple: var(--acc-0);
+	--purple-1: var(--acc-1);
+	--purple-2: var(--acc-2);
+	--cyan: #EDD7D0;
+	--yellow: #FFDECC;
+	--green: #FFDECC;
+	--green-1: #FFDECC;
+	--green-2: #FFDECC;
+}
+

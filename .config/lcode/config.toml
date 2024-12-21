@@ -1,0 +1,11 @@
+translate = true
+url_suffix = "en"
+column = 4
+num_sublist = 16
+page_size = 25
+editor = ["nvim"]
+lang = "python"
+code_dir = "/home/abhishek/Leet Code/lcode/"
+browser = "firefox"
+cargo_integr = true
+dir_with_frontend_id = false

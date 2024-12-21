@@ -1,0 +1,124 @@
+$HOME/.local/share/TauonMusicBox/theme/Wallbash.ttheme
+#Tauon Music Box theme file
+
+
+#-Backgrounds-----
+
+#<wallbash_pry1>		top panel
+#<wallbash_pry1>	  			tracklist panel
+#<wallbash_pry1>		side panel
+#<wallbash_pry1>		bottom panel
+#<wallbash_pry1>        		queue panel
+#<wallbash_pry1>      	gallery background
+
+#-Playlist-------
+
+#<wallbash_1xa8>		track line
+#<wallbash_1xa8>		track time
+#<wallbash_1xa8>		track index
+#<wallbash_1xa8>		track artist
+#<wallbash_1xa8>		track album
+
+#<wallbash_1xa8>		track playing
+#<wallbash_1xa8>		index playing
+#<wallbash_1xa8>		artist playing
+#<wallbash_1xa8>		album playing
+#<wallbash_1xa8>		time playing
+
+70,70,70		track missing
+
+#<wallbash_pry4>	     fav line
+#<wallbash_pry4>	     folder line
+#<wallbash_pry4>		folder title
+
+45,45,45   playing highlight
+30,30,30  select highlight
+#<wallbash_1xa8>1	    gallery highlight
+
+50,50,50     column bar background
+
+#-Bottom panel------
+
+#<wallbash_2xa3>		buttons off
+#<wallbash_1xa8>		buttons over
+#<wallbash_pry4>		buttons active
+
+#<wallbash_1xa8>		playing time
+
+#<wallbash_pry4>		seek bar
+#<wallbash_pry4>		volume bar
+#<wallbash_2xa3>		seek bg
+#<wallbash_2xa3>		volume bg
+#<wallbash_pry4>		scroll bar
+
+#<wallbash_2xa3>		mode off
+#<wallbash_pry4>		mode over
+#<wallbash_1xa8>		mode on
+
+242,239,255		bottom title
+
+#-Top panel---------
+
+#<wallbash_1xa8>		tab active text
+#<wallbash_pry4>		tab text
+15,15,15		tab background
+#<wallbash_1xa8>		tab over
+15,15,15		tab active background
+
+#<wallbash_pry4>		music vis
+
+#<wallbash_2xa3>        window buttons background
+242,239,255     window buttons on
+#<wallbash_1xa8>       window buttons icon off
+31,23,49        window buttons icon over
+# window button x on
+# window button x off
+
+
+#-Menu-------------
+
+#<wallbash_pry1>       menu background
+#<wallbash_2xa3>        menu highlight
+#<wallbash_2xa3> 	 	menu border
+242,239,255     menu text
+#<wallbash_2xa3>       menu disable text
+#<wallbash_2xa3> 		menu icons
+
+#-Dialog box---------
+
+#<wallbash_pry1>        box background
+#<wallbash_2xa3>	    box border
+
+242,239,255     box title text
+#<wallbash_1xa8>     box text label
+
+242,239,255     box text normal
+242,239,255     box sub text
+242,239,255     box input text
+64,48,99        box text border
+
+#        box button text normal
+#        box button text highlight
+#<wallbash_2xa3>        box button background normal
+#<wallbash_pry4>       box button background highlight
+#<wallbash_1xa8>        box button border
+
+#-Misc--------------
+
+# 28,28,28		playlist box background
+#<wallbash_1xa8>	 	window frame
+42,32,65        artist bio background
+242,239,255     artist bio text
+
+#-Side panel--------
+
+#<wallbash_1xa8>		title info
+#<wallbash_1xa8>		extra info
+#<wallbash_1xa8>		art border
+
+#-Mini Mode---------
+
+31,23,49        mini bg
+242,239,255     mini border
+255,255,255     mini text 1
+65,200,229     mini text 2

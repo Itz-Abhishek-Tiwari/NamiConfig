@@ -1,0 +1,46 @@
+/*                                ______
+    _____________________________/::'   \
+   /:'   \::'    \::'    \::' _  \:' |   \
+  /:' |   \'  -   \'    | \'    __\_     / n9! -- [ swayosd ]
+ +\___|___/_______/_______/_______/_____/------------------------------------------------------------------+
+                                                                                                          */
+window#osd {
+  padding: 2px 2px;
+  border-radius: 999px;
+  background: alpha(#2e2e41, 0.9);
+}
+
+window#osd #container {
+  margin: 12px 12px;
+}
+
+window#osd image,
+window#osd label {
+  /*color: @theme_fg_color;*/
+}
+
+window#osd progressbar:disabled,
+window#osd image:disabled {
+  opacity: 0.5;
+}
+
+window#osd progressbar {
+  min-height: 6px;
+  border-radius: 999px;
+  background: transparent;
+  border: none;
+}
+
+window#osd trough {
+  min-height: inherit;
+  border-radius: inherit;
+  border: none;
+  background: alpha(@theme_fg_color, 0.5);
+}
+
+window#osd progress {
+  min-height: inherit;
+  border-radius: inherit;
+  border: none;
+  background: @theme_fg_color;
+}

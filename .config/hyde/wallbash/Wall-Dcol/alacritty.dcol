@@ -1,0 +1,66 @@
+$HOME/.config/alacritty/catppuccin-mocha.toml
+[colors.primary]
+background = "#<wallbash_pry1>"
+foreground = "#<wallbash_txt1>"
+dim_foreground = "#<wallbash_txt4>"
+bright_foreground = "#<wallbash_txt1>"
+
+[colors.cursor]
+text = "#<wallbash_pry1>"
+cursor = "#<wallbash_pry4>"
+
+[colors.vi_mode_cursor]
+text = "#<wallbash_pry1>"
+cursor = "#<wallbash_1xa7>"
+
+[colors.search.matches]
+foreground = "#<wallbash_pry1>"
+background = "#<wallbash_txt4>"
+
+[colors.search.focused_match]
+foreground = "#<wallbash_pry1>"
+background = "#<wallbash_2xa9>"
+
+[colors.footer_bar]
+foreground = "#<wallbash_pry1>"
+background = "#<wallbash_txt4>"
+
+[colors.hints.start]
+foreground = "#<wallbash_pry1>"
+background = "#<wallbash_3xa9>"
+
+[colors.hints.end]
+foreground = "#<wallbash_pry1>"
+background = "#<wallbash_txt4>"
+
+[colors.selection]
+text = "#<wallbash_pry1>"
+background = "#<wallbash_pry4>"
+
+[colors.normal]
+black = "#<wallbash_1xa1>"
+red = "#<wallbash_4xa9>"
+green = "#<wallbash_2xa9>"
+yellow = "#<wallbash_3xa9>"
+blue = "#<wallbash_1xa7>"
+magenta = "#<wallbash_2xa7>"
+cyan = "#<wallbash_3xa7>"
+white = "#<wallbash_4xa9>"
+
+[colors.bright]
+black = "#<wallbash_1xa4>"
+red = "#<wallbash_4xa8>"
+green = "#<wallbash_2xa8>"
+yellow = "#<wallbash_3xa8>"
+blue = "#<wallbash_1xa7>"
+magenta = "#<wallbash_2xa7>"
+cyan = "#<wallbash_3xa7>"
+white = "#<wallbash_4xa8>"
+
+[[colors.indexed_colors]]
+index = 16
+color = "#<wallbash_3xa9>"
+
+[[colors.indexed_colors]]
+index = 17
+color = "#<wallbash_pry4>"

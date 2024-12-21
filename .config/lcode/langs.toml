@@ -1,0 +1,157 @@
+[bash]
+start = "## start #"
+end = "## end #"
+inject_start = ""
+inject_end = ""
+
+[c]
+start = "// start /"
+end = "// end /"
+inject_start = ""
+inject_end = ""
+
+[cpp]
+start = "// start /"
+end = "// end /"
+inject_start = ""
+inject_end = ""
+
+[csharp]
+start = "// start /"
+end = "// end /"
+inject_start = ""
+inject_end = ""
+
+[dart]
+start = "// start /"
+end = "// end /"
+inject_start = ""
+inject_end = ""
+
+[elixir]
+start = "## start #"
+end = "## end #"
+inject_start = ""
+inject_end = ""
+
+[erlang]
+start = "%% start %"
+end = "%% end %"
+inject_start = ""
+inject_end = ""
+
+[golang]
+start = "// start /"
+end = "// end /"
+inject_start = ""
+inject_end = ""
+
+[java]
+start = "// start /"
+end = "// end /"
+inject_start = ""
+inject_end = ""
+
+[javascript]
+start = "// start /"
+end = "// end /"
+inject_start = ""
+inject_end = ""
+
+[kotlin]
+start = "// start /"
+end = "// end /"
+inject_start = ""
+inject_end = ""
+
+[mssql]
+start = "-- start -"
+end = "-- end -"
+inject_start = ""
+inject_end = ""
+
+[mysql]
+start = "-- start -"
+end = "-- end -"
+inject_start = ""
+inject_end = ""
+
+[oraclesql]
+start = "-- start -"
+end = "-- end -"
+inject_start = ""
+inject_end = ""
+
+[postgresql]
+start = "-- start -"
+end = "-- end -"
+inject_start = ""
+inject_end = ""
+
+[php]
+start = "// start /"
+end = "// end /"
+inject_start = ""
+inject_end = ""
+
+[python]
+start = "## start #"
+end = "## end #"
+inject_start = ""
+inject_end = ""
+
+[python3]
+start = "## start #"
+end = "## end #"
+inject_start = ""
+inject_end = ""
+
+[racket]
+start = ";; start ;"
+end = ";; end ;"
+inject_start = ""
+inject_end = ""
+
+[react]
+start = "// start /"
+end = "// end /"
+inject_start = ""
+inject_end = ""
+
+[ruby]
+start = "## start #"
+end = "## end #"
+inject_start = ""
+inject_end = ""
+
+[rust]
+start = "// start /"
+end = "// end /"
+inject_start = """
+struct Solution;
+"""
+inject_end = """
+
+fn main() {
+    let res = Solution::function(todo!());
+    dbg!(&res);
+    assert_eq!(res, todo!());
+}"""
+
+[scala]
+start = "// start /"
+end = "// end /"
+inject_start = ""
+inject_end = ""
+
+[swift]
+start = "// start /"
+end = "// end /"
+inject_start = ""
+inject_end = ""
+
+[typescript]
+start = "// start /"
+end = "// end /"
+inject_start = ""
+inject_end = ""
