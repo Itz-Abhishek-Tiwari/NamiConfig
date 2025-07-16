@@ -1,0 +1,119 @@
+@import "theme.css";
+
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 17px;
+  font-weight: bold;
+  border: none;
+  margin: 0;
+  padding: 0;
+  min-height: 0;
+}
+
+window#waybar,
+window#waybar>box {
+  background: @main-bg;
+  padding: 5px 6px;
+}
+
+tooltip {
+  background: @main-bg;
+}
+
+tooltip label {
+  color: @main-fg;
+  margin: 0 2px;
+}
+
+#workspaces,
+#pulseaudio,
+#backlight,
+#battery,
+#custom-wifi,
+#bluetooth,
+#custom-power,
+#idle_inhibitor,
+#clock,
+#mpris {
+  color: @module-fg;
+  background: transparent;
+  padding: 2px 6px;
+  margin: 0 2px;
+}
+
+#workspaces {
+  color: @rosewater;
+}
+
+#workspaces button {
+  color: @lavender;
+  padding: 2px 4px;
+  margin: 0 3px;
+  border-radius: 2px;
+}
+
+#workspaces button.active {
+  background: lavender;
+  color: @base;
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
+#workspaces button.active:hover {
+  background: @teal;
+  color: @mantle;
+}
+
+#workspaces button:hover,
+#custom-power:hover,
+#pulseaudio:hover,
+#bluetooth:hover,
+#custom-wifi:hover,
+#clock:hover,
+#mpris:hover {
+  color: @yellow;
+}
+
+#custom-power {
+  color: @maroon;
+}
+
+#pulseaudio {
+  color: @teal;
+}
+
+#battery {
+  color: @sapphire;
+}
+
+#custom-wifi {
+  color: @sky;
+}
+
+#bluetooth {
+  color: @pink;
+}
+
+#mpris {
+  color: @green;
+}
+
+#idle_inhibitor {
+  color: @lavender;
+}
+
+#clock {
+  color: @peach;
+}
+
+#battery.warning {
+  color: @yellow;
+}
+
+#battery.critical {
+  color: @red;
+}
+
+#battery.charging {
+  color: @green;
+}

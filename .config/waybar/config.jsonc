@@ -1,0 +1,161 @@
+{
+  "layer": "bottom",
+  "position": "bottom",
+  "mode": "dock",
+  "reload_style_on_change": true,
+  "gtk-layer-shell": true,
+  "modules-left": [
+    "hyprland/workspaces",
+    "mpris"
+  ],
+  "modules-center": [
+    "idle_inhibitor",
+    "clock#time"
+  ],
+  "modules-right": [
+    "pulseaudio",
+    "backlight",
+    "battery",
+    "tray",
+    "custom/wifi",
+    "bluetooth",
+    "custom/power"
+  ],
+  "hyprland/workspaces": {
+    "on-scroll-up": "hyprctl dispatch workspace -1",
+    "on-scroll-down": "hyprctl dispatch workspace +1",
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": []
+    }
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰈈 ",
+      "deactivated": "󰈉 "
+    },
+    "tooltip-format-activated": "Presentation Mode",
+    "tooltip-format-deactivated": "Idle Mode",
+    "start-activated": false
+  },
+  "clock#time": {
+    "format": "{:%I:%M %p}",
+    "tooltip": false,
+    "tooltip-format": "Standard Time: {:%I:%M %p}"
+  },
+  "mpris": {
+    "format": "{player_icon} {title} - {artist}",
+    "format-paused": "{status_icon} {title} - {artist}",
+    "player-icons": {
+      "default": "󰝚 ",
+      "spotify": "<span foreground='#a6e3a1'>󰓇 </span>",
+      "firefox": "<span foreground='#f38ba8'>󰗃 </span>"
+    },
+    "status-icons": {
+      "paused": "<span color='#b4befe'>󰏤</span>"
+    },
+    "tooltip-format": "Playing: {title} - {artist}",
+    "tooltip-format-paused": "Paused: {title} - {artist}",
+    "min-length": 5,
+    "max-length": 35
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰝟 {volume}%",
+    "format-icons": {
+      "default": [
+        "󰕿",
+        "󰖀",
+        "󰕾"
+      ],
+      "headphone": "󰋋",
+      "headset": "󰋋"
+    },
+    "tooltip-format": "Device: {desc}",
+    "on-click": "~/.config/hypr/scripts/volumecontrol.sh -o m",
+    "on-scroll-up": "~/.config/hypr/scripts/volumecontrol.sh -o i",
+    "on-scroll-down": "~/.config/hypr/scripts/volumecontrol.sh -o d",
+    "min-length": 6,
+    "max-length": 6
+  },
+  "backlight": {
+    "format": "{icon} {percent}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "tooltip": false,
+    "on-scroll-up": "~/.config/hypr/scripts/brightnesscontrol.sh -o i",
+    "on-scroll-down": "~/.config/hypr/scripts/brightnesscontrol.sh -o d",
+    "min-length": 6,
+    "max-length": 6
+  },
+  "battery": {
+    "states": {
+      "warning": 20,
+      "critical": 10
+    },
+    "format": "{icon} {capacity}%",
+    "format-icons": [
+      "󰂎",
+      "󰁻",
+      "󰁼",
+      "󰁽",
+      "󰁾",
+      "󰁿",
+      "󰂀",
+      "󰂁",
+      "󰂂",
+      "󰁹"
+    ],
+    "format-charging": " {capacity}%",
+    "tooltip-format": "Discharging: {time}",
+    "tooltip-format-charging": "Charging: {time}",
+    "interval": 1,
+    "min-length": 6,
+    "max-length": 6
+  },
+  "tray": {},
+  "custom/wifi": {
+    "exec": "~/.config/waybar/scripts/wifi-status.sh",
+    "return-type": "json",
+    "format": "{}",
+    "on-click": "~/.config/waybar/scripts/wifi-menu.sh",
+    "on-click-right": "kitty --title '󰤨  Network Manager TUI' bash -c nmtui",
+    "interval": 1,
+    "min-length": 1,
+    "max-length": 1
+  },
+  "bluetooth": {
+    "format": "󰂰",
+    "format-disabled": "󰂲",
+    "format-connected": "󰂱",
+    "format-connected-battery": "󰂱",
+    "tooltip-format": "{num_connections} connected",
+    "tooltip-format-disabled": "Bluetooth Disabled",
+    "tooltip-format-connected": "{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}",
+    "tooltip-format-enumerate-connected-battery": ":: {device_alias}: 󱊣 {device_battery_percentage}%",
+    "on-click": "~/.config/waybar/scripts/bluetooth-menu.sh",
+    "on-click-right": "kitty --title '󰂯  Bluetooth TUI' bash -c bluetui",
+    "interval": 1,
+    "min-length": 1,
+    "max-length": 1
+  },
+  "custom/power": {
+    "format": " ",
+    "tooltip": false,
+    "on-click": "~/.config/rofi/powermenu/type-2/powermenu.sh"
+  }
+}
