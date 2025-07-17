@@ -19,8 +19,15 @@
     "tray",
     "custom/wifi",
     "bluetooth",
+    "custom/theme-toggle",
     "custom/power"
   ],
+  "custom/theme-toggle": {
+    "format": " ",
+    "tooltip": true,
+    "tooltip-format": "Toggle Light/Dark Theme",
+    "on-click": "~/.config/hypr/scripts/wayBarThemeSwitch.py"
+  },
   "hyprland/workspaces": {
     "on-scroll-up": "hyprctl dispatch workspace -1",
     "on-scroll-down": "hyprctl dispatch workspace +1",
@@ -44,19 +51,19 @@
   },
   "clock#time": {
     "format": "{:%I:%M %p}",
-    "tooltip": false,
+    "tooltip": true,
     "tooltip-format": "Standard Time: {:%I:%M %p}"
   },
   "mpris": {
     "format": "{player_icon} {title} - {artist}",
     "format-paused": "{status_icon} {title} - {artist}",
     "player-icons": {
-      "default": "󰝚 ",
-      "spotify": "<span foreground='#a6e3a1'>󰓇 </span>",
-      "firefox": "<span foreground='#f38ba8'>󰗃 </span>"
+      "default": "<span foreground='#89b4fa'>󰝚 </span>",
+      "spotify": "<span foreground='#40a02b'>󰓇 </span>",
+      "firefox": "<span foreground='#d20f39'>󰗃 </span>"
     },
     "status-icons": {
-      "paused": "<span color='#b4befe'>󰏤</span>"
+      "paused": "<span foreground='#f9e2af'>󰏤</span>"
     },
     "tooltip-format": "Playing: {title} - {artist}",
     "tooltip-format-paused": "Paused: {title} - {artist}",
@@ -120,7 +127,7 @@
       "󰁹"
     ],
     "format-charging": " {capacity}%",
-    "tooltip-format": "Discharging: {time}",
+    "tooltip-format": "Battery : {capacity}%",
     "tooltip-format-charging": "Charging: {time}",
     "interval": 1,
     "min-length": 6,

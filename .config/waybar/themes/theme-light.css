@@ -1,0 +1,77 @@
+/* ───── Catppuccin Latte (Enhanced Contrast) ───── */
+
+@define-color rosewater #c56a62;
+@define-color flamingo #c75a5a;
+@define-color pink #d95fc2;
+@define-color mauve #6a32d4;
+@define-color red #b10e32;
+@define-color maroon #cc3d48;
+@define-color peach #e45c05;
+@define-color yellow #c07c1a;
+@define-color green #2f801e;
+@define-color teal #117c80;
+@define-color sky #008fcf;
+@define-color sapphire #1d8aa7;
+@define-color blue #1855d0;
+@define-color lavender #5666f0;
+
+@define-color text #2a2b3c;
+@define-color subtext1 #3b3d4d;
+@define-color subtext0 #4c4e5f;
+
+@define-color overlay2 #5d5f6f;
+@define-color overlay1 #6f7282;
+@define-color overlay0 #828593;
+
+@define-color surface2 #9598a4;
+@define-color surface1 #a8acb6;
+@define-color surface0 #bbc0c9;
+
+@define-color base #e8ebf0;
+@define-color mantle #dfe3ea;
+@define-color crust rgba(200, 208, 220, 0.9);
+
+@define-color white #ffffff;
+@define-color black #000000;
+
+/* ───── Common Roles ───── */
+
+@define-color main-fg @text;
+@define-color main-bg @crust;
+@define-color main-br @text;
+@define-color shadow shade(@overlay2, 1);
+
+/* ───── States ───── */
+
+@define-color warning @yellow;
+@define-color critical @red;
+@define-color charging @green;
+
+/* ───── Modules ───── */
+
+@define-color module-fg @text;
+@define-color workspaces @mantle;
+
+@define-color temperature @mantle;
+@define-color memory @base;
+@define-color cpu @surface0;
+
+@define-color distro-fg @black;
+@define-color distro-bg @overlay2;
+
+@define-color time @surface1;
+@define-color date @surface0;
+@define-color tray @base;
+
+@define-color pulseaudio @surface1;
+@define-color backlight @surface0;
+@define-color battery @base;
+@define-color power @overlay2;
+
+/* ───── Interaction States ───── */
+
+@define-color active-bg @overlay2;
+@define-color active-fg @base;
+
+@define-color hover-bg @surface0;
+@define-color hover-fg alpha(@text, 0.75);

@@ -26,6 +26,7 @@ tooltip label {
 }
 
 #workspaces,
+#custom-theme-toggle,
 #pulseaudio,
 #backlight,
 #battery,
@@ -54,7 +55,7 @@ tooltip label {
 
 #workspaces button.active {
   background: lavender;
-  color: @base;
+  color: @black;
   font-weight: bolder;
   text-decoration: underline;
 }
@@ -116,4 +117,9 @@ tooltip label {
 
 #battery.charging {
   color: @green;
+}
+
+#custom-theme-toggle {
+  color: @peach;
+  background: transparent;
 }
