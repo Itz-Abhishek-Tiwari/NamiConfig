@@ -1,35 +1,35 @@
-/* ───── Catppuccin Latte (Enhanced Contrast) ───── */
+/* ───── Catppuccin Latte ───── */
 
-@define-color rosewater #c56a62;
-@define-color flamingo #c75a5a;
-@define-color pink #d95fc2;
-@define-color mauve #6a32d4;
-@define-color red #b10e32;
-@define-color maroon #cc3d48;
-@define-color peach #e45c05;
-@define-color yellow #c07c1a;
-@define-color green #2f801e;
-@define-color teal #117c80;
-@define-color sky #008fcf;
-@define-color sapphire #1d8aa7;
-@define-color blue #1855d0;
-@define-color lavender #5666f0;
+@define-color rosewater #dc8a78;
+@define-color flamingo #dd7878;
+@define-color pink #ea76cb;
+@define-color mauve #8839ef;
+@define-color red #d20f39;
+@define-color maroon #e64553;
+@define-color peach #fe640b;
+@define-color yellow #df8e1d;
+@define-color green #40a02b;
+@define-color teal #179299;
+@define-color sky #04a5e5;
+@define-color sapphire #209fb5;
+@define-color blue #1e66f5;
+@define-color lavender #7287fd;
 
-@define-color text #2a2b3c;
-@define-color subtext1 #3b3d4d;
-@define-color subtext0 #4c4e5f;
+@define-color text #4c4f69;
+@define-color subtext1 #5c5f77;
+@define-color subtext0 #6c6f85;
 
-@define-color overlay2 #5d5f6f;
-@define-color overlay1 #6f7282;
-@define-color overlay0 #828593;
+@define-color overlay2 #7c7f93;
+@define-color overlay1 #8c8fa1;
+@define-color overlay0 #9ca0b0;
 
-@define-color surface2 #9598a4;
-@define-color surface1 #a8acb6;
-@define-color surface0 #bbc0c9;
+@define-color surface2 #acb0be;
+@define-color surface1 #bcc0cc;
+@define-color surface0 #ccd0da;
 
-@define-color base #e8ebf0;
-@define-color mantle #dfe3ea;
-@define-color crust rgba(200, 208, 220, 0.9);
+@define-color base #eff1f5;
+@define-color mantle #e6e9ef;
+@define-color crust rgba(220, 224, 232, 0.6);
 
 @define-color white #ffffff;
 @define-color black #000000;

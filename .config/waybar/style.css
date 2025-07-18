@@ -65,7 +65,10 @@ tooltip label {
   color: @mantle;
 }
 
-#workspaces button:hover,
+#workspaces button:hover {
+  color: @red;
+}
+
 #custom-power:hover,
 #pulseaudio:hover,
 #bluetooth:hover,

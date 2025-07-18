@@ -6,14 +6,14 @@ margin=20
 padding=15
 border-size=2
 border-radius=1
-on-notify=exec mpv /usr/share/sounds/freedesktop/stereo/message.oga
+
 anchor=top-right
 layer=overlay
 
-background-color=#11111b
-text-color=#cdd6f4
-border-color=#eba0ac
-progress-color=over #313244
+background-color=#eff1f5
+text-color=#4c4f69
+border-color=#d20f39
+progress-color=over #dc8a78
 
 icons=true
 max-icon-size=64
@@ -22,10 +22,10 @@ default-timeout=5000
 ignore-timeout=false
 
 [urgency=low]
-border-color=#7f849c
+border-color=#acb0be
 
 [urgency=normal]
-border-color=#eba0ac
+border-color=#d20f39
 
 [urgency=high]
-border-color=#fab387
+border-color=#e64553

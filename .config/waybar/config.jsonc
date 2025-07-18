@@ -22,12 +22,6 @@
     "custom/theme-toggle",
     "custom/power"
   ],
-  "custom/theme-toggle": {
-    "format": " ",
-    "tooltip": true,
-    "tooltip-format": "Toggle Light/Dark Theme",
-    "on-click": "~/.config/hypr/scripts/wayBarThemeSwitch.py"
-  },
   "hyprland/workspaces": {
     "on-scroll-up": "hyprctl dispatch workspace -1",
     "on-scroll-down": "hyprctl dispatch workspace +1",
@@ -133,7 +127,13 @@
     "min-length": 6,
     "max-length": 6
   },
-  "tray": {},
+  "tray": {
+    "spacing": 10,
+    "icons": {
+      "blueman": "bluetooth",
+      "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
+    }
+  },
   "custom/wifi": {
     "exec": "~/.config/waybar/scripts/wifi-status.sh",
     "return-type": "json",
@@ -159,6 +159,12 @@
     "interval": 1,
     "min-length": 1,
     "max-length": 1
+  },
+  "custom/theme-toggle": {
+    "format": " ",
+    "tooltip": true,
+    "tooltip-format": "Toggle Light/Dark Theme",
+    "on-click": "/home/abhishek/.config/scripts/mode_toggle.py && kill -SIGUSR1 $(pgrep kitty)"
   },
   "custom/power": {
     "format": " ",

@@ -12,6 +12,6 @@
     foreground:     #D9E0EE80;
     selected:       #cba6f7ee;
     active:         #ABE9B380;
-    urgent:         #F28FAD80;
+    urgent:         #F28FAD;
 }
 
