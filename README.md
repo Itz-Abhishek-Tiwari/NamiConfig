@@ -3,7 +3,7 @@
 
 <div align="center">
 
-<img src="screenshots/og-img.png" alt="Hyprland Banner" width="700"/>
+<img src="screenshots/banner-01.png" alt="Hyprland Banner" width="700"/>
 
 
 
