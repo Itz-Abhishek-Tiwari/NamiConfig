@@ -1,77 +1,139 @@
-/* ───── Catppuccin Latte ───── */
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 17px;
+  font-weight: bold;
+  border: none;
+  margin: 0;
+  padding: 0;
+  min-height: 0;
+}
 
-@define-color rosewater #dc8a78;
-@define-color flamingo #dd7878;
-@define-color pink #ea76cb;
-@define-color mauve #8839ef;
-@define-color red #d20f39;
-@define-color maroon #e64553;
-@define-color peach #fe640b;
-@define-color yellow #df8e1d;
-@define-color green #40a02b;
-@define-color teal #179299;
-@define-color sky #04a5e5;
-@define-color sapphire #209fb5;
-@define-color blue #1e66f5;
-@define-color lavender #7287fd;
+window#waybar,
+window#waybar>box {
+  background: rgba(220, 224, 232, 0.6);
+  padding: 5px 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
 
-@define-color text #4c4f69;
-@define-color subtext1 #5c5f77;
-@define-color subtext0 #6c6f85;
+tooltip {
+  background: #dce0e8;
+  padding: 6px 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
 
-@define-color overlay2 #7c7f93;
-@define-color overlay1 #8c8fa1;
-@define-color overlay0 #9ca0b0;
+tooltip label {
+  color: #4c4f69;
+  margin: 0 2px;
+}
 
-@define-color surface2 #acb0be;
-@define-color surface1 #bcc0cc;
-@define-color surface0 #ccd0da;
+#workspaces,
+#custom-theme-toggle,
+#pulseaudio,
+#backlight,
+#battery,
+#custom-wifi,
+#bluetooth,
+#custom-power,
+#idle_inhibitor,
+#clock,
+#mpris {
+  color: #4c4f69;
+  background: transparent;
+  padding: 2px 6px;
+  margin: 0 2px;
+}
 
-@define-color base #eff1f5;
-@define-color mantle #e6e9ef;
-@define-color crust rgba(220, 224, 232, 0.6);
+#custom-theme-toggle,
+#custom-wifi,
+#bluetooth,
+#custom-power {
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
 
-@define-color white #ffffff;
-@define-color black #000000;
+#workspaces {
+  color: #dc8a78;
+}
 
-/* ───── Common Roles ───── */
+#workspaces button {
+  color: #7287fd;
+  padding: 2px 4px;
+  margin: 0 3px;
+  border-radius: 2px;
+}
 
-@define-color main-fg @text;
-@define-color main-bg @crust;
-@define-color main-br @text;
-@define-color shadow shade(@overlay2, 1);
+#workspaces button.active {
+  background: #b4befe;
+  color: #4c4f69;
+  font-weight: bolder;
+  text-decoration: underline;
+}
 
-/* ───── States ───── */
+#workspaces button.active:hover {
+  background: #94e2d5;
+  color: #4c4f69;
+}
 
-@define-color warning @yellow;
-@define-color critical @red;
-@define-color charging @green;
+#workspaces button:hover {
+  color: #d20f39;
+}
 
-/* ───── Modules ───── */
+#custom-power:hover,
+#pulseaudio:hover,
+#bluetooth:hover,
+#custom-wifi:hover,
+#clock:hover,
+#mpris:hover,
+#custom-theme-toggle:hover {
+  background: transparent;
+  color: #4c4f69;
+}
 
-@define-color module-fg @text;
-@define-color workspaces @mantle;
+#custom-power {
+  color: #d20f39;
+}
 
-@define-color temperature @mantle;
-@define-color memory @base;
-@define-color cpu @surface0;
+#pulseaudio {
+  color: #40a02b;
+}
 
-@define-color distro-fg @black;
-@define-color distro-bg @overlay2;
+#battery {
+  color: #1e66f5;
+}
 
-@define-color time @surface1;
-@define-color date @surface0;
-@define-color tray @base;
+#custom-wifi {
+  color: #179299;
+}
 
-@define-color pulseaudio @surface1;
-@define-color backlight @surface0;
-@define-color battery @base;
-@define-color power @overlay2;
+#bluetooth {
+  color: #8839ef;
+}
 
-/* ───── Interaction States ───── */
+#mpris {
+  color: #40a02b;
+}
 
-@define-color active-bg @overlay2;
-@define-color active-fg @base;
+#idle_inhibitor {
+  color: #7287fd;
+}
 
-@define-color hover-bg @surface0;
-@define-color hover-fg alpha(@text, 0.75);
+#clock {
+  color: #fe640b;
+}
+
+#battery.warning {
+  color: #df8e1d;
+}
+
+#battery.critical {
+  color: #d20f39;
+}
+
+#battery.charging {
+  color: #40a02b;
+}
+
+#custom-theme-toggle {
+  color: #fe640b;
+}

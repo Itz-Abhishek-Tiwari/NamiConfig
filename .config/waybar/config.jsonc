@@ -161,7 +161,7 @@
     "max-length": 1
   },
   "custom/theme-toggle": {
-    "format": " ",
+    "format": " ",
     "tooltip": true,
     "tooltip-format": "Toggle Light/Dark Theme",
     "on-click": "/home/abhishek/.config/scripts/mode_toggle.py && kill -SIGUSR1 $(pgrep kitty)"
