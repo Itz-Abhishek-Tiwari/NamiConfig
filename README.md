@@ -1,11 +1,8 @@
 # 🌊 NamiConfig 2.0
 
-
 <div align="center">
 
 <img src="screenshots/banner-1.png" alt="Hyprland Banner" width="400"/>
-
-
 
 <h2>🚀 Modern, Modular & Polished Dotfiles for Arch + Hyprland</h2>
 
@@ -20,6 +17,14 @@
 
 A modular dotfiles system built for **Arch Linux + Hyprland**, featuring unified theming, consistent UI/UX, and one-click light/dark toggle support. Managed cleanly using **[GNU Stow](https://www.gnu.org/software/stow/)**.
 
+This rice was built **completely from scratch** by me — no borrowing from others' dotfiles. It might be rough around the edges, but I finally understand every part of my setup. Feels good.
+
+---
+
+## 🛠️ SwayNC Customization
+
+I customized **SwayNC** by editing the `.blp` layout file **directly in the source code**, then rebuilding it with **Meson + Ninja**. This gave me full control over its layout and visuals — something not possible through CSS alone.
+
 ---
 
 ## 📦 Structure (Stow-compatible)
@@ -28,46 +33,47 @@ A modular dotfiles system built for **Arch Linux + Hyprland**, featuring unified
 
 .
 ├── .config/
-│ ├── bat/
-│ ├── cava/
-│ ├── hypr/
-│ ├── kitty/
-│ ├── Kvantum/
-│ ├── mako/
-│ ├── NamiThemes/
-│ ├── qt5ct/
-│ ├── qt6ct/
-│ ├── rofi/
-│ ├── scripts/
-│ ├── spicetify/
-│ ├── swappy/
-│ ├── waybar/
-│ └── zathura/
+│   ├── bat/
+│   ├── cava/
+│   ├── hypr/
+│   ├── kitty/
+│   ├── Kvantum/
+│   ├── mako/
+│   ├── NamiThemes/
+│   ├── qt5ct/
+│   ├── qt6ct/
+│   ├── rofi/
+│   ├── scripts/
+│   ├── spicetify/
+│   ├── swappy/
+│   ├── swaync/
+│   ├── waybar/
+│   └── zathura/
 ├── .zshrc
 └── README.md
 
 ```
 
-Each folder (e.g., `hypr`, `rofi`, `kitty`, etc.) is a Stow "package" you can symlink into your `$HOME` directory.
+Each folder is a **Stow package** you can symlink into your `$HOME`.
 
 ---
 
 ## 🧰 How to Use
 
-### 🔹 Step 1: Clone this repo
+### 🔹 Step 1: Clone the repo
 
 ```bash
-git clone https://github.com/yourusername/NamiConfig.git ~/.dotfiles
+git clone https://github.com/Itz-Abhishek-Tiwari/NamiConfig.git ~/.dotfiles
 cd ~/.dotfiles
 ```
 
 ### 🔹 Step 2: Install stow
 
 ```bash
-sudo pacman -S stow     # or use your distro's package manager
+sudo pacman -S stow
 ```
 
-### 🔹 Step 3: Stow desired modules
+### 🔹 Step 3: Stow your configs
 
 ```bash
 stow .config/kitty
@@ -75,7 +81,7 @@ stow .config/waybar
 stow .zshrc
 ```
 
-Or stow everything at once:
+Or stow everything:
 
 ```bash
 stow .
@@ -88,77 +94,91 @@ stow .
 Switch between **light** and **dark** mode across all supported apps:
 
 ```bash
-~/.config/hypr/scripts/wayBarThemeSwitch.py
+~/.config/scripts/mode_toggle.py
 ```
 
-### ✅ Applies to:
+✅ This affects:
 
 - GTK 3/4 (via gsettings + config)
 - Kitty, Waybar, Mako, Rofi
-- VSCode (edits `settings.json`)
-- Nemo reload (only if running)
-- Sends a themed desktop notification
+- VSCode (`settings.json`)
+- Nemo (reloads if running)
+- Sends themed notification
 
 ---
 
 ## 🌈 Themes & Styles
 
-Located under:
+All theme variants are located in:
 
 ```
 ~/.config/NamiThemes/
 ```
 
-Includes `light` and `dark` variants for:
+Includes `light` and `dark` styles for:
 
-- `kitty`
-- `waybar`
-- `mako`
-- `rofi`
+- Kitty
+- Waybar
+- Rofi
+- Mako
+- SwayNC
 
-The toggle script will automatically pick the correct theme files and hot-reload supported apps.
+These are auto-applied via the toggle script.
 
 ---
 
 ## 🖼 Wallpapers
 
-Wallpapers used with `hyprpaper` are in:
+Wallpapers used with `swww` live in:
 
 ```
 ~/.config/hypr/wall/
 ```
 
+Hand-picked and themed to match the rice.
+
 ---
 
 ## 📸 Screenshots
 
----
+<details>
+<summary>🌑 Dark Mode — Click to expand</summary>
 
-### 🌑 Dark Mode
+<br>
 
-|           Screenshot 1           |           Screenshot 2           |           Screenshot 3           |           Screenshot 4           |           Screenshot 5           |
-| :------------------------------: | :------------------------------: | :------------------------------: | :------------------------------: | :------------------------------: |
-| ![Dark 1](screenshots/dark1.png) | ![Dark 2](screenshots/dark2.png) | ![Dark 3](screenshots/dark3.png) | ![Dark 4](screenshots/dark4.png) | ![Dark 5](screenshots/dark5.png) |
+![Dark 1](screenshots/dark/dark1.png)
+![Dark 2](screenshots/dark/dark2.png)
+![Dark 3](screenshots/dark/dark3.png)
+![Dark 4](screenshots/dark/dark4.png)
+![Dark 5](screenshots/dark/dark5.png)
+![Dark 6](screenshots/dark/dark6.png)
+![Dark 7](screenshots/dark/dark7.png)
+![Dark 8](screenshots/dark/dark8.png)
+
+</details>
 
 ---
 
 ## ⚙️ Requirements
 
-Make sure you have:
+Make sure the following are installed:
 
-- `hyprland`, `waybar`, `mako`, `kitty`, `rofi`, `nemo`
+- `hyprland`, `waybar`, `swaync`, `kitty`, `rofi`, `nemo`
 - `bat`, `cava`, `swappy`, `spicetify`
 - `python3`, `stow`
-- Nerd Fonts (e.g., `JetBrainsMono Nerd Font`)
+- A Nerd Font (e.g. `JetBrainsMono Nerd Font`)
 
 ---
 
-## 🛠 To-Do
+## ✅ To-Do / Planned Features
 
-- [ ] Add `fzf`/`rofi` based theme switcher UI
-- [ ] Add a wall+theme sync script
-- [ ] VSCode extension auto-theming
-- [ ] Optional CLI preview (like `nvfetcher`)
+- [ ] 💡 Theme Switcher GUI (via `rofi` or `fzf`)
+- [ ] 🌄 Wall + Theme sync automation
+- [ ] 🧩 Auto-apply VSCode theme via extensions
+- [ ] 🖼 Live CLI preview (like `nvfetcher`)
+- [ ] 📦 Bootstrap script to auto-stow everything
+- [ ] 🔁 Dynamic terminal/GTK accent integration
+- [ ] 🌐 Optional Git sync/backup integration
 
 ---
 
@@ -167,6 +187,7 @@ Make sure you have:
 - [Catppuccin Theme](https://github.com/catppuccin)
 - [adi1090x Rofi Scripts](https://github.com/adi1090x/rofi)
 - [nwg-piotr Waybar Modules](https://github.com/nwg-piotr/waybar)
+- Everyone on r/unixporn and the Arch Wiki ❤️
 
 ---
 
@@ -174,9 +195,3 @@ Make sure you have:
 
 MIT — use, fork, and modify freely.
 
-```
-
----
-
-Let me know if you want a `bootstrap.sh` script to automate the Stow linking process or theme preview screenshots added.
-```
