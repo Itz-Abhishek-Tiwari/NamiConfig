@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import os
-import shutil
 import subprocess
 import json
 from pathlib import Path
@@ -40,28 +39,28 @@ GTK_COMMON_SETTINGS = {
 theme_paths = {
     "kitty": {
         "target": CONFIG_DIR / "kitty/theme.conf",
-        "light": CONFIG_DIR / "NamiThemes/kitty/themes/theme-light.conf",
-        "dark": CONFIG_DIR / "NamiThemes/kitty/themes/theme-dark.conf",
+        "light": CONFIG_DIR / "NamiThemes/catppuccin/kitty/themes/theme-light.conf",
+        "dark": CONFIG_DIR / "NamiThemes/catppuccin/kitty/themes/theme-dark.conf",
     },
     "waybar": {
         "target": CONFIG_DIR / "waybar/style.css",
-        "light": CONFIG_DIR / "NamiThemes/waybar/themes/theme-light.css",
-        "dark": CONFIG_DIR / "NamiThemes/waybar/themes/theme-dark.css",
+        "light": CONFIG_DIR / "NamiThemes/catppuccin/waybar/themes/theme-light.css",
+        "dark": CONFIG_DIR / "NamiThemes/catppuccin/waybar/themes/theme-dark.css",
     },
     "mako": {
         "target": CONFIG_DIR / "mako/config",
-        "light": CONFIG_DIR / "NamiThemes/mako/themes/theme-light",
-        "dark": CONFIG_DIR / "NamiThemes/mako/themes/theme-dark",
+        "light": CONFIG_DIR / "NamiThemes/catppuccin/mako/themes/theme-light",
+        "dark": CONFIG_DIR / "NamiThemes/catppuccin/mako/themes/theme-dark",
     },
     "rofi": {
         "target": CONFIG_DIR / "rofi/colors/catppuccin.rasi",
-        "light": CONFIG_DIR / "NamiThemes/rofi/themes/theme-light.rasi",
-        "dark": CONFIG_DIR / "NamiThemes/rofi/themes/theme-dark.rasi",
+        "light": CONFIG_DIR / "NamiThemes/catppuccin/rofi/themes/theme-light.rasi",
+        "dark": CONFIG_DIR / "NamiThemes/catppuccin/rofi/themes/theme-dark.rasi",
     },
     "swaync": {
         "target": CONFIG_DIR / "swaync/style.css",
-        "light": CONFIG_DIR / "NamiThemes/swaync/theme-light.css",
-        "dark": CONFIG_DIR / "NamiThemes/swaync/theme-dark.css",
+        "light": CONFIG_DIR / "NamiThemes/catppuccin/swaync/theme-light.css",
+        "dark": CONFIG_DIR / "NamiThemes/catppuccin/swaync/theme-dark.css",
     },
 }
 
@@ -126,35 +125,40 @@ def set_gtk_theme(theme):
     GTK4_PATH.write_text(ini_content)
 
 
-def copy_theme_file(app, theme):
+def symlink_theme_file(app, theme):
     source = theme_paths[app][theme]
     target = theme_paths[app]["target"]
-    if source.exists():
-        shutil.copy(source, target)
+    if not source.exists():
+        return
+
+    target.parent.mkdir(parents=True, exist_ok=True)
+    if target.exists() or target.is_symlink():
+        target.unlink()
+    target.symlink_to(source)
 
 
 def switch_kitty(theme):
-    copy_theme_file("kitty", theme)
+    symlink_theme_file("kitty", theme)
     subprocess.run("kill -10 $(pgrep kitty)", shell=True)
 
 
 def switch_waybar(theme):
-    copy_theme_file("waybar", theme)
+    symlink_theme_file("waybar", theme)
     subprocess.run(["pkill", "waybar"])
     subprocess.Popen(["waybar"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
 def switch_mako(theme):
-    copy_theme_file("mako", theme)
+    symlink_theme_file("mako", theme)
     subprocess.run(["pkill", "-SIGUSR2", "mako"])
 
 
 def switch_rofi(theme):
-    copy_theme_file("rofi", theme)
+    symlink_theme_file("rofi", theme)
 
 
 def switch_swaync(theme):
-    copy_theme_file("swaync", theme)
+    symlink_theme_file("swaync", theme)
     subprocess.run(["pkill", "-SIGUSR2", "swaync"])
 
 
@@ -223,7 +227,6 @@ def toggle_theme():
     switch_vscode_theme(new_theme)
     update_windowrules_for_blur(new_theme)
     reload_nemo()
-    update_windowrules_for_blur(new_theme)
     notify(new_theme)
 
     print(f"Switched to {new_theme.capitalize()} Theme")

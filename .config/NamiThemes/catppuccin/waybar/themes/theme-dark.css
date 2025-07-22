@@ -1,5 +1,5 @@
 * {
-  font-family: "JetBrainsMono Nerd Font";
+  font-family: "CaskaydiaMono Nerd Font ";
   font-size: 17px;
   font-weight: bold;
   border: none;
@@ -17,6 +17,27 @@ window#waybar>box {
 tooltip {
   background: rgba(17, 17, 27, 0.6);
 }
+
+
+menu {
+  border-radius: 6px;
+  background: #161320;
+  color: #B5E8E0;
+  padding: 4px;
+  margin: 4px;
+  /* fix the overlap */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+menuitem {
+  padding: 8px 14px;
+  border-radius: 4px;
+}
+
+menuitem:hover {
+  background-color: #302D41;
+}
+
 
 tooltip label {
   color: #cdd6f4;
