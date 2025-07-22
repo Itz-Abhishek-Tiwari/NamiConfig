@@ -1,6 +1,6 @@
 * {
-  font-family: "JetBrainsMono Nerd Font";
-  font-size: 17px;
+  font-family: "CaskaydiaMono Nerd Font ";
+  font-size: 19px;
   font-weight: bold;
   border: none;
   margin: 0;
@@ -10,7 +10,7 @@
 
 window#waybar,
 window#waybar>box {
-  background: rgba(220, 224, 232, 0.6);
+  background: transparent;
   padding: 5px 6px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -26,6 +26,7 @@ tooltip label {
   margin: 0 2px;
 }
 
+/* Shared styling */
 #workspaces,
 #custom-theme-toggle,
 #pulseaudio,
@@ -36,22 +37,27 @@ tooltip label {
 #custom-power,
 #idle_inhibitor,
 #clock,
-#mpris {
+#mpris,
+#custom-notification,
+#tray {
   color: #4c4f69;
-  background: transparent;
+  background: #dce0e8;
   padding: 2px 6px;
-  margin: 0 2px;
+  box-shadow: none;
+  margin: 0 5px;
+  border-radius: 4px;
 }
 
+#tray,
+#custom-notification,
 #custom-theme-toggle,
 #custom-wifi,
 #bluetooth,
 #custom-power {
-  background: transparent;
-  border-radius: 0;
-  box-shadow: none;
+  padding: 0px 12px;
 }
 
+/* Workspaces */
 #workspaces {
   color: #dc8a78;
 }
@@ -79,6 +85,7 @@ tooltip label {
   color: #d20f39;
 }
 
+/* Hover */
 #custom-power:hover,
 #pulseaudio:hover,
 #bluetooth:hover,
@@ -86,10 +93,10 @@ tooltip label {
 #clock:hover,
 #mpris:hover,
 #custom-theme-toggle:hover {
-  background: transparent;
-  color: #4c4f69;
+  color: #fe640b;
 }
 
+/* Individual components */
 #custom-power {
   color: #d20f39;
 }
@@ -100,6 +107,18 @@ tooltip label {
 
 #battery {
   color: #1e66f5;
+}
+
+#battery.warning {
+  color: #df8e1d;
+}
+
+#battery.critical {
+  color: #d20f39;
+}
+
+#battery.charging {
+  color: #40a02b;
 }
 
 #custom-wifi {
@@ -120,18 +139,6 @@ tooltip label {
 
 #clock {
   color: #fe640b;
-}
-
-#battery.warning {
-  color: #df8e1d;
-}
-
-#battery.critical {
-  color: #d20f39;
-}
-
-#battery.charging {
-  color: #40a02b;
 }
 
 #custom-theme-toggle {

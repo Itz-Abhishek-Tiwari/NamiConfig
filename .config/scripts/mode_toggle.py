@@ -5,6 +5,7 @@ import shutil
 import subprocess
 import json
 from pathlib import Path
+from typing import NoReturn
 
 # ====================== Theme Constants ====================== #
 DARK = "Colloid-Dark-Catppuccin"
@@ -12,6 +13,8 @@ LIGHT = "Colloid-Light-Catppuccin"
 
 CONFIG_DIR = Path.home() / ".config"
 STATE_FILE = CONFIG_DIR / ".current_theme"
+WINDOWRULES_PATH = CONFIG_DIR / "hypr/windowrules.conf"
+BLUR_RULE = "layerrule = blur,waybar"
 
 # ====================== GTK Configuration ====================== #
 GTK3_PATH = CONFIG_DIR / "gtk-3.0/settings.ini"
@@ -55,6 +58,11 @@ theme_paths = {
         "light": CONFIG_DIR / "NamiThemes/rofi/themes/theme-light.rasi",
         "dark": CONFIG_DIR / "NamiThemes/rofi/themes/theme-dark.rasi",
     },
+    "swaync": {
+        "target": CONFIG_DIR / "swaync/style.css",
+        "light": CONFIG_DIR / "NamiThemes/swaync/theme-light.css",
+        "dark": CONFIG_DIR / "NamiThemes/swaync/theme-dark.css",
+    },
 }
 
 # ====================== Notification Icons ====================== #
@@ -64,7 +72,6 @@ icon_dark = "/usr/share/icons/Papirus-Dark/48x48/status/weather-clear-night.svg"
 
 # ====================== Helper Functions ====================== #
 def get_current_theme():
-    """Detect current GTK theme via gsettings."""
     try:
         result = subprocess.run(
             ["gsettings", "get", "org.gnome.desktop.interface", "gtk-theme"],
@@ -79,12 +86,20 @@ def get_current_theme():
 
 
 def set_gtk_theme(theme):
-    """Set GTK 3/4 theme and color scheme."""
-    theme_name = LIGHT if theme == "light" else DARK
-    prefer_dark = theme == "dark"
+    if theme == "light":
+        theme_name = LIGHT
+        icon_theme = "Papirus-Light"
+        prefer_dark = False
+    else:
+        theme_name = DARK
+        icon_theme = "Papirus-Dark"
+        prefer_dark = True
 
     subprocess.run(
         ["gsettings", "set", "org.gnome.desktop.interface", "gtk-theme", theme_name]
+    )
+    subprocess.run(
+        ["gsettings", "set", "org.gnome.desktop.interface", "icon-theme", icon_theme]
     )
     subprocess.run(
         [
@@ -92,13 +107,14 @@ def set_gtk_theme(theme):
             "set",
             "org.gnome.desktop.interface",
             "color-scheme",
-            "prefer-dark" if prefer_dark else "default",
+            "prefer-dark" if prefer_dark else "prefer-light",
         ]
     )
 
     def build_ini():
         lines = ["[Settings]"]
         lines.append(f"gtk-theme-name={theme_name}")
+        lines.append(f"gtk-icon-theme-name={icon_theme}")
         lines.append(f"gtk-application-prefer-dark-theme={int(prefer_dark)}")
         lines.extend(f"{k}={v}" for k, v in GTK_COMMON_SETTINGS.items())
         return "\n".join(lines)
@@ -111,7 +127,6 @@ def set_gtk_theme(theme):
 
 
 def copy_theme_file(app, theme):
-    """Copy theme file to target location."""
     source = theme_paths[app][theme]
     target = theme_paths[app]["target"]
     if source.exists():
@@ -138,8 +153,12 @@ def switch_rofi(theme):
     copy_theme_file("rofi", theme)
 
 
+def switch_swaync(theme):
+    copy_theme_file("swaync", theme)
+    subprocess.run(["pkill", "-SIGUSR2", "swaync"])
+
+
 def reload_nemo():
-    """Quit and restart Nemo if it's running."""
     if (
         subprocess.run(["pgrep", "-x", "nemo"], stdout=subprocess.DEVNULL).returncode
         == 0
@@ -149,7 +168,6 @@ def reload_nemo():
 
 
 def switch_vscode_theme(theme):
-    """Update VSCode theme in settings.json."""
     settings_path = CONFIG_DIR / "Code/User/settings.json"
     if not settings_path.exists():
         print(f"VSCode settings not found at {settings_path}")
@@ -171,11 +189,24 @@ def switch_vscode_theme(theme):
 
 
 def notify(theme):
-    """Send desktop notification about theme change."""
     icon = icon_light if theme == "light" else icon_dark
     subprocess.run(
         ["notify-send", "-i", icon, f"Switched to {theme.capitalize()} Theme"]
     )
+
+
+def update_windowrules_for_blur(theme):
+    if not WINDOWRULES_PATH.exists():
+        return
+    lines = WINDOWRULES_PATH.read_text().splitlines()
+
+    if theme == "dark":
+        if BLUR_RULE not in lines:
+            lines.append(BLUR_RULE)
+    else:
+        lines = [line for line in lines if line.strip() != BLUR_RULE]
+
+    WINDOWRULES_PATH.write_text("\n".join(lines) + "\n")
 
 
 # ====================== Main ====================== #
@@ -188,8 +219,11 @@ def toggle_theme():
     switch_waybar(new_theme)
     switch_mako(new_theme)
     switch_rofi(new_theme)
+    switch_swaync(new_theme)
     switch_vscode_theme(new_theme)
+    update_windowrules_for_blur(new_theme)
     reload_nemo()
+    update_windowrules_for_blur(new_theme)
     notify(new_theme)
 
     print(f"Switched to {new_theme.capitalize()} Theme")
