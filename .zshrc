@@ -104,5 +104,5 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 export NODE_ENV=development
 export PATH="$HOME/.local/bin:$PATH"
 export QT_STYLE_OVERRIDE=qt5ct
-
+eval "$(rbenv init -)"
 fpath=(~/.zsh/completions $fpath)

@@ -20,22 +20,22 @@ tooltip {
 
 
 menu {
-  border-radius: 6px;
+  border-radius: 0px;
   background: #161320;
-  color: #B5E8E0;
   padding: 4px;
   margin: 4px;
-  /* fix the overlap */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  box-shadow: none;
 }
 
 menuitem {
   padding: 8px 14px;
+  margin: 2px 5px;
   border-radius: 4px;
 }
 
 menuitem:hover {
-  background-color: #302D41;
+  background-color: #f38ba8;
+  color: #11111b
 }
 
 

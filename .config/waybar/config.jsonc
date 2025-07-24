@@ -51,6 +51,7 @@
       "activated": "󰈈 ",
       "deactivated": "󰈉 "
     },
+    "tooltip": true,
     "tooltip-format-activated": "Presentation Mode",
     "tooltip-format-deactivated": "Idle Mode",
     "start-activated": false

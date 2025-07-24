@@ -12,7 +12,7 @@ window#waybar,
 window#waybar>box {
   background: transparent;
   padding: 5px 6px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
 }
 
 tooltip {
@@ -41,12 +41,27 @@ tooltip label {
 #custom-notification,
 #tray {
   color: #4c4f69;
-  background: #dce0e8;
+  background: rgba(239, 241, 245, 0.9);
   padding: 2px 6px;
   box-shadow: none;
-  margin: 0 5px;
-  border-radius: 4px;
+  margin: 0 0px;
+  border-radius: 0px;
 }
+
+#pulseaudio,
+#idle_inhibitor,
+#workspaces {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+#clock,
+#workspaces,
+#custom-theme-toggle {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
 
 #tray,
 #custom-notification,
