@@ -39,13 +39,20 @@ tooltip label {
 #clock,
 #mpris,
 #custom-notification,
-#tray {
+#tray,
+#custom-group-right-logo {
   color: #4c4f69;
   background: rgba(239, 241, 245, 0.9);
   padding: 2px 6px;
   box-shadow: none;
   margin: 0 0px;
   border-radius: 0px;
+}
+
+#mpris {
+  border-radius: 5px;
+  padding: 0 10px;
+  margin-left: 10px;
 }
 
 #pulseaudio,
@@ -57,7 +64,7 @@ tooltip label {
 
 #clock,
 #workspaces,
-#custom-theme-toggle {
+#custom-group-right-logo {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
@@ -158,4 +165,9 @@ tooltip label {
 
 #custom-theme-toggle {
   color: #fe640b;
+}
+
+#custom-group-right-logo {
+  color: #40a02b;
+  padding: 0px 15px;
 }

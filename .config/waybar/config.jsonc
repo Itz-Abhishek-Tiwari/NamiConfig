@@ -1,6 +1,6 @@
 {
   "layer": "bottom",
-  "position": "bottom",
+  "position": "top",
   "mode": "dock",
   "reload_style_on_change": true,
   "gtk-layer-shell": true,
@@ -16,17 +16,35 @@
     "pulseaudio",
     "backlight",
     "battery",
-    "tray",
-    "custom/wifi",
-    "bluetooth",
-    "custom/notification",
-    "custom/theme-toggle"
+    "group/custom-group"
   ],
+  "group/custom-group": {
+    "format": "",
+    "tooltip-format": "Hardware group",
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 500,
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "custom/group-right-logo",
+      "tray",
+      "custom/wifi",
+      "bluetooth",
+      "custom/notification",
+      "custom/theme-toggle",
+      "custom/power"
+    ]
+  },
+  "custom/group-right-logo": {
+    "format": "",
+    "tooltip": false
+  },
   "custom/power": {
     "format": "⏻ ",
     "tooltip": false,
     "menu": "on-click",
-    "menu-file": "~/.config/waybar/power_menu.xml",
+    "menu-file": "~/.config/waybar/menus/power_menu.xml",
     "menu-actions": {
       "shutdown": "shutdown",
       "reboot": "reboot",

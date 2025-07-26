@@ -168,13 +168,18 @@ scale trough {
   background-color: @gray;
   min-height: 8px;
   min-width: 70px;
+
+  border-radius: 30px;
 }
 
 trough highlight {
   background: @blue;
+
+  border-radius: 30px;
 }
 
 slider {
+  border-radius: 30px;
   background-color: @foreground;
 }
 
@@ -197,7 +202,7 @@ tooltip {
 .widget-buttons-grid button {
   background: @crust;
   color: #fff;
-  border-radius: 5px;
+  border-radius: 50px;
   min-width: 60px;
   min-height: 30px;
   margin: 0 3px;
@@ -250,7 +255,6 @@ tooltip {
   font-size: 1rem;
   text-align: center;
 }
-
 
 .widget-mpris-album-art.art {
   border-radius: 999px;

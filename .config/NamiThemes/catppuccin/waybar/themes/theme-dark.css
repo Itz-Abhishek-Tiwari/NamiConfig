@@ -12,6 +12,35 @@ window#waybar,
 window#waybar>box {
   background: rgba(17, 17, 27, 0.6);
   padding: 5px 6px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom: 4px solid #b4befe;
+}
+
+#clock {
+  color: #fab387;
+}
+
+#battery.warning {
+  color: #f9e2af;
+}
+
+#battery.critical {
+  color: #f38ba8;
+}
+
+#battery.charging {
+  color: #a6e3a1;
+}
+
+#custom-theme-toggle {
+  color: #fab387;
+  background: transparent;
+}
+
+#custom-group-right-logo {
+  color: #a6e3a1;
+  padding-right: 20px;
 }
 
 tooltip {
@@ -22,13 +51,12 @@ tooltip {
 menu {
   border-radius: 0px;
   background: #161320;
-  padding: 4px;
-  margin: 4px;
+  padding: 0px 4px;
   box-shadow: none;
 }
 
 menuitem {
-  padding: 8px 14px;
+  padding: 8px 8px;
   margin: 2px 5px;
   border-radius: 4px;
 }
@@ -55,10 +83,12 @@ tooltip label {
 #idle_inhibitor,
 #clock,
 #mpris,
-#custom-notification {
+#tray,
+#custom-notification,
+#custom-group-right-logo {
   color: #cdd6f4;
   background: transparent;
-  padding: 2px 6px;
+  padding: 2px 9px;
   margin: 0 2px;
 }
 
@@ -145,4 +175,9 @@ tooltip label {
 #custom-theme-toggle {
   color: #fab387;
   background: transparent;
+}
+
+#custom-group-right-logo {
+  color: #a6e3a1;
+  padding-right: 20px;
 }

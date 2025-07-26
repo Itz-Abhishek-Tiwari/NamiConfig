@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 
-import os
 import subprocess
 import json
 from pathlib import Path
-from typing import NoReturn
 
 # ====================== Theme Constants ====================== #
 DARK = "Colloid-Dark-Catppuccin"
@@ -59,8 +57,8 @@ theme_paths = {
     },
     "swaync": {
         "target": CONFIG_DIR / "swaync/style.css",
-        "light": CONFIG_DIR / "NamiThemes/catppuccin/swaync/theme-light.css",
-        "dark": CONFIG_DIR / "NamiThemes/catppuccin/swaync/theme-dark.css",
+        "light": CONFIG_DIR / "NamiThemes/catppuccin/swaync/themes/theme-light.css",
+        "dark": CONFIG_DIR / "NamiThemes/catppuccin/swaync/themes/theme-dark.css",
     },
 }
 
@@ -199,6 +197,27 @@ def notify(theme):
     )
 
 
+def switch_spicetify(theme):
+    color_scheme = "latte" if theme == "light" else "mocha"
+    subprocess.run(["spicetify", "config", "current_theme", "catppuccin"])
+    subprocess.run(["spicetify", "config", "color_scheme", color_scheme])
+    subprocess.run(
+        [
+            "spicetify",
+            "config",
+            "inject_css",
+            "1",
+            "inject_theme_js",
+            "1",
+            "replace_colors",
+            "1",
+            "overwrite_assets",
+            "1",
+        ]
+    )
+    subprocess.run(["spicetify", "apply"])
+
+
 def update_windowrules_for_blur(theme):
     if not WINDOWRULES_PATH.exists():
         return
@@ -225,6 +244,7 @@ def toggle_theme():
     switch_rofi(new_theme)
     switch_swaync(new_theme)
     switch_vscode_theme(new_theme)
+    switch_spicetify(new_theme)
     update_windowrules_for_blur(new_theme)
     reload_nemo()
     notify(new_theme)
