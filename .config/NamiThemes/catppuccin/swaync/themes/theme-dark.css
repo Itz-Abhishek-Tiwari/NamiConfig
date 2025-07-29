@@ -1,9 +1,13 @@
 /* -----------------------------------
    🟤 Catppuccin Mocha – Crust Palette
 -------------------------------------- */
-@define-color background rgba(18, 17, 27, 0.9);
-@define-color background-alt rgba(18, 17, 27, 0.8);
-@define-color background-faded rgba(18, 17, 27, 0.5);
+/* @define-color background rgba(18, 17, 27, 0.9); */
+/* @define-color background-alt rgba(18, 17, 27, 0.8); */
+/* @define-color background-faded rgba(18, 17, 27, 0.5); */
+@define-color background rgb(18, 17, 27);
+@define-color background-alt rgb(18, 17, 27);
+@define-color background-faded rgb(18, 17, 27);
+
 @define-color crust #11111b;
 @define-color foreground #cdd6f4;
 @define-color red #f38ba8;
@@ -36,8 +40,9 @@
    🧩 Control Center
 -------------------------------------- */
 .control-center {
-  background-color: alpha(@background, 0.9);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.65);
+  background-color: alpha(@background, 1);
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.65); */
+  box-shadow: none;
   padding: 2px;
   border-bottom: 9px solid @blue;
 }

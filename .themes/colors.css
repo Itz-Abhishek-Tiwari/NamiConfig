@@ -1,0 +1,6 @@
+@define-color window_bg_color alpha(#fbf1c7, 1);
+@define-color view_fg_color alpha(#3c3836, 1);
+@define-color view_bg_color alpha(#fbf1c7, 1);
+@define-color sidebar_bg_color alpha(#fbf1c7, 1);
+@define-color headerbar_bg_color alpha(#fbf1c7, 1);
+@define-color popover_bg_color alpha(#fbf1c7, 1);

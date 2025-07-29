@@ -55,10 +55,10 @@ mainbox {
 
 /*****----- Inputbar -----*****/
 entry {
-    enabled:                     true;
+    enabled:                     false;
     expand:                      false;
-    padding:                     0px 2px;
-    background-color:            @urgent;
+    padding:                     0px 0px;
+    background-color:            transparent;
     text-color:                  @background-alt;
     cursor:                      none;
     // placeholder:                 "       ";
@@ -83,7 +83,7 @@ listview {
     spacing:                     0px;
     margin:                      0px;
     padding:                     20px;
-    border:                      0px solid;
+    border:                      1px solid;
     border-radius:               0px;
     border-color:                @selected;
     background-color:            transparent;
@@ -116,7 +116,7 @@ element normal.normal {
     text-color:                  @foreground;
 }
 element selected.normal {
-    background-color:            @background;
+    background-color:            @background-alt;
     text-color:                  @foreground;
 }
 element-icon {

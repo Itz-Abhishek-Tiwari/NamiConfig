@@ -1,6 +1,6 @@
 * {
   font-family: "CaskaydiaMono Nerd Font ";
-  font-size: 17px;
+  font-size: 15px;
   font-weight: bold;
   border: none;
   margin: 0;
@@ -10,66 +10,35 @@
 
 window#waybar,
 window#waybar>box {
-  background: rgba(17, 17, 27, 0.6);
+  background: rgb(17, 17, 27);
   padding: 5px 6px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  border-bottom: 4px solid #b4befe;
-}
-
-#clock {
-  color: #fab387;
-}
-
-#battery.warning {
-  color: #f9e2af;
-}
-
-#battery.critical {
-  color: #f38ba8;
-}
-
-#battery.charging {
-  color: #a6e3a1;
-}
-
-#custom-theme-toggle {
-  color: #fab387;
-  background: transparent;
-}
-
-#custom-group-right-logo {
-  color: #a6e3a1;
-  padding-right: 20px;
+  /* border-bottom: 3px solid #cba6f7; */
 }
 
 tooltip {
   background: rgba(17, 17, 27, 0.6);
 }
 
+tooltip label {
+  color: #cdd6f4;
+  margin: 0 2px;
+}
 
 menu {
   border-radius: 0px;
   background: #161320;
-  padding: 0px 4px;
+  padding: 4px 4px;
   box-shadow: none;
 }
 
 menuitem {
   padding: 8px 8px;
   margin: 2px 5px;
-  border-radius: 4px;
 }
 
 menuitem:hover {
   background-color: #f38ba8;
-  color: #11111b
-}
-
-
-tooltip label {
-  color: #cdd6f4;
-  margin: 0 2px;
+  color: #11111b;
 }
 
 #workspaces,
@@ -85,13 +54,17 @@ tooltip label {
 #mpris,
 #tray,
 #custom-notification,
-#custom-group-right-logo {
+#custom-group-right-logo,
+#custom-cpu,
+#custom-memory,
+#temperature {
   color: #cdd6f4;
   background: transparent;
   padding: 2px 9px;
   margin: 0 2px;
 }
 
+/* Workspaces */
 #workspaces {
   color: #f5e0dc;
 }
@@ -119,15 +92,20 @@ tooltip label {
   color: #f38ba8;
 }
 
+/* Hover effects */
 #custom-power:hover,
 #pulseaudio:hover,
 #bluetooth:hover,
 #custom-wifi:hover,
 #clock:hover,
-#mpris:hover {
+#mpris:hover,
+#custom-cpu:hover,
+#custom-memory:hover,
+#temperature:hover {
   color: #f9e2af;
 }
 
+/* Individual Module Colors */
 #custom-power {
   color: #eba0ac;
 }
@@ -138,6 +116,18 @@ tooltip label {
 
 #battery {
   color: #74c7ec;
+}
+
+#battery.warning {
+  color: #f9e2af;
+}
+
+#battery.critical {
+  color: #f38ba8;
+}
+
+#battery.charging {
+  color: #a6e3a1;
 }
 
 #custom-wifi {
@@ -160,18 +150,6 @@ tooltip label {
   color: #fab387;
 }
 
-#battery.warning {
-  color: #f9e2af;
-}
-
-#battery.critical {
-  color: #f38ba8;
-}
-
-#battery.charging {
-  color: #a6e3a1;
-}
-
 #custom-theme-toggle {
   color: #fab387;
   background: transparent;
@@ -180,4 +158,17 @@ tooltip label {
 #custom-group-right-logo {
   color: #a6e3a1;
   padding-right: 20px;
+}
+
+/* New system stats modules */
+#custom-cpu {
+  color: #cba6f7;
+}
+
+#custom-memory {
+  color: #a6e3a1;
+}
+
+#temperature {
+  color: #f38ba8;
 }
