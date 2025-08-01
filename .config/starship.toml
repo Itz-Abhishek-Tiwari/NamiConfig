@@ -1,0 +1,162 @@
+format = """\
+[╭╴](fg:arrow)\
+$username\
+$os\
+$git_branch\
+(\
+    at \
+    $directory\
+)\
+$cmd_duration\
+(\
+    via \
+    $python\
+    $conda\
+    $nodejs\
+    $c\
+    $rust\
+    $java\
+)
+[╰─](fg:arrow)$character\
+"""
+
+add_newline = true
+
+palette = "mocha"
+
+
+[palettes.mocha]
+arrow = "#7f849c"        # Changed from #313244 → More balanced neutral
+os = "#d7a657"           # Yellow with better contrast on light themes
+os_admin = "#d75f5f"     # Softer red, still noticeable
+directory = "#6c7086"    # Cooler gray for better readability
+time = "#b48ead"         # Less neon than mauve, more neutral
+node = "#8fbcbb"         # Balanced teal (Nord-like)
+git = "#5e81ac"          # Calm blue with better legibility
+git_status = "#bf616a"   # Muted pinkish-red
+python = "#a3be8c"       # Nord green
+conda = "#ebcb8b"        # Yellowish-peach (warm but not glaring)
+java = "#d08770"         # Burnt orange - warm and visible
+rust = "#c4a78d"         # Earthy neutral
+clang = "#88c0d0"        # Cool blue for clang
+duration = "#d3869b"     # Muted pinkish purple
+text_color = "#4c566a"   # Works in both modes (Nord)
+text_light = "#8fbcbb"   # Soft neutral green-blue
+success_symbol = "#81a1c1"  # Calm success blue
+error_symbol = "#bf616a"    # Same as git_status for consistency
+
+[username]
+style_user = 'bold os'
+style_root = 'bold os_admin'
+format = '[  $user](fg:$style) '
+disabled = false
+show_always = true
+
+[os]
+format = "on [($name)]($style) "
+style = "bold fg:os"
+disabled = true
+
+[os.symbols]
+Alpine = " "
+Arch = " "
+Debian = " "
+EndeavourOS = " "
+Fedora = " "
+Linux = " "
+Macos = " "
+Manjaro = " "
+Mint = " "
+NixOS = " "
+openSUSE = " "
+Pop = " "
+SUSE = " "
+Ubuntu = " "
+Windows = " "
+
+[character]
+success_symbol = "[󰍟](fg:arrow)"
+error_symbol = "[󰍟](fg:red)"
+
+[directory]
+format = "[$path](bold $style)[$read_only]($read_only_style) "
+truncation_length = 2
+style = "fg:directory"
+read_only_style = "fg:directory"
+before_repo_root_style = "fg:directory"
+truncation_symbol = "…/"
+truncate_to_repo = true
+read_only ="  "
+
+[time]
+disabled = true
+format = "at [󱑈 $time]($style)"
+time_format = "%H:%M"
+style = "bold fg:time"
+
+[cmd_duration]
+format = "took [ $duration]($style) "
+style = "bold fg:duration"
+min_time = 500
+
+[git_branch]
+format = "via [$symbol$branch]($style) "
+style = "bold fg:git"
+symbol = " "
+
+[git_status]
+format = '[ $all_status$ahead_behind ]($style)'
+style = "fg:text_color bg:git"
+disabled = true
+
+[docker_context]
+disabled=true
+symbol = " "
+
+[package]
+disabled=true
+
+[fill]
+symbol = " "
+
+[nodejs]
+format = "[ $symbol$version ]($style)"
+style = "bg:node fg:arrow"
+symbol = " "
+version_format = "${raw}"
+disabled=false
+
+[python]
+disabled=false
+format = '[ ${symbol}${pyenv_prefix}(${version})( \($virtualenv\)) ]($style)'
+symbol = " "
+version_format = "${raw}"
+style = "bg:python fg:arrow "
+
+[conda]
+format = "[ $symbol$environment ]($style)"
+style = "bg:conda fg:text_light"
+ignore_base = false
+disabled = false
+symbol = " "
+
+[java]
+format = "[ $symbol$version ]($style)"
+style = "bg:java fg:text_light"
+version_format = "${raw}"
+symbol = " "
+disabled = true
+
+[c]
+format = "[ $symbol($version(-$name)) ]($style)"
+style = "bg:clang fg:text_light"
+symbol = " "
+version_format = "${raw}"
+disabled=true
+
+[rust]
+format ="[ $symbol$version ]($style)"
+style = "bg:rust fg:text_light"
+symbol = " "
+version_format = "${raw}"
+disabled=true
