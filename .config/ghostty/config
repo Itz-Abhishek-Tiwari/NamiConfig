@@ -1,0 +1,31 @@
+theme = catppuccin-crust
+
+# Fonts
+font-family = JetBrains Mono Nerd Font Mono
+
+font-size = 14
+
+
+# Cursor
+cursor-color = "#FFFFFF"
+cursor-style-blink = true
+cursor-invert-fg-bg = false
+
+# Window padding (pixels)
+window-width = 100
+window-height = 30
+# Ghostty doesn't support direct padding like Kitty does.
+
+# Window decorations and behavior
+window-inherit-font-size = true
+window-title-font-family = JetBrains Mono Nerd Font Mono
+
+# Shell integration
+shell-integration = detect
+window-padding-y = 10
+window-padding-x = 10
+
+# Keybindings (example)
+keybind = ctrl+d=new_split:right
+keybind = ctrl+w=close_surface
+

@@ -1,0 +1,557 @@
+# ----------------------------------------------------- 
+# ▄▀█ █▄░█ █ █▀▄▀█ ▄▀█ ▀█▀ █ █▀█ █▄░█
+# █▀█ █░▀█ █ █░▀░█ █▀█ ░█░ █ █▄█ █░▀█
+# ----------------------------------------------------- 
+# Source:https://github.com/xaicat/LimeFrenzy/
+# ----------------------------------------------------- 
+# default animations
+# animations {
+#     enabled = 1
+#
+#     # Custom curves
+#     bezier = default, 0.12, 0.92, 0.08, 1.0
+#     bezier = wind, 0.12, 0.92, 0.08, 1.0
+#     bezier = overshot, 0.18, 0.95, 0.22, 1.03
+#     bezier = liner, 1, 1, 1, 1
+#
+#     # Main window animations
+#     animation = windows, 1, 5, wind, popin 60%
+#     animation = windowsIn, 1, 6, overshot, popin 60%
+#     animation = windowsOut, 1, 4, overshot, popin 60%
+#     animation = windowsMove, 1, 4, overshot, slide
+#
+#     # ⚡ Custom layer animation for SwayNC to slide from left
+#     animation = layers, 1, 5, default, slide
+#
+#     # Fade animations
+#     animation = fadeIn, 1, 7, default
+#     animation = fadeOut, 1, 7, default
+#     animation = fadeSwitch, 1, 7, default
+#     animation = fadeShadow, 1, 7, default
+#     animation = fadeDim, 1, 7, default
+#     animation = fadeLayers, 1, 7, default
+#
+#     # Border and angle
+#     animation = border, 1, 1, liner
+#     animation = borderangle, 1, 24, liner, loop
+# }
+
+
+# ----------------------------------------------------- 
+# ▄▀█ █▄░█ █ █▀▄▀█ ▄▀█ ▀█▀ █ █▀█ █▄░█
+# █▀█ █░▀█ █ █░▀░█ █▀█ ░█░ █ █▄█ █░▀█
+#
+# name "Optimized"
+# ----------------------------------------------------- 
+
+animations {
+    enabled = true
+    bezier = wind, 0.05, 0.85, 0.03, 0.97
+    bezier = winIn, 0.07, 0.88, 0.04, 0.99
+    bezier = winOut, 0.20, -0.15, 0, 1
+    bezier = liner, 1, 1, 1, 1
+    bezier = md3_standard, 0.12, 0, 0, 1
+    bezier = md3_decel, 0.05, 0.80, 0.10, 0.97
+    bezier = md3_accel, 0.20, 0, 0.80, 0.08
+    bezier = overshot, 0.05, 0.85, 0.07, 1.04
+    bezier = crazyshot, 0.1, 1.22, 0.68, 0.98
+    bezier = hyprnostretch, 0.05, 0.82, 0.03, 0.94
+    bezier = menu_decel, 0.05, 0.82, 0, 1
+    bezier = menu_accel, 0.20, 0, 0.82, 0.10
+    bezier = easeInOutCirc, 0.75, 0, 0.15, 1
+    bezier = easeOutCirc, 0, 0.48, 0.38, 1
+    bezier = easeOutExpo, 0.10, 0.94, 0.23, 0.98
+    bezier = softAcDecel, 0.20, 0.20, 0.15, 1
+    bezier = md2, 0.30, 0, 0.15, 1
+    
+    bezier = OutBack, 0.28, 1.40, 0.58, 1
+    bezier = easeInOutCirc, 0.78, 0, 0.15, 1
+
+    animation = border, 1, 1.6, liner
+    animation = borderangle, 1, 82, liner, loop
+    animation = windowsIn, 1, 3.2, winIn, slide
+    animation = windowsOut, 1, 2.8, easeOutCirc
+    animation = windowsMove, 1, 3.0, wind, slide
+    animation = fade, 1, 1.8, md3_decel
+    animation = layersIn, 1, 1.8, menu_decel, slide
+    animation = layersOut, 1, 1.5, menu_accel
+    animation = fadeLayersIn, 1, 1.6, menu_decel
+    animation = fadeLayersOut, 1, 1.8, menu_accel
+    animation = workspaces, 1, 4.0, menu_decel, slide
+    animation = specialWorkspace, 1, 2.3, md3_decel, slidefadevert 15%
+}
+env = QT_QPA_PLATFORM,wayland
+env = GDK_BACKEND,wayland
+env = SDL_VIDEODRIVER,wayland
+env = CLUTTER_BACKEND,wayland
+env = MOZ_ENABLE_WAYLAND,1
+env = ELECTRON_OZONE_PLATFORM_HINT,wayland
+env = HYPRCURSOR_THEME,Bibata-Modern-Ice
+env = HYPRCURSOR_SIZE,20
+
+
+env = WLR_NO_HARDWARE_CURSORS,1
+env = LIBVA_DRIVER_NAME,nvidia
+env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+env = GBM_BACKEND,nvidia-drm
+env = __NV_PRIME_RENDER_OFFLOAD,1
+env = __NV_PRIME_RENDER_OFFLOAD_PROVIDER,NVIDIA-G0
+env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+env = __VK_LAYER_NV_optimus,NVIDIA_only
+
+env = HYPRCURSOR_THEME,Bibata-Modern-Ice
+env = HYPRCURSOR_SIZE,24
+
+env = QT_QPA_PLATFORMTHEME,qt5ct
+
+env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
+env = QT_AUTO_SCREEN_SCALE_FACTOR,1
+# env = QT_STYLE_OVERRIDE,qt5ct 
+
+env = HYPRCURSOR_THEME,Bibata-Modern-Ice
+env = HYPRCURSOR_SIZE,24
+env = QT_QPA_PLATFORMTHEME=qt6ct audiotube
+ 
+xwayland {
+  force_zero_scaling = true
+}
+# Configuring hypridle
+# See: https://wiki.hypr.land/Hypr-Ecosystem/hypridle/
+# 
+# hypridle.conf - Hypridle configuration for HyDE
+# Handles idle actions: dim, lock, DPMS, suspend, and custom listeners
+# 
+# $LOCKSCREEN: Command to lock the screen (set to your preferred lockscreen)
+# 
+# Listeners: Each listener block defines an idle timeout and actions to run
+# 
+# For more info, see: https://wiki.hypr.land/Hypr-Ecosystem/hypridle/
+
+#!      ░▒▒▒░░░▓▓           ___________
+#!    ░░▒▒▒░░░░░▓▓        //___________/
+#!   ░░▒▒▒░░░░░▓▓     _   _ _    _ _____
+#!   ░░▒▒░░░░░▓▓▓▓▓ | | | | |  | |  __/
+#!    ░▒▒░░░░▓▓   ▓▓ | |_| | |_/ /| |___
+#!     ░▒▒░░▓▓   ▓▓   \__  |____/ |____/
+#!       ░▒▓▓   ▓▓  //____/
+
+# $LOCKSCREEN = hyprlock # preferred LOCKSCREEN e.g swaylock
+$LOCKSCREEN = hyde-shell lockscreen  # Calls $LOCKSCREEN
+
+# // --- General hypridle settings ---
+general {
+    lock_cmd = $LOCKSCREEN # Registers the lockscreen command to dbus so it can be invoked by `loginctl lock-session`
+    # unlock_cmd = #notify-send "unlock!"      # Command to run on unlock (optional)
+    before_sleep_cmd = loginctl lock-session    # Locks before sleep
+    # after_sleep_cmd = # notify-send "Awake!"  # Command after waking up (optional)
+    ignore_dbus_inhibit = false             # Ignore dbus idle-inhibit requests (false = respect them)
+    ignore_systemd_inhibit = false          # Ignore systemd-inhibit --what=idle (false = respect them)
+}
+
+# // --- Listener: Dim display after 60s idle ---
+listener {
+    timeout = 60
+    on-timeout = { brightnessctl -s && brightnessctl s 1% ;} # Save and set brightness to 1%
+    on-resume = brightnessctl -r # Restore brightness on activity
+}
+
+# // --- Listener: Lock after 120s idle ---
+# Locks the session before DPMS off, so the screen is not visible after wake
+listener {
+    timeout = 120
+    on-timeout = loginctl lock-session # Try system lock, fallback to $LOCKSCREEN
+}
+
+# // --- Listener: DPMS off after 300s idle ---
+# Turns off display (but not if media is playing)
+listener {
+    timeout = 300
+    on-timeout = hyprctl dispatch dpms off # Turn off display
+    on-resume = hyprctl dispatch dpms on   # Turn display back on
+}
+
+# // --- Listener: Suspend after 500s idle ---
+listener {
+    timeout = 500
+    on-timeout = systemctl suspend # Suspend system
+}
+
+# // --- Custom listeners ---
+# hyprlang noerror true
+# Source any additional listener configs from this path (wildcard supported)
+# Note: 'source' command is not implemented yet in hyprlang, but left for future use
+source = ./hypridle/*
+# hyprlang noerror false
+source = ~/.config/hypr/env.conf
+source = ~/.config/hypr/monitor.conf
+source = ~/.config/hypr/animations.conf
+source = ~/.config/hypr/keybinds.conf
+source = ~/.config/hypr/windowrules.conf
+source = ~/.config/hypr/themes/catppuccin-mocha/theme.conf
+
+
+exec-once = waybar
+exec-once = hyprpaper
+exec-once = swayosd-server
+# exec-once = mako
+exec-once = /usr/local/bin/swaync
+exec-once = waypaper --restore
+exec-once = hyprctl setcursor Bibata-Modern-Ice 24
+exec-once = wl-paste --type text --watch cliphist store # clipboard store text data
+exec-once = wl-paste --type image --watch cliphist store # clipboard store image data
+exec-once = systemctl --user start hyprpolkitagent
+# exec-once = wl-clip-persist --clipboard regular
+
+env = XCURSOR_SIZE,24
+env = HYPRCURSOR_SIZE,24
+
+
+# See https://wiki.hyprland.org/Configuring/Permissions/
+# Please note permission changes here require a Hyprland restart and are not applied on-the-fly
+# for security reasons
+
+# ecosystem {
+#   enforce_permissions = 1
+# }
+
+# permission = /usr/(bin|local/bin)/grim, screencopy, allow
+# permission = /usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland, screencopy, allow
+# permission = /usr/(bin|local/bin)/hyprpm, plugin, allow
+
+
+
+dwindle {
+    pseudotile = true
+    preserve_split = true
+}
+
+master {
+    new_status = master
+}
+
+misc {
+    # force_default_wallpaper = -1
+ disable_hyprland_logo = true
+}
+
+
+input {
+    kb_layout = us
+    kb_variant =
+    kb_model =
+    kb_options =
+    kb_rules =
+
+    follow_mouse = 1
+
+    sensitivity = 0
+    touchpad {
+        natural_scroll = false
+    }
+}
+
+gestures {
+    workspace_swipe = true
+    workspace_swipe_fingers = 3
+}
+
+device {
+    name = epic-mouse-v1
+    sensitivity = -0.5
+}
+
+cursor {
+  no_hardware_cursors = true
+}
+[State]
+folder = ~/.config/hypr/wall
+monitors = All
+wallpaper = ~/.config/hypr/wall/24.png
+
+#####################
+### APP SHORTCUTS ###
+#####################
+$terminal = ghostty
+$fileManager = dolphin
+ 
+$mainMod = SUPER
+
+bind = $mainMod, T, exec, $terminal
+bind = $mainMod, E, exec, $fileManager
+bind = $mainMod, F, exec, firefox
+bind = $mainMod, L, exec, hyprlock
+bind = $mainMod, M, exit,
+bind = $mainMod, Q, killactive,
+bind = $mainMod, SPACE, exec, pkill -x rofi || ~/.config/rofi/launcher/launcher.sh
+bind = $mainMod, BACKSPACE,exec, pkill -x rofi || ~/.config/rofi/powermenu/powermenu.sh
+bind = Ctrl+Alt, W, exec, killall waybar || waybar
+bind = $mainMod, A, exec, waypaper
+bind = $mainMod+Shift, T, exec, /home/abhishek/.config/scripts/mode_toggle.py
+bind = $mainMod+Shift, F, exec, /home/abhishek/.config/scripts/focus_mode.py
+bind = , F9, exec, swaync-client -t
+
+##################################
+### WINDOW MANAGEMENT & FOCUS ###
+##################################
+bind = $mainMod, w, togglefloating,
+bind = $mainMod, J, togglesplit,
+bind = Alt, Return, fullscreen,
+
+# Focus movement
+bind = $mainMod, left, movefocus, l
+bind = $mainMod, right, movefocus, r
+bind = $mainMod, up, movefocus, u
+bind = $mainMod, down, movefocus, d
+
+# Resize window
+binde = $mainMod+Shift, Right, resizeactive, 30 0
+binde = $mainMod+Shift, Left, resizeactive, -30 0
+binde = $mainMod+Shift, Up, resizeactive, 0 -30
+binde = $mainMod+Shift, Down, resizeactive, 0 30
+
+# Move/resize with mouse
+bindm = $mainMod, mouse:272, movewindow
+bindm = $mainMod, mouse:273, resizewindow
+bindm = $mainMod, Z, movewindow
+bindm = $mainMod, X, resizewindow
+
+################################
+### WORKSPACES & SWITCHING  ###
+################################
+# Switch workspaces
+bind = $mainMod, 1, workspace, 1
+bind = $mainMod, 2, workspace, 2
+bind = $mainMod, 3, workspace, 3
+bind = $mainMod, 4, workspace, 4
+bind = $mainMod, 5, workspace, 5
+bind = $mainMod, 6, workspace, 6
+bind = $mainMod, 7, workspace, 7
+bind = $mainMod, 8, workspace, 8
+bind = $mainMod, 9, workspace, 9
+bind = $mainMod, 0, workspace, 10
+
+# Move window to workspace
+bind = $mainMod SHIFT, 1, movetoworkspace, 1
+bind = $mainMod SHIFT, 2, movetoworkspace, 2
+bind = $mainMod SHIFT, 3, movetoworkspace, 3
+bind = $mainMod SHIFT, 4, movetoworkspace, 4
+bind = $mainMod SHIFT, 5, movetoworkspace, 5
+bind = $mainMod SHIFT, 6, movetoworkspace, 6a
+bind = $mainMod SHIFT, 7, movetoworkspace, 7
+bind = $mainMod SHIFT, 8, movetoworkspace, 8
+bind = $mainMod SHIFT, 9, movetoworkspace, 9
+bind = $mainMod SHIFT, 0, movetoworkspace, 10
+
+# Silent move
+bind = $mainMod+Alt, 1, movetoworkspacesilent, 1
+bind = $mainMod+Alt, 2, movetoworkspacesilent, 2
+bind = $mainMod+Alt, 3, movetoworkspacesilent, 3
+bind = $mainMod+Alt, 4, movetoworkspacesilent, 4
+bind = $mainMod+Alt, 5, movetoworkspacesilent, 5
+bind = $mainMod+Alt, 6, movetoworkspacesilent, 6
+bind = $mainMod+Alt, 7, movetoworkspacesilent, 7
+bind = $mainMod+Alt, 8, movetoworkspacesilent, 8
+bind = $mainMod+Alt, 9, movetoworkspacesilent, 9
+bind = $mainMod+Alt, 0, movetoworkspacesilent, 10
+
+# Scroll workspaces
+bind = $mainMod, mouse_down, workspace, e+1
+bind = $mainMod, mouse_up, workspace, e-1
+
+# Special workspace
+bind = $mainMod, S, togglespecialworkspace, magic
+bind = $mainMod SHIFT, S, movetoworkspace, special:magic
+
+#########################
+### MEDIA CONTROLS #####
+#########################
+bindl = , XF86AudioNext, exec, playerctl next
+bindl = , XF86AudioPause, exec, playerctl play-pause
+bindl = , XF86AudioPlay, exec, playerctl play-pause
+bindl = , XF86AudioPrev, exec, playerctl previous
+
+##################################
+### BRIGHTNESS & VOLUME KEYS  ###
+##################################
+# Using wpctl & brightnessctl
+bindel = ,XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+
+bindel = ,XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindel = ,XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindel = ,XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+bindel = ,XF86MonBrightnessUp, exec, brightnessctl -e4 -n2 set 5%+
+bindel = ,XF86MonBrightnessDown, exec, brightnessctl -e4 -n2 set 5%-
+
+# Using custom scripts
+bindl = , XF86MonBrightnessUp, exec, sh -c '/home/abhishek/.config/hypr/scripts/brightnesscontrol.sh -o i'
+bindl = , XF86MonBrightnessDown, exec, sh -c '/home/abhishek/.config/hypr/scripts/brightnesscontrol.sh -o d'
+bindl = , XF86AudioRaiseVolume, exec, sh -c '/home/abhishek/.config/hypr/scripts/volumecontrol.sh -o i'
+bindl = , XF86AudioLowerVolume, exec, sh -c '/home/abhishek/.config/hypr/scripts/volumecontrol.sh -o d'
+bindl = , XF86AudioMute, exec, sh -c '/home/abhishek/.config/hypr/scripts/volumecontrol.sh -o m'
+bindl = , XF86AudioMicMute, exec, sh -c '/home/abhishek/.config/hypr/scripts/volumecontrol.sh -i m'
+
+# Function key fallback
+bindl  = , F10, exec, /home/abhishek/.config/hypr/scripts/volumecontrol.sh -o m
+bindel = , F11, exec, /home/abhishek/.config/hypr/scripts/volumecontrol.sh -o d
+bindel = , F12, exec, /home/abhishek/.config/hypr/scripts/volumecontrol.sh -o i
+bind = , F1,  exec, sh -c '/home/abhishek/.config/hypr/scripts/brightnesscontrol.sh -o d'
+bind = , F3,  exec, sh -c '/home/abhishek/.config/hypr/scripts/brightnesscontrol.sh -o i'
+
+####################
+### SCREENSHOTS ####
+####################
+bindl = $mainMod, P, exec, /home/abhishek/.config/hypr/scripts/screenshot.sh s
+bindl = $mainMod+Ctrl, P, exec, /home/abhishek/.config/hypr/scripts/screenshot.sh sf
+bindl = $mainMod+Alt, P, exec, /home/abhishek/.config/hypr/scripts/screenshot.sh m
+bindl = , Print, exec, /home/abhishek/.config/hypr/scripts/screenshot.sh p
+
+####################
+### MOUSE BUTTONS ###
+####################
+bind = , mouse:275, exec, spotify       # side button up
+bind = , mouse:276, exec, discord       # side button down
+
+# Move focused window around the current workspace
+bind = $mainMod+Shift+Ctrl, Left, movewindow, l
+bind = $mainMod+Shift+Ctrl, Right, movewindow, r
+bind = $mainMod+Shift+Ctrl, Up, movewindow, u
+bind = $mainMod+Shift+Ctrl, Down, movewindow, d
+####################################
+### CLIPBOARD / UTILITIES SHORTCUTS
+####################################
+bind = SUPER+Shift, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy
+
+
+bind = $mainMod+Alt, Left, exec, /home/abhishek/.config/scripts/change_wallpaper.py -p
+bind = $mainMod+Alt, Right, exec, /home/abhishek/.config/scripts/change_wallpaper.py -0
+bind = $mainMod+Alt, I, exec, /home/abhishek/.config/scripts/change_wallpaper.py -i
+
+monitor=,preferred,auto,1
+monitor=HDMI-A-1,1366x768@59.79Hz,auto,auto,transform,3
+
+# █░█░█ █ █▄░█ █▀▄ █▀█ █░█░█   █▀█ █░█ █░░ █▀▀ █▀
+# ▀▄▀▄▀ █ █░▀█ █▄▀ █▄█ ▀▄▀▄▀   █▀▄ █▄█ █▄▄ ██▄ ▄█
+
+# See https://wiki.hyprland.org/Configuring/Window-Rules/
+
+windowrulev2 = opacity 0.90 0.90,class:^(Brave-browser)$
+windowrulev2 = opacity 0.90 0.90,class:^(firefox)$
+windowrulev2 = opacity 0.90 0.90,class:^(code-oss)$
+windowrulev2 = opacity 0.90 0.90,class:^(Code)$
+windowrulev2 = opacity 0.90 0.90,class:^(code-url-handler)$
+windowrulev2 = opacity 0.90 0.90,class:^(code-insiders-url-handler)$
+windowrulev2 = opacity 0.90 0.90,class:^(kitty)$
+windowrulev2 = opacity 0.90 0.90,class:^(org.gnome.Nautilus)$
+windowrulev2 = opacity 0.90 0.90,class:^(org.kde.dolphin)$
+windowrulev2 = opacity 0.90 0.90,class:^(org.kde.ark)$
+windowrulev2 = opacity 0.90 0.90,class:^(nwg-look)$
+windowrulev2 = opacity 0.90 0.90,class:^(qt5ct)$
+windowrulev2 = opacity 0.90 0.90,class:^(qt6ct)$
+windowrulev2 = opacity 0.90 0.90,class:^(kvantummanager)$
+windowrulev2 = opacity 0.90 0.90,class:^(org.pulseaudio.pavucontrol)$
+windowrulev2 = opacity 0.90 0.90,class:^(blueman-manager)$
+windowrulev2 = opacity 0.90 0.90,class:^(nm-applet)$
+windowrulev2 = opacity 0.90 0.90,class:^(nm-connection-editor)$
+windowrulev2 = opacity 0.90 0.90,class:^(org.kde.polkit-kde-authentication-agent-1)$
+windowrulev2 = opacity 0.90 0.90,class:^(polkit-gnome-authentication-agent-1)$
+windowrulev2 = opacity 0.90 0.90,class:^(org.freedesktop.impl.portal.desktop.gtk)$
+windowrulev2 = opacity 0.90 0.90,class:^(org.freedesktop.impl.portal.desktop.hyprland)$
+windowrulev2 = opacity 0.90 0.90,class:^([Ss]team)$
+windowrulev2 = opacity 0.90 0.90,class:^(steamwebhelper)$
+windowrulev2 = opacity 0.90 0.90,class:^(Spotify)$
+windowrulev2 = opacity 0.90 0.90,initialTitle:^(Spotify Free)$
+windowrulev2 = opacity 0.90 0.90,class:^(com.github.rafostar.Clapper)$ # Clapper-Gtk
+windowrulev2 = opacity 0.90 0.90,class:^(com.github.tchx84.Flatseal)$ # Flatseal-Gtk
+windowrulev2 = opacity 0.90 0.90,class:^(hu.kramo.Cartridges)$ # Cartridges-Gtk
+windowrulev2 = opacity 0.90 0.90,class:^(com.obsproject.Studio)$ # Obs-Qt
+windowrulev2 = opacity 0.90 0.90,class:^(gnome-boxes)$ # Boxes-Gtk
+windowrulev2 = opacity 0.90 0.90,class:^(discord)$ # Discord-Electron
+windowrulev2 = opacity 0.90 0.90,class:^(WebCord)$ # WebCord-Electron
+windowrulev2 = opacity 0.90 0.90,class:^(ArmCord)$ # ArmCord-Electron
+windowrulev2 = opacity 0.90 0.90,class:^(app.drey.Warp)$ # Warp-Gtk
+windowrulev2 = opacity 0.90 0.90,class:^(net.davidotek.pupgui2)$ # ProtonUp-Qt
+windowrulev2 = opacity 0.90 0.90,class:^(yad)$ # Protontricks-Gtk
+windowrulev2 = opacity 0.90 0.90,class:^(Signal)$ # Signal-Gtk
+windowrulev2 = opacity 0.90 0.90,class:^(io.github.alainm23.planify)$ # planify-Gtk
+windowrulev2 = opacity 0.90 0.90,class:^(io.gitlab.theevilskeleton.Upscaler)$ # Upscaler-Gtk
+windowrulev2 = opacity 0.90 0.90,class:^(com.github.unrud.VideoDownloader)$ # VideoDownloader-Gtk
+windowrulev2 = opacity 0.90 0.90,class:^(io.gitlab.adhami3310.Impression)$ # Impression-Gtk
+windowrulev2 = opacity 0.90 0.90,class:^(io.missioncenter.MissionCenter)$ # MissionCenter-Gtk
+windowrulev2 = opacity 0.90 0.90,class:^(io.github.flattool.Warehouse)$ # Warehouse-Gtk
+
+
+windowrulev2 = float,class:^(org.kde.dolphin)$,title:^(Progress Dialog — Dolphin)$
+windowrulev2 = float,class:^(org.kde.dolphin)$,title:^(Copying — Dolphin)$
+windowrulev2 = float,class:^(firefox)$,title:^(Picture-in-Picture)$
+windowrulev2 = float,class:^(firefox)$,title:^(Library)$
+windowrulev2 = float,class:^(kitty)$,title:^(top)$
+windowrulev2 = float,class:^(kitty)$,title:^(btop)$
+windowrulev2 = float,class:^(kitty)$,title:^(htop)$
+windowrulev2 = float,class:^(vlc)$
+windowrulev2 = float,class:^(kvantummanager)$
+windowrulev2 = float,class:^(qt5ct)$
+windowrulev2 = float,class:^(qt6ct)$
+windowrulev2 = float,class:^(nwg-look)$
+windowrulev2 = float,class:^(org.kde.ark)$
+windowrulev2 = float,class:^(org.pulseaudio.pavucontrol)$
+windowrulev2 = float,class:^(waypaper)$
+
+windowrulev2 = float,class:^(blueman-manager)$
+windowrulev2 = float,class:^(nm-applet)$
+windowrulev2 = float,class:^(nm-connection-editor)$
+windowrulev2 = float,class:^(org.kde.polkit-kde-authentication-agent-1)$
+
+windowrulev2 = float,class:^(Signal)$ # Signal-Gtk
+windowrulev2 = float,class:^(com.github.rafostar.Clapper)$ # Clapper-Gtk
+windowrulev2 = float,class:^(app.drey.Warp)$ # Warp-Gtk
+windowrulev2 = float,class:^(net.davidotek.pupgui2)$ # ProtonUp-Qt
+windowrulev2 = float,class:^(yad)$ # Protontricks-Gtk
+windowrulev2 = float,class:^(eog)$ # Imageviewer-Gtk
+windowrulev2 = float,class:^(io.github.alainm23.planify)$ # planify-Gtk
+windowrulev2 = float,class:^(io.gitlab.theevilskeleton.Upscaler)$ # Upscaler-Gtk
+windowrulev2 = float,class:^(com.github.unrud.VideoDownloader)$ # VideoDownloader-Gkk
+windowrulev2 = float,class:^(io.gitlab.adhami3310.Impression)$ # Impression-Gtk
+windowrulev2 = float,class:^(io.missioncenter.MissionCenter)$ # MissionCenter-Gtk
+
+
+# # Layer Rules
+layerrule = blur,rofi
+layerrule = ignorezero,rofi
+layerrule = blur,notifications
+layerrule = ignorezero,notifications
+layerrule = blur,logout_dialog
+
+layerrule = ignorealpha 0.5,rofi
+layerrule = ignorealpha 0.5, notifications
+layerrule = blur, swaync-control-center
+layerrule = blur, swaync-notification-window
+
+layerrule = ignorezero, swaync-control-center
+layerrule = ignorezero, swaync-notification-window
+
+layerrule = ignorealpha 0.5, swaync-control-center
+layerrule = ignorealpha 0.5, swaync-notification-window
+
+
+
+
+windowrulev2 = float, title:^(SwayNotificationCenter)$
+windowrulev2 = nofocus, title:^(SwayNotificationCenter)$
+windowrulev2 = noanim, title:^(SwayNotificationCenter)$
+windowrulev2 = noborder, title:^(SwayNotificationCenter)$
+windowrulev2 = opacity 1, title:^(SwayNotificationCenter)$
+
+windowrule = suppressevent maximize, class:.*
+
+# Fix some dragging issues with XWayland
+windowrule = nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0
+
+windowrulev2 = bordercolor gradient(90deg, rgb(f38ba8), rgb(cba6f7), rgb(89b4fa)) , class:^(mako)$
+
+
+
+windowrulev2 = animation layers, class:^(swaync)$
+windowrulev2 = float, class:^(swaync)$
+windowrulev2 = opacity 0.90 0.90,class:^(.*)$
+
+windowrulev2 = opacity 1 1,class:^(.*)$
+layerrule = blur,waybar
