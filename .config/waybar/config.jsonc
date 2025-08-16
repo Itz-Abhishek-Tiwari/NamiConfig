@@ -1,9 +1,6 @@
 {
   "layer": "top",
   "position": "top",
-  // "margin-left": 10,
-  // "margin-right": 10,
-  //  "margin-top": 5,
   "mode": "dock",
   "reload_style_on_change": true,
   "gtk-layer-shell": true,
@@ -55,10 +52,11 @@
     ]
   },
   "custom/cpu": {
-    "exec": "top -bn1 | grep 'Cpu(s)' | awk '{print \"󰍛 CPU: \"$2\"%\"}'",
+    "exec": "echo '󰍛'",
     "interval": 5,
     "return-type": "text",
-    "tooltip": false
+    "tooltip": true,
+    "tooltip-format": "CPU Usage"
   },
   "custom/memory": {
     "exec": "free -h | awk '/^Mem/ {print \" Mem: \"$3\"/\"$2}'",
@@ -77,12 +75,14 @@
     "format": " Temp: {temperatureC}°C"
   },
   "custom/group-right-logo": {
-    "format": " Nami Config",
-    "tooltip": false
+    "format": "",
+    "tooltip": true,
+    "tooltip-format": "System Logo"
   },
   "custom/power": {
-    "format": "⏻ ",
-    "tooltip": false,
+    "format": "⏻",
+    "tooltip": true,
+    "tooltip-format": "Power Options",
     "menu": "on-click",
     "menu-file": "~/.config/waybar/menus/power_menu.xml",
     "menu-actions": {
@@ -90,17 +90,6 @@
       "reboot": "reboot",
       "suspend": "systemctl suspend",
       "hibernate": "systemctl hibernate"
-    }
-  },
-  "niri/workspaces": {
-    "on-scroll-up": "hyprctl dispatch workspace -1",
-    "on-scroll-down": "hyprctl dispatch workspace +1",
-    "persistent-workspaces": {
-      "1": [],
-      "2": [],
-      "3": [],
-      "4": [],
-      "5": []
     }
   },
   "hyprland/workspaces": {
@@ -112,13 +101,14 @@
       "3": [],
       "4": [],
       "5": []
-    }
+    },
+    "tooltip-format": "Workspaces"
   },
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
-      "activated": "󰈈 ",
-      "deactivated": "󰈉 "
+      "activated": "󰈈",
+      "deactivated": "󰈉"
     },
     "tooltip": true,
     "tooltip-format-activated": "Presentation Mode",
@@ -126,7 +116,7 @@
     "start-activated": false
   },
   "clock": {
-    "format": "{:%I:%M %p} ",
+    "format": "{:%I:%M %p}",
     "format-alt": "{:%A, %B %d, %Y (%r)}",
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
     "calendar": {
@@ -168,8 +158,8 @@
     "max-length": 35
   },
   "pulseaudio": {
-    "format": "{icon} {volume}%",
-    "format-muted": "󰝟 {volume}%",
+    "format": "{icon}",
+    "format-muted": "󰝟",
     "format-icons": {
       "default": [
         "󰕿",
@@ -179,15 +169,13 @@
       "headphone": "󰋋",
       "headset": "󰋋"
     },
-    "tooltip-format": "Device: {desc}",
+    "tooltip-format": "Audio Device: {desc}",
     "on-click": "~/.config/hypr/scripts/volumecontrol.sh -o m",
     "on-scroll-up": "~/.config/hypr/scripts/volumecontrol.sh -o i",
-    "on-scroll-down": "~/.config/hypr/scripts/volumecontrol.sh -o d",
-    "min-length": 6,
-    "max-length": 6
+    "on-scroll-down": "~/.config/hypr/scripts/volumecontrol.sh -o d"
   },
   "backlight": {
-    "format": "{icon} {percent}%",
+    "format": "{icon}",
     "format-icons": [
       "",
       "",
@@ -199,18 +187,17 @@
       "",
       ""
     ],
-    "tooltip": false,
+    "tooltip": true,
+    "tooltip-format": "Brightness: {}%",
     "on-scroll-up": "~/.config/hypr/scripts/brightnesscontrol.sh -o i",
-    "on-scroll-down": "~/.config/hypr/scripts/brightnesscontrol.sh -o d",
-    "min-length": 6,
-    "max-length": 6
+    "on-scroll-down": "~/.config/hypr/scripts/brightnesscontrol.sh -o d"
   },
   "battery": {
     "states": {
       "warning": 20,
       "critical": 10
     },
-    "format": "{icon} {capacity}%",
+    "format": "{icon}",
     "format-icons": [
       "󰂎",
       "󰁻",
@@ -223,29 +210,28 @@
       "󰂂",
       "󰁹"
     ],
-    "format-charging": " {capacity}%",
-    "tooltip-format": "Battery : {capacity}%",
-    "tooltip-format-charging": "Charging: {time}",
-    "interval": 1,
-    "min-length": 6,
-    "max-length": 6
+    "format-charging": "",
+    "tooltip-format": "Battery: {capacity}%",
+    //    "tooltip-format-charging": "Charging: {time}",
+    "interval": 1
   },
   "tray": {
     "spacing": 10,
     "icons": {
       "blueman": "bluetooth",
       "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
-    }
+    },
+    "tooltip-format": "System Tray"
   },
   "custom/wifi": {
     "exec": "~/.config/waybar/scripts/wifi-status.sh",
     "return-type": "json",
     "format": "{}",
+    "tooltip": true,
+    "tooltip-format": "Wi-Fi Status",
     "on-click": "~/.config/waybar/scripts/wifi-menu.sh",
     "on-click-right": "kitty --title '󰤨  Network Manager TUI' bash -c nmtui",
-    "interval": 1,
-    "min-length": 1,
-    "max-length": 1
+    "interval": 1
   },
   "bluetooth": {
     "format": "󰂰",
@@ -259,12 +245,11 @@
     "tooltip-format-enumerate-connected-battery": ":: {device_alias}: 󱊣 {device_battery_percentage}%",
     "on-click": "~/.config/waybar/scripts/bluetooth-menu.sh",
     "on-click-right": "kitty --title '󰂯  Bluetooth TUI' bash -c bluetui",
-    "interval": 1,
-    "min-length": 1,
-    "max-length": 1
+    "interval": 1
   },
   "custom/notification": {
-    "tooltip": false,
+    "tooltip": true,
+    "tooltip-format": "Notifications",
     "format": "{icon}",
     "format-icons": {
       "notification": "<span foreground='red'><sup></sup></span>",

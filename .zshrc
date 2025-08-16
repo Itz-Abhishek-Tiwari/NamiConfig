@@ -111,18 +111,13 @@ alias dfh="df -h"
 alias duh="du -h --max-depth=1"
 
 
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+export PATH=$JAVA_HOME/bin:$PATH
 
-## default .config: ~/.config/nvim
-## multiple .configs: ~/.config/nvim-_
 
-alias nvim-lazy='NVIM_APPNAME="nvim-lazyvim" nvim'
-# rm -rf ~/.config/nvim-lazyvim ~/.local/share/nvim-lazyvim ~/.cache/nvim-lazyvim ~/.local/state/nvim-lazyvim
 
-alias nvim-nvchad='NVIM_APPNAME="nvim-nvchad" nvim'
-# rm -rf ~/.config/nvim-nvchad ~/.local/share/nvim-nvchad ~/.cache/nvim-nvchad ~/.local/state/nvim-nvchad
 
-alias nvim-astro='NVIM_APPNAME="nvim-astronvim" nvim'
-# rm -rf ~/.config/nvim-astronvim ~/.local/share/nvim-astronvim ~/.cache/nvim-astronvim ~/.local/state/nvim-astronvim
+# Android SDK
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/emulator:$PATH
 
-alias nvim-kickstart='NVIM_APPNAME="nvim-kickstart" nvim'
-# rm -rf ~/.config/nvim-kickstart ~/.local/share/nvim-kickstart ~/.cache/nvim-kickstart ~/.local/state/nvim-kickstart

@@ -60,6 +60,11 @@ theme_paths = {
         "light": CONFIG_DIR / "NamiThemes/catppuccin/swaync/themes/theme-light.css",
         "dark": CONFIG_DIR / "NamiThemes/catppuccin/swaync/themes/theme-dark.css",
     },
+    "ghostty": {
+        "target": CONFIG_DIR / "ghostty/themes/theme",
+        "light": CONFIG_DIR / "NamiThemes/catppuccin/ghostty/themes/theme-light",
+        "dark": CONFIG_DIR / "NamiThemes/catppuccin/ghostty/themes/theme-dark",
+    },
 }
 
 # ====================== Notification Icons ====================== #
@@ -138,6 +143,11 @@ def symlink_theme_file(app, theme):
 def switch_kitty(theme):
     symlink_theme_file("kitty", theme)
     subprocess.run("kill -10 $(pgrep kitty)", shell=True)
+
+
+def switch_ghostty(theme):
+    symlink_theme_file("ghostty", theme)
+    subprocess.run("kill -10 $(pgrep ghostty)", shell=True)
 
 
 def switch_waybar(theme):
@@ -244,6 +254,7 @@ def toggle_theme():
     switch_rofi(new_theme)
     switch_swaync(new_theme)
     switch_vscode_theme(new_theme)
+    # switch_ghostty(new_theme)
     switch_spicetify(new_theme)
     update_windowrules_for_blur(new_theme)
     reload_nemo()
