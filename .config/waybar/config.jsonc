@@ -1,6 +1,9 @@
 {
   "layer": "top",
-  "position": "top",
+  "position": "bottom",
+  //  "margin-left": 4,
+  // "margin-right": 4,
+  // "margin-top": 4,
   "mode": "dock",
   "reload_style_on_change": true,
   "gtk-layer-shell": true,

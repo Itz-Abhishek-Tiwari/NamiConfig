@@ -1,0 +1,46 @@
+[themes]
+  # Define available themes
+  [themes.decy]
+    light = "decy-light"
+    dark = "decy-dark"
+  
+  [themes.ocean]
+    light = "ocean-light"
+    dark = "ocean-dark"
+
+  [themes.forest]
+    light = "forest-light"
+    dark = "forest-dark"
+
+  [themes.solar]
+    light = "solar-light"
+    dark = "solar-dark"
+
+[theme_settings]
+  # Global settings that can be applied to all themes (e.g., fonts, layout)
+  font = "Arial"
+  primary_color = "#3498db"
+
+[theme_switch]
+  # Current active theme settings
+  current_theme = "decy"     # Can be switched between "decy", "ocean", "forest", "solar"
+  mode = "light"             # Can be "light" or "dark"
+  
+[theme_paths]
+  # Paths to theme assets or configuration files
+  [theme_paths.decy]
+    light = "/path/to/decy-light.css"
+    dark = "/path/to/decy-dark.css"
+  
+  [theme_paths.ocean]
+    light = "/path/to/ocean-light.css"
+    dark = "/path/to/ocean-dark.css"
+
+  [theme_paths.forest]
+    light = "/path/to/forest-light.css"
+    dark = "/path/to/forest-dark.css"
+
+  [theme_paths.solar]
+    light = "/path/to/solar-light.css"
+    dark = "/path/to/solar-dark.css"
+

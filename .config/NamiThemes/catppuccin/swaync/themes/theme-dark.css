@@ -1,12 +1,12 @@
 /* -----------------------------------
    🟤 Catppuccin Mocha – Crust Palette
 -------------------------------------- */
-/* @define-color background rgba(18, 17, 27, 0.9); */
-/* @define-color background-alt rgba(18, 17, 27, 0.8); */
-/* @define-color background-faded rgba(18, 17, 27, 0.5); */
-@define-color background rgb(18, 17, 27);
-@define-color background-alt rgb(18, 17, 27);
-@define-color background-faded rgb(18, 17, 27);
+@define-color background rgba(18, 17, 27, 0.8);
+@define-color background-alt rgba(18, 17, 27, 0.8);
+@define-color background-faded rgba(18, 17, 27, 0.5);
+/* @define-color background rgb(18, 17, 27); */
+/* @define-color background-alt rgb(18, 17, 27); */
+/* @define-color background-faded rgb(18, 17, 27); */
 
 @define-color crust #11111b;
 @define-color foreground #cdd6f4;
@@ -34,6 +34,7 @@
   color: @foreground;
   background-color: transparent;
   border-radius: 2px;
+  border: none
 }
 
 /* -----------------------------------
@@ -44,7 +45,8 @@
   /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.65); */
   box-shadow: none;
   padding: 2px;
-  border-bottom: 9px solid @blue;
+  border: none
+    /* border-bottom: 9px solid @blue; */
 }
 
 .notification-row .notification-background {
@@ -102,6 +104,8 @@
 
 /* Urgency */
 .notification.critical {
+  border: none;
+  outline: none;
   background: @red;
   border-left: 9px solid red;
 }
@@ -115,6 +119,8 @@
 
 .notification.low,
 .notification.normal {
+  border: none;
+  outline: none;
   background-color: alpha(@background, 0.95);
   border-left: 9px solid @blue;
 }
@@ -133,7 +139,7 @@
    ❌ Close Buttons
 -------------------------------------- */
 .close-button {
-  background-color: alpha(@gray, 0.8);
+  background-color: @red;
   border-radius: 8px;
 }
 
@@ -142,7 +148,7 @@
 }
 
 .close-button:hover {
-  background-color: alpha(@red, 0.8);
+  background-color:transparent;
 }
 
 /* -----------------------------------
@@ -313,7 +319,7 @@ picture.mpris-background {
 -------------------------------------- */
 .widget-dnd {
   font-weight: bold;
-  padding: 20px 15px 15px;
+  padding: 15px 15px 15px;
 }
 
 .widget-dnd>switch {

@@ -70,7 +70,6 @@ alias la="eza -a --icons=always"
 alias l="eza -CF --icons=always"
 
 ### --- Network Tools ---
-alias ip="ip a"
 alias ping="ping -c 5"
 alias myip="curl ifconfig.me"
 alias ports="sudo lsof -i -P -n | grep LISTEN"
@@ -121,3 +120,4 @@ export PATH=$JAVA_HOME/bin:$PATH
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/emulator:$PATH
 
+export PATH=$PATH:$(go env GOPATH)/bin

@@ -1,6 +1,6 @@
 // Catppucine Mocha
 * {
-    background:     #11111b;
+    background:     #11111b90;
     background-alt: #282839;
     foreground:     #D9E0EE80;
     selected:       #cba6f7ee;
