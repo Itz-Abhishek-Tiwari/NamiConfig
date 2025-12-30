@@ -1,0 +1,11 @@
+// Catppuccine Mocha
+
+* {
+    background:     #192330;  /* nightfox bg */
+    background-alt: #29394f;  /* nightfox darker alt */
+    foreground:     #cdcecf;  /* nightfox fg */
+    selected:       #719cd6;  /* nightfox blue (selection-like) */
+    active:         #81b29a;  /* nightfox green (active) */
+    urgent:         #c94f6d;  /* nightfox red (urgent) */
+}
+

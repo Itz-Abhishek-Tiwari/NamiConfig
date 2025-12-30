@@ -1,0 +1,173 @@
+* {
+    font-family: "CaskaydiaMono Nerd Font Propo";
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    margin: 0;
+    padding: 0;
+    min-height: 0;
+}
+
+window#waybar,
+window#waybar > box {
+    background: #011627; /* Nightfox bg0 (#181c26) with transparency */
+    padding: 5px 6px;
+}
+
+tooltip {
+    background: rgba(24, 28, 38, 0.9); /* Nightfox bg0 */
+}
+
+tooltip label {
+    color: #dcdecf; /* Nightfox fg1 */
+    margin: 0 2px;
+}
+
+menu {
+    border-radius: 0px;
+    background: #192330; /* Nightfox bg1 */
+    padding: 4px 4px;
+    box-shadow: none;
+}
+
+menuitem {
+    padding: 8px 8px;
+    margin: 2px 5px;
+}
+
+menuitem:hover {
+    background-color: #c94f6d; /* Nightfox red */
+    color: #181c26; /* Nightfox bg0 */
+}
+
+#workspaces,
+#custom-theme-toggle,
+#pulseaudio,
+#backlight,
+#battery,
+#custom-wifi,
+#bluetooth,
+#custom-power,
+#idle_inhibitor,
+#clock,
+#mpris,
+#tray,
+#custom-notification,
+#custom-group-right-logo,
+#custom-cpu,
+#custom-memory,
+#temperature {
+    color: #dcdecf; /* Nightfox fg1 */
+    background: transparent;
+    padding: 2px 9px;
+    margin: 0 2px;
+}
+
+/* Workspaces */
+#workspaces {
+    color: #719cd6; /* Nightfox blue */
+}
+
+#workspaces button {
+    color: #719cd6; /* Nightfox blue workspace buttons */
+    padding: 2px 4px;
+    margin: 0 3px;
+    border-radius: 2px;
+}
+
+#workspaces button.active {
+    background: #9d79d6; /* Nightfox purple active workspace */
+    color: #181c26; /* Nightfox bg0 */
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
+#workspaces button.active:hover {
+    background: #81b29a; /* Nightfox green hover for active */
+    color: #181c26; /* Nightfox bg0 */
+}
+
+#workspaces button:hover {
+    color: #dbc074; /* Nightfox yellow hover */
+}
+
+/* Hover effects for modules */
+#custom-power:hover,
+#pulseaudio:hover,
+#bluetooth:hover,
+#custom-wifi:hover,
+#clock:hover,
+#mpris:hover,
+#custom-cpu:hover,
+#custom-memory:hover,
+#temperature:hover {
+    color: #f4a261; /* Nightfox orange accent hover */
+}
+
+/* Individual Module Colors */
+#custom-power {
+    color: #c94f6d; /* Nightfox red */
+}
+
+#pulseaudio {
+    color: #63cdcf; /* Nightfox cyan */
+}
+
+#battery {
+    color: #81b29a; /* Nightfox green */
+}
+
+#battery.warning {
+    color: #dbc074; /* Nightfox yellow */
+}
+
+#battery.critical {
+    color: #c94f6d; /* Nightfox red */
+}
+
+#battery.charging {
+    color: #9d79d6; /* Nightfox purple */
+}
+
+#custom-wifi {
+    color: #63cdcf; /* Nightfox cyan */
+}
+
+#bluetooth {
+    color: #9d79d6; /* Nightfox purple */
+}
+
+#mpris {
+    color: #81b29a; /* Nightfox green */
+}
+
+#idle_inhibitor {
+    color: #719cd6; /* Nightfox blue */
+}
+
+#clock {
+    color: #dbc074; /* Nightfox yellow */
+}
+
+#custom-theme-toggle {
+    color: #dbc074; /* Nightfox yellow */
+    background: transparent;
+}
+
+#custom-group-right-logo {
+    color: #81b29a; /* Nightfox green */
+    padding-right: 20px;
+}
+
+/* System stats modules */
+#custom-cpu {
+    color: #9d79d6; /* Nightfox purple */
+}
+
+#custom-memory {
+    color: #81b29a; /* Nightfox green */
+}
+
+#temperature {
+    color: #c94f6d; /* Nightfox red */
+}
