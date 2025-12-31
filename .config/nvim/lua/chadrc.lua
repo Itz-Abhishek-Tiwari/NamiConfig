@@ -3,7 +3,7 @@ local M = {}
 
 
 M.base46 = {
-  theme = "rosepine",
+  theme = "gruvbox",
   transparency = true,
 
   hl_override = {

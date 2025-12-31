@@ -1,0 +1,11 @@
+// Catppuccin Latte
+
+
+* {
+    background:     #fbf1c790;
+    background-alt: #f2e5bc;
+    foreground:     #3c3836cc;
+    selected:       #d3869bcc;
+    active:         #689d6880;
+    urgent:         #cc241d;
+}

@@ -5,13 +5,14 @@ import json
 from pathlib import Path
 
 # ====================== Theme Constants ====================== #
-DARK = "Colloid-Dark-Catppuccin"
-LIGHT = "Colloid-Light-Catppuccin"
+DARK = "Colloid-Dark-gruvBox"
+LIGHT = "Colloid-Light-gruvBox"
 
 CONFIG_DIR = Path.home() / ".config"
 STATE_FILE = CONFIG_DIR / ".current_theme"
 WINDOWRULES_PATH = CONFIG_DIR / "hypr/windowrules.conf"
 BLUR_RULE = "layerrule = blur,waybar"
+ZED_SETTINGS_PATH = Path.home() / ".config/zed/settings.json"
 
 # ====================== GTK Configuration ====================== #
 GTK3_PATH = CONFIG_DIR / "gtk-3.0/settings.ini"
@@ -37,33 +38,33 @@ GTK_COMMON_SETTINGS = {
 theme_paths = {
     "kitty": {
         "target": CONFIG_DIR / "kitty/theme.conf",
-        "light": CONFIG_DIR / "NamiThemes/catppuccin/kitty/themes/theme-light.conf",
-        "dark": CONFIG_DIR / "NamiThemes/catppuccin/kitty/themes/theme-dark.conf",
+        "light": CONFIG_DIR / "NamiThemes/gruvBox/kitty/themes/theme-light.conf",
+        "dark": CONFIG_DIR / "NamiThemes/gruvBox/kitty/themes/theme-dark.conf",
     },
     "waybar": {
         "target": CONFIG_DIR / "waybar/style.css",
-        "light": CONFIG_DIR / "NamiThemes/catppuccin/waybar/themes/theme-light.css",
-        "dark": CONFIG_DIR / "NamiThemes/catppuccin/waybar/themes/theme-dark.css",
+        "light": CONFIG_DIR / "NamiThemes/gruvBox/waybar/themes/theme-light.css",
+        "dark": CONFIG_DIR / "NamiThemes/gruvBox/waybar/themes/theme-dark.css",
     },
     "mako": {
         "target": CONFIG_DIR / "mako/config",
-        "light": CONFIG_DIR / "NamiThemes/catppuccin/mako/themes/theme-light",
-        "dark": CONFIG_DIR / "NamiThemes/catppuccin/mako/themes/theme-dark",
+        "light": CONFIG_DIR / "NamiThemes/gruvBox/mako/themes/theme-light",
+        "dark": CONFIG_DIR / "NamiThemes/gruvBox/mako/themes/theme-dark",
     },
     "rofi": {
-        "target": CONFIG_DIR / "rofi/colors/catppuccin.rasi",
-        "light": CONFIG_DIR / "NamiThemes/catppuccin/rofi/themes/theme-light.rasi",
-        "dark": CONFIG_DIR / "NamiThemes/catppuccin/rofi/themes/theme-dark.rasi",
+        "target": CONFIG_DIR / "rofi/colors/theme.rasi",
+        "light": CONFIG_DIR / "NamiThemes/gruvBox/rofi/themes/theme-light.rasi",
+        "dark": CONFIG_DIR / "NamiThemes/gruvBox/rofi/themes/theme-dark.rasi",
     },
     "swaync": {
         "target": CONFIG_DIR / "swaync/style.css",
-        "light": CONFIG_DIR / "NamiThemes/catppuccin/swaync/themes/theme-light.css",
-        "dark": CONFIG_DIR / "NamiThemes/catppuccin/swaync/themes/theme-dark.css",
+        "light": CONFIG_DIR / "NamiThemes/gruvBox/swaync/themes/theme-light.css",
+        "dark": CONFIG_DIR / "NamiThemes/gruvBox/swaync/themes/theme-dark.css",
     },
     "ghostty": {
         "target": CONFIG_DIR / "ghostty/themes/theme",
-        "light": CONFIG_DIR / "NamiThemes/catppuccin/ghostty/themes/theme-light",
-        "dark": CONFIG_DIR / "NamiThemes/catppuccin/ghostty/themes/theme-dark",
+        "light": CONFIG_DIR / "NamiThemes/gruvBox/ghostty/themes/theme-light",
+        "dark": CONFIG_DIR / "NamiThemes/gruvBox/ghostty/themes/theme-dark",
     },
 }
 
@@ -131,6 +132,7 @@ def set_gtk_theme(theme):
 def symlink_theme_file(app, theme):
     source = theme_paths[app][theme]
     target = theme_paths[app]["target"]
+
     if not source.exists():
         return
 
@@ -142,9 +144,43 @@ def symlink_theme_file(app, theme):
 
 def switch_kitty(theme):
     symlink_theme_file("kitty", theme)
-    subprocess.run("kill -10 $(pgrep kitty)", shell=True)
+    result = subprocess.run(["pgrep", "kitty"], capture_output=True, text=True)
+    if result.stdout.strip():
+        subprocess.run(f"kill -10 {result.stdout.strip()}", shell=True)
 
 
+def switch_zed_theme(theme: str):
+    if not ZED_SETTINGS_PATH.exists():
+        print("Settings file not found.")
+        return
+
+    # Load existing settings
+    try:
+        with open(ZED_SETTINGS_PATH, "r") as f:
+            settings = json.load(f)
+    except json.JSONDecodeError:
+        print("Settings file is not valid JSON.")
+        settings = {}
+
+    # Ensure "theme" key exists
+    if "theme" not in settings:
+        settings["theme"] = {}
+
+    # Set the mode and theme values
+    settings["theme"]["mode"] = theme
+    if theme == "light":
+        settings["theme"]["light"] = "gruvBox_light"
+        settings["theme"]["dark"] = settings["theme"].get("dark", "gruvBox_dark")
+    else:
+        settings["theme"]["dark"] = "gruvBox_dark"
+        settings["theme"]["light"] = settings["theme"].get("light", "gruvBox_light")
+
+    # Write the settings back
+    with open(ZED_SETTINGS_PATH, "w") as f:
+        json.dump(settings, f, indent=2)
+
+    print(f"Theme switched to {theme}.")
+        
 def switch_ghostty(theme):
     symlink_theme_file("ghostty", theme)
     subprocess.run("kill -10 $(pgrep ghostty)", shell=True)
@@ -171,10 +207,9 @@ def switch_swaync(theme):
 
 
 def reload_nemo():
-    if (
-        subprocess.run(["pgrep", "-x", "nemo"], stdout=subprocess.DEVNULL).returncode
-        == 0
-    ):
+    if subprocess.run(
+        ["pgrep", "-x", "nemo"], stdout=subprocess.DEVNULL
+    ).returncode == 0:
         subprocess.run(["nemo", "--quit"])
         subprocess.Popen(["nemo"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
@@ -182,47 +217,54 @@ def reload_nemo():
 def switch_vscode_theme(theme):
     settings_path = CONFIG_DIR / "Code/User/settings.json"
     if not settings_path.exists():
-        print(f"VSCode settings not found at {settings_path}")
         return
 
     try:
-        with open(settings_path, "r") as f:
+        with open(settings_path) as f:
             settings = json.load(f)
     except json.JSONDecodeError:
-        print("Error: VSCode settings.json is not valid JSON.")
         return
 
     settings["workbench.colorTheme"] = (
-        "Catppuccin Latte" if theme == "light" else "Catppuccin Mocha"
+        "gruvBox Latte" if theme == "light" else "gruvBox Mocha"
     )
 
     with open(settings_path, "w") as f:
         json.dump(settings, f, indent=2)
 
 
+# ====================== UPDATED NOTIFICATION ====================== #
 def notify(theme):
-    icon = icon_light if theme == "light" else icon_dark
+    if theme == "light":
+        icon = icon_light
+        message = "Light mode applied"
+    else:
+        icon = icon_dark
+        message = "Dark mode applied"
+
     subprocess.run(
-        ["notify-send", "-i", icon, f"Switched to {theme.capitalize()} Theme"]
+        [
+            "notify-send",
+            "-a", "Theme Switcher",
+            "-u", "low",
+            "-i", icon,
+            message,
+        ]
     )
 
 
 def switch_spicetify(theme):
     color_scheme = "latte" if theme == "light" else "mocha"
-    subprocess.run(["spicetify", "config", "current_theme", "catppuccin"])
+    subprocess.run(["spicetify", "config", "current_theme", "gruvBox"])
     subprocess.run(["spicetify", "config", "color_scheme", color_scheme])
     subprocess.run(
         [
             "spicetify",
             "config",
-            "inject_css",
-            "1",
-            "inject_theme_js",
-            "1",
-            "replace_colors",
-            "1",
-            "overwrite_assets",
-            "1",
+            "inject_css", "1",
+            "inject_theme_js", "1",
+            "replace_colors", "1",
+            "overwrite_assets", "1",
         ]
     )
     subprocess.run(["spicetify", "apply"])
@@ -231,6 +273,7 @@ def switch_spicetify(theme):
 def update_windowrules_for_blur(theme):
     if not WINDOWRULES_PATH.exists():
         return
+
     lines = WINDOWRULES_PATH.read_text().splitlines()
 
     if theme == "dark":
@@ -254,6 +297,7 @@ def toggle_theme():
     switch_rofi(new_theme)
     switch_swaync(new_theme)
     switch_vscode_theme(new_theme)
+    switch_zed_theme(new_theme)
     # switch_ghostty(new_theme)
     switch_spicetify(new_theme)
     update_windowrules_for_blur(new_theme)

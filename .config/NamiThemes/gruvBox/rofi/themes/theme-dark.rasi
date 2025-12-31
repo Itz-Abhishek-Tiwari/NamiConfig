@@ -1,0 +1,10 @@
+// Catppucine Mocha
+* {
+    background:     #28282890;  
+    background-alt: #3c383690; 
+    foreground:     #ebdbb280; 
+    selected:       #fabd2fee; 
+    active:         #b8bb267f;  
+    urgent:         #fb4934;    
+}
+ // here is his code

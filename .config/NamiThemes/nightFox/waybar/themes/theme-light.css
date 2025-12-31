@@ -1,4 +1,4 @@
-/* Font and reset */
+/* Dayfox light theme */
 * {
     font-family: "CaskaydiaMono Nerd Font";
     font-size: 15px;
@@ -6,52 +6,41 @@
     border: none;
     margin: 0;
     padding: 0;
-    min-height: 0;
 }
 
-/* Background and layout */
 window#waybar,
 window#waybar > box {
     background: #f6f6f4;
-    /* Nightfox Dayfox base background */
     padding: 5px 6px;
 }
 
-/* Tooltip */
 tooltip {
-    background: rgba(226, 226, 222, 0.9);
-    /* Dayfox surface with alpha */
+    background: rgba(234, 234, 230, 0.9);
 }
 
 tooltip label {
     color: #3d2b5a;
-    /* Dayfox text */
     margin: 0 2px;
 }
 
-/* Menus */
 menu {
     border-radius: 0px;
     background: #eaeae6;
-    /* Dayfox bg1 */
-    padding: 0px 4px;
+    padding: 0 4px;
     box-shadow: none;
 }
 
 menuitem {
-    padding: 8px 8px;
+    padding: 8px;
     margin: 2px 5px;
     border-radius: 4px;
 }
 
 menuitem:hover {
     background-color: #c94f6d;
-    /* Dayfox red */
     color: #f6f6f4;
-    /* Dayfox base */
 }
 
-/* Modules */
 #workspaces,
 #custom-theme-toggle,
 #pulseaudio,
@@ -70,21 +59,17 @@ menuitem:hover {
 #custom-memory,
 #temperature {
     color: #3d2b5a;
-    /* Dayfox text */
     background: transparent;
     padding: 2px 9px;
     margin: 0 2px;
 }
 
-/* Workspaces */
 #workspaces {
     color: #c94f6d;
-    /* Dayfox red */
 }
 
 #workspaces button {
     color: #4d688e;
-    /* Dayfox blue */
     padding: 2px 4px;
     margin: 0 3px;
     border-radius: 2px;
@@ -92,7 +77,6 @@ menuitem:hover {
 
 #workspaces button.active {
     background: #618774;
-    /* Dayfox green */
     color: #f6f6f4;
     font-weight: bolder;
     text-decoration: underline;
@@ -100,16 +84,13 @@ menuitem:hover {
 
 #workspaces button.active:hover {
     background: #c98530;
-    /* Dayfox orange */
     color: #f6f6f4;
 }
 
 #workspaces button:hover {
     color: #c94f6d;
-    /* Dayfox red */
 }
 
-/* Hover effects */
 #custom-power:hover,
 #pulseaudio:hover,
 #bluetooth:hover,
@@ -120,89 +101,22 @@ menuitem:hover {
 #custom-memory:hover,
 #temperature:hover {
     color: #c98530;
-    /* Dayfox orange */
 }
 
-/* Individual Modules */
-#custom-power {
-    color: #c94f6d;
-    /* Dayfox red */
-}
+#custom-power { color: #c94f6d; }
+#pulseaudio { color: #618774; }
+#battery { color: #4d688e; }
+#battery.warning { color: #c98530; }
+#battery.critical { color: #c94f6d; }
+#battery.charging { color: #618774; }
+#custom-wifi { color: #287980; }
+#bluetooth { color: #955f6f; }
+#mpris { color: #618774; }
+#idle_inhibitor { color: #4d688e; }
+#clock { color: #c98530; }
+#custom-theme-toggle { color: #c98530; background: transparent; }
+#custom-group-right-logo { color: #618774; padding-right: 20px; }
+#custom-cpu { color: #955f6f; }
+#custom-memory { color: #618774; }
+#temperature { color: #c94f6d; }
 
-#pulseaudio {
-    color: #618774;
-    /* Dayfox green */
-}
-
-#battery {
-    color: #4d688e;
-    /* Dayfox blue */
-}
-
-#battery.warning {
-    color: #c98530;
-    /* Dayfox orange/yellow */
-}
-
-#battery.critical {
-    color: #c94f6d;
-    /* Dayfox red */
-}
-
-#battery.charging {
-    color: #618774;
-    /* Dayfox green */
-}
-
-#custom-wifi {
-    color: #287980;
-    /* Dayfox cyan */
-}
-
-#bluetooth {
-    color: #955f6f;
-    /* Dayfox magenta/purple */
-}
-
-#mpris {
-    color: #618774;
-    /* Dayfox green */
-}
-
-#idle_inhibitor {
-    color: #4d688e;
-    /* Dayfox blue */
-}
-
-#clock {
-    color: #c98530;
-    /* Dayfox orange */
-}
-
-#custom-theme-toggle {
-    color: #c98530;
-    /* Dayfox orange */
-    background: transparent;
-}
-
-#custom-group-right-logo {
-    color: #618774;
-    /* Dayfox green */
-    padding-right: 20px;
-}
-
-/* System stats modules */
-#custom-cpu {
-    color: #955f6f;
-    /* Dayfox magenta/purple */
-}
-
-#custom-memory {
-    color: #618774;
-    /* Dayfox green */
-}
-
-#temperature {
-    color: #c94f6d;
-    /* Dayfox red */
-}

@@ -16,9 +16,9 @@ plugins=(
   zsh-syntax-highlighting
 )
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 eval "$(starship init zsh)"
-eval "$(rbenv init -)"
+# eval "$(rbenv init -)"
 fpath=(~/.zsh/completions $fpath)
 
 ### --- Editor ---
