@@ -5,8 +5,8 @@ import subprocess
 from pathlib import Path
 
 # ====================== Theme Constants ====================== #
-DARK = "Colloid-Dark-nightFox"
-LIGHT = "Colloid-Light-nightFox"
+DARK = "Colloid-Dark-catppuccin"
+LIGHT = "Colloid-Light-catppuccin"
 
 CONFIG_DIR = Path.home() / ".config"
 STATE_FILE = CONFIG_DIR / ".current_theme"
@@ -38,33 +38,33 @@ GTK_COMMON_SETTINGS = {
 theme_paths = {
     "kitty": {
         "target": CONFIG_DIR / "kitty/theme.conf",
-        "light": CONFIG_DIR / "NamiThemes/nightFox/kitty/themes/theme-light.conf",
-        "dark": CONFIG_DIR / "NamiThemes/nightFox/kitty/themes/theme-dark.conf",
+        "light": CONFIG_DIR / "NamiThemes/catppuccin/kitty/themes/theme-light.conf",
+        "dark": CONFIG_DIR / "NamiThemes/catppuccin/kitty/themes/theme-dark.conf",
     },
     "waybar": {
         "target": CONFIG_DIR / "waybar/style.css",
-        "light": CONFIG_DIR / "NamiThemes/nightFox/waybar/themes/theme-light.css",
-        "dark": CONFIG_DIR / "NamiThemes/nightFox/waybar/themes/theme-dark.css",
+        "light": CONFIG_DIR / "NamiThemes/catppuccin/waybar/themes/theme-light.css",
+        "dark": CONFIG_DIR / "NamiThemes/catppuccin/waybar/themes/theme-dark.css",
     },
     "mako": {
         "target": CONFIG_DIR / "mako/config",
-        "light": CONFIG_DIR / "NamiThemes/nightFox/mako/themes/theme-light",
-        "dark": CONFIG_DIR / "NamiThemes/nightFox/mako/themes/theme-dark",
+        "light": CONFIG_DIR / "NamiThemes/catppuccin/mako/themes/theme-light",
+        "dark": CONFIG_DIR / "NamiThemes/catppuccin/mako/themes/theme-dark",
     },
     "rofi": {
         "target": CONFIG_DIR / "rofi/colors/theme.rasi",
-        "light": CONFIG_DIR / "NamiThemes/nightFox/rofi/themes/theme-light.rasi",
-        "dark": CONFIG_DIR / "NamiThemes/nightFox/rofi/themes/theme-dark.rasi",
+        "light": CONFIG_DIR / "NamiThemes/catppuccin/rofi/themes/theme-light.rasi",
+        "dark": CONFIG_DIR / "NamiThemes/catppuccin/rofi/themes/theme-dark.rasi",
     },
     "swaync": {
         "target": CONFIG_DIR / "swaync/style.css",
-        "light": CONFIG_DIR / "NamiThemes/nightFox/swaync/themes/theme-light.css",
-        "dark": CONFIG_DIR / "NamiThemes/nightFox/swaync/themes/theme-dark.css",
+        "light": CONFIG_DIR / "NamiThemes/catppuccin/swaync/themes/theme-light.css",
+        "dark": CONFIG_DIR / "NamiThemes/catppuccin/swaync/themes/theme-dark.css",
     },
     "ghostty": {
         "target": CONFIG_DIR / "ghostty/themes/theme",
-        "light": CONFIG_DIR / "NamiThemes/nightFox/ghostty/themes/theme-light",
-        "dark": CONFIG_DIR / "NamiThemes/nightFox/ghostty/themes/theme-dark",
+        "light": CONFIG_DIR / "NamiThemes/catppuccin/ghostty/themes/theme-light",
+        "dark": CONFIG_DIR / "NamiThemes/catppuccin/ghostty/themes/theme-dark",
     },
 }
 
@@ -175,7 +175,7 @@ def switch_vscode_theme(theme):
         return
     data = json.loads(path.read_text())
     data["workbench.colorTheme"] = (
-        "nightFox Latte" if theme == "light" else "nightFox Mocha"
+        "catppuccin Latte" if theme == "light" else "catppuccin Mocha"
     )
     path.write_text(json.dumps(data, indent=2))
 
@@ -186,14 +186,14 @@ def switch_zed_theme(theme):
     data = json.loads(ZED_SETTINGS_PATH.read_text())
     data.setdefault("theme", {})
     data["theme"]["mode"] = theme
-    data["theme"]["light"] = "nightFox_light"
-    data["theme"]["dark"] = "nightFox_dark"
+    data["theme"]["light"] = "catppuccin_light"
+    data["theme"]["dark"] = "catppuccin_dark"
     ZED_SETTINGS_PATH.write_text(json.dumps(data, indent=2))
 
 
 def switch_spicetify(theme):
     scheme = "latte" if theme == "light" else "mocha"
-    subprocess.run(["spicetify", "config", "current_theme", "nightFox"])
+    subprocess.run(["spicetify", "config", "current_theme", "catppuccin"])
     subprocess.run(["spicetify", "config", "color_scheme", scheme])
     subprocess.run(["spicetify", "apply"])
 
