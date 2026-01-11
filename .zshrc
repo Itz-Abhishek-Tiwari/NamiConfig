@@ -16,9 +16,13 @@ plugins=(
   zsh-syntax-highlighting
 )
 
-# source $ZSH/oh-my-zsh.sh
+# Load Oh My Zsh
+source $ZSH/oh-my-zsh.sh
+
+# Starship prompt
 eval "$(starship init zsh)"
-# eval "$(rbenv init -)"
+
+# Custom completions
 fpath=(~/.zsh/completions $fpath)
 
 ### --- Editor ---
@@ -36,6 +40,8 @@ export PATH="./node_modules/.bin:$HOME/.local/bin:$PATH"
 ENABLE_CORRECTION="true"
 HYPHEN_INSENSITIVE="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
+# Make completions case-insensitive
+CASE_SENSITIVE="false"
 
 ### --- Safety Aliases ---
 alias rm="rm -i"
@@ -109,15 +115,17 @@ alias suspend="systemctl suspend"
 alias dfh="df -h"
 alias duh="du -h --max-depth=1"
 
-
+### --- Java ---
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 export PATH=$JAVA_HOME/bin:$PATH
 
-
-
-
-# Android SDK
+### --- Android SDK ---
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/emulator:$PATH
 
+### --- Go ---
 export PATH=$PATH:$(go env GOPATH)/bin
+
+### --- Zsh Completion Fixes ---
+autoload -Uz compinit
+compinit
