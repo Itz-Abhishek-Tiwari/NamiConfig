@@ -40,6 +40,11 @@
   border: none;
 }
 
+scrollbar {
+  background: transparent;
+  opacity: 0;
+}
+
 /* -----------------------------------
    🧩 Control Center
 -------------------------------------- */
@@ -48,6 +53,11 @@
   box-shadow: none;
   padding: 2px;
   border: none;
+}
+
+scrollbar {
+  background: transparent;
+  opacity: 0;
 }
 
 .notification-row .notification-background {
@@ -91,6 +101,11 @@
   color: @foreground;
   border-radius: 2px;
   border: none;
+}
+
+scrollbar {
+  background: transparent;
+  opacity: 0;
   margin: 6px 6px 0 0;
 }
 
@@ -130,6 +145,11 @@
   min-width: 36px;
   min-height: 36px;
   border: none;
+}
+
+scrollbar {
+  background: transparent;
+  opacity: 0;
 }
 
 /* -----------------------------------
@@ -278,6 +298,11 @@ picture.mpris-background {
   border: none;
 }
 
+scrollbar {
+  background: transparent;
+  opacity: 0;
+}
+
 /* -----------------------------------
    🔊 Volume Widget
 -------------------------------------- */
@@ -288,6 +313,11 @@ picture.mpris-background {
 
 .widget-volume button {
   border: none;
+}
+
+scrollbar {
+  background: transparent;
+  opacity: 0;
 }
 
 /* -----------------------------------

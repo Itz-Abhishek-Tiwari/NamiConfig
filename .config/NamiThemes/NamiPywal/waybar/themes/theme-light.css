@@ -1,0 +1,175 @@
+@import url("/home/abhishek/.config/waybar/style/colors.css");
+
+* {
+  font-family: "CaskaydiaMono Nerd Font Propo ";
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  margin: 0;
+  padding: 0;
+  min-height: 0;
+}
+
+window#waybar,
+window#waybar>box {
+  background: alpha(@background, 0.6);
+  padding: 5px 6px;
+}
+
+tooltip {
+  background: alpha(@background, 0.8);
+}
+
+tooltip label {
+  color: @foreground;
+  margin: 0 2px;
+}
+
+menu {
+  border-radius: 0px;
+  background: @background;
+  padding: 4px 4px;
+  box-shadow: none;
+}
+
+menuitem {
+  padding: 8px 8px;
+  margin: 2px 5px;
+}
+
+menuitem:hover {
+  background-color: @primary;
+  color: @background;
+}
+
+#workspaces,
+#custom-theme-toggle,
+#pulseaudio,
+#backlight,
+#battery,
+#custom-wifi,
+#bluetooth,
+#custom-power,
+#idle_inhibitor,
+#clock,
+#mpris,
+#tray,
+#custom-notification,
+#custom-group-right-logo,
+#custom-cpu,
+#custom-memory,
+#temperature {
+  color: @foreground;
+  background: transparent;
+  padding: 2px 9px;
+  margin: 0 2px;
+}
+
+/* Workspaces */
+#workspaces {
+  color: @foreground;
+}
+
+#workspaces button {
+  color: @gray;
+  padding: 2px 4px;
+  margin: 0 3px;
+  border-radius: 2px;
+}
+
+#workspaces button.active {
+  background: @primary;
+  color: @background;
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
+#workspaces button.active:hover {
+  background: @accent;
+  color: @background;
+}
+
+#workspaces button:hover {
+  color: @red;
+}
+
+/* Hover effects */
+#custom-power:hover,
+#pulseaudio:hover,
+#bluetooth:hover,
+#custom-wifi:hover,
+#clock:hover,
+#mpris:hover,
+#custom-cpu:hover,
+#custom-memory:hover,
+#temperature:hover {
+  color: @yellow;
+}
+
+/* Individual Module Colors */
+#custom-power {
+  color: @red;
+}
+
+#pulseaudio {
+  color: @cyan;
+}
+
+#battery {
+  color: @blue;
+}
+
+#battery.warning {
+  color: @yellow;
+}
+
+#battery.critical {
+  color: @red;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#custom-wifi {
+  color: @cyan;
+}
+
+#bluetooth {
+  color: @magenta;
+}
+
+#mpris {
+  color: @green;
+}
+
+#idle_inhibitor {
+  color: @blue;
+}
+
+#clock {
+  color: @primary;
+}
+
+#custom-theme-toggle {
+  color: @primary;
+  background: transparent;
+}
+
+#custom-group-right-logo {
+  color: @green;
+  padding-right: 20px;
+}
+
+/* New system stats modules */
+#custom-cpu {
+  color: @magenta;
+}
+
+#custom-memory {
+  color: @green;
+}
+
+#temperature {
+  color: @red;
+}

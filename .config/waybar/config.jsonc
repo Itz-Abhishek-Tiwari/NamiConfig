@@ -274,7 +274,8 @@
     "format": "",
     "tooltip": true,
     "tooltip-format": "Toggle Light/Dark Theme",
-    "on-click": "~/.config/scripts/mode_toggle.py && kill -SIGUSR1 $(pgrep kitty)"
+    "on-click": "~/.config/scripts/mode_toggle.py && kill -SIGUSR1 $(pgrep kitty)",
+    "on-click-right": "~/.config/scripts/wall_theme_select.sh"
   },
   "custom/sync": {
     "format": "󰓠",

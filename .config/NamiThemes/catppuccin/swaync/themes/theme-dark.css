@@ -37,6 +37,11 @@
   border: none
 }
 
+scrollbar {
+  background: transparent;
+  opacity: 0;
+}
+
 /* -----------------------------------
    🧩 Control Center
 -------------------------------------- */
@@ -46,6 +51,11 @@
   box-shadow: none;
   padding: 2px;
   border: none
+}
+
+scrollbar {
+  background: transparent;
+  opacity: 0;
     /* border-bottom: 9px solid @blue; */
 }
 
@@ -90,6 +100,11 @@
   color: @foreground;
   border-radius: 2px;
   border: none;
+}
+
+scrollbar {
+  background: transparent;
+  opacity: 0;
   margin: 6px 6px 0 0;
 }
 
@@ -105,6 +120,11 @@
 /* Urgency */
 .notification.critical {
   border: none;
+}
+
+scrollbar {
+  background: transparent;
+  opacity: 0;
   outline: none;
   background: @red;
   border-left: 9px solid red;
@@ -120,6 +140,11 @@
 .notification.low,
 .notification.normal {
   border: none;
+}
+
+scrollbar {
+  background: transparent;
+  opacity: 0;
   outline: none;
   background-color: alpha(@background, 0.95);
   border-left: 9px solid @blue;
@@ -133,6 +158,11 @@
   min-width: 36px;
   min-height: 36px;
   border: none;
+}
+
+scrollbar {
+  background: transparent;
+  opacity: 0;
 }
 
 /* -----------------------------------
@@ -285,6 +315,11 @@ picture.mpris-background {
   border: none;
 }
 
+scrollbar {
+  background: transparent;
+  opacity: 0;
+}
+
 
 /* -----------------------------------
    🔊 Volume Widget
@@ -296,6 +331,11 @@ picture.mpris-background {
 
 .widget-volume button {
   border: none;
+}
+
+scrollbar {
+  background: transparent;
+  opacity: 0;
 }
 
 /* -----------------------------------
@@ -325,6 +365,11 @@ picture.mpris-background {
 .widget-dnd>switch {
   background: @yellow;
   border: none;
+}
+
+scrollbar {
+  background: transparent;
+  opacity: 0;
   border-radius: 100px;
   padding: 3px;
 }
@@ -355,6 +400,11 @@ picture.mpris-background {
 .widget-title>button {
   background: @red;
   border: none;
+}
+
+scrollbar {
+  background: transparent;
+  opacity: 0;
   border-radius: 100px;
   padding: 0 6px;
   transition: all 0.7s ease;

@@ -1,24 +1,20 @@
+@import url("/home/abhishek/.config/swaync/colors.css");
+
 /* -----------------------------------
-   🌹 Rose Pine Dark – Palette
+   🌈 NamiPywal – Dynamic Palette
 -------------------------------------- */
+/* These @define-color calls are just to make sure the variables are local if not imported */
+/* But they will be overridden by the @import above */
 
-/*Solid references (optional)*/
-@define-color background rgb(25, 23, 36);
-@define-color background-alt rgb(31, 29, 46);
-@define-color background-faded rgb(38, 35, 58);
+@define-color background-alt alpha(@background, 0.8);
+@define-color background-faded alpha(@background, 0.5);
 
-
-@define-color crust #12101e;
-@define-color foreground #e0def4;
-@define-color red #eb6f92;
-@define-color green #31748f;
-@define-color yellow #f6c177;
-@define-color blue #9ccfd8;
-@define-color gray #1f1d2e;
-@define-color select #403d52;
+@define-color crust @background;
+/* @foreground, @red, @green, @yellow, @blue, @gray are already in colors.css */
+@define-color select @primary;
 
 /* 🎵 MPRIS */
-@define-color mpris-album-art-overlay rgba(0, 0, 0, 0.6);
+@define-color mpris-album-art-overlay rgba(0, 0, 0, 0.55);
 @define-color mpris-button-hover rgba(0, 0, 0, 0.5);
 @define-color mpris-button-bg @foreground;
 @define-color mpris-button-fg @crust;
@@ -34,12 +30,17 @@
     color: @foreground;
     background-color: transparent;
     border-radius: 2px;
-    border: none;
+    border: none
 }
 
 scrollbar {
   background: transparent;
   opacity: 0;
+}
+
+scrollbar {
+    background: transparent;
+    opacity: 0;
 }
 
 /* -----------------------------------
@@ -49,7 +50,7 @@ scrollbar {
     background-color: alpha(@background, 1);
     box-shadow: none;
     padding: 2px;
-    border: none;
+    border: none
 }
 
 scrollbar {
@@ -67,7 +68,7 @@ scrollbar {
 -------------------------------------- */
 .notification {
     background-color: @background;
-    border: 1px solid alpha(@foreground, 0.06);
+    border: 1px solid alpha(@foreground, 0.05);
     border-radius: 2px;
     padding: 6px 10px;
     margin-bottom: 6px;
@@ -83,7 +84,7 @@ scrollbar {
 
 .notification .time {
     font-size: 0.75rem;
-    color: alpha(@foreground, 0.65);
+    color: alpha(@foreground, 0.6);
 }
 
 .notification .body {
@@ -117,20 +118,34 @@ scrollbar {
 
 /* Urgency */
 .notification.critical {
+    border: none;
+}
+
+scrollbar {
+  background: transparent;
+  opacity: 0;
+    outline: none;
     background: @red;
-    border-left: 9px solid @red;
+    border-left: 9px solid red;
 }
 
 .notification.critical .title,
 .notification.critical .body,
 .notification.critical .summary {
-    color: @crust;
+    color: alpha(@crust, 0.9);
     font-weight: bold;
 }
 
 .notification.low,
 .notification.normal {
-    background-color: alpha(@background, 0.97);
+    border: none;
+}
+
+scrollbar {
+  background: transparent;
+  opacity: 0;
+    outline: none;
+    background-color: alpha(@background, 0.95);
     border-left: 9px solid @blue;
 }
 
@@ -158,7 +173,7 @@ scrollbar {
 }
 
 .close-button label {
-    color: @crust;
+    color: aliceblue;
 }
 
 .close-button:hover {
@@ -186,7 +201,7 @@ scrollbar {
 }
 
 /* -----------------------------------
-   📊 Sliders
+   📊 Sliders (Volume/Brightness)
 -------------------------------------- */
 scale trough {
     margin: 0 1rem;
@@ -224,7 +239,7 @@ tooltip {
 
 .widget-buttons-grid button {
     background: @crust;
-    color: @foreground;
+    color: #fff;
     border-radius: 50px;
     min-width: 60px;
     min-height: 30px;
@@ -242,11 +257,12 @@ tooltip {
 
 .widget-buttons-grid button.toggle:checked label {
     background: @blue;
-    color: @crust;
+    color: @background;
 }
 
+
 .widget-buttons-grid button.toggle:checked:hover {
-    background: alpha(@blue, 0.85);
+    background: alpha(@blue, 0.8);
 }
 
 /* -----------------------------------
@@ -300,6 +316,7 @@ scrollbar {
   opacity: 0;
 }
 
+
 /* -----------------------------------
    🔊 Volume Widget
 -------------------------------------- */
@@ -338,11 +355,17 @@ scrollbar {
 -------------------------------------- */
 .widget-dnd {
     font-weight: bold;
-    padding: 15px;
+    padding: 15px 15px 15px;
 }
 
 .widget-dnd>switch {
     background: @yellow;
+    border: none;
+}
+
+scrollbar {
+  background: transparent;
+  opacity: 0;
     border-radius: 100px;
     padding: 3px;
 }
@@ -372,8 +395,15 @@ scrollbar {
 
 .widget-title>button {
     background: @red;
+    border: none;
+}
+
+scrollbar {
+  background: transparent;
+  opacity: 0;
     border-radius: 100px;
     padding: 0 6px;
+    transition: all 0.7s ease;
 }
 
 .widget-title>button label {
@@ -381,5 +411,6 @@ scrollbar {
 }
 
 .widget-title>button:hover {
-    background: alpha(@red, 0.85);
+    background: alpha(@red, 0.8);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.65);
 }

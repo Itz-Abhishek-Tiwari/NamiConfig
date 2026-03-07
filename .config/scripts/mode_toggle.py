@@ -2,6 +2,7 @@
 
 import json
 import os
+import sys
 import subprocess
 import argparse
 from pathlib import Path
@@ -213,6 +214,12 @@ def switch_wallpapers(family, mode):
     if wallpaper.exists():
         subprocess.run(["swww", "img", str(wallpaper), "--transition-type", "wipe", "--transition-fps", "60"], 
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        
+        # Trigger dynamic color generation
+        gen_script = CONFIG_DIR / "scripts/generate_colors.py"
+        if gen_script.exists():
+            subprocess.run([sys.executable, str(gen_script), str(wallpaper)],
+                           stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def symlink_theme(app, target_path, theme_family, mode):
     src = get_theme_path(theme_family, app, mode)
@@ -303,6 +310,7 @@ if __name__ == "__main__":
 
     theme_map = {
         "rosepine": "catppuccin", # Fallback for GTK
+        "namipywal": "catppuccin",
     }
     f_lower = theme.lower().replace(" ", "")
     gtk_theme_family = theme_map.get(f_lower, theme)

@@ -9,7 +9,7 @@
   "icon_theme": "Material Icon Theme",
   "theme": {
     "mode": "dark",
-    "dark": "nightFox_dark",
-    "light": "nightFox_light"
+    "dark": "namipywal_dark",
+    "light": "namipywal_light"
   }
 }
