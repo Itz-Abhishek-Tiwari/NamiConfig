@@ -1,0 +1,52 @@
+file:///home/abhishek/NamiConfig/.config/hypr/windowrules.conf {"mtime":1772904986320,"ctime":1772903130021,"size":3113,"etag":"3fmg4jmbk37d","orphaned":false,"typeId":""}
+# █░█░█ █ █▄░█ █▀▄ █▀█ █░█░█   █▀█ █░█ █░░ █▀▀ █▀
+# ▀▄▀▄▀ █ █░▀█ █▄▀ █▄█ ▀▄▀▄▀   █▀▄ █▄█ █▄▄ ██▄ ▄█
+
+# See https://wiki.hyprland.org/Configuring/Window-Rules/
+
+# =========================
+# Opacity Rules (Refactored)
+# =========================
+
+# All apps except those specifically mentioned below
+windowrule = opacity 0.90 0.90, ^(Brave-browser|firefox|code-oss|Code|code.*-handler|kitty|org\.gnome\.Nautilus|org\.kde\.(dolphin|ark|pulseaudio\.pavucontrol|polkit-kde-authentication-agent-1)|nwg-look|qt[56]ct|kvantummanager|blueman-manager|nm-applet|nm-connection-editor|polkit-gnome-authentication-agent-1|org\.freedesktop\.impl\.portal\.desktop\.(gtk|hyprland)|[Ss]team|steamwebhelper|Spotify|com\.(github\.(rafostar\.Clapper|tchx84\.Flatseal|unrud\.VideoDownloader)|obsproject\.Studio)|hu\.kramo\.Cartridges|gnome-boxes|discord|WebCord|ArmCord|app\.drey\.Warp|net\.davidotek\.pupgui2|yad|Signal|io\.(github\.(alainm23\.planify|flattool\.Warehouse)|gitlab\.(theevilskeleton\.Upscaler|adhami3310\.Impression)|missioncenter\.MissionCenter))$
+
+# Specific overrides
+windowrule = opacity 0.90 0.90, initial_title:^(Spotify Free)$
+windowrule = opacity 0.1 override, title:^(SwayNotificationCenter)$
+
+# Global safety switch (commented out if not needed, as it can conflict)
+# windowrule = opacity 1.0 override 1.0 override, .*
+
+# =========================
+# Floating Rules (Grouped)
+# =========================
+
+# Dolphin dialogs
+windowrulev2 = float, class:^(org\.kde\.dolphin)$, title:^(Progress Dialog — Dolphin|Copying — Dolphin)$
+
+# Firefox utilities
+windowrulev2 = float, class:^(firefox)$, title:^(Picture-in-Picture|Library)$
+
+# Monitors and Tools
+windowrulev2 = float, class:^(kitty)$, title:^(top|btop|htop)$
+windowrulev2 = float, class:^(kvantummanager|qt[56]ct|nwg-look|org\.kde\.ark|org\.pulseaudio\.pavucontrol|waypaper|vlc|blueman-manager|nm-applet|nm-connection-editor|org\.kde\.polkit-kde-authentication-agent-1|Signal|com\.github\.rafostar\.Clapper|app\.drey\.Warp|net\.davidotek\.pupgui2|yad|eog|com\.github\.unrud\.VideoDownloader|io\.(github\.alainm23\.planify|gitlab\.(theevilskeleton\.Upscaler|adhami3310\.Impression)|missioncenter\.MissionCenter))$
+
+# SwayNotificationCenter
+windowrulev2 = float, title:^(SwayNotificationCenter)$
+windowrulev2 = nofocus, title:^(SwayNotificationCenter)$
+windowrulev2 = noanim, title:^(SwayNotificationCenter)$
+windowrulev2 = decorate 0, title:^(SwayNotificationCenter)$
+
+# =========================
+# Layer Rules (Consolidated)
+# =========================
+
+layerrule = blur, ^(rofi|notifications|logout_dialog|swaync-.*)$
+layerrule = blur_popups, ^(rofi|notifications|logout_dialog|swaync-.*)$
+layerrule = ignorealpha 0.5, ^(rofi|notifications|swaync-.*)$
+
+# Bars and specialized layers
+layerrule = blur, ^(waybar|zlaunch)$
+layerrule = blur_popups, zlaunch
+layerrule = ignorealpha 0.35, zlaunch

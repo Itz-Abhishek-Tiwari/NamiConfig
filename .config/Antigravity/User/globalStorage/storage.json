@@ -1,0 +1,115 @@
+{
+    "telemetry.sqmId": "",
+    "telemetry.machineId": "333c86e2598010826f4a4b8bebbd7ad0077fdd008fcc8c12501655889263e9d5",
+    "telemetry.devDeviceId": "2c1a6d87-e352-4c95-a823-d6668a37eb22",
+    "backupWorkspaces": {
+        "workspaces": [],
+        "folders": [
+            {
+                "folderUri": "file:///home/abhishek/Workspace/Projects/Abyssal-code/Abyssal-code"
+            },
+            {
+                "folderUri": "file:///home/abhishek/NamiConfig"
+            }
+        ],
+        "emptyWindows": []
+    },
+    "windowControlHeight": 42,
+    "profileAssociations": {
+        "workspaces": {
+            "file:///home/abhishek/Workspace/Projects/Abyssal-code/Abyssal-code": "__default__profile__",
+            "file:///home/abhishek/Workspace/Projects/Abyssal-code": "__default__profile__",
+            "file:///home/abhishek/NamiConfig/.dotfiles/.config/waybar": "__default__profile__",
+            "file:///home/abhishek/NamiConfig/.dotfiles": "__default__profile__",
+            "file:///home/abhishek/NamiConfig": "__default__profile__"
+        },
+        "emptyWindows": {}
+    },
+    "antigravityUnifiedStateSync.oauthToken.hasLegacyMigrated": true,
+    "unifiedStateSync.hasTrajectorySummariesMigrated": true,
+    "overrideStore.migratedSecureMode": true,
+    "antigravityUnifiedStateSync.browserPreferences.hasBrowserAllowlistMigrated": true,
+    "antigravityUnifiedStateSync.browserPreferences.hasAddedLocalhostToAllowlist": true,
+    "unifiedStateSync.hasWindowPreferencesMigrated": true,
+    "unifiedStateSync.hasUserStatusMigrated": true,
+    "sidebarWorkspaces.migratedFromInitState": true,
+    "scratchWorkspaces.migratedFromInitState": true,
+    "windowsState": {
+        "lastActiveWindow": {
+            "folder": "file:///home/abhishek/NamiConfig",
+            "backupPath": "/home/abhishek/.config/Antigravity/Backups/03e5757139e0cc1f9683ac1876c57cd3",
+            "uiState": {
+                "mode": 0,
+                "x": 0,
+                "y": 0,
+                "width": 955,
+                "height": 1030,
+                "zoomLevel": 1
+            }
+        },
+        "openedWindows": []
+    },
+    "antigravityUnifiedStateSync.seenNuxOneTimeMigration": true,
+    "artifactReviewState.migratedFromInitState": true,
+    "theme": "vs-dark",
+    "themeBackground": "#1d2021",
+    "windowSplash": {
+        "zoomLevel": 0,
+        "baseTheme": "vs-dark",
+        "colorInfo": {
+            "foreground": "#ebdbb2",
+            "background": "#1d2021",
+            "editorBackground": "#1d2021",
+            "titleBarBackground": "#1d2021",
+            "activityBarBackground": "#1d2021",
+            "activityBarBorder": "#3c3836",
+            "sideBarBackground": "#1d2021",
+            "sideBarBorder": "#3c3836",
+            "statusBarBackground": "#1d2021",
+            "statusBarBorder": "#3c3836",
+            "statusBarNoFolderBackground": "#1d2021"
+        },
+        "layoutInfo": {
+            "sideBarSide": "left",
+            "editorPartMinWidth": 220,
+            "titleBarHeight": 35,
+            "activityBarWidth": 42,
+            "sideBarWidth": 344,
+            "auxiliaryBarWidth": 300,
+            "statusBarHeight": 22,
+            "windowBorder": false
+        }
+    },
+    "windowSplashWorkspaceOverride": {
+        "layoutInfo": {
+            "sideBarWidth": 344,
+            "auxiliaryBarWidth": 300,
+            "workspaces": {
+                "209f45226bf6284b3aadb023f0a8680d": {
+                    "sideBarVisible": true,
+                    "auxiliaryBarVisible": true
+                },
+                "6479cec8195b17cf9317507c60ee03d0": {
+                    "sideBarVisible": true,
+                    "auxiliaryBarVisible": true
+                },
+                "6da2ed02004b4af1c0ffe3fa54215531": {
+                    "sideBarVisible": true,
+                    "auxiliaryBarVisible": true
+                },
+                "6a5c2ecfbca07836b42998cf5d990066": {
+                    "sideBarVisible": true,
+                    "auxiliaryBarVisible": true
+                },
+                "e79b6a4828cf20536a50ad56c6b17c4f": {
+                    "sideBarVisible": true,
+                    "auxiliaryBarVisible": true
+                },
+                "a0a53b771115cc007b472f2282c5d157": {
+                    "sideBarVisible": true,
+                    "auxiliaryBarVisible": true
+                }
+            }
+        }
+    }
+}

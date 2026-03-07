@@ -172,12 +172,12 @@ Make sure the following are installed:
 
 ## ✅ To-Do / Planned Features
 
-- [ ] 💡 Theme Switcher GUI (via `rofi` or `fzf`)
+- [x] 💡 Theme Switcher GUI (via `rofi`)
 - [ ] 🌄 Wall + Theme sync automation
 - [ ] 🧩 Auto-apply VSCode theme via extensions
 - [ ] 🖼 Live CLI preview (like `nvfetcher`)
-- [ ] 📦 Bootstrap script to auto-stow everything
-- [ ] 🔁 Dynamic terminal/GTK accent integration
+- [x] 📦 Bootstrap script to auto-stow everything (`setup.sh`)
+- [x] 🔁 Dynamic terminal/GTK accent integration
 - [ ] 🌐 Optional Git sync/backup integration
 
 ---

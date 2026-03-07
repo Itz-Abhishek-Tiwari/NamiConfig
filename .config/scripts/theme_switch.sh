@@ -1,49 +1,36 @@
 #!/bin/bash
 
-PYTHON_FILE="$HOME/.config/scripts/mode_toggle.py"
-THEME_LIST_FILE="$HOME/.config/NamiThemes/themes"
+# 🎨 NamiConfig Dynamic Theme Switcher
+# Populates rofi menu from ~/.config/NamiThemes/
+
+THEMES_DIR="$HOME/.config/NamiThemes"
+PYTHON_SCRIPT="$HOME/.config/scripts/mode_toggle.py"
 ROFI_THEME="$HOME/.config/rofi/launcher/test.rasi"
 
-# Exit if theme file is missing
-if [ ! -f "$THEME_LIST_FILE" ]; then
-    echo "Theme list file not found: $THEME_LIST_FILE"
+if [ ! -d "$THEMES_DIR" ]; then
+    notify-send "Error" "NamiThemes directory not found"
     exit 1
 fi
 
-echo "Theme list file found: $THEME_LIST_FILE"
+# Get list of themes (directories in NamiThemes)
+THEME_LIST=$(ls -d "$THEMES_DIR"/*/ | xargs -n 1 basename | sort)
 
-# Show theme list in rofi (style-15)
-echo "Opening rofi to select theme..."
-SELECTED_THEME=$(rofi -dmenu -i \
+if [ -z "$THEME_LIST" ]; then
+    notify-send "Error" "No themes found in $THEMES_DIR"
+    exit 1
+fi
+
+# Show theme list in rofi
+SELECTED_THEME=$(echo "$THEME_LIST" | rofi -dmenu -i \
     -theme "$ROFI_THEME" \
-    -p "Select Theme" < "$THEME_LIST_FILE")
+    -p "Select Theme Family")
 
 # Exit if nothing selected
 if [ -z "$SELECTED_THEME" ]; then
-    echo "No theme selected. Exiting."
     exit 0
 fi
 
-echo "Selected theme: $SELECTED_THEME"
-
-# Detect current theme in Python file
-CURRENT_THEME=$(grep -oP '(?<=Colloid-(Dark|Light)-)[^"]+' "$PYTHON_FILE" | head -1)
-echo "Current theme in Python file: $CURRENT_THEME"
-
-# Replace old theme in Python file (existing functionality)
-sed -i "s/$CURRENT_THEME/$SELECTED_THEME/g" "$PYTHON_FILE"
-echo "Updated Python file with new theme: $SELECTED_THEME"
-
-# Update CURRENT_THEME variable in Python file
-# This will specifically change the line CURRENT_THEME = "..." to the new theme
-sed -i "s/^CURRENT_THEME *= *.*/CURRENT_THEME = \"$SELECTED_THEME\"/" "$PYTHON_FILE"
-echo "Updated CURRENT_THEME variable in Python file: $SELECTED_THEME"
-
-# Notify
-notify-send "Theme Changed" "$SELECTED_THEME"
-echo "Notification sent for theme change."
-
-# Run the Python script after selection
-echo "Running Python theme toggle script..."
-python3 "$PYTHON_FILE"
-echo "Python script executed."
+# Apply the selected theme with the Python script
+# By default, this will set the theme but keep the current mode (or toggle if asked)
+# Here we just want to set the theme family
+python3 "$PYTHON_SCRIPT" --theme "$SELECTED_THEME" --mode toggle
