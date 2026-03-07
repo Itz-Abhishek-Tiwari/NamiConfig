@@ -49,9 +49,12 @@ def save_state(index):
 
 def load_state():
     if STATE_FILE.exists():
-        with open(STATE_FILE) as f:
-            data = json.load(f)
-            return data.get("index", 0)
+        try:
+            with open(STATE_FILE) as f:
+                data = json.load(f)
+                return data.get("index", 0)
+        except (json.JSONDecodeError, Exception):
+            pass
     return 0
 
 
@@ -67,12 +70,16 @@ def set_wallpaper(path):
             TRANSITION_DURATION,
         ]
     )
-    # Generate colors based on the new wallpaper
-    gen_script = Path.home() / ".config/scripts/generate_colors.py"
-    if gen_script.exists():
-        subprocess.run([sys.executable, str(gen_script), path])
     
-    print(f"🌄 Wallpaper set: {path}")
+    # Trigger the unified orchestrator to sync colors (if NamiPywal is active) and reload apps
+    # We don't pass --theme or --mode so it uses the current state
+    scripts_dir = Path(__file__).parent
+    mode_toggle_script = scripts_dir / "mode_toggle.py"
+    if mode_toggle_script.exists():
+        subprocess.run([sys.executable, str(mode_toggle_script)],
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    
+    print(f"🌄 Wallpaper set and system synced: {path}")
 
 
 # === Main Logic ===

@@ -4,24 +4,34 @@ import os
 import sys
 import subprocess
 import json
+import argparse
 from pathlib import Path
 
 # Paths
-CONFIG_DIR = Path.home() / ".config"
+CONFIG_DIR = Path(os.getenv("XDG_CONFIG_HOME", Path.home() / ".config"))
 CACHE_DIR = Path.home() / ".cache"
 COLORS_CONF = CONFIG_DIR / "hypr/themes/colors.conf"
 COLORS_CSS_DIR = CONFIG_DIR / "waybar/style"
 COLORS_CSS = COLORS_CSS_DIR / "colors.css"
 SWAYNC_CSS = CONFIG_DIR / "swaync/colors.css"
+ROFI_COLORS = CONFIG_DIR / "rofi/colors/namipywal.rasi"
 WAL_CACHE = CACHE_DIR / "wal/colors.json"
 
-def run_wal(image_path):
-    print(f"🎨 Running pywal for: {image_path}")
+def run_wal(image_path, mode):
+    print(f"🎨 Running pywal ({mode}) for: {image_path}")
     try:
-        # Run wal without setting terminal colors (-n) and without setting wallpaper (-s)
-        # We handle those ourselves or via swww
-        subprocess.run(["wal", "-i", str(image_path), "-n", "-q"], check=True)
+        # -l flag for light mode
+        cmd = ["wal", "-i", str(image_path), "-n", "-q"]
+        if mode == "light":
+            cmd.append("-l")
+            
+        subprocess.run(cmd, check=True, timeout=10)
         
+        if WAL_CACHE.exists():
+            with open(WAL_CACHE) as f:
+                return json.load(f)
+    except subprocess.TimeoutExpired:
+        print("⚠️ Pywal timed out, trying to use cache...")
         if WAL_CACHE.exists():
             with open(WAL_CACHE) as f:
                 return json.load(f)
@@ -46,8 +56,9 @@ group {{
     col.border_inactive = rgba(1a1b26aa)
 }}
 """
+    COLORS_CONF.parent.mkdir(parents=True, exist_ok=True)
     COLORS_CONF.write_text(content)
-    subprocess.run(["hyprctl", "reload"])
+    subprocess.run(["hyprctl", "reload"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def update_css_colors(colors):
     # Generate CSS variables from pywal colors
@@ -75,32 +86,47 @@ def update_css_colors(colors):
     for i in range(16):
         css_content += f"@define-color color{i} {c[f'color{i}']};\n"
 
-    COLORS_CSS_DIR = Path.home() / ".config/waybar/style"
-    COLORS_CSS_DIR.mkdir(parents=True, exist_ok=True)
-    COLORS_CSS = COLORS_CSS_DIR / "colors.css"
-    COLORS_CSS.write_text(css_content)
-    
-    SWAYNC_CSS.parent.mkdir(parents=True, exist_ok=True)
-    SWAYNC_CSS.write_text(css_content)
+    for path in [COLORS_CSS, SWAYNC_CSS]:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(css_content)
     
     # Reload components
     subprocess.run(["pkill", "-SIGUSR2", "waybar"])
     subprocess.run(["swaync-client", "-rs"])
 
+def update_rofi_colors(colors):
+    c = colors["colors"]
+    special = colors["special"]
+    
+    # Generate Rofi rasi content
+    rasi_content = f"""* {{
+    background:     {special['background']}CC;
+    background-alt: {special['background']};
+    foreground:     {special['foreground']};
+    selected:       {c['color1']}EE;
+    active:         {c['color2']};
+    urgent:         {c['color3']};
+}}
+"""
+    ROFI_COLORS.parent.mkdir(parents=True, exist_ok=True)
+    ROFI_COLORS.write_text(rasi_content)
+
 def main():
-    if len(sys.argv) < 2:
-        print("Usage: generate_colors.py <image_path>")
-        sys.exit(1)
+    parser = argparse.ArgumentParser(description="Pywal Color Generator")
+    parser.add_argument("image", help="Path to the wallpaper image")
+    parser.add_argument("--mode", choices=["light", "dark"], default="dark", help="Theme mode")
+    args = parser.parse_args()
         
-    image_path = Path(sys.argv[1])
+    image_path = Path(args.image)
     if not image_path.exists():
         print(f"❌ Image not found: {image_path}")
         sys.exit(1)
         
-    colors = run_wal(image_path)
+    colors = run_wal(image_path, args.mode)
     if colors:
         update_hypr_colors(colors)
         update_css_colors(colors)
+        update_rofi_colors(colors)
         print("✅ System colors updated successfully via Pywal!")
 
 if __name__ == "__main__":
