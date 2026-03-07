@@ -1,0 +1,91 @@
+{
+    "$schema": "https://zed.dev/schema/themes/v0.1.0.json",
+    "name": "Rose Pine",
+    "author": "Rosé Pine",
+    "themes": [
+        {
+            "name": "rosePine_dark",
+            "appearance": "dark",
+            "style": {
+                "background": "#191724",
+                "border": "#26233a",
+                "border.variant": "#403d52",
+                "editor.background": "#191724",
+                "editor.foreground": "#e0def4",
+                "editor.line_number": "#524f67",
+                "editor.active_line_number": "#e0def4",
+                "editor.active_line.background": "#21202e",
+                "editor.gutter.background": "#191724",
+                "terminal.background": "#191724",
+                "terminal.foreground": "#e0def4",
+                "text": "#e0def4",
+                "text.muted": "#908caa",
+                "syntax": {
+                    "keyword": {
+                        "color": "#31748f"
+                    },
+                    "function": {
+                        "color": "#ebbcba"
+                    },
+                    "string": {
+                        "color": "#f6c177"
+                    },
+                    "number": {
+                        "color": "#ebbcba"
+                    },
+                    "type": {
+                        "color": "#c4a7e7"
+                    },
+                    "comment": {
+                        "color": "#6e6a86"
+                    },
+                    "variable": {
+                        "color": "#e0def4"
+                    }
+                }
+            }
+        },
+        {
+            "name": "rosePine_light",
+            "appearance": "light",
+            "style": {
+                "background": "#faf4ed",
+                "border": "#dfdad9",
+                "border.variant": "#cecacd",
+                "editor.background": "#faf4ed",
+                "editor.foreground": "#575279",
+                "editor.line_number": "#9893a5",
+                "editor.active_line_number": "#575279",
+                "editor.active_line.background": "#f4ede8",
+                "editor.gutter.background": "#faf4ed",
+                "terminal.background": "#faf4ed",
+                "terminal.foreground": "#575279",
+                "text": "#575279",
+                "text.muted": "#797593",
+                "syntax": {
+                    "keyword": {
+                        "color": "#286983"
+                    },
+                    "function": {
+                        "color": "#d7827e"
+                    },
+                    "string": {
+                        "color": "#ea9d34"
+                    },
+                    "number": {
+                        "color": "#d7827e"
+                    },
+                    "type": {
+                        "color": "#907aa9"
+                    },
+                    "comment": {
+                        "color": "#9893a5"
+                    },
+                    "variable": {
+                        "color": "#575279"
+                    }
+                }
+            }
+        }
+    ]
+}

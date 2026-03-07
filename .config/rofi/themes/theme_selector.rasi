@@ -59,7 +59,7 @@ entry {
     background-color:            transparent;
     text-color:                  @foreground;
     cursor:                      text;
-    placeholder:                 "󰍉  Select Theme Family...";
+    placeholder:                 "Select Theme Family...";
     placeholder-color:           inherit;
     horizontal-align:            0.0;
 }

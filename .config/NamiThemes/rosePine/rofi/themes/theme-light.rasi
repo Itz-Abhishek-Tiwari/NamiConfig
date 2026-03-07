@@ -1,0 +1,9 @@
+// Rose Pine Dawn
+* {
+    background:     #faf4ed;  
+    background-alt: #fffaf3; 
+    foreground:     #575279; 
+    selected:       #ea9d34; 
+    active:         #286983;  
+    urgent:         #b4637a;    
+}

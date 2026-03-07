@@ -1,0 +1,9 @@
+// Rose Pine Dark
+* {
+    background:     #191724;  
+    background-alt: #1f1d2e; 
+    foreground:     #e0def4; 
+    selected:       #f6c177; 
+    active:         #31748f;  
+    urgent:         #eb6f92;    
+}

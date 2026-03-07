@@ -55,9 +55,7 @@
     ]
   },
   "custom/cpu": {
-    "exec": "echo '󰍛'",
-    "interval": 15,
-    "return-type": "text",
+    "format": "󰍛",
     "tooltip": true,
     "tooltip-format": "CPU Usage"
   },
@@ -275,6 +273,6 @@
     "format": "",
     "tooltip": true,
     "tooltip-format": "Toggle Light/Dark Theme",
-    "on-click": "/home/abhishek/.config/scripts/mode_toggle.py && kill -SIGUSR1 $(pgrep kitty)"
+    "on-click": "~/.config/scripts/mode_toggle.py && kill -SIGUSR1 $(pgrep kitty)"
   }
 }

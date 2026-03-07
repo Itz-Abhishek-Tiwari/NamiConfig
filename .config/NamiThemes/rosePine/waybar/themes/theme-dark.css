@@ -1,0 +1,201 @@
+* {
+    font-family: "CaskaydiaMono Nerd Font Propo";
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    margin: 0;
+    padding: 0;
+    min-height: 0;
+}
+
+window#waybar,
+window#waybar>box {
+    background: rgb(25, 23, 36);
+    /* Rose Pine dark background */
+    padding: 5px 6px;
+}
+
+tooltip {
+    background: rgb(25, 23, 36);
+}
+
+tooltip label {
+    color: #e0def4;
+    /* Rose Pine foreground */
+    margin: 0 2px;
+}
+
+menu {
+    border-radius: 0px;
+    background: #1f1d2e;
+    /* Rose Pine surface */
+    padding: 4px 4px;
+    box-shadow: none;
+}
+
+menuitem {
+    padding: 8px 8px;
+    margin: 2px 5px;
+}
+
+menuitem:hover {
+    background-color: #f6c177;
+    /* Rose Pine gold */
+    color: #191724;
+    /* dark background for contrast */
+}
+
+#workspaces,
+#custom-theme-toggle,
+#pulseaudio,
+#backlight,
+#battery,
+#custom-wifi,
+#bluetooth,
+#custom-power,
+#idle_inhibitor,
+#clock,
+#mpris,
+#tray,
+#custom-notification,
+#custom-group-right-logo,
+#custom-cpu,
+#custom-memory,
+#temperature {
+    color: #e0def4;
+    /* Default text */
+    background: transparent;
+    padding: 2px 9px;
+    margin: 0 2px;
+}
+
+/* Workspaces */
+#workspaces {
+    color: #e0def4;
+    /* Light Rose Pine fg */
+}
+
+#workspaces button {
+    color: #31748f;
+    /* pine */
+    padding: 2px 4px;
+    margin: 0 3px;
+    border-radius: 2px;
+}
+
+#workspaces button.active {
+    background: #f6c177;
+    /* gold */
+    color: #191724;
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
+#workspaces button.active:hover {
+    background: #ea9d34;
+    /* darker gold */
+    color: #191724;
+}
+
+#workspaces button:hover {
+    color: #eb6f92;
+    /* love/red */
+}
+
+/* Hover effects */
+#custom-power:hover,
+#pulseaudio:hover,
+#bluetooth:hover,
+#custom-wifi:hover,
+#clock:hover,
+#mpris:hover,
+#custom-cpu:hover,
+#custom-memory:hover,
+#temperature:hover {
+    color: #f6c177;
+    /* gold */
+}
+
+/* Individual Module Colors */
+#custom-power {
+    color: #eb6f92;
+    /* love/red */
+}
+
+#pulseaudio {
+    color: #9ccfd8;
+    /* foam */
+}
+
+#battery {
+    color: #31748f;
+    /* pine */
+}
+
+#battery.warning {
+    color: #f6c177;
+    /* gold */
+}
+
+#battery.critical {
+    color: #eb6f92;
+    /* love/red */
+}
+
+#battery.charging {
+    color: #ebbcba;
+    /* rose */
+}
+
+#custom-wifi {
+    color: #9ccfd8;
+    /* foam */
+}
+
+#bluetooth {
+    color: #c4a7e7;
+    /* iris */
+}
+
+#mpris {
+    color: #ebbcba;
+    /* rose */
+}
+
+#idle_inhibitor {
+    color: #31748f;
+    /* pine */
+}
+
+#clock {
+    color: #f6c177;
+    /* gold */
+}
+
+#custom-theme-toggle {
+    color: #f6c177;
+    /* gold */
+    background: transparent;
+}
+
+#custom-group-right-logo {
+    color: #ebbcba;
+    /* rose */
+    padding-right: 20px;
+}
+
+/* New system stats modules */
+#custom-cpu {
+    color: #c4a7e7;
+    /* iris */
+}
+
+#custom-memory {
+    color: #ebbcba;
+    /* rose */
+}
+
+#temperature {
+    color: #eb6f92;
+    /* love/red */
+}
