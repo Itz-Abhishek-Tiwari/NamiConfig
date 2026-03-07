@@ -1,3 +1,5 @@
+@import "./style/colors.css";
+
 /* Global styles */
 * {
     font-family: "CaskaydiaMono Nerd Font Propo";
@@ -11,25 +13,29 @@
 
 /* Window and Waybar */
 window#waybar,
-window#waybar > box {
-    background: #011627; /* Night Owl dark background */
+window#waybar>box {
+    background: #011627;
+    /* Night Owl dark background */
     padding: 5px 6px;
 }
 
 /* Tooltip */
 tooltip {
-    background: rgba(2, 23, 42, 0.9); /* Night Owl transparent dark */
+    background: rgba(2, 23, 42, 0.9);
+    /* Night Owl transparent dark */
 }
 
 tooltip label {
-    color: #d6deeb; /* Night Owl foreground */
+    color: #d6deeb;
+    /* Night Owl foreground */
     margin: 0 2px;
 }
 
 /* Menu */
 menu {
     border-radius: 0;
-    background: #011627; /* Night Owl dark */
+    background: #011627;
+    /* Night Owl dark */
     padding: 4px 4px;
     box-shadow: none;
 }
@@ -40,8 +46,10 @@ menuitem {
 }
 
 menuitem:hover {
-    background-color: #ff5874; /* Night Owl red accent */
-    color: #011627; /* contrast */
+    background-color: #ff5874;
+    /* Night Owl red accent */
+    color: #011627;
+    /* contrast */
 }
 
 /* Modules base style */
@@ -62,7 +70,8 @@ menuitem:hover {
 #custom-cpu,
 #custom-memory,
 #temperature {
-    color: #d6deeb; /* Night Owl foreground */
+    color: #d6deeb;
+    /* Night Owl foreground */
     background: transparent;
     padding: 2px 9px;
     margin: 0 2px;
@@ -70,7 +79,8 @@ menuitem:hover {
 
 /* Workspaces */
 #workspaces {
-    color: #82aaff; /* Night Owl blue */
+    color: #82aaff;
+    /* Night Owl blue */
 }
 
 #workspaces button {
@@ -81,19 +91,22 @@ menuitem:hover {
 }
 
 #workspaces button.active {
-    background: #c792ea; /* Night Owl purple */
-    color: #011627; /* contrast */
+    background: @primary;
+    color: #011627;
+    /* contrast */
     font-weight: bolder;
     text-decoration: underline;
 }
 
 #workspaces button.active:hover {
-    background: #21c7a8; /* Night Owl green */
+    background: #21c7a8;
+    /* Night Owl green */
     color: #011627;
 }
 
 #workspaces button:hover {
-    color: #ffcb6b; /* Night Owl yellow */
+    color: #ffcb6b;
+    /* Night Owl yellow */
 }
 
 /* Hover effects for all modules */
@@ -106,74 +119,94 @@ menuitem:hover {
 #custom-cpu:hover,
 #custom-memory:hover,
 #temperature:hover {
-    color: #f78c6c; /* Night Owl orange */
+    color: #f78c6c;
+    /* Night Owl orange */
 }
 
 /* Individual module colors */
 #custom-power {
-    color: #ff5874; /* red */
+    color: #ff5874;
+    /* red */
+}
+
+#custom-sync {
+    color: @accent;
 }
 
 #pulseaudio {
-    color: #82aaff; /* blue */
+    color: #82aaff;
+    /* blue */
 }
 
 #battery {
-    color: #21c7a8; /* green */
+    color: #21c7a8;
+    /* green */
 }
 
 #battery.warning {
-    color: #ffcb6b; /* yellow */
+    color: #ffcb6b;
+    /* yellow */
 }
 
 #battery.critical {
-    color: #ff5874; /* red */
+    color: #ff5874;
+    /* red */
 }
 
 #battery.charging {
-    color: #c792ea; /* purple */
+    color: #c792ea;
+    /* purple */
 }
 
 #custom-wifi {
-    color: #82aaff; /* blue */
+    color: #82aaff;
+    /* blue */
 }
 
 #bluetooth {
-    color: #c792ea; /* purple */
+    color: #c792ea;
+    /* purple */
 }
 
 #mpris {
-    color: #21c7a8; /* green */
+    color: #21c7a8;
+    /* green */
 }
 
 #idle_inhibitor {
-    color: #82aaff; /* blue */
+    color: #82aaff;
+    /* blue */
 }
 
 #clock {
-    color: #ffcb6b; /* yellow */
+    color: #ffcb6b;
+    /* yellow */
 }
 
 #custom-theme-toggle {
-    color: #ffcb6b; /* yellow */
+    color: #ffcb6b;
+    /* yellow */
     background: transparent;
 }
 
 #custom-group-right-logo {
-    color: #21c7a8; /* green */
+    color: #21c7a8;
+    /* green */
     padding-right: 20px;
 }
 
 /* System stats modules */
 #custom-cpu {
-    color: #c792ea; /* purple */
+    color: #c792ea;
+    /* purple */
 }
 
 #custom-memory {
-    color: #21c7a8; /* green */
+    color: #21c7a8;
+    /* green */
 }
 
 #temperature {
-    color: #ff5874; /* red */
+    color: #ff5874;
+    /* red */
 }
-

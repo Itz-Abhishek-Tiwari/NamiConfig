@@ -36,6 +36,7 @@
       // "custom/wifi",
       // "bluetooth",
       "custom/notification",
+      "custom/sync",
       "custom/theme-toggle",
       "custom/power"
     ]
@@ -274,5 +275,11 @@
     "tooltip": true,
     "tooltip-format": "Toggle Light/Dark Theme",
     "on-click": "~/.config/scripts/mode_toggle.py && kill -SIGUSR1 $(pgrep kitty)"
+  },
+  "custom/sync": {
+    "format": "󰓠",
+    "tooltip": true,
+    "tooltip-format": "Sync Dotfiles to GitHub",
+    "on-click": "~/.config/scripts/nami_sync.sh"
   }
 }

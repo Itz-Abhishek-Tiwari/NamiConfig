@@ -67,6 +67,11 @@ def set_wallpaper(path):
             TRANSITION_DURATION,
         ]
     )
+    # Generate colors based on the new wallpaper
+    gen_script = Path.home() / ".config/scripts/generate_colors.py"
+    if gen_script.exists():
+        subprocess.run([sys.executable, str(gen_script), path])
+    
     print(f"🌄 Wallpaper set: {path}")
 
 
