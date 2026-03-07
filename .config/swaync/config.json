@@ -6,7 +6,7 @@
   "layer": "overlay",
   "control-center-layer": "top",
   "layer-shell": true,
-  "control-center-width": 400,
+  "control-center-width": 420,
   "control-center-height": 850,
   "control-center-margin-top": 10,
   "control-center-margin-bottom": 10,
