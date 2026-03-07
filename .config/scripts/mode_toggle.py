@@ -122,12 +122,12 @@ def switch_apps(theme_family, mode):
         symlink_theme(app, path, theme_family, mode)
     
     # Reload/Signalling
-    subprocess.run("pkill -SIGUSR1 kitty", shell=True)
+    subprocess.run(["pkill", "-SIGUSR1", "kitty"])
     subprocess.run(["pkill", "waybar"])
     subprocess.Popen(["waybar"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     subprocess.run(["pkill", "-SIGUSR2", "mako"])
-    subprocess.run(["pkill", "-SIGUSR2", "swaync"])
-    subprocess.run("pkill -SIGUSR1 ghostty", shell=True)
+    subprocess.run(["swaync-client", "-rs"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.run(["pkill", "-SIGUSR1", "ghostty"])
 
 def switch_editors(theme_family, mode):
     # VSCode

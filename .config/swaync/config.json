@@ -3,7 +3,6 @@
   "positionX": "right",
   "positionY": "top",
   "cssPriority": "user",
-  "position": "center",
   "layer": "overlay",
   "control-center-layer": "top",
   "layer-shell": true,
@@ -47,7 +46,6 @@
   ],
   "widget-config": {
     "mpris": {
-      "image-radius": 0,
       "autohide": true,
       "blacklist": [
         "playerctld"
@@ -100,7 +98,7 @@
           "type": "toggle",
           "active": false,
           "command": "sh -c '/home/abhishek/.config/scripts/mode_toggle.py && kill -SIGUSR1 $(pgrep kitty)'",
-          "update-command": "sh -c 'pactl get-sink-mute @DEFAULT_SINK@ | grep -q yes && echo true || echo false'"
+          "update-command": "sh -c 'grep -q \"light\" /home/abhishek/.theme_state.json && echo true || echo false'"
         }
       ]
     }

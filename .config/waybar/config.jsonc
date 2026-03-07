@@ -56,14 +56,14 @@
   },
   "custom/cpu": {
     "exec": "echo '󰍛'",
-    "interval": 5,
+    "interval": 15,
     "return-type": "text",
     "tooltip": true,
     "tooltip-format": "CPU Usage"
   },
   "custom/memory": {
     "exec": "free -h | awk '/^Mem/ {print \" Mem: \"$3\"/\"$2}'",
-    "interval": 5,
+    "interval": 15,
     "return-type": "text",
     "tooltip": false
   },
@@ -173,9 +173,9 @@
       "headset": "󰋋"
     },
     "tooltip-format": "Audio Device: {desc}",
-    "on-click": "~/.config/hypr/scripts/volumecontrol.sh -o m",
-    "on-scroll-up": "~/.config/hypr/scripts/volumecontrol.sh -o i",
-    "on-scroll-down": "~/.config/hypr/scripts/volumecontrol.sh -o d"
+    "on-click": "~/.config/scripts/volumecontrol.sh -o m",
+    "on-scroll-up": "~/.config/scripts/volumecontrol.sh -o i",
+    "on-scroll-down": "~/.config/scripts/volumecontrol.sh -o d"
   },
   "backlight": {
     "format": "{icon}",
@@ -192,8 +192,8 @@
     ],
     "tooltip": true,
     "tooltip-format": "Brightness: {}%",
-    "on-scroll-up": "~/.config/hypr/scripts/brightnesscontrol.sh -o i",
-    "on-scroll-down": "~/.config/hypr/scripts/brightnesscontrol.sh -o d"
+    "on-scroll-up": "~/.config/scripts/brightnesscontrol.sh -o i",
+    "on-scroll-down": "~/.config/scripts/brightnesscontrol.sh -o d"
   },
   "battery": {
     "states": {
@@ -216,7 +216,7 @@
     "format-charging": "",
     "tooltip-format": "Battery: {capacity}%",
     //    "tooltip-format-charging": "Charging: {time}",
-    "interval": 1
+    "interval": 5
   },
   "tray": {
     "spacing": 10,

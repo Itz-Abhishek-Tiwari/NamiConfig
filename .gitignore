@@ -1,0 +1,32 @@
+# IDE and Editors
+.config/Antigravity/
+.config/Code/
+.config/Code - OSS/
+.vscode/
+
+# Logs and State
+.config/hypr/hyprland.log
+.config/.hypr_rule_state
+.config/.theme_state.json
+.config/session/
+**/*.log
+
+# Telemetry and Caches
+.config/go/
+.config/dconf/
+.config/pulse/
+.cache/
+
+# Apps (Browsers, Connect apps etc)
+.config/BraveSoftware/
+.config/kdeconnect/
+.config/glow/
+
+# Unwanted GUI state
+.config/gtk-3.0/
+.config/gtk-4.0/
+
+# Misc
+.DS_Store
+**/*~
+**/*.swp

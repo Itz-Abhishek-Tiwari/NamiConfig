@@ -5,30 +5,39 @@
 
 THEMES_DIR="$HOME/.config/NamiThemes"
 PYTHON_SCRIPT="$HOME/.config/scripts/mode_toggle.py"
-ROFI_THEME="$HOME/.config/rofi/launcher/test.rasi"
+ROFI_THEME="$HOME/.config/rofi/themes/theme_selector.rasi"
 
 if [ ! -d "$THEMES_DIR" ]; then
     notify-send "Error" "NamiThemes directory not found"
     exit 1
 fi
 
-# Get list of themes (directories in NamiThemes)
-THEME_LIST=$(ls -d "$THEMES_DIR"/*/ | xargs -n 1 basename | sort)
+# Professional Nerd Font Icon Mapping
+get_icon() {
+    case "$1" in
+        catppuccin)  echo "󰄛" ;;
+        gruvBox)     echo "󰼭" ;;
+        nightFox)     echo "󰇧" ;;
+        monoChrome)   echo "󰈊" ;;
+        *)            echo "󰏘" ;;
+    esac
+}
 
-if [ -z "$THEME_LIST" ]; then
-    notify-send "Error" "No themes found in $THEMES_DIR"
-    exit 1
-fi
-
-# Show theme list in rofi
-SELECTED_THEME=$(echo "$THEME_LIST" | rofi -dmenu -i \
+# Show theme list in rofi and get selection
+SELECTED_WITH_ICON=$(while read -r theme; do
+    icon=$(get_icon "$theme")
+    printf "%s %s\n" "$icon" "$theme"
+done < <(ls -d "$THEMES_DIR"/*/ | xargs -n 1 basename | sort) | rofi -dmenu -i \
     -theme "$ROFI_THEME" \
     -p "Select Theme Family")
 
 # Exit if nothing selected
-if [ -z "$SELECTED_THEME" ]; then
+if [ -z "$SELECTED_WITH_ICON" ]; then
     exit 0
 fi
+
+# Strip the icon prefix reliably
+SELECTED_THEME=$(echo "$SELECTED_WITH_ICON" | awk '{print $NF}')
 
 # Apply the selected theme with the Python script
 # By default, this will set the theme but keep the current mode (or toggle if asked)

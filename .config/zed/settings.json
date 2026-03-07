@@ -9,7 +9,7 @@
   "icon_theme": "Material Icon Theme",
   "theme": {
     "mode": "dark",
-    "dark": "catppuccin_dark",
-    "light": "catppuccin_light"
+    "dark": "gruvbox_dark",
+    "light": "gruvbox_light"
   }
 }

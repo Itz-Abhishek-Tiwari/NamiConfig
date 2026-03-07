@@ -7,13 +7,6 @@ ZSH_THEME="agnoster"
 
 plugins=(
   git
-  node
-  npm
-  yarn
-  python
-  pip
-  docker
-  vscode
   sudo
   zsh-autosuggestions
   zsh-syntax-highlighting
@@ -250,11 +243,14 @@ gitwho() {
 }
 
 
-### =========================
-### --- Zsh Completion Fix ---
-### =========================
+# Zsh Completion Fix (Optimized/Cached)
 export XDG_CURRENT_DESKTOP=Hyprland
 export DESKTOP_SESSION=hyprland
 unset KDE_FULL_SESSION
+
 autoload -Uz compinit
-compinit
+if [[ -f "${ZDOTDIR:-$HOME}/.zcompdump" ]]; then
+  compinit -C
+else
+  compinit
+fi
