@@ -8,7 +8,7 @@
   },
   "icon_theme": "Material Icon Theme",
   "theme": {
-    "mode": "light",
+    "mode": "dark",
     "dark": "namipywal_dark",
     "light": "namipywal_light"
   }

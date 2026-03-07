@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Define variables
+nami_core="python3 $HOME/NamiConfig/.config/scripts/nami_core.py"
+
 # Print error message for invalid arguments
 print_error() {
     cat <<"EOF"
@@ -13,22 +16,17 @@ EOF
 # Send a notification with brightness info
 send_notification() {
     brightness=$(brightnessctl info | grep -oP "(?<=\()\d+(?=%)")
-  notify-send -h string:x-canonical-private-synchronous:sys-brightness \
-            -h int:value:"$brightness" \
-            -u low \
-            -a "state" \
-            -i "gpm-brightness-lcd" \
-            "Brightness: ${brightness}%"
-
+    $nami_core notify "Brightness: ${brightness}%" --title "System" --icon "display-brightness" --progress "$brightness" --sync-id "sys-brightness"
 }
 
 # Get the current brightness percentage and device name
 get_brightness() {
     brightness=$(brightnessctl -m | grep -o '[0-9]\+%' | head -c-2)
-    device=$(brightnessctl -m | head -n 1 | awk -F',' '{print $1}' | sed 's/_/ /g; s/\<./\U&/g') # Get device name
-    current_brightness=$(brightnessctl -m | head -n 1 | awk -F',' '{print $3}')                  # Get current brightness
-    max_brightness=$(brightnessctl -m | head -n 1 | awk -F',' '{print $5}')                      # Get max brightness
+    device=$(brightnessctl -m | head -n 1 | awk -F',' '{print $1}' | sed 's/_/ /g; s/\<./\U&/g')
+    current_brightness=$(brightnessctl -m | head -n 1 | awk -F',' '{print $3}')
+    max_brightness=$(brightnessctl -m | head -n 1 | awk -F',' '{print $5}')
 }
+
 get_brightness
 
 # Handle options
@@ -65,34 +63,15 @@ while getopts o: opt; do
     esac
 done
 
-# Determine the icon based on brightness level
+# Backlight module for Waybar (preserving the JSON output format)
 get_icon() {
-    if ((brightness <= 5)); then
-        icon=""
-    elif ((brightness <= 15)); then
-        icon=""
-    elif ((brightness <= 30)); then
-        icon=""
-    elif ((brightness <= 45)); then
-        icon=""
-    elif ((brightness <= 55)); then
-        icon=""
-    elif ((brightness <= 65)); then
-        icon=""
-    elif ((brightness <= 80)); then
-        icon=""
-    elif ((brightness <= 95)); then
-        icon=""
-    else
-        icon=""
-    fi
+    if ((brightness <= 5)); then icon=""; elif ((brightness <= 15)); then icon=""; elif ((brightness <= 30)); then icon=""
+    elif ((brightness <= 45)); then icon=""; elif ((brightness <= 55)); then icon=""; elif ((brightness <= 65)); then icon=""
+    elif ((brightness <= 80)); then icon=""; elif ((brightness <= 95)); then icon=""; else icon=""; fi
 }
 
-# Backlight module and tooltip
 get_icon
 module="${icon} ${brightness}%"
-
-tooltip="Device Name: ${device}"
-tooltip+="\nBrightness:  ${current_brightness} / ${max_brightness}"
+tooltip="Device: ${device}\nBrightness: ${current_brightness} / ${max_brightness}"
 
 echo "{\"text\": \"${module}\", \"tooltip\": \"${tooltip}\"}"

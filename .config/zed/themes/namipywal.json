@@ -7,34 +7,34 @@
             "name": "namipywal_dark",
             "appearance": "dark",
             "style": {
-                "background": "#f9e7ee",
-                "editor.background": "#f9e7ee",
-                "editor.foreground": "#20135D",
-                "editor.line_number": "#843a55",
-                "editor.active_line_number": "#20135D",
-                "terminal.background": "#f9e7ee",
-                "terminal.foreground": "#20135D",
+                "background": "#0a0812",
+                "editor.background": "#0a0812",
+                "editor.foreground": "#e5cbbb",
+                "editor.line_number": "#a08e82",
+                "editor.active_line_number": "#e5cbbb",
+                "terminal.background": "#0a0812",
+                "terminal.foreground": "#e5cbbb",
                 "syntax": {
                     "keyword": {
-                        "color": "#F78E61"
+                        "color": "#82645A"
                     },
                     "function": {
-                        "color": "#3B1488"
+                        "color": "#916F61"
                     },
                     "string": {
-                        "color": "#5E1A92"
+                        "color": "#A57E6C"
                     },
                     "number": {
-                        "color": "#6F1EA1"
+                        "color": "#BC9077"
                     },
                     "type": {
-                        "color": "#901D85"
+                        "color": "#CE9E81"
                     },
                     "comment": {
-                        "color": "#843a55"
+                        "color": "#a08e82"
                     },
                     "variable": {
-                        "color": "#20135D"
+                        "color": "#e5cbbb"
                     }
                 }
             }
@@ -43,34 +43,34 @@
             "name": "namipywal_light",
             "appearance": "light",
             "style": {
-                "background": "#f9e7ee",
-                "editor.background": "#f9e7ee",
-                "editor.foreground": "#20135D",
-                "editor.line_number": "#843a55",
-                "editor.active_line_number": "#20135D",
-                "terminal.background": "#f9e7ee",
-                "terminal.foreground": "#20135D",
+                "background": "#0a0812",
+                "editor.background": "#0a0812",
+                "editor.foreground": "#e5cbbb",
+                "editor.line_number": "#a08e82",
+                "editor.active_line_number": "#e5cbbb",
+                "terminal.background": "#0a0812",
+                "terminal.foreground": "#e5cbbb",
                 "syntax": {
                     "keyword": {
-                        "color": "#F78E61"
+                        "color": "#82645A"
                     },
                     "function": {
-                        "color": "#3B1488"
+                        "color": "#916F61"
                     },
                     "string": {
-                        "color": "#5E1A92"
+                        "color": "#A57E6C"
                     },
                     "number": {
-                        "color": "#6F1EA1"
+                        "color": "#BC9077"
                     },
                     "type": {
-                        "color": "#901D85"
+                        "color": "#CE9E81"
                     },
                     "comment": {
-                        "color": "#843a55"
+                        "color": "#a08e82"
                     },
                     "variable": {
-                        "color": "#20135D"
+                        "color": "#e5cbbb"
                     }
                 }
             }

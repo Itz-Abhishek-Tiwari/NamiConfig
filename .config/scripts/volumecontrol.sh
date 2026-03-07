@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Define variables
+nami_core="python3 $HOME/NamiConfig/.config/scripts/nami_core.py"
+
 # Define functions
 print_error() {
   cat <<"EOF"
@@ -16,48 +19,39 @@ EOF
   exit 1
 }
 
-icon() {
-  vol=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | sed 's/%//')
-  mute=$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')
+get_volume() {
+  pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | sed 's/%//'
+}
 
-  if [ "$mute" = "yes" ] || [ "$vol" -eq 0 ]; then
-    icon="volume-level-muted"
-  elif [ "$vol" -lt 33 ]; then
-    icon="volume-level-low"
-  elif [ "$vol" -lt 66 ]; then
-    icon="volume-level-medium"
-  else
-    icon="volume-level-high"
-  fi
+get_mute() {
+  pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}'
 }
 
 send_notification() {
-  icon
-  notify-send -h string:x-canonical-private-synchronous:sys-volume \
-              -h int:value:"$vol" \
-              -u low \
-              -a "state" \
-              -i "$icon" \
-              "Volume: ${vol}%"
-}
-
-notify_mute() {
-  mute=$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')
-  if [ "$mute" = "yes" ]; then
-    notify-send -h string:x-canonical-private-synchronous:sys-volume \
-                -u low \
-                -a "state" \
-                -i "volume-level-muted" \
-                "Volume: Muted"
+  vol=$(get_volume)
+  mute=$(get_mute)
+  
+  if [ "$mute" = "yes" ] || [ "$vol" -eq 0 ]; then
+    icon="volume-level-muted"
+    msg="Volume: Muted"
+  elif [ "$vol" -lt 33 ]; then
+    icon="volume-level-low"
+    msg="Volume: ${vol}%"
+  elif [ "$vol" -lt 66 ]; then
+    icon="volume-level-medium"
+    msg="Volume: ${vol}%"
   else
-    send_notification
+    icon="volume-level-high"
+    msg="Volume: ${vol}%"
   fi
+
+  $nami_core notify "$msg" --title "System" --icon "$icon" --progress "$vol" --sync-id "sys-volume"
 }
 
 action_volume() {
   case "${1}" in
   i)
-    current_vol=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | sed 's/%//')
+    current_vol=$(get_volume)
     if [ "$current_vol" -lt 100 ]; then
       new_vol=$((current_vol + 2))
       [ "$new_vol" -gt 100 ] && new_vol=100
@@ -65,7 +59,7 @@ action_volume() {
     fi
     ;;
   d)
-    current_vol=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | sed 's/%//')
+    current_vol=$(get_volume)
     new_vol=$((current_vol - 2))
     [ "$new_vol" -lt 0 ] && new_vol=0
     pactl set-sink-volume @DEFAULT_SINK@ "${new_vol}%"
@@ -78,9 +72,9 @@ select_output() {
     desc="$*"
     device=$(pactl list sinks | grep -C2 -F "Description: $desc" | grep Name | cut -d: -f2 | xargs)
     if pactl set-default-sink "$device"; then
-      notify-send -h string:x-canonical-private-synchronous:sys-volume "Activated: $desc"
+      $nami_core notify "Activated: $desc" --title "Audio Output" --sync-id "sys-volume"
     else
-      notify-send -h string:x-canonical-private-synchronous:sys-volume "Error activating $desc"
+      $nami_core notify "Error activating $desc" --title "Audio Output" --sync-id "sys-volume"
     fi
   else
     pactl list sinks | grep -ie "Description:" | awk -F ': ' '{print $2}' | sort
@@ -120,7 +114,7 @@ shift $((OPTIND - 1))
 case "${1}" in
 i) action_volume i ;;
 d) action_volume d ;;
-m) pactl set-sink-mute @DEFAULT_SINK@ toggle && notify_mute && exit 0 ;;
+m) pactl set-sink-mute @DEFAULT_SINK@ toggle ;;
 *) print_error ;;
 esac
 

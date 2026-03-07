@@ -6,7 +6,8 @@ save_dir="${XDG_PICTURES_DIR}/Screenshots"
 swpy_dir="$HOME/.config/swappy"
 save_file="$(date +'%y%m%d_%Hh%Mm%Ss_screenshot.png')"
 temp_screenshot="/tmp/screenshot.png"
-sound_file="/usr/share/sounds/freedesktop/stereo/camera-shutter.oga"
+nami_core="python3 $(dirname "$0")/nami_core.py"
+log_file="/tmp/nami_screenshot.log"
 
 # --- DEFAULTS ---
 timer=0
@@ -14,35 +15,42 @@ copy_only=false
 save_only=false
 freeze=false
 
+# --- LOGGING ---
+log() {
+    echo "[$(date +'%Y-%m-%d %H:%M:%S')] $1" >> "$log_file"
+}
+
+log "Starting screenshot script with action: $1"
+log "Save Dir: $save_dir"
+log "NamiCore: $nami_core"
+
 # --- FUNCTIONS ---
 restore_shader() {
-	if [ -n "$shader" ]; then
-		hyprshade on "$shader"
-	fi
+    if [ -n "$shader" ]; then
+        hyprshade on "$shader"
+    fi
 }
 
 save_shader() {
-	if command -v hyprshade >/dev/null; then
-		shader=$(hyprshade current)
-		hyprshade off
-		trap restore_shader EXIT
-	fi
+    if command -v hyprshade >/dev/null; then
+        shader=$(hyprshade current)
+        hyprshade off
+        trap restore_shader EXIT
+    fi
 }
 
 play_sound() {
-	if [ -f "$sound_file" ]; then
-		if command -v pw-play >/dev/null; then
-			pw-play "$sound_file" &
-		elif command -v paplay >/dev/null; then
-			paplay "$sound_file" &
-		elif command -v canberra-gtk-play >/dev/null; then
-			canberra-gtk-play -f "$sound_file" &
-		fi
-	fi
+    log "Playing Sound"
+    $nami_core play camera-shutter
+}
+
+notify_capture() {
+    log "Sending Notification: $1"
+    $nami_core notify "$1" --title "Screenshots" --icon "$2"
 }
 
 print_error() {
-	cat <<EOF
+    cat <<EOF
 Usage: ./screenshot.sh [options] <action>
 
 Options:
@@ -61,13 +69,13 @@ EOF
 
 # --- PARSE OPTIONS ---
 while getopts "d:csf" opt; do
-	case $opt in
-		d) timer=$OPTARG ;;
-		c) copy_only=true ;;
-		s) save_only=true ;;
-		f) freeze=true ;;
-		*) print_error && exit 1 ;;
-	esac
+    case $opt in
+        d) timer=$OPTARG ;;
+        c) copy_only=true ;;
+        s) save_only=true ;;
+        f) freeze=true ;;
+        *) print_error && exit 1 ;;
+    esac
 done
 shift $((OPTIND-1))
 
@@ -77,9 +85,11 @@ if [ -z "$action" ]; then
     print_error && exit 1
 fi
 
+log "Action resolved: $action"
+
 # --- MAIN LOGIC ---
 if [ "$timer" -gt 0 ]; then
-    notify-send -a "Screenshots" "Timer started" "Capturing in $timer seconds..." -t 2000
+    notify_capture "Capturing in $timer seconds..." "timer"
     sleep "$timer"
 fi
 
@@ -92,48 +102,64 @@ save_dir=$save_dir
 save_filename_format=$save_file" > "$swpy_dir/config"
 
 case "$action" in
-	p)  target="screen" ;;
-	s)  target="area" ;;
-	m)  target="output" ;;
-	w)  target="active" ;;
-	*)  print_error && exit 1 ;;
+    p)  target="screen" ;;
+    s)  target="area" ;;
+    m)  target="output" ;;
+    w)  target="active" ;;
+    *)  print_error && exit 1 ;;
 esac
 
 [ "$freeze" = true ] && [ "$action" = "s" ] && target="area --freeze"
 
+log "Target: $target"
+
 # Handle Copy-Only mode
 if [ "$copy_only" = true ]; then
+    log "Copy-only mode"
     if grimblast copy $target; then
         play_sound
-        notify-send -a "Screenshots" "Copied to clipboard" "Area: $action"
+        notify_capture "Copied to clipboard" "edit-paste"
     fi
     exit 0
 fi
 
 # Capture and handle save/edit
+log "Capturing to $temp_screenshot"
 if grimblast copysave $target "$temp_screenshot"; then
+    log "Capture successful"
     play_sound
     
     if [ "$save_only" = true ]; then
+        log "Save-only mode"
         mv "$temp_screenshot" "$save_dir/$save_file"
         final_path="$save_dir/$save_file"
     else
+        log "Launching swappy"
         swappy -f "$temp_screenshot"
         final_path="$save_dir/$save_file"
     fi
     
+    log "Final path check: $final_path"
     if [ -f "$final_path" ]; then
-        notify-send -a "Screenshots" -i "$final_path" "Screenshot Saved" "Path: $save_dir" \
-            --action="open=Open Folder" --action="view=View Image" | while read -r response; do
-            case "$response" in
-                "open") xdg-open "$save_dir" ;;
-                "view") xdg-open "$final_path" ;;
-            esac
-        done
+        log "Final file found. Sending notification."
+        response=$($nami_core notify "Screenshot Saved: $save_file" \
+            --title "Screenshots" \
+            --icon "$final_path" \
+            --action "open:Open Folder" \
+            --action "view:View Image")
+        log "Notification response: $response"
+        
+        case "$response" in
+            "open") xdg-open "$save_dir" ;;
+            "view") xdg-open "$final_path" ;;
+        esac
     else
+        log "Final file NOT found!"
         rm -f "$temp_screenshot"
     fi
+else
+    log "Capture FAILED!"
 fi
 
 rm -f "$temp_screenshot"
-
+log "Script finished"
