@@ -1,65 +1,50 @@
 #!/usr/bin/env python3
 
-import subprocess
 from pathlib import Path
+import nami_core as core
 
 # === Paths ===
-conf_file = Path.home() / ".config/hypr/windowrules.conf"
-state_file = Path.home() / ".config/.hypr_rule_state"
+CONF_FILE = core.CONFIG_DIR / "hypr/windowrules.conf"
+STATE_FILE = core.CONFIG_DIR / ".hypr_rule_state"
 
 # New syntax rule
-rule_line = "windowrule = opacity 1.0 override 1.0 override, match:class .*"
+RULE_LINE = "windowrule = opacity 1.0 override 1.0 override, match:class .*"
 
-wall_dir = Path.home() / ".config/hypr/wall"
-wallpaper_on_add = wall_dir / "08.png"
-wallpaper_on_remove = wall_dir / "24.png"
-
-
-# === Helpers ===
-def set_wallpaper(path: Path):
-    subprocess.run(["swww", "img", str(path)], check=False)
-
-
-def notify(title: str, body: str, icon: str):
-    subprocess.run(["notify-send", "-i", icon, title, body], check=False)
-
-
-def reload_hyprland():
-    subprocess.run(["hyprctl", "reload"], check=False)
-
+WALL_DIR = core.CONFIG_DIR / "hypr/wall"
+WALL_ON = WALL_DIR / "08.png"
+WALL_OFF = WALL_DIR / "24.png"
 
 # === Rule handlers ===
 def add_rule():
-    if conf_file.exists() and rule_line in conf_file.read_text():
+    if CONF_FILE.exists() and RULE_LINE in CONF_FILE.read_text():
         return
 
-    with open(conf_file, "a") as f:
-        f.write("\n" + rule_line + "\n")
+    with open(CONF_FILE, "a") as f:
+        f.write("\n" + RULE_LINE + "\n")
 
-    state_file.touch()
-    reload_hyprland()
-    set_wallpaper(wallpaper_on_add)
-    notify("Focus Mode", "Activated", "dialog-information")
-
+    STATE_FILE.touch()
+    core.run_command(["hyprctl", "reload"], check=False)
+    core.run_command(["swww", "img", str(WALL_ON)], check=False)
+    core.notify("Activated", title="Focus Mode", icon="dialog-information")
 
 def remove_rule():
-    if not conf_file.exists():
+    if not CONF_FILE.exists():
         return
 
-    lines = conf_file.read_text().splitlines()
-    with open(conf_file, "w") as f:
+    lines = CONF_FILE.read_text().splitlines()
+    with open(CONF_FILE, "w") as f:
         for line in lines:
-            if line.strip() != rule_line:
+            if line.strip() != RULE_LINE:
                 f.write(line + "\n")
 
-    state_file.unlink(missing_ok=True)
-    reload_hyprland()
-    set_wallpaper(wallpaper_on_remove)
-    notify("Focus Mode", "Deactivated", "weather-clear")
-
+    STATE_FILE.unlink(missing_ok=True)
+    core.run_command(["hyprctl", "reload"], check=False)
+    core.run_command(["swww", "img", str(WALL_OFF)], check=False)
+    core.notify("Deactivated", title="Focus Mode", icon="weather-clear")
 
 # === Toggle ===
-if state_file.exists():
-    remove_rule()
-else:
-    add_rule()
+if __name__ == "__main__":
+    if STATE_FILE.exists():
+        remove_rule()
+    else:
+        add_rule()

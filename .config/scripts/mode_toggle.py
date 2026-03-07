@@ -1,27 +1,19 @@
 #!/usr/bin/env python3
 
 import json
-import os
 import sys
-import subprocess
 import argparse
 import fcntl
 from pathlib import Path
+import nami_core as core
+import generate_colors
 
 # ====================== Constants ====================== #
-CONFIG_DIR = Path(os.getenv("XDG_CONFIG_HOME", Path.home() / ".config"))
-NAMICONFIG_DIR = Path.home() / "NamiConfig"
-THEMES_DIR = CONFIG_DIR / "NamiThemes"
-STATE_FILE = CONFIG_DIR / ".theme_state.json"
 LOCK_FILE = Path("/tmp/namitheme_toggle.lock")
 
 # App-specific paths
-GTK3_PATH = CONFIG_DIR / "gtk-3.0/settings.ini"
-GTK4_PATH = CONFIG_DIR / "gtk-4.0/settings.ini"
-GTK3_CSS = CONFIG_DIR / "gtk-3.0/gtk.css"
-GTK4_CSS = CONFIG_DIR / "gtk-4.0/gtk.css"
-HYPR_COLORS_CONF = CONFIG_DIR / "hypr/themes/colors.conf"
-ZED_SETTINGS_PATH = CONFIG_DIR / "zed/settings.json"
+GTK3_PATH = core.CONFIG_DIR / "gtk-3.0/settings.ini"
+GTK4_PATH = core.CONFIG_DIR / "gtk-4.0/settings.ini"
 
 GTK_COMMON_SETTINGS = {
     "gtk-font-name": "Adwaita Sans 11",
@@ -37,18 +29,18 @@ GTK_COMMON_SETTINGS = {
 # ====================== Helpers ====================== #
 
 def get_state():
-    if STATE_FILE.exists():
+    if core.STATE_FILE.exists():
         try:
-            return json.loads(STATE_FILE.read_text())
+            return json.loads(core.STATE_FILE.read_text())
         except Exception:
             pass
     return {"theme": "catppuccin", "mode": "dark"}
 
 def save_state(theme, mode):
-    STATE_FILE.write_text(json.dumps({"theme": theme, "mode": mode}, indent=2))
+    core.STATE_FILE.write_text(json.dumps({"theme": theme, "mode": mode}, indent=2))
 
 def get_theme_path(theme_name, app_name, variant):
-    base = THEMES_DIR / theme_name / app_name / "themes"
+    base = core.THEMES_DIR / theme_name / app_name / "themes"
     for ext in ["", ".conf", ".css", ".rasi"]:
         p = base / f"theme-{variant}{ext}"
         if p.exists():
@@ -59,7 +51,7 @@ def symlink_theme(app, target_path, theme_family, mode):
     src = get_theme_path(theme_family, app, mode)
     if not src or not src.exists():
         return
-    target_path.parent.mkdir(parents=True, exist_ok=True)
+    core.ensure_dir(target_path)
     if target_path.exists() or target_path.is_symlink():
         target_path.unlink()
     target_path.symlink_to(src)
@@ -71,10 +63,10 @@ def set_gtk_theme(theme_mode, theme_family):
     icon_theme = "Papirus-Light" if theme_mode == "light" else "Papirus-Dark"
     prefer_dark = theme_mode == "dark"
 
-    subprocess.run(["gsettings", "set", "org.gnome.desktop.interface", "gtk-theme", theme_name])
-    subprocess.run(["gsettings", "set", "org.gnome.desktop.interface", "icon-theme", icon_theme])
-    subprocess.run(["gsettings", "set", "org.gnome.desktop.interface", "color-scheme", 
-                    "prefer-dark" if prefer_dark else "prefer-light"])
+    core.run_command(["gsettings", "set", "org.gnome.desktop.interface", "gtk-theme", theme_name], check=False)
+    core.run_command(["gsettings", "set", "org.gnome.desktop.interface", "icon-theme", icon_theme], check=False)
+    core.run_command(["gsettings", "set", "org.gnome.desktop.interface", "color-scheme", 
+                    "prefer-dark" if prefer_dark else "prefer-light"], check=False)
 
     lines = ["[Settings]", f"gtk-theme-name={theme_name}", f"gtk-icon-theme-name={icon_theme}",
              f"gtk-application-prefer-dark-theme={int(prefer_dark)}"]
@@ -82,20 +74,17 @@ def set_gtk_theme(theme_mode, theme_family):
     ini = "\n".join(lines)
 
     for p in [GTK3_PATH, GTK4_PATH]:
-        p.parent.mkdir(parents=True, exist_ok=True)
+        core.ensure_dir(p)
         p.write_text(ini)
 
 def get_current_wallpaper():
     """Get the currently displayed wallpaper from swww"""
-    try:
-        res = subprocess.run(["swww", "query"], capture_output=True, text=True)
-        if res.returncode == 0:
-            # Format is typically: 'monitor: image_path'
-            line = res.stdout.splitlines()[0]
-            if ": " in line:
-                return Path(line.split(": ")[-1].strip())
-    except Exception:
-        pass
+    res = core.run_command(["swww", "query"], check=False, capture_output=True)
+    if res and res.returncode == 0:
+        # Format is typically: 'monitor: image_path'
+        lines = res.stdout.splitlines()
+        if lines and ": " in lines[0]:
+            return Path(lines[0].split(": ")[-1].strip())
     return None
 
 def switch_wallpapers(family, mode, force=False):
@@ -104,43 +93,53 @@ def switch_wallpapers(family, mode, force=False):
         if family.lower() == "namipywal":
             wallpaper = get_current_wallpaper()
             if wallpaper and wallpaper.exists():
-                gen_script = CONFIG_DIR / "scripts/generate_colors.py"
-                if gen_script.exists():
-                    subprocess.run([sys.executable, str(gen_script), str(wallpaper), "--mode", mode],
-                                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                generate_colors.generate_all(wallpaper, mode)
         return
 
-    wall_dir = THEMES_DIR / family / "wallpapers"
+    wall_dir = core.THEMES_DIR / family / "wallpapers"
     wallpaper = wall_dir / f"{mode}.png"
     if not wallpaper.exists():
         wallpaper = wall_dir / f"{mode}.jpg"
     
     if not wallpaper.exists():
-        fallback_dir = CONFIG_DIR / "hypr/wall"
+        fallback_dir = core.CONFIG_DIR / "hypr/wall"
         defaults = {"dark": "2.jpg", "light": "1.png"}
         wallpaper = fallback_dir / defaults[mode]
 
     if wallpaper.exists():
-        subprocess.run(["swww", "img", str(wallpaper), "--transition-type", "wipe", "--transition-fps", "60"], 
-                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        core.run_command(["swww", "img", str(wallpaper), "--transition-type", "wipe", "--transition-fps", "60"], check=False)
         
         # Trigger dynamic color generation if theme is NamiPywal
         if family.lower() == "namipywal":
-            gen_script = CONFIG_DIR / "scripts/generate_colors.py"
-            if gen_script.exists():
-                subprocess.run([sys.executable, str(gen_script), str(wallpaper), "--mode", mode],
-                               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            generate_colors.generate_all(wallpaper, mode)
 
-def reload_system():
-    # Reload components in a unified way
+def set_zed_theme(theme_family, mode):
+    if not core.ZED_SETTINGS.exists():
+        return
+        
     try:
-        subprocess.run(["pkill", "-SIGUSR1", "kitty"], stderr=subprocess.DEVNULL)
-        subprocess.run(["pkill", "-SIGUSR1", "ghostty"], stderr=subprocess.DEVNULL)
-        subprocess.run(["pkill", "-SIGUSR2", "waybar"], stderr=subprocess.DEVNULL)
-        subprocess.run(["swaync-client", "-rs"], stderr=subprocess.DEVNULL)
-        subprocess.run(["hyprctl", "reload"], stderr=subprocess.DEVNULL)
-    except Exception:
-        pass
+        settings = json.loads(core.ZED_SETTINGS.read_text())
+        
+        # Mapping system themes to Zed theme names
+        # namipywal uses the ones we generate in generate_colors.py
+        mapping = {
+            "namipywal": {"dark": "namipywal_dark", "light": "namipywal_light"},
+            "rosepine": {"dark": "rosePine_dark", "light": "rosePine_light"},
+            "catppuccin": {"dark": "Catppuccin Mocha", "light": "catppuccin_light"},
+            "gruvbox": {"dark": "Gruvbox Dark", "light": "Gruvbox Light"}
+        }
+        
+        theme_info = mapping.get(theme_family.lower(), mapping["namipywal"])
+        
+        settings["theme"] = {
+            "mode": mode,
+            "dark": theme_info["dark"],
+            "light": theme_info["light"]
+        }
+        
+        core.ZED_SETTINGS.write_text(json.dumps(settings, indent=2))
+    except Exception as e:
+        print(f"❌ Failed to update Zed theme: {e}")
 
 def main():
     parser = argparse.ArgumentParser(description="Unified NamiConfig Theme Orchestrator")
@@ -167,19 +166,19 @@ def main():
 
     # 1. Update Symlinks for Apps
     apps = {
-        "kitty": CONFIG_DIR / "kitty/theme.conf",
-        "waybar": CONFIG_DIR / "waybar/style.css",
-        "mako": CONFIG_DIR / "mako/config",
-        "rofi": CONFIG_DIR / "rofi/colors/theme.rasi",
-        "swaync": CONFIG_DIR / "swaync/style.css",
-        "ghostty": CONFIG_DIR / "ghostty/themes/theme",
+        "kitty": core.CONFIG_DIR / "kitty/theme.conf",
+        "waybar": core.CONFIG_DIR / "waybar/style.css",
+        "mako": core.CONFIG_DIR / "mako/config",
+        "rofi": core.ROFI_THEME_COLORS,
+        "swaync": core.CONFIG_DIR / "swaync/style.css",
+        "ghostty": core.CONFIG_DIR / "ghostty/themes/theme",
     }
     for app, path in apps.items():
         if app == "rofi" and theme.lower() == "namipywal":
             # Direct link to generated colors for NamiPywal
-            src = CONFIG_DIR / "rofi/colors/namipywal.rasi"
+            src = core.ROFI_PYWAL_COLORS
             if src.exists():
-                path.parent.mkdir(parents=True, exist_ok=True)
+                core.ensure_dir(path)
                 if path.exists() or path.is_symlink():
                     path.unlink()
                 path.symlink_to(src)
@@ -191,16 +190,18 @@ def main():
     gtk_family = gtk_map.get(theme.lower(), theme)
     set_gtk_theme(mode, gtk_family)
     
+    # 3. Update Zed Theme
+    set_zed_theme(theme, mode)
+    
     # Only force wallpaper change if theme family is explicitly changed via argument
     force_wallpaper = args.theme is not None
     switch_wallpapers(theme, mode, force=force_wallpaper)
 
     # 3. Reload Everything
-    reload_system()
+    core.reload_components()
     save_state(theme, mode)
     
-    subprocess.run(["notify-send", "-a", "NamiTheme", "-i", "weather-clear", 
-                    f"Unified Theme: {theme} ({mode.capitalize()})"])
+    core.notify(f"Unified Theme: {theme} ({mode.capitalize()})", title="NamiTheme")
 
 if __name__ == "__main__":
     main()

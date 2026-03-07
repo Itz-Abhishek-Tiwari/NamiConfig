@@ -1,43 +1,25 @@
 #!/usr/bin/env python3
 
-import os
-import sys
-import subprocess
 import json
 import argparse
+import sys
 from pathlib import Path
-
-# Paths
-CONFIG_DIR = Path(os.getenv("XDG_CONFIG_HOME", Path.home() / ".config"))
-CACHE_DIR = Path.home() / ".cache"
-COLORS_CONF = CONFIG_DIR / "hypr/themes/colors.conf"
-COLORS_CSS_DIR = CONFIG_DIR / "waybar/style"
-COLORS_CSS = COLORS_CSS_DIR / "colors.css"
-SWAYNC_CSS = CONFIG_DIR / "swaync/colors.css"
-ROFI_COLORS = CONFIG_DIR / "rofi/colors/namipywal.rasi"
-WAL_CACHE = CACHE_DIR / "wal/colors.json"
+import nami_core as core
 
 def run_wal(image_path, mode):
     print(f"🎨 Running pywal ({mode}) for: {image_path}")
-    try:
-        # -l flag for light mode
-        cmd = ["wal", "-i", str(image_path), "-n", "-q"]
-        if mode == "light":
-            cmd.append("-l")
-            
-        subprocess.run(cmd, check=True, timeout=10)
+    
+    # -l flag for light mode
+    cmd = ["wal", "-i", str(image_path), "-n", "-q"]
+    if mode == "light":
+        cmd.append("-l")
         
-        if WAL_CACHE.exists():
-            with open(WAL_CACHE) as f:
-                return json.load(f)
-    except subprocess.TimeoutExpired:
-        print("⚠️ Pywal timed out, trying to use cache...")
-        if WAL_CACHE.exists():
-            with open(WAL_CACHE) as f:
-                return json.load(f)
-    except Exception as e:
-        print(f"❌ Pywal failed: {e}")
-        return None
+    core.run_command(cmd, timeout=10)
+    
+    if core.WAL_CACHE.exists():
+        with open(core.WAL_CACHE) as f:
+            return json.load(f)
+    return None
 
 def update_hypr_colors(colors):
     # Pywal colors are in colors['colors']['colorX']
@@ -56,9 +38,9 @@ group {{
     col.border_inactive = rgba(1a1b26aa)
 }}
 """
-    COLORS_CONF.parent.mkdir(parents=True, exist_ok=True)
-    COLORS_CONF.write_text(content)
-    subprocess.run(["hyprctl", "reload"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    core.ensure_dir(core.HYPR_COLORS_CONF)
+    core.HYPR_COLORS_CONF.write_text(content)
+    core.run_command(["hyprctl", "reload"], check=False)
 
 def update_css_colors(colors):
     # Generate CSS variables from pywal colors
@@ -86,13 +68,13 @@ def update_css_colors(colors):
     for i in range(16):
         css_content += f"@define-color color{i} {c[f'color{i}']};\n"
 
-    for path in [COLORS_CSS, SWAYNC_CSS]:
-        path.parent.mkdir(parents=True, exist_ok=True)
+    for path in [core.WAYBAR_COLORS, core.SWAYNC_COLORS]:
+        core.ensure_dir(path)
         path.write_text(css_content)
     
     # Reload components
-    subprocess.run(["pkill", "-SIGUSR2", "waybar"])
-    subprocess.run(["swaync-client", "-rs"])
+    core.run_command(["pkill", "-SIGUSR2", "waybar"], check=False)
+    core.run_command(["swaync-client", "-rs"], check=False)
 
 def update_rofi_colors(colors):
     c = colors["colors"]
@@ -108,26 +90,87 @@ def update_rofi_colors(colors):
     urgent:         {c['color3']};
 }}
 """
-    ROFI_COLORS.parent.mkdir(parents=True, exist_ok=True)
-    ROFI_COLORS.write_text(rasi_content)
+    core.ensure_dir(core.ROFI_PYWAL_COLORS)
+    core.ROFI_PYWAL_COLORS.write_text(rasi_content)
+
+def update_zed_colors(colors):
+    c = colors["colors"]
+    special = colors["special"]
+    
+    # We create two themes in one file: namipywal_dark and namipywal_light
+    # Since pywal is usually dark-focused, we'll map the main ones to dark
+    # and maybe do some basic inversion for light if needed, but for now 
+    # let's just create the dark one as requested.
+    
+    def get_zed_style(is_light=False):
+        return {
+            "background": special['background'],
+            "editor.background": special['background'],
+            "editor.foreground": special['foreground'],
+            "editor.line_number": c['color8'],
+            "editor.active_line_number": special['foreground'],
+            "terminal.background": special['background'],
+            "terminal.foreground": special['foreground'],
+            "syntax": {
+                "keyword": {"color": c['color1']},
+                "function": {"color": c['color2']},
+                "string": {"color": c['color3']},
+                "number": {"color": c['color4']},
+                "type": {"color": c['color5']},
+                "comment": {"color": c['color8']},
+                "variable": {"color": special['foreground']}
+            }
+        }
+
+    zed_theme = {
+        "$schema": "https://zed.dev/schema/themes/v0.1.0.json",
+        "name": "NamiPywal",
+        "author": "Antigravity",
+        "themes": [
+            {
+                "name": "namipywal_dark",
+                "appearance": "dark",
+                "style": get_zed_style()
+            },
+            {
+                "name": "namipywal_light",
+                "appearance": "light",
+                "style": get_zed_style(is_light=True)
+            }
+        ]
+    }
+    
+    zed_file = core.ZED_THEMES_DIR / "namipywal.json"
+    core.ensure_dir(zed_file)
+    zed_file.write_text(json.dumps(zed_theme, indent=4))
+
+def generate_all(image_path, mode="dark"):
+    """Main generation entry point for other scripts"""
+    image_path = Path(image_path)
+    if not image_path.exists():
+        print(f"❌ Image not found: {image_path}")
+        return False
+        
+    colors = run_wal(image_path, mode)
+    if colors:
+        update_hypr_colors(colors)
+        update_css_colors(colors)
+        update_rofi_colors(colors)
+        update_zed_colors(colors)
+        print("✅ System colors updated successfully via Pywal!")
+        return True
+    return False
 
 def main():
     parser = argparse.ArgumentParser(description="Pywal Color Generator")
     parser.add_argument("image", help="Path to the wallpaper image")
     parser.add_argument("--mode", choices=["light", "dark"], default="dark", help="Theme mode")
     args = parser.parse_args()
-        
-    image_path = Path(args.image)
-    if not image_path.exists():
-        print(f"❌ Image not found: {image_path}")
+    
+    if generate_all(args.image, args.mode):
+        sys.exit(0)
+    else:
         sys.exit(1)
-        
-    colors = run_wal(image_path, args.mode)
-    if colors:
-        update_hypr_colors(colors)
-        update_css_colors(colors)
-        update_rofi_colors(colors)
-        print("✅ System colors updated successfully via Pywal!")
 
 if __name__ == "__main__":
     main()

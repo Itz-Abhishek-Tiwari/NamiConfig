@@ -1,0 +1,79 @@
+{
+    "$schema": "https://zed.dev/schema/themes/v0.1.0.json",
+    "name": "NamiPywal",
+    "author": "Antigravity",
+    "themes": [
+        {
+            "name": "namipywal_dark",
+            "appearance": "dark",
+            "style": {
+                "background": "#151318",
+                "editor.background": "#151318",
+                "editor.foreground": "#e1d2d0",
+                "editor.line_number": "#9d9391",
+                "editor.active_line_number": "#e1d2d0",
+                "terminal.background": "#151318",
+                "terminal.foreground": "#e1d2d0",
+                "syntax": {
+                    "keyword": {
+                        "color": "#69A35A"
+                    },
+                    "function": {
+                        "color": "#F39762"
+                    },
+                    "string": {
+                        "color": "#C2C246"
+                    },
+                    "number": {
+                        "color": "#393FA0"
+                    },
+                    "type": {
+                        "color": "#6053A6"
+                    },
+                    "comment": {
+                        "color": "#9d9391"
+                    },
+                    "variable": {
+                        "color": "#e1d2d0"
+                    }
+                }
+            }
+        },
+        {
+            "name": "namipywal_light",
+            "appearance": "light",
+            "style": {
+                "background": "#151318",
+                "editor.background": "#151318",
+                "editor.foreground": "#e1d2d0",
+                "editor.line_number": "#9d9391",
+                "editor.active_line_number": "#e1d2d0",
+                "terminal.background": "#151318",
+                "terminal.foreground": "#e1d2d0",
+                "syntax": {
+                    "keyword": {
+                        "color": "#69A35A"
+                    },
+                    "function": {
+                        "color": "#F39762"
+                    },
+                    "string": {
+                        "color": "#C2C246"
+                    },
+                    "number": {
+                        "color": "#393FA0"
+                    },
+                    "type": {
+                        "color": "#6053A6"
+                    },
+                    "comment": {
+                        "color": "#9d9391"
+                    },
+                    "variable": {
+                        "color": "#e1d2d0"
+                    }
+                }
+            }
+        }
+    ]
+}
