@@ -1,58 +1,62 @@
-@import "./style/colors.css";
+/* ═══════════════════════════════════════════════
+   WAYBAR — NightFox / Night Owl (Dark)
+   ═══════════════════════════════════════════════ */
 
-/* Global styles */
 * {
     font-family: "CaskaydiaMono Nerd Font Propo";
-    font-size: 15px;
+    font-size: 13px;
     font-weight: bold;
     border: none;
     margin: 0;
     padding: 0;
     min-height: 0;
+    transition: all 200ms ease;
 }
 
-/* Window and Waybar */
-window#waybar,
+window#waybar {
+    background: transparent;
+}
+
 window#waybar>box {
-    background: #011627;
-    /* Night Owl dark background */
-    padding: 5px 6px;
+    background: rgba(1, 22, 39, 0.68);
+    border-top: 1px solid rgba(214, 222, 235, 0.07);
+    padding: 4px 8px;
 }
 
-/* Tooltip */
 tooltip {
-    background: rgba(2, 23, 42, 0.9);
-    /* Night Owl transparent dark */
+    background: rgba(1, 22, 39, 0.92);
+    border: 1px solid rgba(255, 203, 107, 0.35);
+    border-radius: 8px;
+    padding: 4px 8px;
 }
 
 tooltip label {
     color: #d6deeb;
-    /* Night Owl foreground */
-    margin: 0 2px;
+    margin: 2px 4px;
+    font-size: 12px;
 }
 
-/* Menu */
 menu {
-    border-radius: 0;
-    background: #011627;
-    /* Night Owl dark */
-    padding: 4px 4px;
-    box-shadow: none;
+    border-radius: 10px;
+    background: rgba(1, 22, 39, 0.96);
+    border: 1px solid rgba(255, 88, 116, 0.25);
+    padding: 6px 4px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.75);
 }
 
 menuitem {
-    padding: 8px 8px;
-    margin: 2px 5px;
+    border-radius: 6px;
+    padding: 8px 14px;
+    margin: 2px 4px;
+    color: #d6deeb;
 }
 
 menuitem:hover {
-    background-color: #ff5874;
-    /* Night Owl red accent */
-    color: #011627;
-    /* contrast */
+    background: rgba(255, 88, 116, 0.2);
+    color: #ff5874;
 }
 
-/* Modules base style */
+/* ═══ SHARED PILL BASE ═══ */
 #workspaces,
 #custom-theme-toggle,
 #pulseaudio,
@@ -69,144 +73,275 @@ menuitem:hover {
 #custom-group-right-logo,
 #custom-cpu,
 #custom-memory,
-#temperature {
+#temperature,
+#custom-sync {
     color: #d6deeb;
-    /* Night Owl foreground */
-    background: transparent;
-    padding: 2px 9px;
-    margin: 0 2px;
+    background: rgba(214, 222, 235, 0.06);
+    border: 1px solid rgba(214, 222, 235, 0.08);
+    border-radius: 20px;
+    padding: 3px 12px;
+    margin: 2px 3px;
 }
 
-/* Workspaces */
+/* ═══ WORKSPACES ═══ */
 #workspaces {
-    color: #82aaff;
-    /* Night Owl blue */
+    border-radius: 20px;
+    padding: 3px 6px;
 }
 
 #workspaces button {
-    color: #82aaff;
-    padding: 2px 4px;
-    margin: 0 3px;
-    border-radius: 2px;
+    color: #5f7e97;
+    background: transparent;
+    border-radius: 14px;
+    padding: 2px 8px;
+    margin: 0 2px;
+    min-width: 22px;
 }
 
 #workspaces button.active {
-    background: @primary;
+    background: rgba(130, 170, 255, 0.85);
     color: #011627;
-    /* contrast */
-    font-weight: bolder;
-    text-decoration: underline;
+    font-weight: 900;
+    box-shadow: 0 0 8px rgba(130, 170, 255, 0.5);
 }
 
 #workspaces button.active:hover {
     background: #21c7a8;
-    /* Night Owl green */
     color: #011627;
+    box-shadow: 0 0 12px rgba(33, 199, 168, 0.6);
 }
 
 #workspaces button:hover {
+    background: rgba(255, 203, 107, 0.12);
     color: #ffcb6b;
-    /* Night Owl yellow */
 }
 
-/* Hover effects for all modules */
-#custom-power:hover,
-#pulseaudio:hover,
-#bluetooth:hover,
-#custom-wifi:hover,
-#clock:hover,
-#mpris:hover,
-#custom-cpu:hover,
-#custom-memory:hover,
-#temperature:hover {
-    color: #f78c6c;
-    /* Night Owl orange */
-}
-
-/* Individual module colors */
-#custom-power {
+#workspaces button.urgent {
+    background: rgba(255, 88, 116, 0.3);
     color: #ff5874;
-    /* red */
+    animation: blink 1s step-end infinite;
 }
 
-#custom-sync {
-    color: @accent;
+/* ═══ CLOCK ═══ */
+#clock {
+    background: rgba(255, 203, 107, 0.1);
+    border-color: rgba(255, 203, 107, 0.25);
+    color: #ffcb6b;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    padding: 3px 16px;
 }
 
+#clock:hover {
+    background: rgba(255, 203, 107, 0.18);
+    box-shadow: 0 0 10px rgba(255, 203, 107, 0.4);
+}
+
+/* ═══ MPRIS ═══ */
+#mpris {
+    color: #21c7a8;
+    border-color: rgba(33, 199, 168, 0.15);
+}
+
+#mpris:hover {
+    color: #f78c6c;
+    border-color: rgba(247, 140, 108, 0.25);
+}
+
+/* ═══ IDLE INHIBITOR ═══ */
+#idle_inhibitor {
+    color: #82aaff;
+    border-color: rgba(130, 170, 255, 0.15);
+}
+
+#idle_inhibitor.activated {
+    color: #ffcb6b;
+    border-color: rgba(255, 203, 107, 0.25);
+    box-shadow: 0 0 8px rgba(255, 203, 107, 0.3);
+}
+
+/* ═══ PULSEAUDIO ═══ */
 #pulseaudio {
     color: #82aaff;
-    /* blue */
+    border-color: rgba(130, 170, 255, 0.15);
 }
 
+#pulseaudio:hover {
+    color: #f78c6c;
+    box-shadow: 0 0 8px rgba(130, 170, 255, 0.3);
+}
+
+#pulseaudio.muted {
+    color: #5f7e97;
+    border-color: rgba(95, 126, 151, 0.15);
+}
+
+/* ═══ BACKLIGHT ═══ */
+#backlight {
+    color: #ffcb6b;
+    border-color: rgba(255, 203, 107, 0.15);
+}
+
+#backlight:hover {
+    box-shadow: 0 0 8px rgba(255, 203, 107, 0.3);
+}
+
+/* ═══ BATTERY ═══ */
 #battery {
     color: #21c7a8;
-    /* green */
+    border-color: rgba(33, 199, 168, 0.15);
 }
 
 #battery.warning {
     color: #ffcb6b;
-    /* yellow */
+    border-color: rgba(255, 203, 107, 0.2);
+    animation: blink 2s ease-in-out infinite;
 }
 
 #battery.critical {
     color: #ff5874;
-    /* red */
+    border-color: rgba(255, 88, 116, 0.3);
+    box-shadow: 0 0 10px rgba(255, 88, 116, 0.4);
+    animation: blink 0.8s ease-in-out infinite;
 }
 
 #battery.charging {
     color: #c792ea;
-    /* purple */
+    border-color: rgba(199, 146, 234, 0.2);
+    box-shadow: 0 0 6px rgba(199, 146, 234, 0.3);
 }
 
+/* ═══ WIFI & BLUETOOTH ═══ */
 #custom-wifi {
     color: #82aaff;
-    /* blue */
+    border-color: rgba(130, 170, 255, 0.15);
 }
 
 #bluetooth {
     color: #c792ea;
-    /* purple */
+    border-color: rgba(199, 146, 234, 0.15);
 }
 
-#mpris {
-    color: #21c7a8;
-    /* green */
+#custom-wifi:hover,
+#bluetooth:hover {
+    color: #f78c6c;
 }
 
-#idle_inhibitor {
-    color: #82aaff;
-    /* blue */
+/* ═══ NOTIFICATION ═══ */
+#custom-notification {
+    color: #d6deeb;
+    border-color: rgba(214, 222, 235, 0.1);
 }
 
-#clock {
+#custom-notification:hover {
     color: #ffcb6b;
-    /* yellow */
+    border-color: rgba(255, 203, 107, 0.2);
 }
 
+/* ═══ THEME TOGGLE ═══ */
 #custom-theme-toggle {
     color: #ffcb6b;
-    /* yellow */
-    background: transparent;
+    border-color: rgba(255, 203, 107, 0.2);
 }
 
+#custom-theme-toggle:hover {
+    color: #21c7a8;
+    box-shadow: 0 0 8px rgba(255, 203, 107, 0.4);
+}
+
+/* ═══ SYNC ═══ */
+#custom-sync {
+    color: #82aaff;
+    border-color: rgba(130, 170, 255, 0.15);
+}
+
+#custom-sync:hover {
+    color: #c792ea;
+    box-shadow: 0 0 8px rgba(130, 170, 255, 0.3);
+}
+
+/* ═══ POWER ═══ */
+#custom-power {
+    color: #ff5874;
+    border-color: rgba(255, 88, 116, 0.2);
+    font-size: 16px;
+    padding: 3px 12px;
+}
+
+#custom-power:hover {
+    background: rgba(255, 88, 116, 0.2);
+    box-shadow: 0 0 12px rgba(255, 88, 116, 0.5);
+    color: #ff5874;
+}
+
+/* ═══ GROUP LOGO ═══ */
 #custom-group-right-logo {
     color: #21c7a8;
-    /* green */
-    padding-right: 20px;
+    background: rgba(33, 199, 168, 0.1);
+    border-color: rgba(33, 199, 168, 0.2);
+    font-size: 16px;
+    padding: 3px 14px 3px 12px;
 }
 
-/* System stats modules */
+/* ═══ SYSTEM STATS ═══ */
 #custom-cpu {
     color: #c792ea;
-    /* purple */
+    border-color: rgba(199, 146, 234, 0.15);
+}
+
+#custom-cpu:hover {
+    color: #f78c6c;
+    box-shadow: 0 0 8px rgba(199, 146, 234, 0.3);
 }
 
 #custom-memory {
     color: #21c7a8;
-    /* green */
+    border-color: rgba(33, 199, 168, 0.15);
+}
+
+#custom-memory:hover {
+    color: #f78c6c;
+    box-shadow: 0 0 8px rgba(33, 199, 168, 0.3);
 }
 
 #temperature {
     color: #ff5874;
-    /* red */
+    border-color: rgba(255, 88, 116, 0.15);
+}
+
+#temperature.critical {
+    color: #ff5874;
+    background: rgba(255, 88, 116, 0.15);
+    border-color: rgba(255, 88, 116, 0.4);
+    box-shadow: 0 0 12px rgba(255, 88, 116, 0.5);
+    animation: blink 0.8s ease-in-out infinite;
+}
+
+#temperature:hover {
+    color: #f78c6c;
+    box-shadow: 0 0 8px rgba(255, 88, 116, 0.3);
+}
+
+/* ═══ TRAY ═══ */
+#tray {
+    border-color: rgba(214, 222, 235, 0.08);
+}
+
+#tray>.passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+    -gtk-icon-effect: highlight;
+    background: rgba(255, 88, 116, 0.15);
+}
+
+@keyframes blink {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0.4;
+    }
 }

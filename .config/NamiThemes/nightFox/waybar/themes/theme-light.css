@@ -1,46 +1,62 @@
-/* Dayfox light theme */
+/* ═══════════════════════════════════════════════
+   WAYBAR — NightFox / DayFox (Light)
+   ═══════════════════════════════════════════════ */
+
 * {
-    font-family: "CaskaydiaMono Nerd Font";
-    font-size: 15px;
+    font-family: "CaskaydiaMono Nerd Font Propo";
+    font-size: 13px;
     font-weight: bold;
     border: none;
     margin: 0;
     padding: 0;
+    min-height: 0;
+    transition: all 200ms ease;
 }
 
-window#waybar,
-window#waybar > box {
-    background: #f6f6f4;
-    padding: 5px 6px;
+window#waybar {
+    background: transparent;
+}
+
+window#waybar>box {
+    background: rgba(246, 246, 244, 0.88);
+    border-top: 1px solid rgba(61, 43, 90, 0.1);
+    padding: 4px 8px;
 }
 
 tooltip {
-    background: rgba(234, 234, 230, 0.9);
+    background: rgba(246, 246, 244, 0.95);
+    border: 1px solid rgba(201, 133, 48, 0.3);
+    border-radius: 8px;
+    padding: 4px 8px;
 }
 
 tooltip label {
     color: #3d2b5a;
-    margin: 0 2px;
+    margin: 2px 4px;
+    font-size: 12px;
 }
 
 menu {
-    border-radius: 0px;
-    background: #eaeae6;
-    padding: 0 4px;
-    box-shadow: none;
+    border-radius: 10px;
+    background: rgba(234, 234, 230, 0.98);
+    border: 1px solid rgba(201, 79, 109, 0.25);
+    padding: 6px 4px;
+    box-shadow: 0 8px 32px rgba(61, 43, 90, 0.15);
 }
 
 menuitem {
-    padding: 8px;
-    margin: 2px 5px;
-    border-radius: 4px;
+    border-radius: 6px;
+    padding: 8px 14px;
+    margin: 2px 4px;
+    color: #3d2b5a;
 }
 
 menuitem:hover {
-    background-color: #c94f6d;
-    color: #f6f6f4;
+    background: rgba(201, 79, 109, 0.2);
+    color: #c94f6d;
 }
 
+/* ═══ SHARED PILL BASE ═══ */
 #workspaces,
 #custom-theme-toggle,
 #pulseaudio,
@@ -57,66 +73,275 @@ menuitem:hover {
 #custom-group-right-logo,
 #custom-cpu,
 #custom-memory,
-#temperature {
+#temperature,
+#custom-sync {
     color: #3d2b5a;
-    background: transparent;
-    padding: 2px 9px;
-    margin: 0 2px;
+    background: rgba(61, 43, 90, 0.06);
+    border: 1px solid rgba(61, 43, 90, 0.1);
+    border-radius: 20px;
+    padding: 3px 12px;
+    margin: 2px 3px;
 }
 
+/* ═══ WORKSPACES ═══ */
 #workspaces {
-    color: #c94f6d;
+    border-radius: 20px;
+    padding: 3px 6px;
 }
 
 #workspaces button {
-    color: #4d688e;
-    padding: 2px 4px;
-    margin: 0 3px;
-    border-radius: 2px;
+    color: #9da6a6;
+    background: transparent;
+    border-radius: 14px;
+    padding: 2px 8px;
+    margin: 0 2px;
+    min-width: 22px;
 }
 
 #workspaces button.active {
-    background: #618774;
+    background: rgba(97, 135, 116, 0.85);
     color: #f6f6f4;
-    font-weight: bolder;
-    text-decoration: underline;
+    font-weight: 900;
+    box-shadow: 0 0 8px rgba(97, 135, 116, 0.4);
 }
 
 #workspaces button.active:hover {
     background: #c98530;
     color: #f6f6f4;
+    box-shadow: 0 0 12px rgba(201, 133, 48, 0.5);
 }
 
 #workspaces button:hover {
+    background: rgba(201, 79, 109, 0.12);
     color: #c94f6d;
 }
 
-#custom-power:hover,
-#pulseaudio:hover,
-#bluetooth:hover,
+#workspaces button.urgent {
+    background: rgba(201, 79, 109, 0.25);
+    color: #c94f6d;
+    animation: blink 1s step-end infinite;
+}
+
+/* ═══ CLOCK ═══ */
+#clock {
+    background: rgba(201, 133, 48, 0.1);
+    border-color: rgba(201, 133, 48, 0.25);
+    color: #c98530;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    padding: 3px 16px;
+}
+
+#clock:hover {
+    background: rgba(201, 133, 48, 0.18);
+    box-shadow: 0 0 10px rgba(201, 133, 48, 0.35);
+}
+
+/* ═══ MPRIS ═══ */
+#mpris {
+    color: #618774;
+    border-color: rgba(97, 135, 116, 0.15);
+}
+
+#mpris:hover {
+    color: #c98530;
+    border-color: rgba(201, 133, 48, 0.25);
+}
+
+/* ═══ IDLE INHIBITOR ═══ */
+#idle_inhibitor {
+    color: #4d688e;
+    border-color: rgba(77, 104, 142, 0.15);
+}
+
+#idle_inhibitor.activated {
+    color: #c98530;
+    border-color: rgba(201, 133, 48, 0.25);
+    box-shadow: 0 0 8px rgba(201, 133, 48, 0.3);
+}
+
+/* ═══ PULSEAUDIO ═══ */
+#pulseaudio {
+    color: #618774;
+    border-color: rgba(97, 135, 116, 0.15);
+}
+
+#pulseaudio:hover {
+    color: #c98530;
+    box-shadow: 0 0 8px rgba(97, 135, 116, 0.25);
+}
+
+#pulseaudio.muted {
+    color: #9da6a6;
+    border-color: rgba(157, 166, 166, 0.15);
+}
+
+/* ═══ BACKLIGHT ═══ */
+#backlight {
+    color: #c98530;
+    border-color: rgba(201, 133, 48, 0.15);
+}
+
+#backlight:hover {
+    box-shadow: 0 0 8px rgba(201, 133, 48, 0.3);
+}
+
+/* ═══ BATTERY ═══ */
+#battery {
+    color: #4d688e;
+    border-color: rgba(77, 104, 142, 0.15);
+}
+
+#battery.warning {
+    color: #c98530;
+    border-color: rgba(201, 133, 48, 0.2);
+    animation: blink 2s ease-in-out infinite;
+}
+
+#battery.critical {
+    color: #c94f6d;
+    border-color: rgba(201, 79, 109, 0.3);
+    box-shadow: 0 0 10px rgba(201, 79, 109, 0.35);
+    animation: blink 0.8s ease-in-out infinite;
+}
+
+#battery.charging {
+    color: #618774;
+    border-color: rgba(97, 135, 116, 0.2);
+    box-shadow: 0 0 6px rgba(97, 135, 116, 0.25);
+}
+
+/* ═══ WIFI & BLUETOOTH ═══ */
+#custom-wifi {
+    color: #287980;
+    border-color: rgba(40, 121, 128, 0.15);
+}
+
+#bluetooth {
+    color: #955f6f;
+    border-color: rgba(149, 95, 111, 0.15);
+}
+
 #custom-wifi:hover,
-#clock:hover,
-#mpris:hover,
-#custom-cpu:hover,
-#custom-memory:hover,
-#temperature:hover {
+#bluetooth:hover {
     color: #c98530;
 }
 
-#custom-power { color: #c94f6d; }
-#pulseaudio { color: #618774; }
-#battery { color: #4d688e; }
-#battery.warning { color: #c98530; }
-#battery.critical { color: #c94f6d; }
-#battery.charging { color: #618774; }
-#custom-wifi { color: #287980; }
-#bluetooth { color: #955f6f; }
-#mpris { color: #618774; }
-#idle_inhibitor { color: #4d688e; }
-#clock { color: #c98530; }
-#custom-theme-toggle { color: #c98530; background: transparent; }
-#custom-group-right-logo { color: #618774; padding-right: 20px; }
-#custom-cpu { color: #955f6f; }
-#custom-memory { color: #618774; }
-#temperature { color: #c94f6d; }
+/* ═══ NOTIFICATION ═══ */
+#custom-notification {
+    color: #3d2b5a;
+    border-color: rgba(61, 43, 90, 0.12);
+}
 
+#custom-notification:hover {
+    color: #c98530;
+    border-color: rgba(201, 133, 48, 0.22);
+}
+
+/* ═══ THEME TOGGLE ═══ */
+#custom-theme-toggle {
+    color: #c98530;
+    border-color: rgba(201, 133, 48, 0.2);
+}
+
+#custom-theme-toggle:hover {
+    color: #618774;
+    box-shadow: 0 0 8px rgba(201, 133, 48, 0.35);
+}
+
+/* ═══ SYNC ═══ */
+#custom-sync {
+    color: #4d688e;
+    border-color: rgba(77, 104, 142, 0.15);
+}
+
+#custom-sync:hover {
+    color: #955f6f;
+    box-shadow: 0 0 8px rgba(77, 104, 142, 0.3);
+}
+
+/* ═══ POWER ═══ */
+#custom-power {
+    color: #c94f6d;
+    border-color: rgba(201, 79, 109, 0.2);
+    font-size: 16px;
+    padding: 3px 12px;
+}
+
+#custom-power:hover {
+    background: rgba(201, 79, 109, 0.15);
+    box-shadow: 0 0 12px rgba(201, 79, 109, 0.4);
+    color: #c94f6d;
+}
+
+/* ═══ GROUP LOGO ═══ */
+#custom-group-right-logo {
+    color: #618774;
+    background: rgba(97, 135, 116, 0.08);
+    border-color: rgba(97, 135, 116, 0.2);
+    font-size: 16px;
+    padding: 3px 14px 3px 12px;
+}
+
+/* ═══ SYSTEM STATS ═══ */
+#custom-cpu {
+    color: #955f6f;
+    border-color: rgba(149, 95, 111, 0.15);
+}
+
+#custom-cpu:hover {
+    color: #c98530;
+    box-shadow: 0 0 8px rgba(149, 95, 111, 0.25);
+}
+
+#custom-memory {
+    color: #618774;
+    border-color: rgba(97, 135, 116, 0.15);
+}
+
+#custom-memory:hover {
+    color: #c98530;
+    box-shadow: 0 0 8px rgba(97, 135, 116, 0.25);
+}
+
+#temperature {
+    color: #c94f6d;
+    border-color: rgba(201, 79, 109, 0.15);
+}
+
+#temperature.critical {
+    color: #c94f6d;
+    background: rgba(201, 79, 109, 0.1);
+    border-color: rgba(201, 79, 109, 0.4);
+    box-shadow: 0 0 12px rgba(201, 79, 109, 0.4);
+    animation: blink 0.8s ease-in-out infinite;
+}
+
+#temperature:hover {
+    color: #c98530;
+    box-shadow: 0 0 8px rgba(201, 79, 109, 0.25);
+}
+
+/* ═══ TRAY ═══ */
+#tray {
+    border-color: rgba(61, 43, 90, 0.08);
+}
+
+#tray>.passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+    -gtk-icon-effect: highlight;
+    background: rgba(201, 79, 109, 0.1);
+}
+
+@keyframes blink {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0.4;
+    }
+}

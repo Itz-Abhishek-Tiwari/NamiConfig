@@ -1,56 +1,62 @@
+/* ═══════════════════════════════════════════════
+   WAYBAR — Rosé Pine Dawn (Light)
+   ═══════════════════════════════════════════════ */
+
 * {
-    font-family: "CaskaydiaMono Nerd Font";
-    font-size: 15px;
+    font-family: "CaskaydiaMono Nerd Font Propo";
+    font-size: 13px;
     font-weight: bold;
     border: none;
     margin: 0;
     padding: 0;
     min-height: 0;
+    transition: all 200ms ease;
 }
 
-/* Background and layout */
-window#waybar,
+window#waybar {
+    background: transparent;
+}
+
 window#waybar>box {
-    background: #faf4ed;
-    /* Rose Pine Dawn bg */
-    padding: 5px 6px;
+    background: rgba(250, 244, 237, 0.88);
+    border-top: 1px solid rgba(87, 82, 121, 0.1);
+    padding: 4px 8px;
 }
 
-/* Tooltip */
 tooltip {
-    background: rgba(250, 244, 237, 0.9);
-    /* Light overlay */
+    background: rgba(250, 244, 237, 0.95);
+    border: 1px solid rgba(234, 157, 52, 0.3);
+    border-radius: 8px;
+    padding: 4px 8px;
 }
 
 tooltip label {
     color: #575279;
-    /* Dark text */
-    margin: 0 2px;
+    margin: 2px 4px;
+    font-size: 12px;
 }
 
-/* Menus */
 menu {
-    border-radius: 0px;
-    background: #fffaf3;
-    /* Light surface */
-    padding: 0px 4px;
-    box-shadow: none;
+    border-radius: 10px;
+    background: rgba(255, 250, 243, 0.98);
+    border: 1px solid rgba(180, 99, 122, 0.25);
+    padding: 6px 4px;
+    box-shadow: 0 8px 32px rgba(87, 82, 121, 0.12);
 }
 
 menuitem {
-    padding: 8px 8px;
-    margin: 2px 5px;
-    border-radius: 4px;
+    border-radius: 6px;
+    padding: 8px 14px;
+    margin: 2px 4px;
+    color: #575279;
 }
 
 menuitem:hover {
-    background-color: #b4637a;
-    /* Red/Love */
-    color: #faf4ed;
-    /* Light background text */
+    background: rgba(180, 99, 122, 0.2);
+    color: #b4637a;
 }
 
-/* Modules */
+/* ═══ SHARED PILL BASE ═══ */
 #workspaces,
 #custom-theme-toggle,
 #pulseaudio,
@@ -67,141 +73,275 @@ menuitem:hover {
 #custom-group-right-logo,
 #custom-cpu,
 #custom-memory,
-#temperature {
+#temperature,
+#custom-sync {
     color: #575279;
-    /* Default dark text */
-    background: transparent;
-    padding: 2px 9px;
-    margin: 0 2px;
+    background: rgba(87, 82, 121, 0.06);
+    border: 1px solid rgba(87, 82, 121, 0.1);
+    border-radius: 20px;
+    padding: 3px 12px;
+    margin: 2px 3px;
 }
 
-/* Workspaces */
+/* ═══ WORKSPACES ═══ */
 #workspaces {
-    color: #b4637a;
-    /* Red/Love */
+    border-radius: 20px;
+    padding: 3px 6px;
 }
 
 #workspaces button {
-    color: #286983;
-    /* Pine */
-    padding: 2px 4px;
-    margin: 0 3px;
-    border-radius: 2px;
+    color: #9893a5;
+    background: transparent;
+    border-radius: 14px;
+    padding: 2px 8px;
+    margin: 0 2px;
+    min-width: 22px;
 }
 
 #workspaces button.active {
-    background: #ea9d34;
-    /* Gold */
+    background: rgba(234, 157, 52, 0.85);
     color: #575279;
-    font-weight: bolder;
-    text-decoration: underline;
+    font-weight: 900;
+    box-shadow: 0 0 8px rgba(234, 157, 52, 0.4);
 }
 
 #workspaces button.active:hover {
     background: #dfdad9;
-    /* Highlight Med */
     color: #575279;
+    box-shadow: 0 0 12px rgba(223, 218, 217, 0.5);
 }
 
 #workspaces button:hover {
+    background: rgba(180, 99, 122, 0.12);
     color: #b4637a;
-    /* Red/Love */
 }
 
-/* Hover effects */
-#custom-power:hover,
-#pulseaudio:hover,
-#bluetooth:hover,
-#custom-wifi:hover,
-#clock:hover,
-#mpris:hover,
-#custom-cpu:hover,
-#custom-memory:hover,
-#temperature:hover {
+#workspaces button.urgent {
+    background: rgba(180, 99, 122, 0.25);
+    color: #b4637a;
+    animation: blink 1s step-end infinite;
+}
+
+/* ═══ CLOCK ═══ */
+#clock {
+    background: rgba(234, 157, 52, 0.1);
+    border-color: rgba(234, 157, 52, 0.25);
     color: #ea9d34;
-    /* Gold */
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    padding: 3px 16px;
 }
 
-/* Individual Modules */
-#custom-power {
-    color: #b4637a;
-    /* Red/Love */
+#clock:hover {
+    background: rgba(234, 157, 52, 0.18);
+    box-shadow: 0 0 10px rgba(234, 157, 52, 0.35);
 }
 
+/* ═══ MPRIS ═══ */
+#mpris {
+    color: #286983;
+    border-color: rgba(40, 105, 131, 0.15);
+}
+
+#mpris:hover {
+    color: #ea9d34;
+    border-color: rgba(234, 157, 52, 0.25);
+}
+
+/* ═══ IDLE INHIBITOR ═══ */
+#idle_inhibitor {
+    color: #286983;
+    border-color: rgba(40, 105, 131, 0.15);
+}
+
+#idle_inhibitor.activated {
+    color: #ea9d34;
+    border-color: rgba(234, 157, 52, 0.25);
+    box-shadow: 0 0 8px rgba(234, 157, 52, 0.3);
+}
+
+/* ═══ PULSEAUDIO ═══ */
 #pulseaudio {
     color: #286983;
-    /* Pine */
+    border-color: rgba(40, 105, 131, 0.15);
 }
 
+#pulseaudio:hover {
+    color: #ea9d34;
+    box-shadow: 0 0 8px rgba(40, 105, 131, 0.25);
+}
+
+#pulseaudio.muted {
+    color: #9893a5;
+    border-color: rgba(152, 147, 165, 0.15);
+}
+
+/* ═══ BACKLIGHT ═══ */
+#backlight {
+    color: #ea9d34;
+    border-color: rgba(234, 157, 52, 0.15);
+}
+
+#backlight:hover {
+    box-shadow: 0 0 8px rgba(234, 157, 52, 0.3);
+}
+
+/* ═══ BATTERY ═══ */
 #battery {
     color: #56949f;
-    /* Foam */
+    border-color: rgba(86, 148, 159, 0.15);
 }
 
 #battery.warning {
     color: #ea9d34;
-    /* Gold */
+    border-color: rgba(234, 157, 52, 0.2);
+    animation: blink 2s ease-in-out infinite;
 }
 
 #battery.critical {
     color: #b4637a;
-    /* Red/Love */
+    border-color: rgba(180, 99, 122, 0.3);
+    box-shadow: 0 0 10px rgba(180, 99, 122, 0.35);
+    animation: blink 0.8s ease-in-out infinite;
 }
 
 #battery.charging {
     color: #286983;
-    /* Pine */
+    border-color: rgba(40, 105, 131, 0.2);
+    box-shadow: 0 0 6px rgba(40, 105, 131, 0.25);
 }
 
+/* ═══ WIFI & BLUETOOTH ═══ */
 #custom-wifi {
     color: #56949f;
-    /* Foam */
+    border-color: rgba(86, 148, 159, 0.15);
 }
 
 #bluetooth {
     color: #907aa9;
-    /* Iris */
+    border-color: rgba(144, 122, 169, 0.15);
 }
 
-#mpris {
-    color: #286983;
-    /* Pine */
-}
-
-#idle_inhibitor {
-    color: #286983;
-    /* Pine */
-}
-
-#clock {
+#custom-wifi:hover,
+#bluetooth:hover {
     color: #ea9d34;
-    /* Gold */
 }
 
+/* ═══ NOTIFICATION ═══ */
+#custom-notification {
+    color: #575279;
+    border-color: rgba(87, 82, 121, 0.12);
+}
+
+#custom-notification:hover {
+    color: #ea9d34;
+    border-color: rgba(234, 157, 52, 0.22);
+}
+
+/* ═══ THEME TOGGLE ═══ */
 #custom-theme-toggle {
     color: #ea9d34;
-    /* Gold */
-    background: transparent;
+    border-color: rgba(234, 157, 52, 0.2);
 }
 
+#custom-theme-toggle:hover {
+    color: #907aa9;
+    box-shadow: 0 0 8px rgba(234, 157, 52, 0.35);
+}
+
+/* ═══ SYNC ═══ */
+#custom-sync {
+    color: #286983;
+    border-color: rgba(40, 105, 131, 0.15);
+}
+
+#custom-sync:hover {
+    color: #56949f;
+    box-shadow: 0 0 8px rgba(40, 105, 131, 0.3);
+}
+
+/* ═══ POWER ═══ */
+#custom-power {
+    color: #b4637a;
+    border-color: rgba(180, 99, 122, 0.2);
+    font-size: 16px;
+    padding: 3px 12px;
+}
+
+#custom-power:hover {
+    background: rgba(180, 99, 122, 0.15);
+    box-shadow: 0 0 12px rgba(180, 99, 122, 0.4);
+    color: #b4637a;
+}
+
+/* ═══ GROUP LOGO ═══ */
 #custom-group-right-logo {
     color: #286983;
-    /* Pine */
-    padding-right: 20px;
+    background: rgba(40, 105, 131, 0.08);
+    border-color: rgba(40, 105, 131, 0.2);
+    font-size: 16px;
+    padding: 3px 14px 3px 12px;
 }
 
-/* System stats modules */
+/* ═══ SYSTEM STATS ═══ */
 #custom-cpu {
     color: #907aa9;
-    /* Iris */
+    border-color: rgba(144, 122, 169, 0.15);
+}
+
+#custom-cpu:hover {
+    color: #ea9d34;
+    box-shadow: 0 0 8px rgba(144, 122, 169, 0.25);
 }
 
 #custom-memory {
     color: #286983;
-    /* Pine */
+    border-color: rgba(40, 105, 131, 0.15);
+}
+
+#custom-memory:hover {
+    color: #ea9d34;
+    box-shadow: 0 0 8px rgba(40, 105, 131, 0.25);
 }
 
 #temperature {
     color: #b4637a;
-    /* Red/Love */
+    border-color: rgba(180, 99, 122, 0.15);
+}
+
+#temperature.critical {
+    color: #b4637a;
+    background: rgba(180, 99, 122, 0.1);
+    border-color: rgba(180, 99, 122, 0.4);
+    box-shadow: 0 0 12px rgba(180, 99, 122, 0.4);
+    animation: blink 0.8s ease-in-out infinite;
+}
+
+#temperature:hover {
+    color: #ea9d34;
+    box-shadow: 0 0 8px rgba(180, 99, 122, 0.25);
+}
+
+/* ═══ TRAY ═══ */
+#tray {
+    border-color: rgba(87, 82, 121, 0.08);
+}
+
+#tray>.passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+    -gtk-icon-effect: highlight;
+    background: rgba(180, 99, 122, 0.1);
+}
+
+@keyframes blink {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0.4;
+    }
 }

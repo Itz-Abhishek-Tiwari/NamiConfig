@@ -1,57 +1,65 @@
-/* Font and reset */
+/* ═══════════════════════════════════════════════
+   WAYBAR — Catppuccin Latte (Light)
+   ═══════════════════════════════════════════════ */
+
 * {
-  font-family: "CaskaydiaMono Nerd Font";
-  font-size: 15px;
+  font-family: "CaskaydiaMono Nerd Font Propo";
+  font-size: 13px;
   font-weight: bold;
   border: none;
   margin: 0;
   padding: 0;
   min-height: 0;
+  transition: all 200ms ease;
 }
 
-/* Background and layout */
-window#waybar,
+/* ── Bar ── */
+window#waybar {
+  background: transparent;
+}
+
 window#waybar>box {
-  background: #eff1f5;
-  /* Base */
-  padding: 5px 6px;
+  background: rgba(239, 241, 245, 0.88);
+  border-top: 1px solid rgba(76, 79, 105, 0.1);
+  padding: 4px 8px;
 }
 
-/* Tooltip */
+/* ── Tooltip ── */
 tooltip {
-  background: rgba(186, 194, 222, 0.9);
-  /* Overlay1 with alpha */
+  background: rgba(239, 241, 245, 0.95);
+  border: 1px solid rgba(254, 100, 11, 0.3);
+  border-radius: 8px;
+  padding: 4px 8px;
 }
 
 tooltip label {
   color: #4c4f69;
-  /* Text */
-  margin: 0 2px;
+  margin: 2px 4px;
+  font-size: 12px;
 }
 
-/* Menus */
+/* ── Power menu ── */
 menu {
-  border-radius: 0px;
-  background: #dce0e8;
-  /* Surface0 */
-  padding: 0px 4px;
-  box-shadow: none;
+  border-radius: 10px;
+  background: rgba(220, 224, 232, 0.98);
+  border: 1px solid rgba(220, 138, 120, 0.25);
+  padding: 6px 4px;
+  box-shadow: 0 8px 32px rgba(76, 79, 105, 0.15);
 }
 
 menuitem {
-  padding: 8px 8px;
-  margin: 2px 5px;
-  border-radius: 4px;
+  border-radius: 6px;
+  padding: 8px 14px;
+  margin: 2px 4px;
+  color: #4c4f69;
 }
 
 menuitem:hover {
-  background-color: #dc8a78;
-  /* Red */
-  color: #eff1f5;
-  /* Base */
+  background: rgba(220, 138, 120, 0.2);
+  color: #dc8a78;
 }
 
-/* Modules */
+/* ═══ SHARED PILL BASE ═══ */
 #workspaces,
 #custom-theme-toggle,
 #pulseaudio,
@@ -68,141 +76,275 @@ menuitem:hover {
 #custom-group-right-logo,
 #custom-cpu,
 #custom-memory,
-#temperature {
+#temperature,
+#custom-sync {
   color: #4c4f69;
-  /* Text */
-  background: transparent;
-  padding: 2px 9px;
-  margin: 0 2px;
+  background: rgba(76, 79, 105, 0.06);
+  border: 1px solid rgba(76, 79, 105, 0.1);
+  border-radius: 20px;
+  padding: 3px 12px;
+  margin: 2px 3px;
 }
 
-/* Workspaces */
+/* ═══ WORKSPACES ═══ */
 #workspaces {
-  color: #dc8a78;
-  /* Red */
+  border-radius: 20px;
+  padding: 3px 6px;
 }
 
 #workspaces button {
-  color: #7287fd;
-  /* Lavender */
-  padding: 2px 4px;
-  margin: 0 3px;
-  border-radius: 2px;
+  color: #9ca0b0;
+  background: transparent;
+  border-radius: 14px;
+  padding: 2px 8px;
+  margin: 0 2px;
+  min-width: 22px;
 }
 
 #workspaces button.active {
-  background: #40a02b;
-  /* Green */
-  color: #ffffff;
-  font-weight: bolder;
-  text-decoration: underline;
+  background: rgba(64, 160, 43, 0.85);
+  color: #fff;
+  font-weight: 900;
+  box-shadow: 0 0 8px rgba(64, 160, 43, 0.4);
 }
 
 #workspaces button.active:hover {
   background: #df8e1d;
-  /* Yellow */
-  color: #ffffff;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(223, 142, 29, 0.5);
 }
 
 #workspaces button:hover {
+  background: rgba(210, 15, 57, 0.1);
   color: #d20f39;
-  /* Red */
 }
 
-/* Hover effects */
-#custom-power:hover,
-#pulseaudio:hover,
-#bluetooth:hover,
-#custom-wifi:hover,
-#clock:hover,
-#mpris:hover,
-#custom-cpu:hover,
-#custom-memory:hover,
-#temperature:hover {
+#workspaces button.urgent {
+  background: rgba(210, 15, 57, 0.25);
+  color: #d20f39;
+  animation: blink 1s step-end infinite;
+}
+
+/* ═══ CLOCK ═══ */
+#clock {
+  background: rgba(254, 100, 11, 0.1);
+  border-color: rgba(254, 100, 11, 0.22);
+  color: #fe640b;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  padding: 3px 16px;
+}
+
+#clock:hover {
+  background: rgba(254, 100, 11, 0.18);
+  box-shadow: 0 0 10px rgba(254, 100, 11, 0.3);
+}
+
+/* ═══ MPRIS ═══ */
+#mpris {
+  color: #40a02b;
+  border-color: rgba(64, 160, 43, 0.15);
+}
+
+#mpris:hover {
   color: #df8e1d;
-  /* Yellow */
+  border-color: rgba(223, 142, 29, 0.25);
 }
 
-/* Individual Modules */
-#custom-power {
-  color: #dc8a78;
-  /* Red */
+/* ═══ IDLE INHIBITOR ═══ */
+#idle_inhibitor {
+  color: #7287fd;
+  border-color: rgba(114, 135, 253, 0.15);
 }
 
+#idle_inhibitor.activated {
+  color: #df8e1d;
+  border-color: rgba(223, 142, 29, 0.25);
+  box-shadow: 0 0 8px rgba(223, 142, 29, 0.3);
+}
+
+/* ═══ PULSEAUDIO ═══ */
 #pulseaudio {
   color: #40a02b;
-  /* Green */
+  border-color: rgba(64, 160, 43, 0.15);
 }
 
+#pulseaudio:hover {
+  color: #df8e1d;
+  box-shadow: 0 0 8px rgba(64, 160, 43, 0.25);
+}
+
+#pulseaudio.muted {
+  color: #9ca0b0;
+  border-color: rgba(156, 160, 176, 0.15);
+}
+
+/* ═══ BACKLIGHT ═══ */
+#backlight {
+  color: #df8e1d;
+  border-color: rgba(223, 142, 29, 0.15);
+}
+
+#backlight:hover {
+  box-shadow: 0 0 8px rgba(223, 142, 29, 0.3);
+}
+
+/* ═══ BATTERY ═══ */
 #battery {
   color: #1e66f5;
-  /* Blue */
+  border-color: rgba(30, 102, 245, 0.15);
 }
 
 #battery.warning {
   color: #df8e1d;
-  /* Yellow */
+  border-color: rgba(223, 142, 29, 0.2);
+  animation: blink 2s ease-in-out infinite;
 }
 
 #battery.critical {
   color: #d20f39;
-  /* Red */
+  border-color: rgba(210, 15, 57, 0.3);
+  box-shadow: 0 0 10px rgba(210, 15, 57, 0.4);
+  animation: blink 0.8s ease-in-out infinite;
 }
 
 #battery.charging {
   color: #40a02b;
-  /* Green */
+  border-color: rgba(64, 160, 43, 0.2);
+  box-shadow: 0 0 6px rgba(64, 160, 43, 0.25);
 }
 
+/* ═══ WIFI & BLUETOOTH ═══ */
 #custom-wifi {
   color: #04a5e5;
-  /* Sky */
+  border-color: rgba(4, 165, 229, 0.15);
 }
 
 #bluetooth {
   color: #8839ef;
-  /* Mauve */
+  border-color: rgba(136, 57, 239, 0.15);
 }
 
-#mpris {
-  color: #40a02b;
-  /* Green */
+#custom-wifi:hover,
+#bluetooth:hover {
+  color: #df8e1d;
 }
 
-#idle_inhibitor {
-  color: #7287fd;
-  /* Lavender */
+/* ═══ NOTIFICATION ═══ */
+#custom-notification {
+  color: #4c4f69;
+  border-color: rgba(76, 79, 105, 0.12);
 }
 
-#clock {
-  color: #fe640b;
-  /* Peach */
+#custom-notification:hover {
+  color: #df8e1d;
+  border-color: rgba(223, 142, 29, 0.22);
 }
 
+/* ═══ THEME TOGGLE ═══ */
 #custom-theme-toggle {
   color: #fe640b;
-  /* Peach */
-  background: transparent;
+  border-color: rgba(254, 100, 11, 0.2);
 }
 
+#custom-theme-toggle:hover {
+  color: #1e66f5;
+  box-shadow: 0 0 8px rgba(254, 100, 11, 0.35);
+}
+
+/* ═══ SYNC ═══ */
+#custom-sync {
+  color: #1e66f5;
+  border-color: rgba(30, 102, 245, 0.15);
+}
+
+#custom-sync:hover {
+  color: #8839ef;
+  box-shadow: 0 0 8px rgba(30, 102, 245, 0.3);
+}
+
+/* ═══ POWER ═══ */
+#custom-power {
+  color: #dc8a78;
+  border-color: rgba(220, 138, 120, 0.2);
+  font-size: 16px;
+  padding: 3px 12px;
+}
+
+#custom-power:hover {
+  background: rgba(210, 15, 57, 0.15);
+  box-shadow: 0 0 12px rgba(210, 15, 57, 0.4);
+  color: #d20f39;
+}
+
+/* ═══ GROUP LOGO ═══ */
 #custom-group-right-logo {
   color: #40a02b;
-  /* Green */
-  padding-right: 20px;
+  background: rgba(64, 160, 43, 0.08);
+  border-color: rgba(64, 160, 43, 0.2);
+  font-size: 16px;
+  padding: 3px 14px 3px 12px;
 }
 
-/* System stats modules */
+/* ═══ SYSTEM STATS ═══ */
 #custom-cpu {
   color: #8839ef;
-  /* Mauve */
+  border-color: rgba(136, 57, 239, 0.15);
+}
+
+#custom-cpu:hover {
+  color: #df8e1d;
+  box-shadow: 0 0 8px rgba(136, 57, 239, 0.25);
 }
 
 #custom-memory {
   color: #40a02b;
-  /* Green */
+  border-color: rgba(64, 160, 43, 0.15);
+}
+
+#custom-memory:hover {
+  color: #df8e1d;
+  box-shadow: 0 0 8px rgba(64, 160, 43, 0.25);
 }
 
 #temperature {
   color: #d20f39;
-  /* Red */
+  border-color: rgba(210, 15, 57, 0.15);
+}
+
+#temperature.critical {
+  color: #d20f39;
+  background: rgba(210, 15, 57, 0.12);
+  border-color: rgba(210, 15, 57, 0.4);
+  box-shadow: 0 0 12px rgba(210, 15, 57, 0.4);
+  animation: blink 0.8s ease-in-out infinite;
+}
+
+#temperature:hover {
+  color: #df8e1d;
+  box-shadow: 0 0 8px rgba(210, 15, 57, 0.25);
+}
+
+/* ═══ TRAY ═══ */
+#tray {
+  border-color: rgba(76, 79, 105, 0.08);
+}
+
+#tray>.passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+  -gtk-icon-effect: highlight;
+  background: rgba(210, 15, 57, 0.1);
+}
+
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.4;
+  }
 }

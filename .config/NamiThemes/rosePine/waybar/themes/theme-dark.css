@@ -1,50 +1,62 @@
+/* ═══════════════════════════════════════════════
+   WAYBAR — Rosé Pine (Dark)
+   ═══════════════════════════════════════════════ */
+
 * {
     font-family: "CaskaydiaMono Nerd Font Propo";
-    font-size: 15px;
+    font-size: 13px;
     font-weight: bold;
     border: none;
     margin: 0;
     padding: 0;
     min-height: 0;
+    transition: all 200ms ease;
 }
 
-window#waybar,
+window#waybar {
+    background: transparent;
+}
+
 window#waybar>box {
-    background: rgb(25, 23, 36);
-    /* Rose Pine dark background */
-    padding: 5px 6px;
+    background: rgba(25, 23, 36, 0.68);
+    border-top: 1px solid rgba(224, 222, 244, 0.07);
+    padding: 4px 8px;
 }
 
 tooltip {
-    background: rgb(25, 23, 36);
+    background: rgba(25, 23, 36, 0.92);
+    border: 1px solid rgba(246, 193, 119, 0.35);
+    border-radius: 8px;
+    padding: 4px 8px;
 }
 
 tooltip label {
     color: #e0def4;
-    /* Rose Pine foreground */
-    margin: 0 2px;
+    margin: 2px 4px;
+    font-size: 12px;
 }
 
 menu {
-    border-radius: 0px;
-    background: #1f1d2e;
-    /* Rose Pine surface */
-    padding: 4px 4px;
-    box-shadow: none;
+    border-radius: 10px;
+    background: rgba(31, 29, 46, 0.96);
+    border: 1px solid rgba(246, 193, 119, 0.25);
+    padding: 6px 4px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
 }
 
 menuitem {
-    padding: 8px 8px;
-    margin: 2px 5px;
+    border-radius: 6px;
+    padding: 8px 14px;
+    margin: 2px 4px;
+    color: #e0def4;
 }
 
 menuitem:hover {
-    background-color: #f6c177;
-    /* Rose Pine gold */
-    color: #191724;
-    /* dark background for contrast */
+    background: rgba(246, 193, 119, 0.2);
+    color: #f6c177;
 }
 
+/* ═══ SHARED PILL BASE ═══ */
 #workspaces,
 #custom-theme-toggle,
 #pulseaudio,
@@ -61,141 +73,275 @@ menuitem:hover {
 #custom-group-right-logo,
 #custom-cpu,
 #custom-memory,
-#temperature {
+#temperature,
+#custom-sync {
     color: #e0def4;
-    /* Default text */
-    background: transparent;
-    padding: 2px 9px;
-    margin: 0 2px;
+    background: rgba(224, 222, 244, 0.06);
+    border: 1px solid rgba(224, 222, 244, 0.08);
+    border-radius: 20px;
+    padding: 3px 12px;
+    margin: 2px 3px;
 }
 
-/* Workspaces */
+/* ═══ WORKSPACES ═══ */
 #workspaces {
-    color: #e0def4;
-    /* Light Rose Pine fg */
+    border-radius: 20px;
+    padding: 3px 6px;
 }
 
 #workspaces button {
-    color: #31748f;
-    /* pine */
-    padding: 2px 4px;
-    margin: 0 3px;
-    border-radius: 2px;
+    color: #6e6a86;
+    background: transparent;
+    border-radius: 14px;
+    padding: 2px 8px;
+    margin: 0 2px;
+    min-width: 22px;
 }
 
 #workspaces button.active {
-    background: #f6c177;
-    /* gold */
+    background: rgba(246, 193, 119, 0.85);
     color: #191724;
-    font-weight: bolder;
-    text-decoration: underline;
+    font-weight: 900;
+    box-shadow: 0 0 8px rgba(246, 193, 119, 0.5);
 }
 
 #workspaces button.active:hover {
     background: #ea9d34;
-    /* darker gold */
     color: #191724;
+    box-shadow: 0 0 12px rgba(234, 157, 52, 0.6);
 }
 
 #workspaces button:hover {
+    background: rgba(235, 111, 146, 0.15);
     color: #eb6f92;
-    /* love/red */
 }
 
-/* Hover effects */
-#custom-power:hover,
-#pulseaudio:hover,
-#bluetooth:hover,
-#custom-wifi:hover,
-#clock:hover,
-#mpris:hover,
-#custom-cpu:hover,
-#custom-memory:hover,
-#temperature:hover {
+#workspaces button.urgent {
+    background: rgba(235, 111, 146, 0.3);
+    color: #eb6f92;
+    animation: blink 1s step-end infinite;
+}
+
+/* ═══ CLOCK ═══ */
+#clock {
+    background: rgba(246, 193, 119, 0.12);
+    border-color: rgba(246, 193, 119, 0.25);
     color: #f6c177;
-    /* gold */
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    padding: 3px 16px;
 }
 
-/* Individual Module Colors */
-#custom-power {
-    color: #eb6f92;
-    /* love/red */
+#clock:hover {
+    background: rgba(246, 193, 119, 0.22);
+    box-shadow: 0 0 10px rgba(246, 193, 119, 0.4);
 }
 
+/* ═══ MPRIS ═══ */
+#mpris {
+    color: #ebbcba;
+    border-color: rgba(235, 188, 186, 0.15);
+}
+
+#mpris:hover {
+    color: #f6c177;
+    border-color: rgba(246, 193, 119, 0.25);
+}
+
+/* ═══ IDLE INHIBITOR ═══ */
+#idle_inhibitor {
+    color: #31748f;
+    border-color: rgba(49, 116, 143, 0.15);
+}
+
+#idle_inhibitor.activated {
+    color: #f6c177;
+    border-color: rgba(246, 193, 119, 0.25);
+    box-shadow: 0 0 8px rgba(246, 193, 119, 0.3);
+}
+
+/* ═══ PULSEAUDIO ═══ */
 #pulseaudio {
     color: #9ccfd8;
-    /* foam */
+    border-color: rgba(156, 207, 216, 0.15);
 }
 
+#pulseaudio:hover {
+    color: #f6c177;
+    box-shadow: 0 0 8px rgba(156, 207, 216, 0.3);
+}
+
+#pulseaudio.muted {
+    color: #6e6a86;
+    border-color: rgba(110, 106, 134, 0.15);
+}
+
+/* ═══ BACKLIGHT ═══ */
+#backlight {
+    color: #f6c177;
+    border-color: rgba(246, 193, 119, 0.15);
+}
+
+#backlight:hover {
+    box-shadow: 0 0 8px rgba(246, 193, 119, 0.3);
+}
+
+/* ═══ BATTERY ═══ */
 #battery {
     color: #31748f;
-    /* pine */
+    border-color: rgba(49, 116, 143, 0.15);
 }
 
 #battery.warning {
     color: #f6c177;
-    /* gold */
+    border-color: rgba(246, 193, 119, 0.2);
+    animation: blink 2s ease-in-out infinite;
 }
 
 #battery.critical {
     color: #eb6f92;
-    /* love/red */
+    border-color: rgba(235, 111, 146, 0.3);
+    box-shadow: 0 0 10px rgba(235, 111, 146, 0.4);
+    animation: blink 0.8s ease-in-out infinite;
 }
 
 #battery.charging {
     color: #ebbcba;
-    /* rose */
+    border-color: rgba(235, 188, 186, 0.2);
+    box-shadow: 0 0 6px rgba(235, 188, 186, 0.3);
 }
 
+/* ═══ WIFI & BLUETOOTH ═══ */
 #custom-wifi {
     color: #9ccfd8;
-    /* foam */
+    border-color: rgba(156, 207, 216, 0.15);
 }
 
 #bluetooth {
     color: #c4a7e7;
-    /* iris */
+    border-color: rgba(196, 167, 231, 0.15);
 }
 
-#mpris {
-    color: #ebbcba;
-    /* rose */
-}
-
-#idle_inhibitor {
-    color: #31748f;
-    /* pine */
-}
-
-#clock {
+#custom-wifi:hover,
+#bluetooth:hover {
     color: #f6c177;
-    /* gold */
 }
 
+/* ═══ NOTIFICATION ═══ */
+#custom-notification {
+    color: #e0def4;
+    border-color: rgba(224, 222, 244, 0.1);
+}
+
+#custom-notification:hover {
+    color: #f6c177;
+    border-color: rgba(246, 193, 119, 0.2);
+}
+
+/* ═══ THEME TOGGLE ═══ */
 #custom-theme-toggle {
     color: #f6c177;
-    /* gold */
-    background: transparent;
+    border-color: rgba(246, 193, 119, 0.2);
 }
 
+#custom-theme-toggle:hover {
+    color: #c4a7e7;
+    box-shadow: 0 0 8px rgba(246, 193, 119, 0.4);
+}
+
+/* ═══ SYNC ═══ */
+#custom-sync {
+    color: #31748f;
+    border-color: rgba(49, 116, 143, 0.15);
+}
+
+#custom-sync:hover {
+    color: #9ccfd8;
+    box-shadow: 0 0 8px rgba(49, 116, 143, 0.3);
+}
+
+/* ═══ POWER ═══ */
+#custom-power {
+    color: #eb6f92;
+    border-color: rgba(235, 111, 146, 0.2);
+    font-size: 16px;
+    padding: 3px 12px;
+}
+
+#custom-power:hover {
+    background: rgba(235, 111, 146, 0.2);
+    box-shadow: 0 0 12px rgba(235, 111, 146, 0.5);
+    color: #eb6f92;
+}
+
+/* ═══ GROUP LOGO ═══ */
 #custom-group-right-logo {
     color: #ebbcba;
-    /* rose */
-    padding-right: 20px;
+    background: rgba(235, 188, 186, 0.1);
+    border-color: rgba(235, 188, 186, 0.2);
+    font-size: 16px;
+    padding: 3px 14px 3px 12px;
 }
 
-/* New system stats modules */
+/* ═══ SYSTEM STATS ═══ */
 #custom-cpu {
     color: #c4a7e7;
-    /* iris */
+    border-color: rgba(196, 167, 231, 0.15);
+}
+
+#custom-cpu:hover {
+    color: #f6c177;
+    box-shadow: 0 0 8px rgba(196, 167, 231, 0.3);
 }
 
 #custom-memory {
     color: #ebbcba;
-    /* rose */
+    border-color: rgba(235, 188, 186, 0.15);
+}
+
+#custom-memory:hover {
+    color: #f6c177;
+    box-shadow: 0 0 8px rgba(235, 188, 186, 0.3);
 }
 
 #temperature {
     color: #eb6f92;
-    /* love/red */
+    border-color: rgba(235, 111, 146, 0.15);
+}
+
+#temperature.critical {
+    color: #eb6f92;
+    background: rgba(235, 111, 146, 0.15);
+    border-color: rgba(235, 111, 146, 0.4);
+    box-shadow: 0 0 12px rgba(235, 111, 146, 0.5);
+    animation: blink 0.8s ease-in-out infinite;
+}
+
+#temperature:hover {
+    color: #f6c177;
+    box-shadow: 0 0 8px rgba(235, 111, 146, 0.3);
+}
+
+/* ═══ TRAY ═══ */
+#tray {
+    border-color: rgba(224, 222, 244, 0.08);
+}
+
+#tray>.passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+    -gtk-icon-effect: highlight;
+    background: rgba(235, 111, 146, 0.15);
+}
+
+@keyframes blink {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0.4;
+    }
 }

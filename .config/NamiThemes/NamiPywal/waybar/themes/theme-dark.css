@@ -1,47 +1,71 @@
 @import url("/home/abhishek/.config/waybar/style/colors.css");
 
+/* ═══════════════════════════════════════════════
+   WAYBAR — Premium Glassmorphism Style
+   Uses NamiTheme @define-color variables
+   ═══════════════════════════════════════════════ */
+
 * {
-  font-family: "CaskaydiaMono Nerd Font Propo ";
-  font-size: 15px;
+  font-family: "CaskaydiaMono Nerd Font Propo";
+  font-size: 13px;
   font-weight: bold;
   border: none;
   margin: 0;
   padding: 0;
   min-height: 0;
+  transition: all 200ms ease;
 }
 
-window#waybar,
+/* ── Bar itself ── */
+window#waybar {
+  background: transparent;
+}
+
 window#waybar>box {
-  background: alpha(@background, 0.6);
-  padding: 5px 6px;
+  background: alpha(@background, 0.65);
+  border-top: 1px solid alpha(@foreground, 0.08);
+  padding: 4px 8px;
 }
 
+/* ── Tooltip ── */
 tooltip {
-  background: alpha(@background, 0.8);
+  background: alpha(@background, 0.92);
+  border: 1px solid alpha(@primary, 0.4);
+  border-radius: 8px;
+  padding: 4px 8px;
+  box-shadow: 0 4px 20px alpha(@background, 0.6);
 }
 
 tooltip label {
   color: @foreground;
-  margin: 0 2px;
+  margin: 2px 4px;
+  font-size: 12px;
 }
 
+/* ── Power menu ── */
 menu {
-  border-radius: 0px;
-  background: @background;
-  padding: 4px 4px;
-  box-shadow: none;
+  border-radius: 10px;
+  background: alpha(@background, 0.96);
+  border: 1px solid alpha(@primary, 0.3);
+  padding: 6px 4px;
+  box-shadow: 0 8px 32px alpha(@background, 0.8);
 }
 
 menuitem {
-  padding: 8px 8px;
-  margin: 2px 5px;
+  border-radius: 6px;
+  padding: 8px 14px;
+  margin: 2px 4px;
+  color: @foreground;
 }
 
 menuitem:hover {
-  background-color: @primary;
-  color: @background;
+  background: alpha(@primary, 0.25);
+  color: @primary;
 }
 
+/* ══════════════════════════════════════
+   SHARED PILL BASE — all modules
+   ══════════════════════════════════════ */
 #workspaces,
 #custom-theme-toggle,
 #pulseaudio,
@@ -58,118 +82,311 @@ menuitem:hover {
 #custom-group-right-logo,
 #custom-cpu,
 #custom-memory,
-#temperature {
+#temperature,
+#custom-sync {
   color: @foreground;
-  background: transparent;
-  padding: 2px 9px;
-  margin: 0 2px;
+  background: alpha(@foreground, 0.06);
+  border: 1px solid alpha(@foreground, 0.07);
+  border-radius: 20px;
+  padding: 3px 12px;
+  margin: 2px 3px;
 }
 
-/* Workspaces */
+/* ══════════════════════════════════════
+   WORKSPACES
+   ══════════════════════════════════════ */
 #workspaces {
-  color: @foreground;
+  background: alpha(@foreground, 0.06);
+  border-radius: 20px;
+  padding: 3px 6px;
 }
 
 #workspaces button {
   color: @gray;
-  padding: 2px 4px;
-  margin: 0 3px;
-  border-radius: 2px;
+  background: transparent;
+  border-radius: 14px;
+  padding: 2px 8px;
+  margin: 0 2px;
+  font-size: 14px;
+  min-width: 22px;
 }
 
 #workspaces button.active {
-  background: @primary;
+  background: alpha(@primary, 0.85);
   color: @background;
-  font-weight: bolder;
-  text-decoration: underline;
+  font-weight: 900;
+  box-shadow: 0 0 8px alpha(@primary, 0.5);
 }
 
 #workspaces button.active:hover {
   background: @accent;
   color: @background;
+  box-shadow: 0 0 12px alpha(@accent, 0.6);
 }
 
 #workspaces button:hover {
+  background: alpha(@red, 0.15);
   color: @red;
 }
 
-/* Hover effects */
-#custom-power:hover,
-#pulseaudio:hover,
-#bluetooth:hover,
-#custom-wifi:hover,
-#clock:hover,
-#mpris:hover,
-#custom-cpu:hover,
-#custom-memory:hover,
-#temperature:hover {
+#workspaces button.urgent {
+  background: alpha(@red, 0.30);
+  color: @red;
+  animation: blink 0.8s ease-in-out infinite alternate;
+}
+
+/* ══════════════════════════════════════
+   CLOCK  (center — slightly bigger pill)
+   ══════════════════════════════════════ */
+#clock {
+  background: alpha(@primary, 0.15);
+  border-color: alpha(@primary, 0.25);
+  color: @primary;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  padding: 3px 16px;
+}
+
+#clock:hover {
+  background: alpha(@primary, 0.25);
+  color: @primary;
+  box-shadow: 0 0 10px alpha(@primary, 0.4);
+}
+
+/* ══════════════════════════════════════
+   MPRIS
+   ══════════════════════════════════════ */
+#mpris {
+  color: @green;
+  border-color: alpha(@green, 0.15);
+}
+
+#mpris:hover {
   color: @yellow;
+  border-color: alpha(@yellow, 0.25);
 }
 
-/* Individual Module Colors */
-#custom-power {
-  color: @red;
+/* ══════════════════════════════════════
+   IDLE INHIBITOR
+   ══════════════════════════════════════ */
+#idle_inhibitor {
+  color: @blue;
+  border-color: alpha(@blue, 0.15);
 }
 
+#idle_inhibitor.activated {
+  color: @yellow;
+  border-color: alpha(@yellow, 0.25);
+  box-shadow: 0 0 8px alpha(@yellow, 0.3);
+}
+
+/* ══════════════════════════════════════
+   PULSEAUDIO
+   ══════════════════════════════════════ */
 #pulseaudio {
   color: @cyan;
+  border-color: alpha(@cyan, 0.15);
 }
 
+#pulseaudio:hover {
+  color: @yellow;
+  box-shadow: 0 0 8px alpha(@cyan, 0.3);
+}
+
+#pulseaudio.muted {
+  color: @gray;
+  border-color: alpha(@gray, 0.15);
+}
+
+/* ══════════════════════════════════════
+   BACKLIGHT
+   ══════════════════════════════════════ */
+#backlight {
+  color: @yellow;
+  border-color: alpha(@yellow, 0.15);
+}
+
+#backlight:hover {
+  box-shadow: 0 0 8px alpha(@yellow, 0.3);
+}
+
+/* ══════════════════════════════════════
+   BATTERY
+   ══════════════════════════════════════ */
 #battery {
   color: @blue;
+  border-color: alpha(@blue, 0.15);
 }
 
 #battery.warning {
   color: @yellow;
+  border-color: alpha(@yellow, 0.2);
+  animation: blink 2s ease-in-out infinite alternate;
 }
 
 #battery.critical {
   color: @red;
+  border-color: alpha(@red, 0.3);
+  box-shadow: 0 0 10px alpha(@red, 0.4);
+  animation: blink 0.8s ease-in-out infinite alternate;
 }
 
 #battery.charging {
   color: @green;
+  border-color: alpha(@green, 0.2);
+  box-shadow: 0 0 6px alpha(@green, 0.3);
 }
 
+/* ══════════════════════════════════════
+   WIFI & BLUETOOTH
+   ══════════════════════════════════════ */
 #custom-wifi {
   color: @cyan;
+  border-color: alpha(@cyan, 0.15);
 }
 
 #bluetooth {
   color: @magenta;
+  border-color: alpha(@magenta, 0.15);
 }
 
-#mpris {
-  color: @green;
+#custom-wifi:hover,
+#bluetooth:hover {
+  color: @yellow;
 }
 
-#idle_inhibitor {
-  color: @blue;
+/* ══════════════════════════════════════
+   NOTIFICATION
+   ══════════════════════════════════════ */
+#custom-notification {
+  color: @foreground;
+  border-color: alpha(@foreground, 0.1);
 }
 
-#clock {
-  color: @primary;
+#custom-notification:hover {
+  color: @yellow;
+  border-color: alpha(@yellow, 0.2);
 }
 
+/* ══════════════════════════════════════
+   THEME TOGGLE
+   ══════════════════════════════════════ */
 #custom-theme-toggle {
   color: @primary;
-  background: transparent;
+  border-color: alpha(@primary, 0.2);
 }
 
+#custom-theme-toggle:hover {
+  color: @accent;
+  box-shadow: 0 0 8px alpha(@primary, 0.4);
+}
+
+/* ══════════════════════════════════════
+   SYNC
+   ══════════════════════════════════════ */
+#custom-sync {
+  color: @blue;
+  border-color: alpha(@blue, 0.15);
+}
+
+#custom-sync:hover {
+  color: @primary;
+  box-shadow: 0 0 8px alpha(@blue, 0.3);
+}
+
+/* ══════════════════════════════════════
+   POWER
+   ══════════════════════════════════════ */
+#custom-power {
+  color: @red;
+  border-color: alpha(@red, 0.2);
+  font-size: 16px;
+  padding: 3px 12px;
+}
+
+#custom-power:hover {
+  background: alpha(@red, 0.2);
+  box-shadow: 0 0 12px alpha(@red, 0.5);
+  color: @red;
+}
+
+/* ══════════════════════════════════════
+   GROUP LOGO (right edge icon)
+   ══════════════════════════════════════ */
 #custom-group-right-logo {
   color: @green;
-  padding-right: 20px;
+  background: alpha(@green, 0.1);
+  border-color: alpha(@green, 0.2);
+  font-size: 16px;
+  padding: 3px 14px 3px 12px;
 }
 
-/* New system stats modules */
+/* ══════════════════════════════════════
+   SYSTEM STATS
+   ══════════════════════════════════════ */
 #custom-cpu {
   color: @magenta;
+  border-color: alpha(@magenta, 0.15);
+}
+
+#custom-cpu:hover {
+  color: @yellow;
+  box-shadow: 0 0 8px alpha(@magenta, 0.3);
 }
 
 #custom-memory {
   color: @green;
+  border-color: alpha(@green, 0.15);
+}
+
+#custom-memory:hover {
+  color: @yellow;
+  box-shadow: 0 0 8px alpha(@green, 0.3);
 }
 
 #temperature {
   color: @red;
+  border-color: alpha(@red, 0.15);
+}
+
+#temperature.critical {
+  color: @red;
+  background: alpha(@red, 0.15);
+  border-color: alpha(@red, 0.4);
+  box-shadow: 0 0 12px alpha(@red, 0.5);
+  animation: blink 0.8s ease-in-out infinite alternate;
+}
+
+#temperature:hover {
+  color: @yellow;
+  box-shadow: 0 0 8px alpha(@red, 0.3);
+}
+
+/* ══════════════════════════════════════
+   TRAY
+   ══════════════════════════════════════ */
+#tray {
+  border-color: alpha(@foreground, 0.08);
+}
+
+#tray>.passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+  -gtk-icon-effect: highlight;
+  background: alpha(@red, 0.15);
+}
+
+/* ══════════════════════════════════════
+   BLINK ANIMATION
+   ══════════════════════════════════════ */
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.4;
+  }
 }

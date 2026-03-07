@@ -1,45 +1,65 @@
+/* ═══════════════════════════════════════════════
+   WAYBAR — Gruvbox Dark
+   ═══════════════════════════════════════════════ */
+
 * {
   font-family: "CaskaydiaMono Nerd Font Propo";
-  font-size: 15px;
+  font-size: 13px;
   font-weight: bold;
   border: none;
   margin: 0;
   padding: 0;
   min-height: 0;
+  transition: all 200ms ease;
 }
 
-window#waybar,
+/* ── Bar ── */
+window#waybar {
+  background: transparent;
+}
+
 window#waybar>box {
-  background: rgb(29, 32, 33); /* Gruvbox dark background */
-  padding: 5px 6px;
+  background: rgba(29, 32, 33, 0.68);
+  border-top: 1px solid rgba(235, 219, 178, 0.07);
+  padding: 4px 8px;
 }
 
+/* ── Tooltip ── */
 tooltip {
-  background: rgb(29, 32, 33);
+  background: rgba(29, 32, 33, 0.92);
+  border: 1px solid rgba(250, 189, 47, 0.35);
+  border-radius: 8px;
+  padding: 4px 8px;
 }
 
 tooltip label {
-  color: #ebdbb2; /* Gruvbox light foreground */
-  margin: 0 2px;
+  color: #ebdbb2;
+  margin: 2px 4px;
+  font-size: 12px;
 }
 
+/* ── Power menu ── */
 menu {
-  border-radius: 0px;
-  background: #3c3836; /* Gruvbox dark gray */
-  padding: 4px 4px;
-  box-shadow: none;
+  border-radius: 10px;
+  background: rgba(40, 40, 40, 0.96);
+  border: 1px solid rgba(250, 189, 47, 0.25);
+  padding: 6px 4px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
 }
 
 menuitem {
-  padding: 8px 8px;
-  margin: 2px 5px;
+  border-radius: 6px;
+  padding: 8px 14px;
+  margin: 2px 4px;
+  color: #ebdbb2;
 }
 
 menuitem:hover {
-  background-color: #fabd2f; /* Gruvbox yellow */
-  color: #282828; /* dark background for contrast */
+  background: rgba(250, 189, 47, 0.2);
+  color: #fabd2f;
 }
 
+/* ═══ SHARED PILL BASE ═══ */
 #workspaces,
 #custom-theme-toggle,
 #pulseaudio,
@@ -56,118 +76,275 @@ menuitem:hover {
 #custom-group-right-logo,
 #custom-cpu,
 #custom-memory,
-#temperature {
-  color: #ebdbb2; /* Default text */
-  background: transparent;
-  padding: 2px 9px;
-  margin: 0 2px;
+#temperature,
+#custom-sync {
+  color: #ebdbb2;
+  background: rgba(235, 219, 178, 0.06);
+  border: 1px solid rgba(235, 219, 178, 0.08);
+  border-radius: 20px;
+  padding: 3px 12px;
+  margin: 2px 3px;
 }
 
-/* Workspaces */
+/* ═══ WORKSPACES ═══ */
 #workspaces {
-  color: #fbf1c7; /* Light Gruvbox fg */
+  border-radius: 20px;
+  padding: 3px 6px;
 }
 
 #workspaces button {
-  color: #b8bb26; /* green */
-  padding: 2px 4px;
-  margin: 0 3px;
-  border-radius: 2px;
+  color: #a89984;
+  background: transparent;
+  border-radius: 14px;
+  padding: 2px 8px;
+  margin: 0 2px;
+  min-width: 22px;
 }
 
 #workspaces button.active {
-  background: #fabd2f; /* yellow */
-  color: #282828; 
-  font-weight: bolder;
-  text-decoration: underline;
+  background: rgba(250, 189, 47, 0.85);
+  color: #282828;
+  font-weight: 900;
+  box-shadow: 0 0 8px rgba(250, 189, 47, 0.5);
 }
 
 #workspaces button.active:hover {
-  background: #d79921; /* darker yellow */
+  background: #d79921;
   color: #282828;
+  box-shadow: 0 0 12px rgba(215, 153, 33, 0.6);
 }
 
 #workspaces button:hover {
-  color: #fb4934; /* red */
+  background: rgba(251, 73, 52, 0.15);
+  color: #fb4934;
 }
 
-/* Hover effects */
-#custom-power:hover,
-#pulseaudio:hover,
-#bluetooth:hover,
-#custom-wifi:hover,
-#clock:hover,
-#mpris:hover,
-#custom-cpu:hover,
-#custom-memory:hover,
-#temperature:hover {
-  color: #fabd2f; /* yellow */
+#workspaces button.urgent {
+  background: rgba(251, 73, 52, 0.3);
+  color: #fb4934;
+  animation: blink 1s step-end infinite;
 }
 
-/* Individual Module Colors */
-#custom-power {
-  color: #fb4934; /* red */
+/* ═══ CLOCK ═══ */
+#clock {
+  background: rgba(250, 189, 47, 0.12);
+  border-color: rgba(250, 189, 47, 0.25);
+  color: #fabd2f;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  padding: 3px 16px;
 }
 
+#clock:hover {
+  background: rgba(250, 189, 47, 0.22);
+  box-shadow: 0 0 10px rgba(250, 189, 47, 0.4);
+}
+
+/* ═══ MPRIS ═══ */
+#mpris {
+  color: #8ec07c;
+  border-color: rgba(142, 192, 124, 0.15);
+}
+
+#mpris:hover {
+  color: #fabd2f;
+  border-color: rgba(250, 189, 47, 0.25);
+}
+
+/* ═══ IDLE INHIBITOR ═══ */
+#idle_inhibitor {
+  color: #b8bb26;
+  border-color: rgba(184, 187, 38, 0.15);
+}
+
+#idle_inhibitor.activated {
+  color: #fabd2f;
+  border-color: rgba(250, 189, 47, 0.25);
+  box-shadow: 0 0 8px rgba(250, 189, 47, 0.3);
+}
+
+/* ═══ PULSEAUDIO ═══ */
 #pulseaudio {
-  color: #83a598; /* blue-gray */
+  color: #83a598;
+  border-color: rgba(131, 165, 152, 0.15);
 }
 
+#pulseaudio:hover {
+  color: #fabd2f;
+  box-shadow: 0 0 8px rgba(131, 165, 152, 0.3);
+}
+
+#pulseaudio.muted {
+  color: #928374;
+  border-color: rgba(146, 131, 116, 0.15);
+}
+
+/* ═══ BACKLIGHT ═══ */
+#backlight {
+  color: #fabd2f;
+  border-color: rgba(250, 189, 47, 0.15);
+}
+
+#backlight:hover {
+  box-shadow: 0 0 8px rgba(250, 189, 47, 0.3);
+}
+
+/* ═══ BATTERY ═══ */
 #battery {
-  color: #b8bb26; /* green */
+  color: #b8bb26;
+  border-color: rgba(184, 187, 38, 0.15);
 }
 
 #battery.warning {
-  color: #fabd2f; /* yellow */
+  color: #fabd2f;
+  border-color: rgba(250, 189, 47, 0.2);
+  animation: blink 2s ease-in-out infinite;
 }
 
 #battery.critical {
-  color: #fb4934; /* red */
+  color: #fb4934;
+  border-color: rgba(251, 73, 52, 0.3);
+  box-shadow: 0 0 10px rgba(251, 73, 52, 0.4);
+  animation: blink 0.8s ease-in-out infinite;
 }
 
 #battery.charging {
-  color: #8ec07c; /* light green */
+  color: #8ec07c;
+  border-color: rgba(142, 192, 124, 0.2);
+  box-shadow: 0 0 6px rgba(142, 192, 124, 0.3);
 }
 
+/* ═══ WIFI & BLUETOOTH ═══ */
 #custom-wifi {
-  color: #83a598; /* blue-gray */
+  color: #83a598;
+  border-color: rgba(131, 165, 152, 0.15);
 }
 
 #bluetooth {
-  color: #d3869b; /* pink/magenta */
+  color: #d3869b;
+  border-color: rgba(211, 134, 155, 0.15);
 }
 
-#mpris {
-  color: #8ec07c; /* green */
+#custom-wifi:hover,
+#bluetooth:hover {
+  color: #fabd2f;
 }
 
-#idle_inhibitor {
-  color: #b8bb26; /* green */
+/* ═══ NOTIFICATION ═══ */
+#custom-notification {
+  color: #ebdbb2;
+  border-color: rgba(235, 219, 178, 0.1);
 }
 
-#clock {
-  color: #fabd2f; /* yellow */
+#custom-notification:hover {
+  color: #fabd2f;
+  border-color: rgba(250, 189, 47, 0.2);
 }
 
+/* ═══ THEME TOGGLE ═══ */
 #custom-theme-toggle {
-  color: #fabd2f; /* yellow */
-  background: transparent;
+  color: #fabd2f;
+  border-color: rgba(250, 189, 47, 0.2);
 }
 
+#custom-theme-toggle:hover {
+  color: #8ec07c;
+  box-shadow: 0 0 8px rgba(250, 189, 47, 0.4);
+}
+
+/* ═══ SYNC ═══ */
+#custom-sync {
+  color: #83a598;
+  border-color: rgba(131, 165, 152, 0.15);
+}
+
+#custom-sync:hover {
+  color: #b8bb26;
+  box-shadow: 0 0 8px rgba(131, 165, 152, 0.3);
+}
+
+/* ═══ POWER ═══ */
+#custom-power {
+  color: #fb4934;
+  border-color: rgba(251, 73, 52, 0.2);
+  font-size: 16px;
+  padding: 3px 12px;
+}
+
+#custom-power:hover {
+  background: rgba(251, 73, 52, 0.2);
+  box-shadow: 0 0 12px rgba(251, 73, 52, 0.5);
+  color: #fb4934;
+}
+
+/* ═══ GROUP LOGO ═══ */
 #custom-group-right-logo {
-  color: #8ec07c; /* green */
-  padding-right: 20px;
+  color: #8ec07c;
+  background: rgba(142, 192, 124, 0.1);
+  border-color: rgba(142, 192, 124, 0.2);
+  font-size: 16px;
+  padding: 3px 14px 3px 12px;
 }
 
-/* New system stats modules */
+/* ═══ SYSTEM STATS ═══ */
 #custom-cpu {
-  color: #d3869b; /* magenta */
+  color: #d3869b;
+  border-color: rgba(211, 134, 155, 0.15);
+}
+
+#custom-cpu:hover {
+  color: #fabd2f;
+  box-shadow: 0 0 8px rgba(211, 134, 155, 0.3);
 }
 
 #custom-memory {
-  color: #8ec07c; /* green */
+  color: #8ec07c;
+  border-color: rgba(142, 192, 124, 0.15);
+}
+
+#custom-memory:hover {
+  color: #fabd2f;
+  box-shadow: 0 0 8px rgba(142, 192, 124, 0.3);
 }
 
 #temperature {
-  color: #fb4934; /* red */
+  color: #fb4934;
+  border-color: rgba(251, 73, 52, 0.15);
+}
+
+#temperature.critical {
+  color: #fb4934;
+  background: rgba(251, 73, 52, 0.15);
+  border-color: rgba(251, 73, 52, 0.4);
+  box-shadow: 0 0 12px rgba(251, 73, 52, 0.5);
+  animation: blink 0.8s ease-in-out infinite;
+}
+
+#temperature:hover {
+  color: #fabd2f;
+  box-shadow: 0 0 8px rgba(251, 73, 52, 0.3);
+}
+
+/* ═══ TRAY ═══ */
+#tray {
+  border-color: rgba(235, 219, 178, 0.08);
+}
+
+#tray>.passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+  -gtk-icon-effect: highlight;
+  background: rgba(251, 73, 52, 0.15);
+}
+
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.4;
+  }
 }
