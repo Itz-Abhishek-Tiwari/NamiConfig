@@ -1,24 +1,27 @@
 /* -----------------------------------
-   🟤 Catppuccin Mocha – Crust Palette
+   🟤 Gruvbox Dark Hard – Palette
 -------------------------------------- */
-@define-color background rgba(18, 17, 27, 0.8);
-@define-color background-alt rgba(18, 17, 27, 0.8);
-@define-color background-faded rgba(18, 17, 27, 0.5);
-/* @define-color background rgb(18, 17, 27); */
-/* @define-color background-alt rgb(18, 17, 27); */
-/* @define-color background-faded rgb(18, 17, 27); */
+/*@define-color background rgba(29, 32, 33, 0.95);     
+@define-color background-alt rgba(29, 32, 33, 0.95);
+@define-color background-faded rgba(29, 32, 33, 0.6);*/
 
-@define-color crust #11111b;
-@define-color foreground #cdd6f4;
-@define-color red #f38ba8;
-@define-color green #a6e3a1;
-@define-color yellow #f9e2af;
-@define-color blue #89b4fa;
-@define-color gray #313244;
-@define-color select #585b70;
+ /*Solid references (optional)*/
+@define-color background rgb(29, 32, 33);
+@define-color background-alt rgb(29, 32, 33);
+@define-color background-faded rgb(29, 32, 33);
+
+
+@define-color crust #141617;
+@define-color foreground #ebdbb2;
+@define-color red #fb4934;
+@define-color green #b8bb26;
+@define-color yellow #fabd2f;
+@define-color blue #83a598;
+@define-color gray #3c3836;
+@define-color select #504945;
 
 /* 🎵 MPRIS */
-@define-color mpris-album-art-overlay rgba(0, 0, 0, 0.55);
+@define-color mpris-album-art-overlay rgba(0, 0, 0, 0.6);
 @define-color mpris-button-hover rgba(0, 0, 0, 0.5);
 @define-color mpris-button-bg @foreground;
 @define-color mpris-button-fg @crust;
@@ -34,7 +37,7 @@
   color: @foreground;
   background-color: transparent;
   border-radius: 2px;
-  border: none
+  border: none;
 }
 
 /* -----------------------------------
@@ -42,11 +45,9 @@
 -------------------------------------- */
 .control-center {
   background-color: alpha(@background, 1);
-  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.65); */
   box-shadow: none;
   padding: 2px;
-  border: none
-    /* border-bottom: 9px solid @blue; */
+  border: none;
 }
 
 .notification-row .notification-background {
@@ -59,7 +60,7 @@
 -------------------------------------- */
 .notification {
   background-color: @background;
-  border: 1px solid alpha(@foreground, 0.05);
+  border: 1px solid alpha(@foreground, 0.06);
   border-radius: 2px;
   padding: 6px 10px;
   margin-bottom: 6px;
@@ -75,7 +76,7 @@
 
 .notification .time {
   font-size: 0.75rem;
-  color: alpha(@foreground, 0.6);
+  color: alpha(@foreground, 0.65);
 }
 
 .notification .body {
@@ -83,7 +84,7 @@
   color: @foreground;
 }
 
-.notification-action>button {
+.notification-action > button {
   padding: 5px 10px;
   font-size: 0.9rem;
   background-color: @select;
@@ -93,35 +94,31 @@
   margin: 6px 6px 0 0;
 }
 
-.notification-action>button:hover {
+.notification-action > button:hover {
   background-color: @blue;
 }
 
-.notification-action>button:hover label {
+.notification-action > button:hover label {
   background-color: @blue;
   color: @crust;
 }
 
 /* Urgency */
 .notification.critical {
-  border: none;
-  outline: none;
   background: @red;
-  border-left: 9px solid red;
+  border-left: 9px solid @red;
 }
 
 .notification.critical .title,
 .notification.critical .body,
 .notification.critical .summary {
-  color: alpha(@crust, 0.9);
+  color: @crust;
   font-weight: bold;
 }
 
 .notification.low,
 .notification.normal {
-  border: none;
-  outline: none;
-  background-color: alpha(@background, 0.95);
+  background-color: alpha(@background, 0.97);
   border-left: 9px solid @blue;
 }
 
@@ -144,11 +141,11 @@
 }
 
 .close-button label {
-  color: aliceblue;
+  color: @crust;
 }
 
 .close-button:hover {
-  background-color:transparent;
+  background-color: transparent;
 }
 
 /* -----------------------------------
@@ -172,20 +169,18 @@
 }
 
 /* -----------------------------------
-   📊 Sliders (Volume/Brightness)
+   📊 Sliders
 -------------------------------------- */
 scale trough {
   margin: 0 1rem;
   background-color: @gray;
   min-height: 8px;
   min-width: 70px;
-
   border-radius: 30px;
 }
 
 trough highlight {
   background: @blue;
-
   border-radius: 30px;
 }
 
@@ -212,7 +207,7 @@ tooltip {
 
 .widget-buttons-grid button {
   background: @crust;
-  color: #fff;
+  color: @foreground;
   border-radius: 50px;
   min-width: 60px;
   min-height: 30px;
@@ -230,12 +225,11 @@ tooltip {
 
 .widget-buttons-grid button.toggle:checked label {
   background: @blue;
-  color: @background;
+  color: @crust;
 }
 
-
 .widget-buttons-grid button.toggle:checked:hover {
-  background: alpha(@blue, 0.8);
+  background: alpha(@blue, 0.85);
 }
 
 /* -----------------------------------
@@ -275,7 +269,6 @@ tooltip {
   background-repeat: no-repeat;
   overflow: hidden;
   box-shadow: none;
-  background: red;
 }
 
 picture.mpris-background {
@@ -284,7 +277,6 @@ picture.mpris-background {
   box-shadow: none;
   border: none;
 }
-
 
 /* -----------------------------------
    🔊 Volume Widget
@@ -319,21 +311,20 @@ picture.mpris-background {
 -------------------------------------- */
 .widget-dnd {
   font-weight: bold;
-  padding: 15px 15px 15px;
+  padding: 15px;
 }
 
-.widget-dnd>switch {
+.widget-dnd > switch {
   background: @yellow;
-  border: none;
   border-radius: 100px;
   padding: 3px;
 }
 
-.widget-dnd>switch:checked {
+.widget-dnd > switch:checked {
   background: @green;
 }
 
-.widget-dnd>switch slider {
+.widget-dnd > switch slider {
   background: @background;
   border-radius: 12px;
   min-width: 18px;
@@ -348,23 +339,20 @@ picture.mpris-background {
   font-weight: bold;
 }
 
-.widget-title>label {
+.widget-title > label {
   font-size: 1.5rem;
 }
 
-.widget-title>button {
+.widget-title > button {
   background: @red;
-  border: none;
   border-radius: 100px;
   padding: 0 6px;
-  transition: all 0.7s ease;
 }
 
-.widget-title>button label {
+.widget-title > button label {
   color: @crust;
 }
 
-.widget-title>button:hover {
-  background: alpha(@red, 0.8);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.65);
+.widget-title > button:hover {
+  background: alpha(@red, 0.85);
 }

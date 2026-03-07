@@ -1,0 +1,173 @@
+* {
+  font-family: "CaskaydiaMono Nerd Font Propo";
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  margin: 0;
+  padding: 0;
+  min-height: 0;
+}
+
+window#waybar,
+window#waybar > box {
+  background: rgb(20, 20, 24);
+  padding: 5px 6px;
+}
+
+tooltip {
+  background: rgb(20, 20, 24);
+}
+
+tooltip label {
+  color: #e4e4e7;
+  margin: 0 2px;
+}
+
+menu {
+  border-radius: 0px;
+  background: #141417;
+  padding: 4px 4px;
+  box-shadow: none;
+}
+
+menuitem {
+  padding: 8px 8px;
+  margin: 2px 5px;
+}
+
+menuitem:hover {
+  background-color: #e5e5e5;
+  color: #000000;
+}
+
+#workspaces,
+#custom-theme-toggle,
+#pulseaudio,
+#backlight,
+#battery,
+#custom-wifi,
+#bluetooth,
+#custom-power,
+#idle_inhibitor,
+#clock,
+#mpris,
+#tray,
+#custom-notification,
+#custom-group-right-logo,
+#custom-cpu,
+#custom-memory,
+#temperature {
+  color: #d4d4d8;
+  background: transparent;
+  padding: 2px 9px;
+  margin: 0 2px;
+}
+
+/* Workspaces */
+#workspaces {
+  color: #e5e5e5;
+}
+
+#workspaces button {
+  color: #bfbfc7;
+  padding: 2px 4px;
+  margin: 0 3px;
+  border-radius: 2px;
+}
+
+#workspaces button.active {
+  background: #e4e4e7;
+  color: #000000;
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
+#workspaces button.active:hover {
+  background: #cfcfd4;
+  color: #0a0a0a;
+}
+
+#workspaces button:hover {
+  color: #f0f0f0;
+}
+
+/* Hover effects */
+#custom-power:hover,
+#pulseaudio:hover,
+#bluetooth:hover,
+#custom-wifi:hover,
+#clock:hover,
+#mpris:hover,
+#custom-cpu:hover,
+#custom-memory:hover,
+#temperature:hover {
+  color: #ffffff;
+}
+
+/* Individual Module Shades */
+#custom-power {
+  color: #cfcfd4;
+}
+
+#pulseaudio {
+  color: #d9d9de;
+}
+
+#battery {
+  color: #d0d0d5;
+}
+
+#battery.warning {
+  color: #f0f0f0;
+}
+
+#battery.critical {
+  color: #ffffff;
+}
+
+#battery.charging {
+  color: #e0e0e5;
+}
+
+#custom-wifi {
+  color: #ccccd1;
+}
+
+#bluetooth {
+  color: #c7c7cc;
+}
+
+#mpris {
+  color: #dadade;
+}
+
+#idle_inhibitor {
+  color: #c1c1c7;
+}
+
+#clock {
+  color: #e6e6eb;
+}
+
+#custom-theme-toggle {
+  color: #e6e6eb;
+  background: transparent;
+}
+
+#custom-group-right-logo {
+  color: #d8d8dd;
+  padding-right: 20px;
+}
+
+/* System stats */
+#custom-cpu {
+  color: #bfbfc7;
+}
+
+#custom-memory {
+  color: #d6d6db;
+}
+
+#temperature {
+  color: #ffffff;
+}

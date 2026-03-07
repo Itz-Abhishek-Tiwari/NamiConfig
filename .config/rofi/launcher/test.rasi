@@ -2,17 +2,17 @@
  *
  * Author : Aditya Shakya (adi1090x)
  * Github : @adi1090x
- *
+ * 
  * Rofi Theme File
  * Rofi Version: 1.7.3
  **/
 
 /*****----- Configuration -----*****/
 configuration {
-    modi:                       "drun";
-    show-icons:                 false;   // disabled globally
+  	modi:                       "drun";
+    show-icons:                 true;
     display-drun:               " Applications";
-    drun-display-format:        "{name}";
+  	drun-display-format:        "{name}";
 }
 
 /*****----- Global Properties -----*****/
@@ -46,7 +46,7 @@ mainbox {
     margin:                      0px;
     padding:                     0px;
     border:                      0px solid;
-    border-radius:               0px;
+    border-radius:               0px 0px 0px 0px;
     border-color:                @selected;
     background-color:            @background;
     orientation:                 horizontal;
@@ -61,6 +61,7 @@ entry {
     background-color:            transparent;
     text-color:                  @background-alt;
     cursor:                      none;
+    // placeholder:                 "       ";
     placeholder-color:           inherit;
     vertical-align:              0.5;
     horizontal-align:            0.5;
@@ -74,24 +75,23 @@ listview {
     cycle:                       true;
     dynamic:                     true;
     scrollbar:                   false;
-    layout:                      horizontal;
+    layout:                      vertical;
     reverse:                     false;
     fixed-height:                true;
     fixed-columns:               true;
-
+    
     spacing:                     0px;
     margin:                      0px;
     padding:                     20px;
-    border:                      0px solid;
+    border:                     0px solid;
     border-radius:               0px;
     border-color:                @selected;
     background-color:            transparent;
     text-color:                  @foreground;
     cursor:                      "default";
 }
-
 scrollbar {
-    handle-width:                5px;
+    handle-width:                5px ;
     handle-color:                @selected;
     border-radius:               0px;
     background-color:            @background-alt;
@@ -110,28 +110,22 @@ element {
     text-color:                  @foreground;
     orientation:                 vertical;
     cursor:                      pointer;
-    width:                        "100%";
-
 }
-
 element normal.normal {
     background-color:            transparent;
     text-color:                  @foreground;
 }
-
 element selected.normal {
     background-color:            @background-alt;
     text-color:                  @foreground;
 }
-
-/*****----- Remove element icons -----*****/
 element-icon {
-    size:                        0px;
+    enabled:                     false;
     background-color:            transparent;
-    text-color:                  transparent;
+    text-color:                  inherit;
+    size:                        64px;
     cursor:                      inherit;
 }
-
 element-text {
     background-color:            transparent;
     text-color:                  inherit;
@@ -139,6 +133,7 @@ element-text {
     cursor:                      inherit;
     vertical-align:              0.5;
     horizontal-align:            0.5;
+    font:                        "Iosevka Nerd Font Bold 12";  
 }
 
 /*****----- Message -----*****/
@@ -150,7 +145,6 @@ error-message {
     background-color:            @background;
     text-color:                  @foreground;
 }
-
 textbox {
     background-color:            @background;
     text-color:                  @foreground;

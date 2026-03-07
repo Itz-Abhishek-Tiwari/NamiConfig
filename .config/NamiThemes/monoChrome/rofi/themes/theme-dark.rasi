@@ -1,0 +1,9 @@
+// Monochrome (Catppuccin Mocha–based)
+* {
+    background:     #111111;
+    background-alt: #2a2a2a;
+    foreground:     #d0d0d080;
+    selected:       #b5b5b5ee;
+    active:         #a0a0a080;
+    urgent:         #e0e0e0;
+}

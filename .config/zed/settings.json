@@ -1,0 +1,15 @@
+{
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "vim_mode": true,
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 1000
+    }
+  },
+  "icon_theme": "Material Icon Theme",
+  "theme": {
+    "mode": "dark",
+    "dark": "catppuccin_dark",
+    "light": "catppuccin_light"
+  }
+}

@@ -1,0 +1,179 @@
+/* Font and reset */
+* {
+  font-family: "CaskaydiaMono Nerd Font";
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  margin: 0;
+  padding: 0;
+  min-height: 0;
+}
+
+/* Background and layout */
+window#waybar,
+window#waybar > box {
+  background: #f4f4f6;
+  padding: 5px 6px;
+}
+
+/* Tooltip */
+tooltip {
+  background: rgb(210, 210, 218);
+}
+
+tooltip label {
+  color: #3f3f46;
+  margin: 0 2px;
+}
+
+/* Menus */
+menu {
+  border-radius: 0px;
+  background: #e6e6eb;
+  padding: 0px 4px;
+  box-shadow: none;
+}
+
+menuitem {
+  padding: 8px 8px;
+  margin: 2px 5px;
+  border-radius: 4px;
+}
+
+menuitem:hover {
+  background-color: #3f3f46;
+  color: #ffffff;
+}
+
+/* Modules */
+#workspaces,
+#custom-theme-toggle,
+#pulseaudio,
+#backlight,
+#battery,
+#custom-wifi,
+#bluetooth,
+#custom-power,
+#idle_inhibitor,
+#clock,
+#mpris,
+#tray,
+#custom-notification,
+#custom-group-right-logo,
+#custom-cpu,
+#custom-memory,
+#temperature {
+  color: #3f3f46;
+  background: transparent;
+  padding: 2px 9px;
+  margin: 0 2px;
+}
+
+/* Workspaces */
+#workspaces {
+  color: #2a2a30;
+}
+
+#workspaces button {
+  color: #6b6b75;
+  padding: 2px 4px;
+  margin: 0 3px;
+  border-radius: 2px;
+}
+
+#workspaces button.active {
+  background: #3f3f46;
+  color: #ffffff;
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
+#workspaces button.active:hover {
+  background: #2f2f35;
+  color: #ffffff;
+}
+
+#workspaces button:hover {
+  color: #1f1f24;
+}
+
+/* Hover effects */
+#custom-power:hover,
+#pulseaudio:hover,
+#bluetooth:hover,
+#custom-wifi:hover,
+#clock:hover,
+#mpris:hover,
+#custom-cpu:hover,
+#custom-memory:hover,
+#temperature:hover {
+  color: #1a1a1f;
+}
+
+/* Individual Modules (brightness hierarchy only) */
+#custom-power {
+  color: #4a4a52;
+}
+
+#pulseaudio {
+  color: #55555d;
+}
+
+#battery {
+  color: #4f4f57;
+}
+
+#battery.warning {
+  color: #2a2a30;
+}
+
+#battery.critical {
+  color: #000000;
+}
+
+#battery.charging {
+  color: #3a3a41;
+}
+
+#custom-wifi {
+  color: #5a5a62;
+}
+
+#bluetooth {
+  color: #66666f;
+}
+
+#mpris {
+  color: #505058;
+}
+
+#idle_inhibitor {
+  color: #6e6e77;
+}
+
+#clock {
+  color: #2f2f35;
+}
+
+#custom-theme-toggle {
+  color: #2f2f35;
+  background: transparent;
+}
+
+#custom-group-right-logo {
+  color: #4a4a52;
+  padding-right: 20px;
+}
+
+/* System stats modules */
+#custom-cpu {
+  color: #6a6a73;
+}
+
+#custom-memory {
+  color: #4f4f57;
+}
+
+#temperature {
+  color: #000000;
+}

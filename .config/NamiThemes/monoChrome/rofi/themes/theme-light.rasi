@@ -1,0 +1,9 @@
+// Monochrome (Catppuccin Latte–based)
+* {
+    background:     #f2f2f2;
+    background-alt: #b8b8b8;
+    foreground:     #4a4a4acc;
+    selected:       #7a7a7acc;
+    active:         #6a6a6a80;
+    urgent:         #2f2f2f;
+}

@@ -5,9 +5,9 @@ import subprocess
 from pathlib import Path
 
 # ====================== Theme Constants ====================== #
-DARK = "Colloid-Dark-gruvBox"
-LIGHT = "Colloid-Light-gruvBox"
-CURRENT_THEME = "gruvBox"
+DARK = "Colloid-Dark-catppuccin"
+LIGHT = "Colloid-Light-catppuccin"
+CURRENT_THEME = "catppuccin"
 CONFIG_DIR = Path.home() / ".config"
 STATE_FILE = CONFIG_DIR / ".current_theme"
 WINDOWRULES_PATH = CONFIG_DIR / "hypr/windowrules.conf"
@@ -40,33 +40,33 @@ GTK_COMMON_SETTINGS = {
 theme_paths = {
     "kitty": {
         "target": CONFIG_DIR / "kitty/theme.conf",
-        "light": CONFIG_DIR / "NamiThemes/gruvBox/kitty/themes/theme-light.conf",
-        "dark": CONFIG_DIR / "NamiThemes/gruvBox/kitty/themes/theme-dark.conf",
+        "light": CONFIG_DIR / "NamiThemes/catppuccin/kitty/themes/theme-light.conf",
+        "dark": CONFIG_DIR / "NamiThemes/catppuccin/kitty/themes/theme-dark.conf",
     },
     "waybar": {
         "target": CONFIG_DIR / "waybar/style.css",
-        "light": CONFIG_DIR / "NamiThemes/gruvBox/waybar/themes/theme-light.css",
-        "dark": CONFIG_DIR / "NamiThemes/gruvBox/waybar/themes/theme-dark.css",
+        "light": CONFIG_DIR / "NamiThemes/catppuccin/waybar/themes/theme-light.css",
+        "dark": CONFIG_DIR / "NamiThemes/catppuccin/waybar/themes/theme-dark.css",
     },
     "mako": {
         "target": CONFIG_DIR / "mako/config",
-        "light": CONFIG_DIR / "NamiThemes/gruvBox/mako/themes/theme-light",
-        "dark": CONFIG_DIR / "NamiThemes/gruvBox/mako/themes/theme-dark",
+        "light": CONFIG_DIR / "NamiThemes/catppuccin/mako/themes/theme-light",
+        "dark": CONFIG_DIR / "NamiThemes/catppuccin/mako/themes/theme-dark",
     },
     "rofi": {
         "target": CONFIG_DIR / "rofi/colors/theme.rasi",
-        "light": CONFIG_DIR / "NamiThemes/gruvBox/rofi/themes/theme-light.rasi",
-        "dark": CONFIG_DIR / "NamiThemes/gruvBox/rofi/themes/theme-dark.rasi",
+        "light": CONFIG_DIR / "NamiThemes/catppuccin/rofi/themes/theme-light.rasi",
+        "dark": CONFIG_DIR / "NamiThemes/catppuccin/rofi/themes/theme-dark.rasi",
     },
     "swaync": {
         "target": CONFIG_DIR / "swaync/style.css",
-        "light": CONFIG_DIR / "NamiThemes/gruvBox/swaync/themes/theme-light.css",
-        "dark": CONFIG_DIR / "NamiThemes/gruvBox/swaync/themes/theme-dark.css",
+        "light": CONFIG_DIR / "NamiThemes/catppuccin/swaync/themes/theme-light.css",
+        "dark": CONFIG_DIR / "NamiThemes/catppuccin/swaync/themes/theme-dark.css",
     },
     "ghostty": {
         "target": CONFIG_DIR / "ghostty/themes/theme",
-        "light": CONFIG_DIR / "NamiThemes/gruvBox/ghostty/themes/theme-light",
-        "dark": CONFIG_DIR / "NamiThemes/gruvBox/ghostty/themes/theme-dark",
+        "light": CONFIG_DIR / "NamiThemes/catppuccin/ghostty/themes/theme-light",
+        "dark": CONFIG_DIR / "NamiThemes/catppuccin/ghostty/themes/theme-dark",
     },
 }
 
@@ -192,7 +192,7 @@ def switch_vscode_theme(theme):
         return
     data = json.loads(path.read_text())
     data["workbench.colorTheme"] = (
-        "gruvBox Latte" if theme == "light" else "gruvBox Mocha"
+        "catppuccin Latte" if theme == "light" else "catppuccin Mocha"
     )
     path.write_text(json.dumps(data, indent=2))
 
@@ -203,8 +203,8 @@ def switch_zed_theme(theme):
     data = json.loads(ZED_SETTINGS_PATH.read_text())
     data.setdefault("theme", {})
     data["theme"]["mode"] = theme
-    data["theme"]["light"] = "gruvBox_light"
-    data["theme"]["dark"] = "gruvBox_dark"
+    data["theme"]["light"] = "catppuccin_light"
+    data["theme"]["dark"] = "catppuccin_dark"
     ZED_SETTINGS_PATH.write_text(json.dumps(data, indent=2))
 
 
@@ -284,7 +284,7 @@ def toggle_theme():
     switch_zed_theme(new)
     switch_spicetify(new)
 
-    update_windowrules_for_blur(new)
+    # update_windowrules_for_blur(new)
     reload_nemo()
     notify(new)
 

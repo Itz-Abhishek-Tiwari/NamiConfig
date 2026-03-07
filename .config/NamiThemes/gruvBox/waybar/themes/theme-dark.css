@@ -10,12 +10,12 @@
 
 window#waybar,
 window#waybar>box {
-  background: rgba(29, 32, 33, 0.8); /* Gruvbox dark background */
+  background: rgb(29, 32, 33); /* Gruvbox dark background */
   padding: 5px 6px;
 }
 
 tooltip {
-  background: rgba(29, 32, 33, 0.8);
+  background: rgb(29, 32, 33);
 }
 
 tooltip label {
