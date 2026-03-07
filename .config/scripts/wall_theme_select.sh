@@ -5,7 +5,8 @@
 
 WALLPAPER_DIR="$HOME/.config/hypr/wall"
 THEMES_DIR="$HOME/NamiConfig/.config/NamiThemes"
-STATE_FILE="$HOME/NamiConfig/.config/.theme_state.json"
+STATE_FILE="$HOME/.config/.theme_state.json"
+nami_core="python3 $HOME/NamiConfig/.config/scripts/nami_core.py"
 
 # Get current theme from state file
 if [ -f "$STATE_FILE" ]; then
@@ -43,7 +44,7 @@ rm -f "$TARGET_DIR/$MODE.png" "$TARGET_DIR/$MODE.jpg"
 
 ln -sf "$WALLPAPER_DIR/$WALLPAPER" "$TARGET_FILE"
 
-notify-send "NamiConfig" "Set $WALLPAPER as $MODE wallpaper for $CURRENT_THEME"
+$nami_core notify "Set $WALLPAPER as $MODE wallpaper for $CURRENT_THEME" --title "NamiConfig" --icon "image"
 
 # 4. Trigger reload if the current mode matches the one we just set
 ACTIVE_MODE=$(jq -r '.mode' "$STATE_FILE")

@@ -77,21 +77,12 @@ def set_gtk_theme(theme_mode, theme_family):
         core.ensure_dir(p)
         p.write_text(ini)
 
-def get_current_wallpaper():
-    """Get the currently displayed wallpaper from swww"""
-    res = core.run_command(["swww", "query"], check=False, capture_output=True)
-    if res and res.returncode == 0:
-        # Format is typically: 'monitor: image_path'
-        lines = res.stdout.splitlines()
-        if lines and ": " in lines[0]:
-            return Path(lines[0].split(": ")[-1].strip())
-    return None
 
 def switch_wallpapers(family, mode, force=False):
     if not force:
         # If not forcing, we only regenerate colors for NamiPywal using current wallpaper
         if family.lower() == "namipywal":
-            wallpaper = get_current_wallpaper()
+            wallpaper = core.get_current_wallpaper()
             if wallpaper and wallpaper.exists():
                 generate_colors.generate_all(wallpaper, mode)
         return
@@ -192,12 +183,12 @@ def main():
     
     # 3. Update Zed Theme
     set_zed_theme(theme, mode)
-    
-    # Only force wallpaper change if theme family is explicitly changed via argument
+
+    # 4. Switch wallpaper (forced only when theme family is explicitly changed)
     force_wallpaper = args.theme is not None
     switch_wallpapers(theme, mode, force=force_wallpaper)
 
-    # 3. Reload Everything
+    # 5. Reload Everything
     core.reload_components()
     save_state(theme, mode)
     

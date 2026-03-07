@@ -72,9 +72,9 @@ select_output() {
     desc="$*"
     device=$(pactl list sinks | grep -C2 -F "Description: $desc" | grep Name | cut -d: -f2 | xargs)
     if pactl set-default-sink "$device"; then
-      $nami_core notify "Activated: $desc" --title "Audio Output" --sync-id "sys-volume"
+      $nami_core notify "Activated: $desc" --title "Audio Output" --icon "audio-card" --sync-id "sys-volume"
     else
-      $nami_core notify "Error activating $desc" --title "Audio Output" --sync-id "sys-volume"
+      $nami_core notify "Error activating: $desc" --title "Audio Output" --icon "dialog-error" --sync-id "sys-volume"
     fi
   else
     pactl list sinks | grep -ie "Description:" | awk -F ': ' '{print $2}' | sort
