@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+# =====================================================
+# brightness — brightnessctl wrapper with OSD
+# Usage:
+#   brightness up    — increase brightness 5%
+#   brightness down  — decrease brightness 5%
+#   brightness set N — set brightness to N% (0-100)
+# =====================================================
+
+set -euo pipefail
+
+STEP=2
+ACTION="${1:-up}"
+VALUE="${2:-}"
+
+notify_brightness() {
+    local PCT
+    PCT="$(brightnessctl get)"
+    local MAX
+    MAX="$(brightnessctl max)"
+    local PERCENT
+    PERCENT="$(( PCT * 100 / MAX ))"
+
+    notify-send -u low \
+        -a "System" \
+        -i "display-brightness" \
+        -h string:x-canonical-private-synchronous:brightness \
+        -h "int:value:${PERCENT}" \
+        -t 1500 \
+        "Brightness: ${PERCENT}%"
+}
+
+case "${ACTION}" in
+    up)
+        # Non-linear scaling (finer at low levels)
+        CUR="$(brightnessctl -m | cut -d, -f4 | sed 's/%//')"
+        if [[ "${CUR}" -lt 10 ]]; then
+            brightnessctl -q set 1%+
+        else
+            brightnessctl -q set "${STEP}%+"
+        fi
+        notify_brightness
+        ;;
+    down)
+        CUR="$(brightnessctl -m | cut -d, -f4 | sed 's/%//')"
+        if [[ "${CUR}" -le 1 ]]; then
+            brightnessctl -q set 1%
+        elif [[ "${CUR}" -le 10 ]]; then
+            brightnessctl -q set 1%-
+        else
+            brightnessctl -q set "${STEP}%-"
+        fi
+        notify_brightness
+        ;;
+    set)
+        [[ -z "${VALUE}" ]] && { echo "Usage: brightness set <0-100>"; exit 1; }
+        brightnessctl -q set "${VALUE}%"
+        notify_brightness
+        ;;
+    *)
+        echo "Usage: brightness [up|down|set <value>]"
+        exit 1
+        ;;
+esac

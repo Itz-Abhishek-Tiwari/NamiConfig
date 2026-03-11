@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# =====================================================
+# wallpaper-cycle — Randomly cycle wallpapers in theme
+# =====================================================
+
+set -euo pipefail
+
+DOTFILES="${HOME}/dotfiles"
+STATE_FILE="${HOME}/.cache/current-theme"
+WALLPAPER_DIR="${DOTFILES}/.config/wallpapers"
+
+# Determine current theme
+TARGET=$(cat "${STATE_FILE}" 2>/dev/null || echo "dark")
+THEME_WALL_DIR="${WALLPAPER_DIR}/${TARGET}"
+
+if [[ ! -d "${THEME_WALL_DIR}" ]]; then
+    notify-send "Wallpaper Cycle" "Error: Directory ${THEME_WALL_DIR} not found" -u critical
+    exit 1
+fi
+
+# Pick a random image from the theme directory
+MAPFILE=()
+while IFS= read -r -d $'\0' file; do
+    MAPFILE+=("$file")
+done < <(find "${THEME_WALL_DIR}" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.webp" \) -print0)
+
+if [[ ${#MAPFILE[@]} -eq 0 ]]; then
+    notify-send "Wallpaper Cycle" "No images found in ${THEME_WALL_DIR}"
+    exit 1
+fi
+
+RANDOM_WALL="${MAPFILE[$(( RANDOM % ${#MAPFILE[@]} ))]}"
+
+# Apply using swww
+if command -v swww &>/dev/null && swww query &>/dev/null; then
+    swww img "${RANDOM_WALL}" --transition-type grow --transition-pos top-right --transition-duration 2
+    notify-send "󰸉 Wallpaper Changed" "$(basename "${RANDOM_WALL}") (${TARGET^})" -t 2000
+else
+    notify-send "Wallpaper Cycle" "swww-daemon is not running" -u low
+fi

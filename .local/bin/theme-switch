@@ -1,0 +1,222 @@
+#!/usr/bin/env bash
+# =====================================================
+# theme-switch — Toggle Gruvbox Hard Dark / Light
+# Usage: theme-switch [dark|light]   (no arg = toggle)
+# =====================================================
+
+set -euo pipefail
+exec > >(tee -i /tmp/theme-switch.log)
+exec 2>&1
+echo "--- Theme switch started at $(date) ---"
+notify-send -u low "Theme Switcher" "Toggling colors..."
+
+DOTFILES="${HOME}/dotfiles"
+THEME_DIR="${DOTFILES}/.config/themes/gruvbox"
+HYPR_THEME="${DOTFILES}/.config/hypr/configs/theme.conf"
+WAYBAR_COLORS="${DOTFILES}/.config/waybar/colors.css"
+SWAYNC_COLORS="${DOTFILES}/.config/swaync/colors.css"
+GTK3_CONF="${HOME}/.config/gtk-3.0/gtk.css"
+GTK4_CONF="${HOME}/.config/gtk-4.0/gtk.css"
+STATE_FILE="${HOME}/.cache/current-theme"
+SHELL_STATE="${HOME}/.cache/shell-theme.zsh"
+FUZZEL_CONFIG="${DOTFILES}/.config/fuzzel/fuzzel.ini"
+WALLPAPER_DIR="${DOTFILES}/.config/wallpapers"
+
+# ── Determine target theme ───────────────────────────
+if [[ "${1:-}" == "dark" || "${1:-}" == "light" ]]; then
+    TARGET="${1}"
+else
+    # Toggle based on current state
+    CURRENT=$(cat "${STATE_FILE}" 2>/dev/null || echo "dark")
+    [[ "${CURRENT}" == "dark" ]] && TARGET="light" || TARGET="dark"
+fi
+
+# ── Apply theme files ─────────────────────────────────
+echo "Updating Hyprland, Waybar, and SwayNC colors..."
+rm -f "${HYPR_THEME}" "${WAYBAR_COLORS}" "${SWAYNC_COLORS}"
+/usr/bin/cp "${THEME_DIR}/${TARGET}.conf" "${HYPR_THEME}"
+/usr/bin/cp "${THEME_DIR}/${TARGET}.css" "${WAYBAR_COLORS}"
+/usr/bin/cp "${THEME_DIR}/${TARGET}.css" "${SWAYNC_COLORS}"
+
+# Wallpaper switching
+if command -v swww &>/dev/null && swww query &>/dev/null; then
+    echo "Updating wallpaper..."
+    THEME_WALL_DIR="${WALLPAPER_DIR}/${TARGET}"
+    if [[ -d "${THEME_WALL_DIR}" ]]; then
+        # Pick a random one for the new theme
+        MAPFILE=()
+        while IFS= read -r -d $'\0' file; do
+            MAPFILE+=("$file")
+        done < <(find "${THEME_WALL_DIR}" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.webp" \) -print0)
+        
+        if [[ ${#MAPFILE[@]} -gt 0 ]]; then
+            RANDOM_WALL="${MAPFILE[$(( RANDOM % ${#MAPFILE[@]} ))]}"
+            swww img "${RANDOM_WALL}" --transition-type grow --transition-pos top-right --transition-duration 2
+        fi
+    fi
+fi
+
+# Fuzzel switching
+if [[ -f "${FUZZEL_CONFIG}" ]]; then
+    echo "Updating Fuzzel theme..."
+    # Replace [colors] block in fuzzel.ini
+    sed -i '/\[colors\]/,/^$/d' "${FUZZEL_CONFIG}"
+    cat "${THEME_DIR}/fuzzel-${TARGET}.ini" >> "${FUZZEL_CONFIG}"
+    # Ensure there's a newline if cat didn't have one
+    echo "" >> "${FUZZEL_CONFIG}"
+fi
+
+# Global GTK theme (Standard CSS)
+# Ensure directories exist; if they are symlinks, check that the target exists
+for dir in "${HOME}/.config/gtk-3.0" "${HOME}/.config/gtk-4.0"; do
+    if [[ -L "$dir" ]]; then
+        # If it's a symlink, check if the target exists. If not, the symlink is broken.
+        target=$(readlink -f "$dir")
+        if [[ ! -d "$target" ]]; then
+            echo "Warning: Symlink $dir is broken (points to $target). Creating directory..."
+            /usr/bin/mkdir -p "$target"
+        fi
+    else
+        /usr/bin/mkdir -p "$dir"
+    fi
+done
+
+# Use the full theme CSS if available in .themes (fixes libadwaita apps like Nautilus)
+NEW_GTK3_THEME="${HOME}/.themes/gruvBox-${TARGET}/gtk-3.0/gtk.css"
+NEW_GTK4_THEME="${HOME}/.themes/gruvBox-${TARGET}/gtk-4.0/gtk.css"
+NEW_GTK4_ASSETS="${HOME}/.themes/gruvBox-${TARGET}/gtk-4.0/assets"
+
+if [[ -f "${NEW_GTK3_THEME}" ]]; then
+    echo "Applying full GTK3 theme..."
+    rm -f "${GTK3_CONF}"
+    /usr/bin/cp "${NEW_GTK3_THEME}" "${GTK3_CONF}"
+else
+    if [[ -f "${THEME_DIR}/${TARGET}.css" ]]; then
+        rm -f "${GTK3_CONF}"
+        /usr/bin/cp "${THEME_DIR}/${TARGET}.css" "${GTK3_CONF}"
+    fi
+fi
+
+if [[ -f "${NEW_GTK4_THEME}" ]]; then
+    echo "Applying full GTK4 theme for Libadwaita..."
+    rm -f "${GTK4_CONF}"
+    /usr/bin/cp "${NEW_GTK4_THEME}" "${GTK4_CONF}"
+    # Also copy gtk-dark.css as libadwaita might look for it
+    if [[ -f "${HOME}/.themes/gruvBox-${TARGET}/gtk-4.0/gtk-dark.css" ]]; then
+        rm -f "${HOME}/.config/gtk-4.0/gtk-dark.css"
+        /usr/bin/cp "${HOME}/.themes/gruvBox-${TARGET}/gtk-4.0/gtk-dark.css" "${HOME}/.config/gtk-4.0/gtk-dark.css"
+    fi
+    # Handle assets
+    if [[ -d "${NEW_GTK4_ASSETS}" ]]; then
+        rm -rf "${HOME}/.config/gtk-4.0/assets"
+        cp -r "${NEW_GTK4_ASSETS}" "${HOME}/.config/gtk-4.0/assets"
+    fi
+else
+    if [[ -f "${THEME_DIR}/${TARGET}.css" ]]; then
+        rm -f "${GTK4_CONF}"
+        /usr/bin/cp "${THEME_DIR}/${TARGET}.css" "${GTK4_CONF}"
+    fi
+fi
+
+# ── Save state ────────────────────────────────────────
+/usr/bin/mkdir -p "${HOME}/.cache"
+echo "${TARGET}" > "${STATE_FILE}"
+
+# ── Kitty Theme ─────────────────────────────────────
+KITY_THEME="${HOME}/.config/kitty/theme.conf"
+if [[ -d "${HOME}/.config/kitty" ]]; then
+    echo "Updating Kitty theme..."
+    rm -f "${KITY_THEME}"
+    /usr/bin/cp "${THEME_DIR}/kitty-${TARGET}.conf" "${KITY_THEME}"
+    # Reload Kitty instances
+    /usr/bin/pkill -SIGUSR1 kitty 2>/dev/null || true
+fi
+
+# ── Ghostty Theme ─────────────────────────────────────
+GHOS_THEME="${HOME}/.config/ghostty/theme.conf"
+if [[ -d "${HOME}/.config/ghostty" ]]; then
+    echo "Updating Ghostty theme..."
+    rm -f "${GHOS_THEME}"
+    /usr/bin/cp "${THEME_DIR}/ghostty-${TARGET}.conf" "${GHOS_THEME}"
+fi
+
+# ── Neovim Theme ──────────────────────────────────────
+# No longer needed as Neovim has a built-in file watcher for ${STATE_FILE}
+# but we keep the background state update for consistency if needed by other tools
+# echo "Updating Neovim theme to ${TARGET}..."
+
+# ── Zed Editor Theme ──────────────────────────────────
+ZCONF="${HOME}/.config/zed/settings.json"
+if [[ -f "$ZCONF" ]]; then
+    echo "Updating Zed theme to ${TARGET^}..."
+    /usr/bin/sed 's/"theme": ".*"/"theme": "Gruvbox '${TARGET^}'"/g' "$ZCONF" > /tmp/zconf
+    /usr/bin/cat /tmp/zconf > "$ZCONF"
+fi
+
+# ── CLI & Shell Integration ──────────────────────────
+echo "Updating Shell CLI themes..."
+if [[ "${TARGET}" == "dark" ]]; then
+    cat <<EOF > "${SHELL_STATE}"
+export BAT_THEME="gruvbox-dark"
+export FZF_DEFAULT_OPTS="--color=bg+:#3c3836,bg:#1d2021,spinner:#83a598,hl:#8ec07c,fg:#ebdbb2,header:#8ec07c,info:#fabd2f,pointer:#83a598,marker:#fe8019,fg+:#fbf1c7,prompt:#fabd2f,hl+:#8ec07c"
+EOF
+    # Update GTK system theme
+    gsettings set org.gnome.desktop.interface gtk-theme "gruvBox-dark"
+    gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
+else
+    cat <<EOF > "${SHELL_STATE}"
+export BAT_THEME="gruvbox-light"
+export FZF_DEFAULT_OPTS="--color=bg+:#ebdbb2,bg:#fbf1c7,spinner:#076678,hl:#427b58,fg:#3c3836,header:#427b58,info:#b57614,pointer:#076678,marker:#af3a03,fg+:#282828,prompt:#b57614,hl+:#427b58"
+EOF
+    # Update GTK system theme
+    gsettings set org.gnome.desktop.interface gtk-theme "gruvBox-light"
+    gsettings set org.gnome.desktop.interface color-scheme "prefer-light"
+fi
+
+# ── Reload running apps ───────────────────────────────
+# Hyprland — re-source config (colors update immediately)
+/usr/bin/hyprctl reload 2>/dev/null || true
+
+# Waybar — reload CSS without restart
+/usr/bin/pkill -SIGUSR2 waybar 2>/dev/null || true
+
+# swaync — reload style (touch first to force GTK refresh of imports)
+/usr/bin/touch "${DOTFILES}/.config/swaync/style.css"
+/usr/bin/swaync-client -R 2>/dev/null || true
+/usr/bin/swaync-client -rs 2>/dev/null || true
+
+# ── Generate TOML State ──────────────────────────────
+TOML_FILE="${HOME}/.config/theme.toml"
+TIMESTAMP=$(date +"%Y-%m-%dT%H:%M:%S%z")
+
+cat <<EOF > "${TOML_FILE}"
+[theme]
+mode = "${TARGET}"
+palette = "gruvbox-hard"
+updated_at = "${TIMESTAMP}"
+
+[applications]
+hyprland = "synced"
+waybar = "synced"
+swaync = "synced"
+nvim = "synced"
+zsh = "synced"
+kitty = "$( [[ -d "${HOME}/.config/kitty" ]] && echo "synced" || echo "not_installed" )"
+ghostty = "$( [[ -d "${HOME}/.config/ghostty" ]] && echo "synced" || echo "not_installed" )"
+zed = "$( [[ -f "${ZCONF:-}" ]] && echo "synced" || echo "not_installed" )"
+gtk3 = "synced"
+gtk4 = "synced"
+fuzzel = "$( [[ -f "${FUZZEL_CONFIG:-}" ]] && echo "synced" || echo "not_installed" )"
+fastfetch = "synced"
+bat = "synced"
+fzf = "synced"
+EOF
+
+# ── Notify user ───────────────────────────────────────
+ICON="🌙"
+[[ "${TARGET}" == "light" ]] && ICON="☀️"
+/usr/bin/notify-send -u low -t 3000 -i "preferences-desktop-theme" \
+    "${ICON} Theme: Gruvbox Hard ${TARGET^}" \
+    "System colors synchronized globally"
+
+echo "Switched to: ${TARGET}"

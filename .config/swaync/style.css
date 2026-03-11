@@ -1,0 +1,204 @@
+@import "colors.css";
+
+/* ================================================
+   swaync — Gruvbox Darkhard Square Floating Design
+   Ultra Minimal (2 Buttons Only)
+   ================================================ */
+
+/* ── Prevent White Artifacts ──────────────────── */
+window,
+.blank-window {
+    background: transparent;
+}
+
+
+/* ── Reset & Base ─────────────────────────────── */
+* {
+    border-radius: 0 !important;
+    font-family: "Maple Mono", monospace;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    transition: none !important;
+    color: @fg1;
+    /* Global default */
+}
+
+/* ── Control Center (Solid Darkhard, Floating) ─ */
+.control-center {
+    background: @bg0_hard;
+    border: 2px solid @bg2;
+    color: @fg1;
+}
+
+.control-center-list,
+.control-center-list-member {
+    background: transparent;
+}
+
+/* ── Title Bar ───────────────────────────────── */
+.widget-title {
+    padding: 15px 20px;
+    background: @bg0_hard;
+    border-bottom: 2px solid @bg1;
+}
+
+.widget-title>label {
+    font-size: 16px;
+    font-weight: 800;
+    color: @fg0;
+    text-transform: uppercase;
+}
+
+.widget-title>button {
+    background: @bg0;
+    color: @red;
+    border: 1px solid @red;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.widget-title>button:hover {
+    background: @red;
+    color: @bg0_hard;
+}
+
+/* ── DND Widget ──────────────────────────────── */
+.widget-dnd {
+    padding: 15px 20px;
+    background: @bg0_hard;
+    border-bottom: 2px solid @bg1;
+}
+
+.widget-dnd>label {
+    font-size: 14px;
+    font-weight: 800;
+    color: @fg1;
+}
+
+/* ── Fix Switches ────────────────────────────── */
+switch {
+    background: @bg2;
+    border: 1px solid @bg4;
+    border-radius: 0 !important;
+}
+
+switch slider {
+    background: @fg4;
+    border: 1px solid @fg2;
+}
+
+switch:checked {
+    background: @green;
+}
+
+switch:checked slider {
+    background: @bg0_hard;
+}
+
+/* ── Progress Bars (Brightness/Volume) ─────── */
+progressbar,
+progress,
+trough {
+    border-radius: 0 !important;
+}
+
+progressbar>trough {
+    background: @bg2;
+    min-height: 8px;
+}
+
+progressbar>trough>progress {
+    background: @accent;
+    min-height: 8px;
+}
+
+/* ── Notifications Center ──────────────────── */
+.notification-row {
+    margin: 10px 15px;
+    background: transparent;
+}
+
+.notification {
+    background: @bg1;
+    border: 1px solid @bg3;
+    padding: 0;
+}
+
+.notification-content {
+    padding: 12px;
+    color: @fg1;
+}
+
+.notification-default-header {
+    margin-bottom: 4px;
+}
+
+.notification-default-header label {
+    color: @fg2;
+    font-weight: 800;
+}
+
+.notification .header {
+    color: @fg2;
+    font-size: 10px;
+}
+
+.notification .time {
+    color: @fg4;
+    font-size: 10px;
+}
+
+.notification .summary {
+    font-size: 14px;
+    font-weight: 800;
+    color: @orange;
+    margin-bottom: 4px;
+}
+
+.notification .body {
+    font-size: 12px;
+    color: @fg1;
+}
+
+/* ── Explicit HOVER / FOCUS Fixes ─────────── */
+/* This addresses the "ugly" dark hover (#383838) */
+.control-center-list-member:focus,
+.control-center-list-member:hover,
+.notification-row:focus .notification,
+.notification-row:hover .notification,
+.notification:hover {
+    background: #d5c4a1 !important;
+    /* Force @bg2 color manually if vars fail */
+    color: @fg1 !important;
+}
+
+/* Fix for labels inside hovered notifications */
+.notification-row:hover label,
+.notification-row:hover .notification-content label {
+    color: @fg1 !important;
+}
+
+/* Hard Urgency Borders */
+.notification.low {
+    border-left: 4px solid @blue;
+}
+
+.notification.normal {
+    border-left: 4px solid @aqua;
+}
+
+.notification.critical {
+    border-left: 4px solid @red;
+    background: @bg2;
+}
+
+/* ── Hide Scrollbars ────────────────────────── */
+scrollbar,
+scrollbar trough,
+scrollbar slider {
+    background: transparent;
+    border: none;
+    min-width: 0px;
+    min-height: 0px;
+}

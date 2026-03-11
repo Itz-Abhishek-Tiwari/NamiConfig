@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+# =====================================================
+# volume — wpctl wrapper with OSD notifications
+# Usage:
+#   volume up        — raise volume 5%
+#   volume down      — lower volume 5%
+#   volume mute      — toggle output mute
+#   volume mic-mute  — toggle microphone mute
+# =====================================================
+
+set -euo pipefail
+
+STEP=2
+ACTION="${1:-up}"
+
+notify_volume() {
+    local VOL
+    local MUTED
+    VOL="$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{printf "%d", $2 * 100}')"
+    MUTED="$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -c MUTED || true)"
+
+    local ICON="audio-volume-high"
+    [[ "${VOL}" -lt 33 ]] && ICON="audio-volume-low"
+    [[ "${VOL}" -lt 66 ]] && [[ "${VOL}" -ge 33 ]] && ICON="audio-volume-medium"
+    [[ "${MUTED}" -gt 0 ]] && ICON="audio-volume-muted"
+
+    notify-send -u low \
+        -a "System" \
+        -i "${ICON}" \
+        -h string:x-canonical-private-synchronous:volume \
+        -h "int:value:${VOL}" \
+        -t 1500 \
+        "Volume: ${VOL}%"
+}
+
+notify_mic() {
+    local MUTED
+    MUTED="$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -c MUTED || true)"
+    local STATUS="On"
+    local ICON="audio-input-microphone"
+    if [[ "${MUTED}" -gt 0 ]]; then
+        STATUS="Muted"
+        ICON="audio-input-microphone-muted"
+    fi
+    notify-send -u low \
+        -i "${ICON}" \
+        -h string:x-canonical-private-synchronous:mic \
+        -t 1500 "Microphone" "${STATUS}"
+}
+
+case "${ACTION}" in
+    up)
+        wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ "${STEP}%+"
+        notify_volume
+        ;;
+    down)
+        wpctl set-volume @DEFAULT_AUDIO_SINK@ "${STEP}%-"
+        notify_volume
+        ;;
+    mute)
+        wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+        notify_volume
+        ;;
+    mic-mute)
+        wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+        notify_mic
+        ;;
+    *)
+        echo "Usage: volume [up|down|mute|mic-mute]"
+        exit 1
+        ;;
+esac

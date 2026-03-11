@@ -1,0 +1,163 @@
+/* ================================================
+   Waybar — Horizontal Top Bar Style
+   Square Design | Advanced GTK CSS
+   ================================================ */
+
+@import "colors.css";
+
+/* ── Reset & Base ─────────────────────────────── */
+* {
+    font-family: "Maple Mono", "Maple Mono", monospace;
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    border-radius: 0;
+    /* Forced Square */
+    padding: 0;
+    margin: 0;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: alpha(@window_bg_color, 1);
+    /* Solid for docked look */
+    color: @theme_fg_color;
+    border-top: 2px solid @borders;
+}
+
+/* ── Module Groups ───────────────────────────── */
+.modules-left,
+.modules-center,
+.modules-right {
+    padding: 0 4px;
+}
+
+/* ── Generic Module Style ────────────────────── */
+#custom-logo,
+#workspaces,
+#clock,
+#tray,
+#pulseaudio,
+#network,
+#backlight,
+#battery,
+#idle_inhibitor,
+#custom-power {
+    padding: 0 12px;
+    margin: 0;
+    border-radius: 0;
+    /* Forced Square */
+    transition: all 0.2s ease;
+}
+
+#custom-logo:hover,
+#workspaces button:hover,
+#clock:hover,
+#pulseaudio:hover,
+#network:hover,
+#backlight:hover,
+#battery:hover,
+#idle_inhibitor:hover,
+#custom-power:hover {
+    background-color: alpha(@theme_fg_color, 0.1);
+}
+
+/* ── Logo ────────────────────────────────────── */
+#custom-logo {
+    color: @accent_color;
+    font-size: 16px;
+}
+
+/* ── Workspaces ──────────────────────────────── */
+#workspaces {
+    padding: 0;
+}
+
+#workspaces button {
+    padding: 0 10px;
+    color: @fg4;
+    border-top: 2px solid transparent;
+}
+
+#workspaces button.active {
+    color: @theme_selected_bg_color;
+    background-color: alpha(@theme_selected_bg_color, 0.1);
+    border-top: 2px solid @theme_selected_bg_color;
+}
+
+#workspaces button.urgent {
+    color: @error_color;
+    background-color: alpha(@error_color, 0.1);
+    border-top: 2px solid @error_color;
+    animation-name: blink;
+    animation-duration: 1s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes blink {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0.4;
+    }
+}
+
+/* ── Clock ───────────────────────────────────── */
+#clock {
+    color: @fg1;
+    font-weight: 700;
+}
+
+/* ── Battery ─────────────────────────────────── */
+#battery.good {
+    color: @success_color;
+}
+
+#battery.warning {
+    color: @warning_color;
+}
+
+#battery.critical {
+    color: @error_color;
+    animation-name: blink;
+    animation-duration: 1s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* ── Hardware Icons ──────────────────────────── */
+#pulseaudio.muted {
+    color: @fg4;
+}
+
+#network.disconnected {
+    color: @error_color;
+}
+
+/* ── Tray ────────────────────────────────────── */
+#tray {
+    padding: 0 8px;
+}
+
+/* ── Power ───────────────────────────────────── */
+#custom-power {
+    color: @error_color;
+}
+
+#idle_inhibitor {
+    color: @accent_color;
+}
+
+#idle_inhibitor.activated {
+    color: @warning_color;
+}
+
+#custom-power:hover {
+    background-color: @error_color;
+    color: @bg0_hard;
+}

@@ -1,0 +1,8 @@
+{
+    "icon_theme": "VSCode Icons for Zed (Dark Angular)",
+    "theme": "Gruvbox Dark",
+    "vim_mode": true,
+    "ui_font_size": 16,
+    "buffer_font_size": 16,
+    "buffer_font_family": "Maple Mono"
+}

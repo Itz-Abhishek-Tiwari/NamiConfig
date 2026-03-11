@@ -1,0 +1,42 @@
+{
+    "$schema": "https://raw.githubusercontent.com/ErikReider/SwayNotificationCenter/main/src/config/swaync-config-schema.json",
+    "positionX": "right",
+    "positionY": "top",
+    "layer": "overlay",
+    "control-center-layer": "top",
+    "layer-shell": true,
+    "cssPriority": "application",
+    "control-center-width": 460,
+    "control-center-height": 800,
+    "control-center-margin-top": 15,
+    "control-center-margin-bottom": 15,
+    "control-center-margin-right": 15,
+    "notification-window-width": 460,
+    "fit-to-screen": false,
+    "notification-icon-size": 48,
+    "notification-body-image-height": 100,
+    "notification-body-image-width": 160,
+    "timeout": 5,
+    "timeout-low": 3,
+    "timeout-critical": 0,
+    "transition-time": 0,
+    "hide-on-clear": false,
+    "hide-on-action": true,
+    "keyboard-shortcuts": true,
+    "image-visibility": "when-available",
+    "widgets": [
+        "title",
+        "dnd",
+        "notifications"
+    ],
+    "widget-config": {
+        "title": {
+            "text": "Notifications",
+            "clear-all-button": true,
+            "button-text": "Clear All"
+        },
+        "dnd": {
+            "text": "Do Not Disturb"
+        }
+    }
+}

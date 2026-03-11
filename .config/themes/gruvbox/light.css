@@ -1,0 +1,79 @@
+/* ==============================
+   GRUVBOX HARD — LIGHT
+   GTK-native Colors
+   Used by: Waybar, swaync, global GTK
+   ============================== */
+
+/* Backgrounds (inverted — light bg) */
+@define-color bg0_hard #f9f5d7;
+@define-color bg0 #fbf1c7;
+@define-color bg1 #ebdbb2;
+@define-color bg2 #d5c4a1;
+@define-color bg3 #bdae93;
+@define-color bg4 #a89984;
+
+/* Foregrounds (dark text) */
+@define-color fg0 #1d2021;
+@define-color fg1 #282828;
+@define-color fg2 #3c3836;
+@define-color fg3 #504945;
+@define-color fg4 #665c54;
+
+/* Accents (muted for light mode) */
+@define-color red #9d0006;
+@define-color green #79740e;
+@define-color yellow #b57614;
+@define-color blue #076678;
+@define-color purple #8f3f71;
+@define-color aqua #427b58;
+@define-color orange #af3a03;
+@define-color gray #7c6f64;
+
+/* Semantic aliases */
+@define-color accent @blue;
+@define-color accent_alt @aqua;
+@define-color surface @bg1;
+@define-color surface_deep @bg0_hard;
+@define-color on_surface @fg1;
+@define-color on_surface_dim @fg4;
+@define-color border @bg3;
+@define-color warning @yellow;
+@define-color error @red;
+@define-color success @green;
+@define-color info @blue;
+
+/* ── Global GTK Colors ───────────────────────── */
+@define-color window_bg_color @bg0_hard;
+@define-color window_fg_color @fg1;
+@define-color view_bg_color @bg2;
+@define-color view_fg_color @fg1;
+@define-color headerbar_bg_color @bg1;
+@define-color headerbar_fg_color @fg0;
+@define-color sidebar_bg_color @bg1;
+@define-color sidebar_fg_color @fg2;
+@define-color selected_bg_color @accent;
+@define-color selected_fg_color @bg0_hard;
+@define-color accent_color @accent;
+@define-color accent_bg_color @accent;
+@define-color accent_fg_color @bg0_hard;
+@define-color error_color @red;
+@define-color warning_color @yellow;
+@define-color success_color @green;
+
+/* ── Standard GTK Theme Aliases ──────────────── */
+@define-color theme_bg_color @bg0_hard;
+@define-color theme_fg_color @fg1;
+@define-color theme_base_color @bg2;
+@define-color theme_text_color @fg1;
+@define-color theme_selected_bg_color @accent;
+@define-color theme_selected_fg_color @bg0_hard;
+@define-color theme_view_bg_color @bg2;
+@define-color theme_view_text_color @fg1;
+
+@define-color unfocused_borders @bg4;
+@define-color borders @border;
+
+/* ── Component specific (Shadows/Highlights) ── */
+@define-color shadow_color @bg2;
+@define-color scrollbar_bg_color @bg1;
+@define-color scrollbar_slider_color @bg3;

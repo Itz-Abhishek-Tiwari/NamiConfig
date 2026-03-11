@@ -1,0 +1,142 @@
+{
+  // ================================================
+  // Waybar — Horizontal Top Bar
+  // Gruvbox Hard | Modern "Floating Pill" Design
+  // ================================================
+  "layer": "bottom",
+  "position": "bottom",
+  "height": 32,
+  "spacing": 4,
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
+  "reload_style_on_change": true,
+  "modules-left": [
+    "custom/logo",
+    "hyprland/workspaces"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "tray",
+    "pulseaudio",
+    "network",
+    "backlight",
+    "battery",
+    "idle_inhibitor",
+    "custom/power"
+  ],
+  // ── Left Modules ────────────────
+  "custom/logo": {
+    "format": "",
+    "tooltip": false,
+  },
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-scroll-up": "hyprctl dispatch workspace -1",
+    "on-scroll-down": "hyprctl dispatch workspace +1",
+    "format-icons": {
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "urgent": "",
+      "active": "",
+      "default": "",
+    },
+    "sort-by-number": true,
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": [],
+    },
+  },
+  // ── Center Modules ──────────────
+  "clock": {
+    "format": "󱑂 {:%I:%M %p}",
+    "format-alt": "󰃭 {:%a %d %b}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "month",
+      "weeks-pos": "",
+      "format": {
+        "today": "<span color='#fe8019'><b>{}</b></span>",
+      },
+    },
+  },
+  // ── Right Modules ───────────────
+  "tray": {
+    "icon-size": 16,
+    "spacing": 8,
+    "show-passive-items": true,
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰝟 Muted",
+    "format-icons": {
+      "headphone": "󰋋",
+      "default": [
+        "󰕿",
+        "󰖀",
+        "󰕾"
+      ],
+    },
+    "on-click": "pavucontrol",
+    "on-scroll-up": "volume up",
+    "on-scroll-down": "volume down",
+  },
+  "network": {
+    "format-wifi": " {essid}",
+    "format-ethernet": "󰈀 Wired",
+    "format-disconnected": "󰖪 Off",
+    "tooltip-format": "{ifname}: {ipaddr}",
+  },
+  "backlight": {
+    "format": "{icon} {percent}%",
+    "format-icons": [
+      "󰃞",
+      "󰃟",
+      "󰃠"
+    ],
+    "on-scroll-up": "brightness up",
+    "on-scroll-down": "brightness down"
+  },
+  "battery": {
+    "states": {
+      "good": 80,
+      "warning": 20,
+      "critical": 10
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": "󰂄 {capacity}%",
+    "format-plugged": "󰚥 {capacity}%",
+    "format-icons": [
+      "󰂎",
+      "󰁺",
+      "󰁼",
+      "󰁾",
+      "󰂀",
+      "󰂂",
+      "󰁹"
+    ],
+  },
+  "custom/power": {
+    "format": "⏻",
+    "on-click": "power-menu",
+    "tooltip": false,
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": "",
+    },
+    "tooltip": true,
+    "tooltip-format-activated": "Idle Inhibited",
+    "tooltip-format-deactivated": "Idle Enabled",
+  },
+}

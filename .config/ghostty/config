@@ -1,0 +1,10 @@
+# Ghostty Base Configuration
+font-family = Maple Mono
+font-size = 12.0
+
+# Window padding
+window-padding-x = 10
+window-padding-y = 10
+
+# Include theme
+config-file = theme.conf

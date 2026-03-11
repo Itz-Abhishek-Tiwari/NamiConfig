@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+# =====================================================
+# screenshot — grim + slurp wrapper
+# Usage:
+#   screenshot full    — fullscreen to both
+#   screenshot region  — region select to both
+#   screenshot window  — active window to both
+# =====================================================
+
+set -euo pipefail
+
+SAVE_DIR="${HOME}/Pictures/Screenshots"
+DATE="$(date +%Y-%m-%d_%H-%M-%S)"
+MODE="${1:-region}"
+mkdir -p "${SAVE_DIR}"
+
+take_screenshot() {
+    local GEOM="${1}"
+    local OUTPUT="${SAVE_DIR}/screenshot_${DATE}.png"
+    local TMPFILE
+    TMPFILE="$(mktemp /tmp/screenshot.XXXXXX.png)"
+
+    # Capture image
+    grim ${GEOM:+-g "$GEOM"} "${TMPFILE}"
+
+    # 1. Save to folder
+    cp "${TMPFILE}" "${OUTPUT}"
+
+    # 2. Copy to clipboard
+    cat "${TMPFILE}" | wl-copy -t image/png
+
+    # 3. Notify with action
+    notify-send -u low -t 4000 \
+        -a "System" \
+        -i "camera-photo" \
+        "📸 Screenshot Captured" \
+        "Saved to: Screenshots/\nCopied to clipboard"
+
+    rm -f "${TMPFILE}"
+}
+
+case "${MODE}" in
+    full)
+        take_screenshot ""
+        ;;
+    region)
+        GEOM="$(slurp 2>/dev/null)" || exit 0
+        take_screenshot "${GEOM}"
+        ;;
+    window)
+        GEOM="$(hyprctl activewindow -j | \
+            jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')"
+        take_screenshot "${GEOM}"
+        ;;
+    *)
+        echo "Usage: screenshot [full|region|window]"
+        exit 1
+        ;;
+esac

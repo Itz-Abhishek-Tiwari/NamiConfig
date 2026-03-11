@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+# =====================================================
+# power-menu — Simple fuzzel-based power menu
+# Options: Lock | Suspend | Reboot | Shutdown | Logout
+# =====================================================
+
+set -euo pipefail
+
+CHOICE=$(printf "  Lock\n  Suspend\n  Reboot\n  Shutdown\n  Logout" \
+    | fuzzel --dmenu \
+        --prompt="⏻  " \
+        --width=18 \
+        --lines=5 \
+        --font="Maple Mono:size=13" \
+        --background=1d2021ff \
+        --text-color=ebdbb2ff \
+        --match-color=fe8019ff \
+        --selection-color=3c3836ff \
+        --selection-text-color=fbf1c7ff \
+        --border-color=504945ff \
+        --border-width=2 \
+        --border-radius=0 \
+        2>/dev/null)
+
+confirm_action() {
+    local action=$1
+    local choice=$(printf "  No\n  Yes" \
+        | fuzzel --dmenu \
+            --prompt="Confirm ${action}? " \
+            --width=15 \
+            --lines=2 \
+            --font="Maple Mono:size=13" \
+            --background=1d2021ff \
+            --text-color=ebdbb2ff \
+            --match-color=fe8019ff \
+            --selection-color=3c3836ff \
+            --selection-text-color=fbf1c7ff \
+            --border-color=504945ff \
+            --border-width=2 \
+            --border-radius=0 \
+            2>/dev/null)
+    [[ "${choice}" == *"Yes"* ]]
+}
+
+case "${CHOICE}" in
+    *"Lock")
+        hyprlock
+        ;;
+    *"Suspend")
+        if confirm_action "Suspend"; then
+            loginctl lock-session && systemctl suspend
+        fi
+        ;;
+    *"Reboot")
+        if confirm_action "Reboot"; then
+            systemctl reboot
+        fi
+        ;;
+    *"Shutdown")
+        if confirm_action "Shutdown"; then
+            systemctl poweroff
+        fi
+        ;;
+    *"Logout")
+        if confirm_action "Logout"; then
+            hyprctl dispatch exit 0
+        fi
+        ;;
+    *)
+        exit 0
+        ;;
+esac

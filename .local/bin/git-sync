@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# =====================================================
+# git-sync — Quick Sync Dotfiles to Remote
+# =====================================================
+
+set -euo pipefail
+
+DOTFILES="${HOME}/dotfiles"
+cd "${DOTFILES}"
+
+echo "Checking for dotfile updates..."
+
+# Get current branch
+BRANCH=$(git symbolic-ref --short HEAD)
+
+# Pull latest changes
+echo "󰇚 Pulling latest changes..."
+git pull --rebase origin "${BRANCH}"
+
+# Check for local changes
+if [[ -n "$(git status --porcelain)" ]]; then
+    echo "󰚰 Local changes detected. Syncing..."
+    git add .
+    
+    MSG="${1:-"sync: $(date +'%Y-%m-%d %H:%M:%S')"}"
+    git commit -m "${MSG}"
+    
+    echo "󰚺 Pushing changes..."
+    git push origin "${BRANCH}"
+    
+    notify-send "Git Sync" "Dotfiles synchronized successfully!" -i git
+else
+    echo "󰄬 Everything is up to date."
+    notify-send "Git Sync" "Dotfiles already up to date." -i git
+fi
