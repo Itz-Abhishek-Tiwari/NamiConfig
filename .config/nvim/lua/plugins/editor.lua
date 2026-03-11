@@ -82,7 +82,8 @@ return {
     opts = {
       enabled = true,
       execution_message = {
-        message = function() return ("AutoSave: saved at " .. vim.fn.strftime("%I:%M:%S %p")) end,
+        enabled = false,
+        message = function() return "" end,
         dim = 0.18,
         cleaning_interval = 1250,
       },

@@ -1,27 +1,34 @@
-# dotfiles
+# NamiConfig
 
 Arch Linux · Hyprland · Gruvbox Hard · Performance-first
 
+
+
 ---
+
+## Overview
+
+A premium, performant, and aesthetically pleasing dotfiles setup focused on the Gruvbox color palette. This configuration is modular, well-documented, and optimized for both productivity and visual excellence using Hyprland and standard Wayland tools.
 
 ## Structure
 
 ```
 dotfiles/
-├── .config/
-│   ├── hypr/         # Window manager (Hyprland)
-│   ├── waybar/       # Status bar
-│   ├── swww/         # Wallpaper (implicitly used)
-│   ├── wallpapers/   # Wallpaper assets
-│   ├── fuzzel/       # App launcher
-│   ├── swaync/       # Notifications
-│   ├── ghostty/      # Terminal
-│   ├── kitty/        # Terminal (fallback/alternative)
-│   ├── themes/       # Theme files (gruvbox)
-│   ├── fastfetch/    # System info
-│   └── zsh/          # Shell extras
-├── .local/bin/       # Scripts (theme-switch, screenshot, volume…)
-├── .zshrc            # Main shell config
+├── [.config/](.config/README.md)
+│   ├── [hypr/](.config/hypr/README.md)         # Window manager (Hyprland)
+│   ├── [waybar/](.config/waybar/README.md)       # Status bar
+│   ├── swww/           # Wallpaper (implicitly used)
+│   ├── wallpapers/     # Wallpaper assets
+│   ├── [fuzzel/](.config/fuzzel/README.md)       # App launcher
+│   ├── [swaync/](.config/swaync/README.md)       # Notifications
+│   ├── [ghostty/](.config/ghostty/README.md)      # Terminal
+│   ├── [kitty/](.config/kitty/README.md)        # Terminal (fallback/alternative)
+│   ├── themes/         # Theme files (gruvbox)
+│   ├── fastfetch/      # System info
+│   └── [zsh/](.config/zsh/README.md)          # Shell extras
+├── [.local/bin/](.local/bin/README.md)       # Scripts (theme-switch, screenshot, volume…)
+├── [.themes/](.themes/README.md)          # GTK themes
+├── .zshrc              # Main shell config
 ├── install.sh
 └── README.md
 ```

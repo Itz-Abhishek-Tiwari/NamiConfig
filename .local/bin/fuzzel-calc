@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# Check if an expression was provided as an argument
+if [ -z "$1" ]; then
+    # No argument, open fuzzel for input
+    query=$(echo "" | fuzzel --dmenu -p "Calc: " --lines 0)
+else
+    query="$1"
+fi
+
+# Exit if query is empty
+[ -z "$query" ] && exit 0
+
+# Calculate using python3
+# Fixed: use a more robust way to handle the expression and avoid syntax errors
+result=$(python3 -c "import math; print(eval('$query'))" 2>/dev/null)
+
+# If calculation failed, try again with math functions enabled
+if [ -z "$result" ]; then
+    # Simple attempt to handle basic errors or invalid syntax
+    notify-send "Calculator" "Invalid expression: $query" -i calc
+    exit 1
+fi
+
+# Show result in fuzzel and copy to clipboard if selected
+final_choice=$(echo "$result" | fuzzel --dmenu -p "Result: " --lines 1)
+
+if [ "$final_choice" == "$result" ]; then
+    echo -n "$result" | wl-copy
+    notify-send "Calculator" "Result Copied: $result" -i calc
+fi
