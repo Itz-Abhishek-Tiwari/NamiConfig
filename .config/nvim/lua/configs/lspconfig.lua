@@ -58,3 +58,6 @@ setup_server("jsonls")
 setup_server("html")
 setup_server("cssls")
 setup_server("emmet_ls")
+
+-- Hyprland
+setup_server("hyprls")

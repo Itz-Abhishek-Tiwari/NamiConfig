@@ -40,6 +40,7 @@ return {
         "cssls",
         "jsonls",
         "emmet_ls",
+        "hyprls",
       },
       automatic_installation = true,
     },

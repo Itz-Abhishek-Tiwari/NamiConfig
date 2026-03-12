@@ -176,13 +176,13 @@ return {
       local dashboard = require("alpha.themes.dashboard")
       dashboard.section.header.val = {
         "                                ",
-        "  ██████   ██████  ██████  ██ ██  ",
-        "  ██   ██ ██    ██ ██   ██ ██ ██  ",
-        "  ██████  ██    ██ ██████  ██ ██  ",
-        "  ██   ██ ██    ██ ██   ██ ██     ",
-        "  ██████   ██████  ██   ██ ██ ██  ",
+        "  ███    ██  █████  ███    ███ ██ ",
+        "  ████   ██ ██   ██ ████  ████ ██ ",
+        "  ██ ██  ██ ███████ ██ ████ ██ ██ ",
+        "  ██  ██ ██ ██   ██ ██  ██  ██ ██ ",
+        "  ██   ████ ██   ██ ██      ██ ██ ",
         "                                ",
-        "      [ Neovim 0.11 Optimized ] ",
+        "      [ NamiConfig Optimized ] ",
       }
       dashboard.section.buttons.val = {
         dashboard.button("f", "  Find file", ":Telescope find_files<CR>"),
