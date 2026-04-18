@@ -1,0 +1,52 @@
+[
+    {
+        "key": "ctrl+s",
+        "command": "workbench.action.files.save"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "-workbench.action.quit"
+    },
+    {
+        "key": "tab",
+        "command": "workbench.action.nextEditor",
+        "when": "!sideBarFocus && !terminalFocus"
+    },
+    {
+        "key": "shift+tab",
+        "command": "workbench.action.previousEditor",
+        "when": "!sideBarFocus && !terminalFocus"
+    },
+    {
+        "key": "ctrl+h",
+        "command": "workbench.action.focusLeftGroup",
+        "when": "neovim.mode != 'insert'"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "workbench.action.focusRightGroup",
+        "when": "neovim.mode != 'insert'"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "workbench.action.focusBelowGroup",
+        "when": "neovim.mode != 'insert'"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "workbench.action.focusAboveGroup",
+        "when": "neovim.mode != 'insert'"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "workbench.action.quickOpen"
+    },
+    {
+        "key": "ctrl+shift+f",
+        "command": "workbench.action.findInFiles"
+    }
+]

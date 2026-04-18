@@ -1,0 +1,57 @@
+{
+    "workbench.colorTheme": "Gruvbox Dark Hard",
+    "workbench.iconTheme": "catppuccin-mocha",
+    "editor.lineNumbers": "relative",
+    "editor.minimap.enabled": false,
+    "workbench.statusBar.visible": false,
+    "editor.scrollbar.vertical": "hidden",
+    "editor.scrollbar.horizontal": "hidden",
+    "editor.overviewRulerBorder": false,
+    "editor.hideCursorInOverviewRuler": true,
+    "editor.renderLineHighlight": "none",
+    "window.menuBarVisibility": "compact",
+    "editor.cursorStyle": "line",
+    "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": true,
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    "extensions.ignoreRecommendations": true,
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+    "workbench.layoutControl.enabled": false,
+    "workbench.editor.showTabs": "multiple",
+    "editor.fontSize": 14,
+    "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Fira Code', monospace",
+    "editor.fontLigatures": true,
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font'",
+    "vscode-neovim.compositeKeys": {
+        "jk": {
+            "command": "vscode-neovim.escape"
+        }
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python",
+        "editor.tabSize": 4
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "django.workingDirectory": "${workspaceFolder}",
+    "python.languageServer": "Pylance",
+    "workbench.activityBar.location": "hidden",
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    }
+}

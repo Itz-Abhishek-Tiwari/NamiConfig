@@ -1,0 +1,11 @@
+asvetliakov.vscode-neovim
+jdinhlife.gruvbox
+dsznajder.es7-react-js-snippets
+ms-python.python
+batisteo.vscode-django
+ms-python.debugpy
+ms-python.vscode-python-envs
+formulahendry.auto-rename-tag
+steoates.autoimport
+catppuccin.catppuccin-vsc
+catppuccin.catppuccin-vsc-icons

@@ -105,6 +105,10 @@ link_dir "${DOTFILES}/.config/zsh"        "${DOTCONFIG}/zsh"
 link_dir "${DOTFILES}/.config/fastfetch"  "${DOTCONFIG}/fastfetch"
 link_dir "${DOTFILES}/.config/themes"     "${DOTCONFIG}/themes"
 link_dir "${DOTFILES}/.config/waypaper"   "${DOTCONFIG}/waypaper"
+link_dir "${DOTFILES}/.config/btop"       "${DOTCONFIG}/btop"
+
+# Code - OSS (Visual Studio Code)
+link_items "${DOTFILES}/.config/Code - OSS/User" "${DOTCONFIG}/Code - OSS/User"
 
 # GTK Global — symlink dotfiles GTK configs to standard GNOME locations
 link_dir "${DOTFILES}/.config/gtk-3.0" "${DOTCONFIG}/gtk-3.0"
@@ -112,8 +116,22 @@ link_dir "${DOTFILES}/.config/gtk-4.0" "${DOTCONFIG}/gtk-4.0"
 
 echo "  ✓ Linking complete"
 
-# ── 5. Final checks ──────────────────────────────────
-echo "[5/5] Final checks..."
+# ── 5. Install VS Code Extensions ─────────────────────
+if command -v code-oss &>/dev/null; then
+    echo "[5/6] Installing VS Code extensions..."
+    while IFS= read -r ext || [[ -n "$ext" ]]; do
+        [[ -z "$ext" || "$ext" == \#* ]] && continue
+        if ! code-oss --list-extensions | grep -qi "^${ext}$"; then
+            echo "  + Installing: ${ext}"
+            code-oss --install-extension "${ext}" --force &>/dev/null || echo "    ⚠ Failed: ${ext}"
+        else
+            echo "  ~ Already installed: ${ext}"
+        fi
+    done < "${DOTFILES}/vscode_extensions.txt"
+fi
+
+# ── 6. Final checks ──────────────────────────────────
+echo "[6/6] Final checks..."
 if [[ ":${PATH}:" != *":${HOME}/.local/bin:"* ]]; then
     echo "  ⚠ Reload your shell: source ~/.zshrc  (to pick up PATH updates)"
 else
