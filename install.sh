@@ -13,8 +13,7 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 echo "  Dotfiles Installer"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-# ── 1. Ensure dependencies ───────────────────────────
-echo "[1/5] Checking dependencies..."
+# Dependencies for Hyprland
 PKGS=(hyprland waybar fuzzel swaync waypaper awww hyprlock hypridle
       wl-clipboard cliphist grim slurp jq playerctl
       brightnessctl pipewire wireplumber
