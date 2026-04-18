@@ -17,8 +17,8 @@ dotfiles/
 ├── [.config/](.config/README.md)
 │   ├── [hypr/](.config/hypr/README.md)         # Window manager (Hyprland)
 │   ├── [waybar/](.config/waybar/README.md)       # Status bar
-│   ├── swww/           # Wallpaper (implicitly used)
-│   ├── wallpapers/     # Wallpaper assets
+│   ├── waypaper/       # Wallpaper picker config
+│   ├── wallpapers/     # Wallpaper assets (optional, pick any folder in waypaper)
 │   ├── [fuzzel/](.config/fuzzel/README.md)       # App launcher
 │   ├── [swaync/](.config/swaync/README.md)       # Notifications
 │   ├── [ghostty/](.config/ghostty/README.md)      # Terminal
@@ -42,7 +42,7 @@ bash install.sh
 
 This will:
 1. Check for missing packages
-2. Generate a default Gruvbox wallpaper
+2. Note that waypaper manages wallpapers (SUPER+ALT+W to pick)
 3. Make scripts executable
 4. Create symlinks in `~/.config` (per category) and `~/.local/bin`
 5. Check that `~/.local/bin` is in `$PATH`
@@ -66,10 +66,9 @@ This approach is compatible with a running system where `~/.config` already exis
 ## Theme System
 
 ```bash
-theme-switch          # toggle dark/light (includes random wallpaper)
+theme-switch          # toggle dark/light (restores last waypaper wallpaper)
 theme-switch dark     # force dark
 theme-switch light    # force light
-wallpaper-cycle       # rotate through current theme wallpapers
 gsync                 # sync dotfiles to git
 ```
 
@@ -96,7 +95,7 @@ Active theme → `wm/hypr/configs/theme.conf` + `wm/waybar/colors.css`
 | `SUPER + L` | Lock screen |
 | `SUPER + N` | Notifications |
 | `SUPER + SHIFT + T` | Toggle dark/light theme |
-| `SUPER + ALT + W` | Cycle current theme wallpapers |
+| `SUPER + ALT + W` | Open waypaper wallpaper picker |
 | `SUPER + SHIFT + P` | Power menu |
 | `SUPER + 1-0` | Switch workspace |
 | `SUPER + SHIFT + 1-0` | Move window to workspace |
@@ -112,7 +111,7 @@ Active theme → `wm/hypr/configs/theme.conf` + `wm/waybar/colors.css`
 | Waybar | Status bar (vertical left) |
 | fuzzel | App launcher |
 | swaync | Notifications |
-| hyprpaper | Wallpaper |
+| waypaper + awww | Wallpaper picker |
 | hyprlock | Lock screen |
 | hypridle | Idle daemon |
 | ghostty | Terminal |

@@ -24,6 +24,7 @@
     "network",
     "backlight",
     "battery",
+    "custom/battery_limit",
     "idle_inhibitor",
     "custom/power"
   ],
@@ -139,4 +140,10 @@
     "tooltip-format-activated": "Idle Inhibited",
     "tooltip-format-deactivated": "Idle Enabled",
   },
+  "custom/battery_limit": {
+    "exec": "/home/abhishek/.local/bin/battery-limit",
+    "on-click": "/home/abhishek/.local/bin/battery-limit toggle",
+    "interval": 30,
+    "return-type": "json"
+  }
 }

@@ -15,7 +15,7 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 
 # ── 1. Ensure dependencies ───────────────────────────
 echo "[1/5] Checking dependencies..."
-PKGS=(hyprland waybar fuzzel swaync hyprpaper hyprlock hypridle
+PKGS=(hyprland waybar fuzzel swaync waypaper awww hyprlock hypridle
       wl-clipboard cliphist grim slurp jq playerctl
       brightnessctl pipewire wireplumber
       ghostty thunar nm-applet polkit-gnome)
@@ -34,17 +34,9 @@ else
     echo "  ✓ All dependencies found"
 fi
 
-# ── 2. Create solid gruvbox wallpaper ────────────────
-echo "[2/5] Generating default wallpaper..."
-# Write directly into dotfiles wm/hypr — hyprpaper.conf references it there
-WALL="${DOTFILES}/.config/hypr/gruvbox-dark.png"
-if command -v convert &>/dev/null; then
-    convert -size 1920x1080 xc:#1d2021 "${WALL}" 2>/dev/null && \
-        echo "  ✓ Wallpaper: ${WALL}" || \
-        echo "  ⚠ convert failed — set your own wallpaper in hyprpaper.conf"
-else
-    echo "  ⚠ ImageMagick not found — install 'imagemagick' or set wallpaper manually"
-fi
+# ── 2. Note waypaper setup ──────────────────────────
+echo "[2/5] Wallpaper managed by waypaper..."
+echo "  ✓ Launch waypaper (SUPER+ALT+W) to pick your wallpaper"
 
 # ── 3. Make scripts executable ───────────────────────
 echo "[3/5] Setting script permissions..."
@@ -113,7 +105,7 @@ link_dir "${DOTFILES}/.config/kitty"      "${DOTCONFIG}/kitty"
 link_dir "${DOTFILES}/.config/zsh"        "${DOTCONFIG}/zsh"
 link_dir "${DOTFILES}/.config/fastfetch"  "${DOTCONFIG}/fastfetch"
 link_dir "${DOTFILES}/.config/themes"     "${DOTCONFIG}/themes"
-link_dir "${DOTFILES}/.config/wallpapers" "${DOTCONFIG}/wallpapers"
+link_dir "${DOTFILES}/.config/waypaper"   "${DOTCONFIG}/waypaper"
 
 # GTK Global — symlink dotfiles GTK configs to standard GNOME locations
 link_dir "${DOTFILES}/.config/gtk-3.0" "${DOTCONFIG}/gtk-3.0"

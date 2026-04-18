@@ -20,7 +20,6 @@ GTK4_CONF="${HOME}/.config/gtk-4.0/gtk.css"
 STATE_FILE="${HOME}/.cache/current-theme"
 SHELL_STATE="${HOME}/.cache/shell-theme.zsh"
 FUZZEL_CONFIG="${DOTFILES}/.config/fuzzel/fuzzel.ini"
-WALLPAPER_DIR="${DOTFILES}/.config/wallpapers"
 
 # ── Determine target theme ───────────────────────────
 if [[ "${1:-}" == "dark" || "${1:-}" == "light" ]]; then
@@ -38,22 +37,10 @@ rm -f "${HYPR_THEME}" "${WAYBAR_COLORS}" "${SWAYNC_COLORS}"
 /usr/bin/cp "${THEME_DIR}/${TARGET}.css" "${WAYBAR_COLORS}"
 /usr/bin/cp "${THEME_DIR}/${TARGET}.css" "${SWAYNC_COLORS}"
 
-# Wallpaper switching
-if command -v swww &>/dev/null && swww query &>/dev/null; then
-    echo "Updating wallpaper..."
-    THEME_WALL_DIR="${WALLPAPER_DIR}/${TARGET}"
-    if [[ -d "${THEME_WALL_DIR}" ]]; then
-        # Pick a random one for the new theme
-        MAPFILE=()
-        while IFS= read -r -d $'\0' file; do
-            MAPFILE+=("$file")
-        done < <(find "${THEME_WALL_DIR}" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.webp" \) -print0)
-        
-        if [[ ${#MAPFILE[@]} -gt 0 ]]; then
-            RANDOM_WALL="${MAPFILE[$(( RANDOM % ${#MAPFILE[@]} ))]}"
-            swww img "${RANDOM_WALL}" --transition-type grow --transition-pos top-right --transition-duration 2
-        fi
-    fi
+# Wallpaper switching — restore last waypaper selection
+if command -v waypaper &>/dev/null; then
+    echo "Restoring wallpaper via waypaper..."
+    waypaper --restore &
 fi
 
 # Fuzzel switching

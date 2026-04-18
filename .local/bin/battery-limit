@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+# Path to Lenovo conservation mode control
+CONSERVATION_MODE="/sys/devices/pci0000:00/0000:00:14.3/PNP0C09:00/VPC2004:00/conservation_mode"
+
+get_status() {
+    if [[ ! -f "$CONSERVATION_MODE" ]]; then
+        echo '{"text": "ERR", "tooltip": "Conservation mode file not found", "class": "error"}'
+        exit 0
+    fi
+
+    local MODE
+    MODE=$(cat "$CONSERVATION_MODE")
+
+    if [[ "$MODE" -eq 1 ]]; then
+        echo '{"text": "󱐋 80%", "tooltip": "Battery Limit: ON (80%)", "class": "enabled"}'
+    else
+        echo '{"text": "󱐌 100%", "tooltip": "Battery Limit: OFF (100%)", "class": "disabled"}'
+    fi
+}
+
+toggle_mode() {
+    if [[ ! -f "$CONSERVATION_MODE" ]]; then
+        notify-send "Battery Limit" "Error: Conservation mode file not found" -u critical
+        exit 1
+    fi
+
+    local MODE
+    MODE=$(cat "$CONSERVATION_MODE")
+
+    if [[ "$MODE" -eq 1 ]]; then
+        echo 0 > "$CONSERVATION_MODE"
+        notify-send "Battery Limit" "Disabled - Charging to 100%" -i battery-full
+    else
+        echo 1 > "$CONSERVATION_MODE"
+        notify-send "Battery Limit" "Enabled - Limited to 80%" -i battery-good
+    fi
+}
+
+case "$1" in
+    toggle)
+        toggle_mode
+        ;;
+    *)
+        get_status
+        ;;
+esac
