@@ -3,6 +3,10 @@
 # Managed via ~/dotfiles (Ported from NamiConfig)
 # ==============================================
 
+# ── Performance Profiling ──────────────────────
+# Uncomment the following line to enable profiling
+# zmodload zsh/zprof
+
 # ── Environment & Zsh Modular Load ─────────────
 [[ -f "$HOME/.config/zsh/env.zsh"        ]] && source "$HOME/.config/zsh/env.zsh"
 [[ -f "$HOME/.config/zsh/core.zsh"       ]] && source "$HOME/.config/zsh/core.zsh"
@@ -15,3 +19,5 @@
 [[ -f "${HOME}/.cache/shell-theme.zsh" ]] && source "${HOME}/.cache/shell-theme.zsh"
 
 true
+
+[[ $commands[zprof] ]] && zprof

@@ -12,7 +12,7 @@ notify-send -u low "Theme Switcher" "Toggling colors..."
 
 DOTFILES="${HOME}/dotfiles"
 THEME_DIR="${DOTFILES}/.config/themes/gruvbox"
-HYPR_THEME="${DOTFILES}/.config/hypr/configs/theme.conf"
+HYPR_THEME="${DOTFILES}/.config/hypr/conf/appearance.conf"
 WAYBAR_COLORS="${DOTFILES}/.config/waybar/colors.css"
 SWAYNC_COLORS="${DOTFILES}/.config/swaync/colors.css"
 GTK3_CONF="${HOME}/.config/gtk-3.0/gtk.css"
@@ -30,12 +30,11 @@ else
     [[ "${CURRENT}" == "dark" ]] && TARGET="light" || TARGET="dark"
 fi
 
-# ── Apply theme files ─────────────────────────────────
+# ── Apply theme files (Atomic Symlinking) ──────────────
 echo "Updating Hyprland, Waybar, and SwayNC colors..."
-rm -f "${HYPR_THEME}" "${WAYBAR_COLORS}" "${SWAYNC_COLORS}"
-/usr/bin/cp "${THEME_DIR}/${TARGET}.conf" "${HYPR_THEME}"
-/usr/bin/cp "${THEME_DIR}/${TARGET}.css" "${WAYBAR_COLORS}"
-/usr/bin/cp "${THEME_DIR}/${TARGET}.css" "${SWAYNC_COLORS}"
+ln -sf "${THEME_DIR}/${TARGET}.conf" "${HYPR_THEME}"
+ln -sf "${THEME_DIR}/${TARGET}.css" "${WAYBAR_COLORS}"
+ln -sf "${THEME_DIR}/${TARGET}.css" "${SWAYNC_COLORS}"
 
 # Wallpaper switching — restore last waypaper selection
 if command -v waypaper &>/dev/null; then
@@ -75,33 +74,27 @@ NEW_GTK4_ASSETS="${HOME}/.themes/gruvBox-${TARGET}/gtk-4.0/assets"
 
 if [[ -f "${NEW_GTK3_THEME}" ]]; then
     echo "Applying full GTK3 theme..."
-    rm -f "${GTK3_CONF}"
-    /usr/bin/cp "${NEW_GTK3_THEME}" "${GTK3_CONF}"
+    ln -sf "${NEW_GTK3_THEME}" "${GTK3_CONF}"
 else
     if [[ -f "${THEME_DIR}/${TARGET}.css" ]]; then
-        rm -f "${GTK3_CONF}"
-        /usr/bin/cp "${THEME_DIR}/${TARGET}.css" "${GTK3_CONF}"
+        ln -sf "${THEME_DIR}/${TARGET}.css" "${GTK3_CONF}"
     fi
 fi
 
 if [[ -f "${NEW_GTK4_THEME}" ]]; then
     echo "Applying full GTK4 theme for Libadwaita..."
-    rm -f "${GTK4_CONF}"
-    /usr/bin/cp "${NEW_GTK4_THEME}" "${GTK4_CONF}"
+    ln -sf "${NEW_GTK4_THEME}" "${GTK4_CONF}"
     # Also copy gtk-dark.css as libadwaita might look for it
     if [[ -f "${HOME}/.themes/gruvBox-${TARGET}/gtk-4.0/gtk-dark.css" ]]; then
-        rm -f "${HOME}/.config/gtk-4.0/gtk-dark.css"
-        /usr/bin/cp "${HOME}/.themes/gruvBox-${TARGET}/gtk-4.0/gtk-dark.css" "${HOME}/.config/gtk-4.0/gtk-dark.css"
+        ln -sf "${HOME}/.themes/gruvBox-${TARGET}/gtk-4.0/gtk-dark.css" "${HOME}/.config/gtk-4.0/gtk-dark.css"
     fi
     # Handle assets
     if [[ -d "${NEW_GTK4_ASSETS}" ]]; then
-        rm -rf "${HOME}/.config/gtk-4.0/assets"
-        cp -r "${NEW_GTK4_ASSETS}" "${HOME}/.config/gtk-4.0/assets"
+        ln -sfT "${NEW_GTK4_ASSETS}" "${HOME}/.config/gtk-4.0/assets"
     fi
 else
     if [[ -f "${THEME_DIR}/${TARGET}.css" ]]; then
-        rm -f "${GTK4_CONF}"
-        /usr/bin/cp "${THEME_DIR}/${TARGET}.css" "${GTK4_CONF}"
+        ln -sf "${THEME_DIR}/${TARGET}.css" "${GTK4_CONF}"
     fi
 fi
 
@@ -113,8 +106,7 @@ echo "${TARGET}" > "${STATE_FILE}"
 KITY_THEME="${HOME}/.config/kitty/theme.conf"
 if [[ -d "${HOME}/.config/kitty" ]]; then
     echo "Updating Kitty theme..."
-    rm -f "${KITY_THEME}"
-    /usr/bin/cp "${THEME_DIR}/kitty-${TARGET}.conf" "${KITY_THEME}"
+    ln -sf "${THEME_DIR}/kitty-${TARGET}.conf" "${KITY_THEME}"
     # Reload Kitty instances
     /usr/bin/pkill -SIGUSR1 kitty 2>/dev/null || true
 fi
@@ -123,21 +115,20 @@ fi
 GHOS_THEME="${HOME}/.config/ghostty/theme.conf"
 if [[ -d "${HOME}/.config/ghostty" ]]; then
     echo "Updating Ghostty theme..."
-    rm -f "${GHOS_THEME}"
-    /usr/bin/cp "${THEME_DIR}/ghostty-${TARGET}.conf" "${GHOS_THEME}"
+    ln -sf "${THEME_DIR}/ghostty-${TARGET}.conf" "${GHOS_THEME}"
 fi
 
 # ── Neovim Theme ──────────────────────────────────────
 # No longer needed as Neovim has a built-in file watcher for ${STATE_FILE}
-# but we keep the background state update for consistency if needed by other tools
-# echo "Updating Neovim theme to ${TARGET}..."
 
 # ── Zed Editor Theme ──────────────────────────────────
 ZCONF="${HOME}/.config/zed/settings.json"
-if [[ -f "$ZCONF" ]]; then
-    echo "Updating Zed theme to ${TARGET^}..."
-    /usr/bin/sed 's/"theme": ".*"/"theme": "Gruvbox '${TARGET^}'"/g' "$ZCONF" > /tmp/zconf
-    /usr/bin/cat /tmp/zconf > "$ZCONF"
+if [[ -f "$ZCONF" ]] && command -v jq &>/dev/null; then
+    echo "Updating Zed theme to ${TARGET^} (via jq)..."
+    jq '.theme = "Gruvbox '"${TARGET^}"'"' "$ZCONF" > /tmp/zed_settings.json && mv /tmp/zed_settings.json "$ZCONF"
+elif [[ -f "$ZCONF" ]]; then
+    echo "Updating Zed theme to ${TARGET^} (via sed)..."
+    sed -i 's/"theme": ".*"/"theme": "Gruvbox '${TARGET^}'"/g' "$ZCONF"
 fi
 
 # ── CLI & Shell Integration ──────────────────────────
